@@ -49,6 +49,8 @@
 
 ## 2. 헬스체크 성공 후 해야 하는 일 (DB 연결을 위한 `.env` 파일 작성)
 
+![image](https://github.com/user-attachments/assets/5a0491da-c385-4677-a10a-595b66be408d)
+
 - [환경 설정 컨벤션](https://www.notion.so/1bbe3739a96a817f992eef3d9a09aa9b)을 참고하여 `.env` 파일을 `backend/` 경로에 작성해야 원격 데이터베이스에 연결할 수 있습니다.
 
 - 백엔드 루트 경로, README.md와 Package.json 파일이 보이는 곳에 같이
