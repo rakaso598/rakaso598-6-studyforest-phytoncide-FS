@@ -22,7 +22,7 @@
 
 ## 폴더 구조는 수업시간에 반복적으로 사용했던 구조를 최대한 비슷하게 사용했습니다.
 
-- src/db/prisma/schema.prisma : `프리즈마 ORM`을 사용하기 위한 파일입니다. js 파일에서 임포트하여 불러와 사용할 수 있습니다.
+- src/db/prisma/schema.prisma : `프리즈마 ORM`에서 사용하는 `스키마 모델`입니다. 여기에서 기본적인 DB 모델을 설계할 수 있습니다.
 - src/middlewares/errorHandler.module.js : `서버 내부 에러`가 발생했을 때 기본적인 500 서버 에러를 발생시킵니다.
 - src/modules/index.module.js : 라우팅을 위한 기본 루트 경로가 됩니다. 이곳에 `user.module.js`나 `study.module.js` 등을 불러와 사용하면 됩니다.
 - src/modules/healthCheck.module.js : 처음 깃클론시 헬스체크를 위한 모듈입니다. `npm install` 후 `npm run dev`로 서버를 실행하고, `curl http://localhost:5090/health-check` 를 다른 콘솔을 켜서 입력해보고 `헬스체크 성공!`이 뜨면 프로젝트 초기화 된 것입니다.
