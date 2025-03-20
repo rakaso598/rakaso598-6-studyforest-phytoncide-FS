@@ -1,22 +1,22 @@
-# **{아주 멋진 팀이름}**
+<div align="center">
+
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+
+</div>
+
+# 🌟 **{아주 멋진 팀이름}**
 
 (팀 협업 문서 링크 게시)
 
 # 👥 **팀원 구성**
 
-### **이지수B [팀장]** [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Jam1eL1)
+<div align="center">
 
-### **김홍섭** [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/rakaso598)
+|                                                         **이지수B [팀장]**                                                          |                                                              **김홍섭**                                                               |                                                             **이태빈**                                                             |                                                             **안세빈**                                                             |                                                             **임정빈**                                                              |                                                             **최민경**                                                              |                                                              **박민규**                                                               |
+| :---------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------: |
+| [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Jam1eL1) | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/rakaso598) | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/De-cal) | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/sebiny) | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jbinyim) | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/choi-mk) | [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/gksktl111) |
 
-### **이태빈** [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/De-cal)
-
-### **안세빈** [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/sebiny)
-
-### **임정빈** [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/jbinyim)
-
-### **최민경** [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/choi-mk)
-
-### **박민규** [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/gksktl111)
+</div>
 
 ---
 
