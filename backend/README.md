@@ -38,9 +38,20 @@
 
 ---
 
+8. 스튜디오를 열어 DB를 확인하려면, 먼저 아래 컨벤션을 따라 `.env` 파일을 작성해 주세요.
+
+9. `npx prisma generate`
+   `.env` 파일 작성 후 명령어를 실행하여 프리즈마 설정을 적용해 주세요.
+
+10. `npx prisma studio`를 실행해 보세요. 왼쪽 화면에 테이블이 잘 클릭되는지, 데이터가 원활히 불러와지는지 확인해 보세요.
+
+---
+
 ## 2. 헬스체크 성공 후 해야 하는 일 (DB 연결을 위한 `.env` 파일 작성)
 
 - [환경 설정 컨벤션](https://www.notion.so/1bbe3739a96a817f992eef3d9a09aa9b)을 참고하여 `.env` 파일을 `backend/` 경로에 작성해야 원격 데이터베이스에 연결할 수 있습니다.
+
+- 백엔드 루트 경로, README.md와 Package.json 파일이 보이는 곳에 같이
 
 ---
 
@@ -76,7 +87,9 @@
 
 ## 7. 초기화 시 설치한 패키지
 
-- `npm install express @types/express nodemon cors`  
+- `npm install express @types/express nodemon cors`
+  - `express` : 백엔드 서버를 구동하기 위해 필요한 프레임워크입니다.
+  - `@types/express` : TypeScript 환경에서 express를 사용하기 위해 필요합니다.
   - `nodemon` : 코드가 변경되면 자동으로 서버를 재시작합니다.
   - `cors` : 브라우저에서 발생하는 CORS 이슈를 방지하기 위해 설치합니다.
 
@@ -94,9 +107,12 @@
 - `package.json` 내 `"prisma"` 항목에 `schema` 경로를 설정해줍니다.
 
 ```json
+
 "prisma": {
   "schema": "./src/db/prisma/schema.prisma"
 }
+
+```
 
 - 이렇게 설정하면 npx prisma migrate 실행 시 경로 오류를 방지할 수 있습니다.
 
