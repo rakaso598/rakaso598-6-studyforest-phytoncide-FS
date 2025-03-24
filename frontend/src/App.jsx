@@ -6,7 +6,7 @@ import Home from './pages/home/Home';
 import CreateStudy from './pages/create-study/CreateStudy';
 import TodayFocus from './pages/today-focus/TodayFocus';
 import TodayHabit from './pages/today-habit/TodayHabit';
-import StudyDetail from './pages/study-deatil/StudyDetail';
+import StudyDetail from './pages/study-detail/StudyDetail';
 
 function App() {
   return (
