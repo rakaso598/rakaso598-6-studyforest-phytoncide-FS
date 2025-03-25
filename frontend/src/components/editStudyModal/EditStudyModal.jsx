@@ -45,19 +45,31 @@ const EditStudyModal = ({ isOpen, onClose }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="modal">
-        <div>
-          <p>연우의 개발공장<button type="button" onClick={onClose}>나가기</button></p>
+      <div className="modal-content">
+        <div className="modal-header">
+          <p className="modal-title">연우의 개발공장</p>
+          <button type="button" onClick={onClose} className="modal-close-button">
+            나가기
+          </button>
         </div>
-        <p>권한이 필요해요!</p>
-        <div>
-          <p>비밀번호</p>
-          <input placeholder='비밀번호를 입력해 주세요'
+        <p className="modal-message">권한이 필요해요!</p>
+        <div className="modal-input-container">
+          <p className="modal-input-label">비밀번호</p>
+          <input
+            placeholder="비밀번호를 입력해 주세요"
             type="password"
             value={password}
-            onChange={handlePasswordChange} />
+            onChange={handlePasswordChange}
+            className="modal-input"
+          />
         </div>
-        <button type="button" onClick={handleVerifyPassword}>수정하러 가기</button>
+        <button
+          className="modal-verify-button"
+          type="button"
+          onClick={handleVerifyPassword}
+        >
+          수정하러 가기
+        </button>
       </div>
     </div>
   );
