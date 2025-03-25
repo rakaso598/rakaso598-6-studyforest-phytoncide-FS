@@ -1,4 +1,5 @@
 import React from 'react';
+import './EditStudyModal.css';
 
 const EditStudyModal = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
