@@ -4,6 +4,7 @@ import './EditStudyModal.css';
 const EditStudyModal = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+  const VERIFY_PASSWORD_URL = "http://localhost:5090/api/verify-password";
 
   if (!isOpen) return null;
 
@@ -14,7 +15,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
   const handleVerifyPassword = async () => {
     try {
       // 백엔드로 요청
-      const response = await fetch('/api/verify-password', {
+      const response = await fetch(VERIFY_PASSWORD_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -23,7 +24,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
       })
       // 백엔드에서 응답
       if (!response.ok) {
-        throw new Error('서버 연결 실패!') // 요청 자체가 성공했는지?
+        throw new Error('서버 응답 실패!') // 서버의 응답이 ok가 아닐 때
       }
 
       const data = await response.json(); // 응답을 json으로 파싱
@@ -37,7 +38,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
       }
 
     } catch (error) {
-      console.error('API 호출 실패:', error)
+      console.error('비밀번호 검증 API 호출 실패!:', error)
       setErrorMessage('비밀번호 검증에 실패했습니다. 다시 시도해주세요.')
     }
   }
