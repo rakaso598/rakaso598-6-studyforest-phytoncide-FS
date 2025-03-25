@@ -1,0 +1,81 @@
+.habitCreateModal {
+  background-color: #ffffff;
+  width: 648px;
+  height: 861px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  margin: 100px;
+}
+.headline {
+  color: #414141;
+  font-weight: 800;
+  size: 24px;
+  font-family: Pretendard;
+  margin-top: 40px;
+  margin-bottom: 24px;
+}
+/* single끼리 paddingBottem 20px인데 맨아래 버튼부분은 24px임 */
+.singleHabit {
+  color: #818181;
+  font-family: Pretendard;
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: underline;
+  text-align: center;
+}
+.wholeHabitsBox {
+  margin-left: 20px;
+}
+.singleHabitBoxWithTrashIc {
+  display: flex;
+  margin-bottom: 20px;
+  margin-left: 24px;
+}
+.singleHabitBox {
+  display: grid;
+  place-items: center;
+  width: 400px;
+  height: 54px;
+  border-radius: 20px;
+  background: #eeeeee;
+}
+.trashIcon {
+  width: 24px;
+  height: 24px;
+  background-color: #fde0e9;
+  padding: 12px;
+  border-radius: 35px;
+  margin-left: 8px;
+}
+.createBox {
+  display: grid;
+  place-items: center;
+  width: 400px;
+  height: 54px;
+  border-radius: 20px;
+  border: 2px solid #414141;
+  text-align: center;
+  margin-bottom: 24px;
+  margin-left: 24px;
+}
+button {
+  width: 288px;
+  height: 58px;
+  border-radius: 16px;
+  gap: 10px;
+  padding: 10px;
+  border: none;
+}
+.close {
+  background-color: #dddddd;
+  margin-right: 12px;
+}
+.confirmRevision {
+  background-color: #99c08e;
+  margin-left: 12px;
+}
+/* +는 아이콘으로 받아오기 */
+
+/* trash아이콘을 다시 받아와야할듯 */
