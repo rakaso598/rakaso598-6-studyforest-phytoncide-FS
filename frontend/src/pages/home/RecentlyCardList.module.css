@@ -1,0 +1,61 @@
+.recentStudyContainer {
+  width: 100%;
+  max-width: 1200px;
+  background-color: var(--bg-white);
+  padding: 20px 0 20px 20px;
+
+  border-radius: 20px;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-black);
+
+  margin-bottom: 15px;
+
+  transition: all 0.3s ease;
+}
+
+.cardListContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.cardListContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.cardList {
+  display: flex;
+  width: max-content;
+
+  gap: 20px;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.cardWrapper {
+  width: 300px;
+
+  transition: width 0.3s ease;
+}
+
+@media screen and (min-width: 744px) {
+  .recentStudyContainer {
+    padding: 30px 0 30px 30px;
+  }
+  .title {
+    font-size: 24px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .cardWrapper {
+    width: 374.5px;
+  }
+}
