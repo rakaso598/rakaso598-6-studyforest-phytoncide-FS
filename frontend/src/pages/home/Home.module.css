@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 .home {
   display: flex;
   flex-direction: column;

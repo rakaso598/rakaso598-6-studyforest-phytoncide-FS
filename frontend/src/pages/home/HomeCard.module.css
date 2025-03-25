@@ -49,7 +49,7 @@
 }
 
 .pointsText {
-  font-family: var(--font-pretendard-medium);
+  font-weight: 600;
   color: var(--text-black);
   font-size: 12px;
 }
@@ -59,13 +59,13 @@
 
   gap: 5px;
 
-  font-family: var(--font-pretendard-bold);
+  font-weight: 800;
   font-size: 16px;
   color: var(--text-black);
 }
 
 .cardDayContainer {
-  font-family: var(--font-pretendard-regular);
+  font-weight: 400;
   font-size: 14px;
 }
 
