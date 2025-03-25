@@ -1,6 +1,6 @@
 import React from 'react';
 import EditStudyModal from './EditStudyModal';
-import { useEditStudyModalController } from './useEditStudyModalController';
+import { useEditStudyModalController } from './EditStudyModalController';
 
 const EditStudyModalButton = ({ buttonText }) => {
   const { editStudyModal, handleOpenEditStudyModal, handleCloseEditStudyModal } = useEditStudyModalController();
