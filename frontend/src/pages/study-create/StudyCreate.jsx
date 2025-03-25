@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CreateStudy = () => {
+const StudyCreate = () => {
   return (
     <div>
       <h1>스터디 만들기</h1>
@@ -9,4 +9,4 @@ const CreateStudy = () => {
   );
 };
 
-export default CreateStudy;
+export default StudyCreate;
