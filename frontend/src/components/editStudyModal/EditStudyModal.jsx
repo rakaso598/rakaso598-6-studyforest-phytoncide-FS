@@ -7,12 +7,18 @@ const EditStudyModal = ({ isOpen, onClose }) => {
   return (
     <div className="modal-overlay">
       <div className="modal">
-        <h2>모달 제목</h2>
-        <p>모달 내용</p>
-        <button type="button" onClick={onClose}>닫기</button>
+        <div>
+          <p>연우의 개발공장<button type="button" onClick={onClose}>나가기</button></p>
+        </div>
+        <p>권한이 필요해요!</p>
+        <div>
+          <p>비밀번호</p>
+          <input placeholder='비밀번호를 입력해 주세요' />
+        </div>
+        <button>수정하러 가기</button>
       </div>
     </div>
   );
 };
 
-export default EditStudyModal;
+export default EditStudyModal; 
