@@ -106,13 +106,77 @@
   font-size: 24px;
 }
 
-.focusTimer {
+.focusSelectTimeContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px, solid, var(--color-gray-200);
+  border-radius: 50px;
+  padding: 5px 8px;
+  gap: 4px;
+}
+
+.focusSelectTimeContainer p {
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.focusTimerContainer {
+  display: flex;
+  justify-content: center;
   color: var(--text-black);
   font-weight: 800;
   font-size: 80px;
 }
 
-.focusBtn {
+.focusMinTimer {
+  text-align: end;
+  color: var(--text-black);
+  font-weight: 800;
+  font-size: 80px;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.focusSecTimer {
+  text-align: start;
+  color: var(--text-black);
+  font-weight: 800;
+  font-size: 80px;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 0;
+}
+
+.focusBtnContainer {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.focusPauseBtn {
+  background-color: var(--text-green);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 100%;
+  padding: 0;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+}
+
+.focusPauseBtn img {
+  width: 26.4px;
+  height: 26.4px;
+}
+
+.focusStartBtn {
   color: var(--text-white);
   background-color: var(--bg-green);
   font-weight: 800;
@@ -125,11 +189,53 @@
   padding: 10px 28px 10px 20px;
   gap: 8px;
   cursor: pointer;
+  height: 45px;
 }
 
-.focusBtn img {
+.focusStartBtn.disable {
+  background-color: var(--text-gray);
+  cursor: default;
+}
+
+.focusStartBtn p {
+  width: 60px;
+}
+
+.focusRestartBtn {
+  background-color: var(--bg-green);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 100%;
+  padding: 0;
+  width: 48px;
+  height: 48px;
+  cursor: pointer;
+}
+
+.focusRestartBtn img {
+  width: 26.4px;
+  height: 26.4px;
+}
+
+.focusStartBtn img {
   width: 24px;
   height: 24px;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 223px;
+  height: 47px;
+  border-radius: 12px;
+  padding: 14px 25px;
+  background-color: var(--bg-pink);
+  color: var(--error-light);
+  font-weight: 500;
+  font-size: 16px;
 }
 
 @media (min-width: 744px) {
@@ -163,19 +269,56 @@
     height: 430px;
   }
 
-  .focusTimer {
+  .focusTimerContainer {
     font-size: 120px;
   }
 
-  .focusBtn {
+  .focusMinTimer {
+    font-size: 120px;
+  }
+
+  .focusSecTimer {
+    font-size: 120px;
+  }
+
+  .focusBtnContainer {
+    gap: 24px;
+  }
+
+  .focusPauseBtn {
+    width: 64px;
+    height: 64px;
+  }
+
+  .focusPauseBtn img {
+    width: 35.2px;
+    height: 35.2px;
+  }
+
+  .focusStartBtn {
     font-size: 28px;
     padding: 8px 105px 8px 78px;
     gap: 16px;
+    height: 60px;
   }
 
-  .focusBtn img {
+  .focusStartBtn p {
+    width: 90px;
+  }
+
+  .focusStartBtn img {
     width: 44px;
     height: 44px;
+  }
+
+  .focusRestartBtn {
+    width: 64px;
+    height: 64px;
+  }
+
+  .focusRestartBtn img {
+    width: 35.2px;
+    height: 35.2px;
   }
 }
 
@@ -198,7 +341,15 @@
     height: 546px;
   }
 
-  .focusTimer {
+  .focusTimerContainer {
+    font-size: 150px;
+  }
+
+  .focusMinTimer {
+    font-size: 150px;
+  }
+
+  .focusSecTimer {
     font-size: 150px;
   }
 }
