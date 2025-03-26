@@ -1,12 +1,12 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import './styles/global.css';
-import Header from './layout/Header';
-import Home from './pages/home/Home';
-import CreateStudy from './pages/create-study/CreateStudy';
-import TodayFocus from './pages/today-focus/TodayFocus';
-import TodayHabit from './pages/today-habit/TodayHabit';
-import StudyDetail from './pages/study-detail/StudyDetail';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import "../public/font/Pretendard-1.3.9/web/static/pretendard.css";
+import Header from "./layout/Header";
+import Home from "@home/Home";
+import TodayFocus from "@today-focus/TodayFocus";
+import TodayHabit from "@today-habit/TodayHabit";
+import StudyDetail from "@study-detail/StudyDetail";
+import StudyCreate from "@study-create/StudyCreate";
 
 function App() {
   return (
@@ -14,11 +14,11 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/create-study' element={<CreateStudy />} />
-          <Route path='/study-detail' element={<StudyDetail />} />
-          <Route path='/today-focus' element={<TodayFocus />} />
-          <Route path='/today-habit' element={<TodayHabit />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/study-create" element={<StudyCreate />} />
+          <Route path="/study-detail" element={<StudyDetail />} />
+          <Route path="/today-focus" element={<TodayFocus />} />
+          <Route path="/today-habit" element={<TodayHabit />} />
         </Routes>
       </main>
     </>
