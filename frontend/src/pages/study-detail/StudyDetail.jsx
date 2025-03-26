@@ -1,7 +1,15 @@
-import React from 'react';
+import React from "react";
+import EditStudyModalImpl from "../../components/editStudyModal/EditStudyModalImpl";
 
 const StudyDetail = () => {
-  return <div>여기는 스터디 디테일입니다.</div>;
+  return (
+    <section>
+      <div>
+        <EditStudyModalImpl />
+      </div>
+    </section>
+  );
 };
+
 
 export default StudyDetail;

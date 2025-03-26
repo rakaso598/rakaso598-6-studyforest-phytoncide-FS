@@ -1,47 +1,48 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './EditStudyModal.css';
 
 const EditStudyModal = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
-  const VERIFY_PASSWORD_URL = "http://localhost:5090/api/verify-password";
+  const VERIFY_PASSWORD_URL = 'http://localhost:5090/api/verify-password';
+  const navigate = useNavigate();
+
+  const userId = "1"; // userId를 알수있어야함, 일단 지금은 해결책이 부족하므로(전역 상태에서 id를 가져온다거나 하는 설정이 없음). 일단 userId를 1로 하드코딩합니다.
 
   if (!isOpen) return null;
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-  }
+  };
 
   const handleVerifyPassword = async () => {
     try {
-      // 백엔드로 요청
       const response = await fetch(VERIFY_PASSWORD_URL, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ password }),
-      })
-      // 백엔드에서 응답
+        body: JSON.stringify({ userId, password }),
+      });
+
       if (!response.ok) {
-        throw new Error('서버 응답 실패!') // 서버의 응답이 ok가 아닐 때
+        throw new Error('서버 응답 실패!');
       }
 
-      const data = await response.json(); // 응답을 json으로 파싱
-      console.log(data); // 응답을 콘솔로그
+      const data = await response.json();
+      console.log(data);
 
-      /// 백엔드에서 { success : true } 또는 false 를 포함해서 넣어줘야함. 비밀번호 검증이 성공했는지 실패했는지.
       if (data.success) {
-        // 성공시 비밀번호 수정 화면으로 이동하면 됨. 라우팅되있으면 이동합시다.
+        navigate('/example'); // 비밀번호 검증 성공 시 '/example' 경로로 이동
       } else {
-        // 실패시 비밀번호 검증에 실패했다는 문구를 보여줘야함.
+        setErrorMessage('비밀번호 검증에 실패했습니다. 다시 시도해주세요.'); // 비밀번호 검증 실패 시 오류 메시지
       }
-
     } catch (error) {
-      console.error('비밀번호 검증 API 호출 실패!:', error)
-      setErrorMessage('비밀번호 검증에 실패했습니다. 다시 시도해주세요.')
+      console.error('비밀번호 검증 API 호출 실패!:', error);
+      setErrorMessage('비밀번호 검증에 실패했습니다. 다시 시도해주세요.');
     }
-  }
+  };
 
   return (
     <div className="modal-overlay">
@@ -62,6 +63,9 @@ const EditStudyModal = ({ isOpen, onClose }) => {
             onChange={handlePasswordChange}
             className="modal-input"
           />
+          {errorMessage && (
+            <p className="error-message">{errorMessage}</p> // 오류 메시지 표시
+          )}
         </div>
         <button
           className="modal-verify-button"
@@ -75,4 +79,4 @@ const EditStudyModal = ({ isOpen, onClose }) => {
   );
 };
 
-export default EditStudyModal; 
+export default EditStudyModal;
