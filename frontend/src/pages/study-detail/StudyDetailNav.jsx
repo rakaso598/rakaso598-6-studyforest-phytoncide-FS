@@ -27,11 +27,17 @@ function StudyDetailNav() {
 
       <nav className={styles.nav}>
         {/* 이부분 Link 달아서 변경해야함 */}
-        <a href="#">공유하기</a>
+        <a href="#" className={styles.shareLink}>
+          공유하기
+        </a>
         <span className={styles.divider}>|</span>
-        <a href="#">수정하기</a>
+        <a href="#" className={styles.editLink}>
+          수정하기
+        </a>
         <span className={styles.divider}>|</span>
-        <a href="#">스터디 삭제하기</a>
+        <a href="#" className={styles.deleteLink}>
+          스터디 삭제하기
+        </a>
       </nav>
     </div>
   );

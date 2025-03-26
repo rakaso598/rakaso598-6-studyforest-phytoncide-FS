@@ -14,14 +14,23 @@
   gap: 8px;
 }
 
-.nav a {
+.shareLink {
   text-decoration: none;
-  color: #333333;
-  font-size: 14px;
+  color: var(--color-green-300);
+}
+
+.editLink {
+  text-decoration: none;
+  color: var(--color-green-300);
+}
+
+.deleteLink {
+  text-decoration: none;
+  color: var(--color-gray-300);
 }
 
 .divider {
-  color: #dddddd;
+  color: var(--color-gray-200);
 }
 
 .emojis {
@@ -41,11 +50,11 @@
   border: none;
   border-radius: 50px;
 }
+
 .addBtn {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff4d;
   gap: 5px;
   border: 1px solid #0000001a;
   border-radius: 50px;
