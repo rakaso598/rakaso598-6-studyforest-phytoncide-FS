@@ -305,3 +305,8 @@ table {
 .modal-verify-button:hover {
   background-color: var(--color-green-300);
 }
+
+.error-message {
+  color: var(--color-red-300);
+  margin-top: 8px;
+}
