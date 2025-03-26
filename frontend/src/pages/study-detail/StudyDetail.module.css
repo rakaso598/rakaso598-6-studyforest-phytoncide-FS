@@ -1,4 +1,4 @@
-.section {
+.container {
   width: 344px;
   margin: 20px auto 56px auto;
   border-radius: 20px;
@@ -12,139 +12,15 @@
   gap: 24px;
 }
 
-.topContainer {
-  width: 312px;
-  height: 70px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.navigationContainer {
-  display: flex;
-  gap: 8px;
-}
-
-.navigationContainer a {
-  text-decoration: none;
-  color: #333333;
-}
-
-.emojiContainer {
-  display: flex;
-  gap: 8px;
-}
-
-.emojiContainer img {
-  width: 24px;
-  height: 24px;
-}
-
-.bottomContainer {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.titleSection {
-  width: 312px;
-  height: 85px;
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.titleSection h1 {
-  margin: 0;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.buttonContainer {
-  display: flex;
-  gap: 8px;
-}
-
-.buttonContainer button {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 20px;
-  background-color: #578246;
-  color: white;
-  cursor: pointer;
-}
-
-.contentSection {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.introSection {
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  gap: 8px;
-}
-
-.introSection h2 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.introSection p {
-  margin: 0;
-  font-size: 14px;
-}
-
-.pointsSection {
-  display: flex;
-  flex-direction: column;
-  height: 62px;
-  gap: 8px;
-}
-
-.pointsSection h2 {
-  margin: 0;
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.pointsSection div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.pointsSection img {
-  width: 20px;
-  height: 20px;
-}
-
-.pointsSection p {
-  margin: 0;
-  font-size: 14px;
-  font-weight: bold;
-  color: #578246;
-}
-
-.habitRecordTable {
-  border-radius: 20px;
-  border: 1px solid #dddddd;
-  padding: 16px;
-  min-height: 200px;
-}
-
 @media screen and (min-width: 744px) {
-  .section {
+  .container {
     min-width: 696px;
     margin: 16px auto 81px auto;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .section {
+  .container {
     min-width: 1200px;
     margin: 40px auto 73px auto;
   }
