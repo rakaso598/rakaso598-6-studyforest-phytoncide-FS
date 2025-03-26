@@ -18,7 +18,7 @@
 .studyCreateTitle {
   font-size: 16px;
   font-weight: 800;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
 }
 
 .studyCreateTopInputBox {
@@ -106,6 +106,7 @@
   }
   .studyCreateTitle {
     font-size: 24px;
+    margin-bottom: 24px;
   }
   .inputBoxTitle {
     font-size: 18px;
