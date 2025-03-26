@@ -1,0 +1,119 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 180px;
+
+  gap: 12px;
+
+  background-color: var(--bg-green-light);
+
+  border-radius: 20px;
+
+  padding: 16px;
+
+  cursor: pointer;
+
+  transition: all 0.3s ease;
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.headerTop {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+}
+
+.pointsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  max-width: 80px;
+
+  gap: 5px;
+  border-radius: 20px;
+
+  padding: 3px;
+
+  border: 1px solid rgb(194, 194, 194);
+}
+
+.pointsText {
+  font-weight: 600;
+  color: var(--text-black);
+  font-size: 12px;
+}
+
+.cardTitleContainer {
+  display: flex;
+
+  gap: 5px;
+
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text-black);
+}
+
+.cardDayContainer {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.cardContentContainer {
+  width: 80%;
+}
+
+.cardContent {
+  font-size: 14px;
+}
+
+.emojiContainer {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.emoji {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  font-size: 12px;
+
+  padding: 8px 8px 8px 8px;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  border-radius: 50px;
+}
+
+@media screen and (min-width: 744px) {
+  .card {
+    height: 220px;
+  }
+  .headerTop {
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+
+  .pointsContainer {
+    width: 100%;
+  }
+
+  .cardContent {
+    font-size: 18px;
+  }
+}
