@@ -3,34 +3,39 @@
   width: 100%;
   justify-content: center;
 }
-.main-container {
+.mainContainer {
   padding: 40px;
-  background-color: white;
+  background-color: var(--color-white);
   display: flex;
   justify-content: center;
   flex-direction: column;
   border-radius: 20px;
+  max-width: 1248px;
+  width: 90%;
 }
-.top-container {
-  width: 1168px;
-  height: 128px;
+.topContainer {
+  width: 100%;
+  height: 165px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.title-container {
+.titleContainer {
   width: 100%;
   height: 48px;
   display: flex;
+  flex-direction: column;
+  gap: 16px;
   justify-content: space-between;
 }
-.link-container {
+.linkContainer {
   width: 242px;
   display: flex;
+  padding: 8px;
   justify-content: space-between;
 }
-.link-text {
-  color: #818181;
+.linkText {
+  color: var(--color-gray-300);
   font-size: 16px;
   font-weight: 500;
   text-decoration: none;
@@ -38,44 +43,59 @@
 .title {
   font-weight: 800;
   font-size: 32px;
-  color: #414141;
+  color: var(--color-black);
 }
-.time-container {
+.timeContainer {
   display: flex;
   flex-direction: column;
 }
-.time-title {
-  color: #818181;
+.timeTitle {
+  color: var(--color-gray-300);
   font-weight: 400;
   font-size: 18px;
   margin-bottom: 8px;
 }
-.time-now {
-  color: #414141;
+.timeNow {
+  color: var(--color-black);
   font-size: 16px;
   padding: 4px;
   font-weight: 500;
 }
-.habit-container {
+.habitContainer {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   padding: 40px 24px;
 }
-.habit-top-container {
+.habitTopContainer {
   display: flex;
   flex-direction: row;
-  width: 100%;
-  justify-content: center;
-  gap: 40px;
+  max-width: 400px;
+  width: 90%;
+  align-items: center;
   margin-bottom: 24px;
+  position: relative;
 }
-.habit-title {
-  color: #414141;
+.habitTitle {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--color-black);
   font-weight: 800;
   font-size: 24px;
 }
-.list-text {
-  color: #818181;
+.listText {
+  position: absolute;
+  color: var(--color-gray-300);
+  right: 0%;
+}
+
+@media screen and (min-width: 744px) {
+  .titleContainer {
+    flex-direction: row;
+  }
+  .topContainer {
+    height: 128px;
+  }
 }
