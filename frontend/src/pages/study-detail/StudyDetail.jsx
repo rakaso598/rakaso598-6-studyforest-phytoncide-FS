@@ -9,7 +9,9 @@ const StudyDetail = () => {
     <section className={styles.container}>
       <div className={styles.wrapper}>
         <StudyDetailNav />
+
         <StudyContent />
+
         <HabitRecordTable />
       </div>
     </section>

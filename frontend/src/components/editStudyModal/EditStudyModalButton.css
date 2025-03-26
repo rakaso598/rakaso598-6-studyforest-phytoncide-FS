@@ -217,96 +217,9 @@ table {
   border-spacing: 0;
 }
 
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: var(--radius-sm);
-  width: 648px;
-  height: 369px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  gap: 20px;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 15px;
-  margin-top: 24px;
-}
-
-.modal-title {
-  font-size: 24px;
-  font-weight: bold;
-  flex-grow: 1;
-  margin-left: 218px;
-}
-
-.modal-close-button {
-  background: none;
-  border: none;
-  font-size: 16px;
+.openEditStudyModalButton {
+  all: unset;
   cursor: pointer;
   color: var(--color-green-300);
-}
-
-.modal-message {
-  margin-bottom: 20px;
-  text-align: center;
-  color: var(--color-gray-300);
-}
-
-.modal-input-container {
-  margin-bottom: 15px;
-}
-
-.modal-input-label {
-  display: block;
-  margin-bottom: 6px;
-  font-weight: bold;
-}
-
-.modal-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: var(--radius-sm);
-  margin-top: 10px;
-  padding: 14px;
-}
-
-.modal-verify-button {
-  font-family: var(--font-jejudoldam);
-  background-color: var(--color-green-200);
-  color: white;
-  padding: 16px;
-  border: none;
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.modal-verify-button:hover {
-  background-color: var(--color-green-300);
-}
-
-.error-message {
-  color: var(--color-red-300);
-  margin-top: 8px;
+  font-size: 16px;
 }
