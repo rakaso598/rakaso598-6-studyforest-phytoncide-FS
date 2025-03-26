@@ -34,7 +34,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
       console.log(data);
 
       if (data.success) {
-        navigate('/example'); // 비밀번호 검증 성공 시 '/example' 경로로 이동
+        navigate('/study-edit-form'); // 비밀번호 검증 성공 시 'study-edit-form' 경로로 이동
       } else {
         setErrorMessage('비밀번호 검증에 실패했습니다. 다시 시도해주세요.'); // 비밀번호 검증 실패 시 오류 메시지
       }
