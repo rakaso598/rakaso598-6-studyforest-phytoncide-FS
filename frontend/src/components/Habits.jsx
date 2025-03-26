@@ -21,16 +21,15 @@ function Habits() {
         </p>
       ) : (
         habits.map((habit) => (
-          <div id={habit.id} className={styles.habitItem}>
-            <button
-              onClick={() => HandleClick(habit.id)}
-              className={
-                habit.checked ? styles.habitChecked : styles.habitUnchecked
-              }
-            >
-              {habit.title}
-            </button>
-          </div>
+          <button
+            key={habit.id}
+            onClick={() => HandleClick(habit.id)}
+            className={
+              habit.checked ? styles.habitChecked : styles.habitUnchecked
+            }
+          >
+            {habit.title}
+          </button>
         ))
       )}
     </div>
