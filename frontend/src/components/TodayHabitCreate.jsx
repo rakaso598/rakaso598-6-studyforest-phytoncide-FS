@@ -3,7 +3,7 @@ import styles from "./TodayHabitCreate.module.css";
 import trashIcon from "../../public/images/icon/ic_trash.svg";
 import plusIcon from "../../public/images/icon/ic_plus.svg";
 
-const TodayHabitCreate = () => {
+const TodayHabitCreate = ({ onClose }) => {
   //habits 설정
   const [habits, setHabits] = useState([
     "미라클모닝 6시 기상",
@@ -54,7 +54,9 @@ const TodayHabitCreate = () => {
         </div>
       </div>
       <div className={styles.btns}>
-        <button className={styles.close}>취소</button>
+        <button className={styles.close} onClick={onClose}>
+          취소
+        </button>
         <button className={styles.confirmRevision}>수정 완료</button>
       </div>
     </div>

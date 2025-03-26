@@ -1,7 +1,5 @@
-
-
 import TodayHabitCreate from "@components/TodayHabitCreate";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "@today-habit/TodayHabit.module.css";
 import Habits from "@components/Habits";
@@ -12,16 +10,16 @@ const TodayHabit = () => {
     .format("YYYY-MM-DD A HH:mm")
     .replace("AM", "오전")
     .replace("PM", "오후");
-  const [runningTime, setRunningTime] = useState(null);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRunningTime(currentTime);
-    }, 60000);
-    return () => {
-      clearInterval(interval);
-    };
-  }, [currentTime]);
+  const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 관리
+
+  const openModal = () => {
+    setIsModalOpen(true); // 모달 열기
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // 모달 닫기
+  };
 
   return (
     <div className={styles.container}>
@@ -48,11 +46,23 @@ const TodayHabit = () => {
         <div className={styles.habitContainer}>
           <div className={styles.habitTopContainer}>
             <p className={styles.habitTitle}>오늘의 습관</p>
-            <p className={styles.listText}>목록 수정</p>
+            <button
+              className={styles.listText}
+              onClick={openModal} // 목록 수정 클릭 시 모달 열기
+            >
+              목록 수정
+            </button>
           </div>
           <Habits />
         </div>
       </div>
+
+      {/* 모달 열림 상태가 true일 때 TodayHabitCreate 모달 표시 */}
+      {isModalOpen && (
+        <div className={styles.modalBackground} onClick={closeModal}>
+          <TodayHabitCreate onClose={closeModal} />
+        </div>
+      )}
     </div>
   );
 };
