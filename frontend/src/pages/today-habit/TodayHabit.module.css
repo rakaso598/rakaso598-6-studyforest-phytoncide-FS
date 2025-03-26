@@ -34,12 +34,21 @@
   padding: 8px;
   justify-content: space-between;
 }
-.linkText {
+.link {
   color: var(--color-gray-300);
   font-size: 16px;
   font-weight: 500;
   text-decoration: none;
+  border-radius: 15px;
+  padding: 12px 6px 12px 12px;
+  border: 1px solid var(--color-gray-200);
+  display: flex;
+  height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
 .title {
   font-weight: 800;
   font-size: 32px;
@@ -60,6 +69,11 @@
   font-size: 16px;
   padding: 4px;
   font-weight: 500;
+  border-radius: 50px;
+  width: 190px;
+  border: 1px solid var(--color-gray-200);
+  margin-bottom: 24px;
+  text-align: center;
 }
 .habitContainer {
   display: flex;
@@ -67,6 +81,8 @@
   flex-direction: column;
   align-items: center;
   padding: 40px 24px;
+  border-radius: 20px;
+  border: 1px solid var(--color-gray-200);
 }
 .habitTopContainer {
   display: flex;

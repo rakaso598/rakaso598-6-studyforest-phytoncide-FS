@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import styles from "./TodayHabit.module.css";
-import Habits from "../../components/Habits";
+import styles from "@today-habit/TodayHabit.module.css";
+import Habits from "@components/Habits";
 import dayjs from "dayjs";
 
 const TodayHabit = () => {
-  const currentTime = dayjs().format("YYYY-MM-DD HH:mm");
+  const currentTime = dayjs()
+    .format("YYYY-MM-DD A HH:mm")
+    .replace("AM", "오전")
+    .replace("PM", "오후");
   const [runningTime, setRunningTime] = useState(null);
 
   useEffect(() => {
@@ -24,11 +27,13 @@ const TodayHabit = () => {
           <div className={styles.titleContainer}>
             <p className={styles.title}>title</p>
             <div className={styles.linkContainer}>
-              <Link to="/today-focus" className={styles.linkText}>
-                오늘의 집중 &gt;
+              <Link to="/today-focus" className={styles.link}>
+                <p className={styles.linkText}>오늘의 집중</p>
+                <img src="/images/icon/ic_arrow_right.svg" />
               </Link>
-              <Link to="/" className={styles.linkText}>
-                홈 &gt;
+              <Link to="/" className={styles.link}>
+                <p>홈</p>
+                <img src="/images/icon/ic_arrow_right.svg" />
               </Link>
             </div>
           </div>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./Habits.module.css";
+import styles from "@components/Habits.module.css";
 
 function Habits() {
   const [habits, setHabits] = useState([
@@ -16,7 +16,7 @@ function Habits() {
   return (
     <div className={styles.habitList}>
       {habits.length === 0 ? (
-        <p className={styles["noHabitText"]}>
+        <p className={styles.noHabitText}>
           아직 습관이 없어요 <br /> 목록 수정을 눌러 습관을 생성해보세요{" "}
         </p>
       ) : (
