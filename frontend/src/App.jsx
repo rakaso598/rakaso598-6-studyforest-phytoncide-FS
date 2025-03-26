@@ -1,6 +1,5 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import "./styles/global.css";
 import "../public/font/Pretendard-1.3.9/web/static/pretendard.css";
 import Header from "./layout/Header";
 import Home from "@home/Home";
