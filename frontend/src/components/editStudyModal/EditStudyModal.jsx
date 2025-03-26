@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // useNavigate
+import { useNavigate } from 'react-router-dom';
 import './EditStudyModal.css';
 
 const EditStudyModal = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const VERIFY_PASSWORD_URL = 'http://localhost:5090/api/verify-password';
-  const navigate = useNavigate(); // useNavigate 초기화
+  const navigate = useNavigate();
+
+  const userId = "1"; // userId를 알수있어야함, 일단 지금은 해결책이 부족하므로(전역 상태에서 id를 가져온다거나 하는 설정이 없음). 일단 userId를 1로 하드코딩합니다.
 
   if (!isOpen) return null;
 
@@ -21,7 +23,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ userId, password }),
       });
 
       if (!response.ok) {
@@ -32,9 +34,9 @@ const EditStudyModal = ({ isOpen, onClose }) => {
       console.log(data);
 
       if (data.success) {
-        navigate('/example'); // 비밀번호 검증 성공 시 /example 경로로 이동
+        navigate('/example'); // 비밀번호 검증 성공 시 '/example' 경로로 이동
       } else {
-        setErrorMessage('비밀번호 검증에 실패했습니다. 다시 시도해주세요.'); // 비밀번호 검증 실패 시 오류 메시지 설정
+        setErrorMessage('비밀번호 검증에 실패했습니다. 다시 시도해주세요.'); // 비밀번호 검증 실패 시 오류 메시지
       }
     } catch (error) {
       console.error('비밀번호 검증 API 호출 실패!:', error);
