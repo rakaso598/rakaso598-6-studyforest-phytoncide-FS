@@ -1,5 +1,6 @@
 import express from "express";
 import prisma from "../../db/prisma/client.prisma.js";
+import { nextTick } from "process";
 
 const studyUpdate = express.Router();
 
@@ -35,11 +36,8 @@ studyUpdate.put("/study/:studyId/update", async (req, res) => {
       message: "스터디 정보가 성공적으로 업데이트되었습니다.",
       updatedStudy,
     });
-  } catch (error) {
-    console.error("스터디 업데이트 중 오류 발생", error);
-    res
-      .status(500)
-      .json({ success: false, message: "서버 오류가 발생했습니다." });
+  } catch (err) {
+    next(err);
   }
 });
 
