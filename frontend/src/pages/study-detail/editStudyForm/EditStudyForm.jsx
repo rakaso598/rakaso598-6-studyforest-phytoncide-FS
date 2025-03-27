@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./EditStudyForm.module.css";
 import bg1 from "/images/studyBg/Rectangle 1.svg";
 import bg2 from "/images/studyBg/Rectangle 1249.svg";
@@ -13,7 +13,59 @@ import btnSeeIcon from "/images/icon/btn_visibility_on_24px.svg";
 
 const backgroundImages = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8];
 
-const EditStudyForm = () => {
+const EditStudyForm = ({ studyId }) => {
+  const [nickname, setNickname] = useState("");
+  const [studyName, setStudyName] = useState("");
+  const [description, setDescription] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [selectedBackground, setSelectedBackground] = useState(backgroundImages[0]);
+
+  const handleUpdateStudy = async () => {
+    if (
+      nickname &&
+      studyName &&
+      description &&
+      password &&
+      confirmPassword &&
+      password === confirmPassword
+    ) {
+      try {
+        const response = await fetch(
+          `http://localhost:5090/api/study/${studyId}/update`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              nickname,
+              studyName,
+              description,
+              password,
+              background: selectedBackground,
+            }),
+          }
+        );
+
+        if (response.ok) {
+          console.log("스터디가 성공적으로 업데이트되었습니다!");
+          // 성공 처리 (예: 리디렉션, 메시지 표시)
+          alert("업데이트 성공!")
+        } else {
+          console.error("스터디 업데이트 실패:", response.statusText);
+          // 오류 처리 (예: 오류 메시지 표시)
+          alert("업데이트 실패... 오류...")
+        }
+      } catch (error) {
+        console.error("스터디 업데이트 중 오류 발생:", error);
+        // 네트워크 오류 처리
+      }
+    } else {
+      alert("모든 필드를 채우고 비밀번호를 확인해주세요.");
+    }
+  };
+
   return (
     <section className={styles.section}>
       <article className={styles.article}>
@@ -25,6 +77,8 @@ const EditStudyForm = () => {
               className={styles.input}
               type="text"
               placeholder="닉네임을 입력해 주세요"
+              value={nickname}
+              onChange={(e) => setNickname(e.target.value)}
             />
           </label>
           <label className={styles.label}>
@@ -33,6 +87,8 @@ const EditStudyForm = () => {
               className={styles.input}
               type="text"
               placeholder="스터디 이름을 입력해주세요"
+              value={studyName}
+              onChange={(e) => setStudyName(e.target.value)}
             />
           </label>
           <label className={styles.label}>
@@ -40,6 +96,8 @@ const EditStudyForm = () => {
             <textarea
               className={styles.inputBox}
               placeholder="소개 멘트를 작성해 주세요"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
           </label>
         </div>
@@ -47,7 +105,13 @@ const EditStudyForm = () => {
           <p className={styles.inputBoxTitle}>배경을 선택해주세요</p>
           <div className={styles.bgBox}>
             {backgroundImages.map((bgs) => (
-              <img src={bgs} alt="bgImg" />
+              <img
+                key={bgs}
+                src={bgs}
+                alt="bgImg"
+                onClick={() => setSelectedBackground(bgs)}
+                style={{ border: selectedBackground === bgs ? "2px solid blue" : "none" }}
+              />
             ))}
           </div>
         </div>
@@ -57,26 +121,28 @@ const EditStudyForm = () => {
             <div className={styles.pwInputBox}>
               <input
                 className={styles.input}
-                type="text"
+                type="password"
                 placeholder="비밀번호를 입력해주세요"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
-              <img
-                className={styles.btnIcon}
-                src={btnCloseIcon}
-                alt="btnSeeIcon"
-              />
+              <img className={styles.btnIcon} src={btnCloseIcon} alt="btnSeeIcon" />
             </div>
           </label>
           <label className={styles.label}>
             <p className={styles.inputBoxTitle}>비밀번호 확인</p>
             <input
               className={styles.input}
-              type="text"
+              type="password"
               placeholder="비밀번호를 다시 한 번 입력해주세요"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
           </label>
         </div>
-        <button className={styles.createBtn}>수정하기</button>
+        <button className={styles.createBtn} onClick={handleUpdateStudy}>
+          수정하기
+        </button>
       </article>
     </section>
   );
