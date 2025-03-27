@@ -7,7 +7,7 @@ import TodayFocus from "@today-focus/TodayFocus";
 import TodayHabit from "@today-habit/TodayHabit";
 import StudyDetail from "@study-detail/StudyDetail";
 import StudyCreate from "@study-create/StudyCreate";
-import StudyEditForm from "@study-detail/studyEditForm/StudyEditForm";
+import EditStudyForm from "@study-detail/editStudyForm/EditStudyForm";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
           <Route path="/study-detail" element={<StudyDetail />} />
           <Route path="/today-focus" element={<TodayFocus />} />
           <Route path="/today-habit" element={<TodayHabit />} />
-          <Route path="/study-edit-form" element={<StudyEditForm />} />
+          <Route path="/edit-study-form" element={<EditStudyForm />} />
         </Routes>
       </main>
     </>

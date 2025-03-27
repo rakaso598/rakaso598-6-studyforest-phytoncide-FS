@@ -9,7 +9,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
   const VERIFY_PASSWORD_URL = `${SERVER_URL}/api/verify-password`;
   const navigate = useNavigate();
 
-  const userId = "cm8qx9v700000s19kgwe2lgd7"; // 일단 userId를 DB에 실제로 존재하는 cuid로 하드코딩했습니다.
+  const userId = "cm8qy86i90000w3h1rhd0iqqd"; // 일단 userId를 DB에 실제로 존재하는 cuid로 하드코딩했습니다.
   if (!isOpen) return null;
 
   const handlePasswordChange = (event) => {
@@ -34,7 +34,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
       console.log(data);
 
       if (data.success) {
-        navigate("/study-edit-form"); // 비밀번호 검증 성공 시 'study-edit-form' 경로로 이동
+        navigate("/edit-study-form"); // 비밀번호 검증 성공 시 'edit-study-form' 경로로 이동
       } else {
         setErrorMessage("비밀번호 검증에 실패했습니다. 다시 시도해주세요."); // 비밀번호 검증 실패 시 오류 메시지
       }

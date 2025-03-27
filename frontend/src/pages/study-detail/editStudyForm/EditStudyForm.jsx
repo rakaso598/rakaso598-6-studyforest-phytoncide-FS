@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./StudyEditForm.module.css";
+import styles from "./EditStudyForm.module.css";
 import bg1 from "/images/studyBg/Rectangle 1.svg";
 import bg2 from "/images/studyBg/Rectangle 1249.svg";
 import bg3 from "/images/studyBg/Rectangle 1250.svg";
@@ -13,7 +13,7 @@ import btnSeeIcon from "/images/icon/btn_visibility_on_24px.svg";
 
 const backgroundImages = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8];
 
-const StudyEditForm = () => {
+const EditStudyForm = () => {
   return (
     <section className={styles.section}>
       <article className={styles.article}>
@@ -82,4 +82,4 @@ const StudyEditForm = () => {
   );
 };
 
-export default StudyEditForm;
+export default EditStudyForm;

@@ -1,9 +1,9 @@
 import express from "express";
 import prisma from "../../db/prisma/client.prisma.js";
 
-const editStudyModules = express.Router();
+const studyVerifyPassword = express.Router();
 
-editStudyModules.post("/verify-password", async (req, res) => {
+studyVerifyPassword.post("/verify-password", async (req, res) => {
   const { userId, password } = req.body;
 
   try {
@@ -34,4 +34,4 @@ editStudyModules.post("/verify-password", async (req, res) => {
   }
 });
 
-export default editStudyModules;
+export default studyVerifyPassword;
