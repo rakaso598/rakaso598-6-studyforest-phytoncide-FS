@@ -28,4 +28,17 @@ habitsRouter.patch("/patchhabit/:habitId", async (req, res, next) => {
   }
 });
 
+habitsRouter.post("/posthabit/:studyId", async (req, res, next) => {
+  try {
+    const studyId = Number(req.params.studyId);
+    const { title } = req.body;
+    const habit = await prisma.habit.create({
+      data: { title, studyId },
+    });
+    res.json(habit);
+  } catch (e) {
+    next(e);
+  }
+});
+
 export default habitsRouter;

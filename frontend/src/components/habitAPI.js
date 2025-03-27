@@ -2,7 +2,7 @@ import axios from "axios";
 import SERVER_URL from "../server.js";
 
 const instance = axios.create({
-  baseURL: `${SERVER_URL}/api/habits`,
+  baseURL: `${SERVER_URL}/api/habits`, //백엔드 배포 시 사용
   // baseURL: `http://localhost:5090/api/habits/`,
 });
 
