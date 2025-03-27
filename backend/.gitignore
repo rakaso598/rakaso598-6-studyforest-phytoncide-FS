@@ -6,3 +6,7 @@ node_modules
 
 ### .http testing file
 *.http
+
+### mock seed.js 제외
+mock
+seed.js
