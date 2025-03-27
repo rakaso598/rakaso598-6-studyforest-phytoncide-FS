@@ -9,7 +9,7 @@ import bg6 from "/images/studyBg/Frame 2609427.svg";
 import bg7 from "/images/studyBg/Frame 2609428.svg";
 import bg8 from "/images/studyBg/Frame 2609429.svg";
 import btnCloseIcon from "/images/icon/btn_visibility_on_24px-1.svg";
-// import btnSeeIcon from "/images/icon/btn_visibility_on_24px.svg";
+import axios from 'axios';
 
 const backgroundImages = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8];
 
@@ -31,35 +31,38 @@ const EditStudyForm = ({ studyId }) => {
       password === confirmPassword
     ) {
       try {
-        const response = await fetch(
+        const response = await axios.put(
           `http://localhost:5090/api/study/${studyId}/update`,
           {
-            method: "PUT",
+            nickname,
+            studyName,
+            description,
+            password,
+            background: selectedBackground,
+          },
+          {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              nickname,
-              studyName,
-              description,
-              password,
-              background: selectedBackground,
-            }),
           }
         );
 
-        if (response.ok) {
-          console.log("스터디가 성공적으로 업데이트되었습니다!");
-          // 성공 처리 (예: 리디렉션, 메시지 표시)
-          alert("업데이트 성공!")
-        } else {
-          console.error("스터디 업데이트 실패:", response.statusText);
-          // 오류 처리 (예: 오류 메시지 표시)
-          alert("업데이트 실패... 오류...")
-        }
+        console.log("스터디가 성공적으로 업데이트되었습니다!", response.data);
+        alert("업데이트 성공!");
+        // 성공 처리 (예: 리디렉션, 메시지 표시)
       } catch (error) {
         console.error("스터디 업데이트 중 오류 발생:", error);
-        // 네트워크 오류 처리
+        alert("업데이트 실패... 오류...");
+        // 오류 처리 (예: 오류 메시지 표시)
+        if (error.response) {
+          console.error("서버 응답:", error.response.data);
+          console.error("서버 상태:", error.response.status);
+          console.error("서버 헤더:", error.response.headers);
+        } else if (error.request) {
+          console.error("요청 오류:", error.request);
+        } else {
+          console.error("오류 메시지:", error.message);
+        }
       }
     } else {
       alert("모든 필드를 채우고 비밀번호를 확인해주세요.");
