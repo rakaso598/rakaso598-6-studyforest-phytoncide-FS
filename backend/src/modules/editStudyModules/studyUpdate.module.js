@@ -3,7 +3,7 @@ import prisma from "../../db/prisma/client.prisma.js";
 
 const studyUpdate = express.Router();
 
-studyUpdate.post("/verify-password", async (req, res) => {
+studyUpdate.put("/verify-password", async (req, res) => {
   const data = req.body;
 
   try {
