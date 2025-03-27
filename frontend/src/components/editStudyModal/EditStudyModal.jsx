@@ -9,8 +9,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
   const VERIFY_PASSWORD_URL = `${SERVER_URL}/api/verify-password`;
   const navigate = useNavigate();
 
-  const userId = "1"; // userId를 알수있어야함, 일단 지금은 해결책이 부족하므로(전역 상태에서 id를 가져온다거나 하는 설정이 없음). 일단 userId를 1로 하드코딩합니다.
-
+  const userId = "cm8qx9v700000s19kgwe2lgd7"; // 일단 userId를 DB에 실제로 존재하는 cuid로 하드코딩했습니다.
   if (!isOpen) return null;
 
   const handlePasswordChange = (event) => {
