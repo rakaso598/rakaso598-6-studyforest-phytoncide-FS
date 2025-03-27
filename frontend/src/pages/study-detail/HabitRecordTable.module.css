@@ -1,0 +1,18 @@
+.container {
+  border: 1px solid var(--color-gray-200);
+  border-radius: 20px;
+  padding-top: 16px;
+  padding-left: 16px;
+  width: 100%;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+@media screen and (min-width: 744px) {
+  .title {
+    font-size: 24px;
+  }
+}
