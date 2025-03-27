@@ -1,20 +1,37 @@
 import express from "express";
-import prisma from "@prisma/client";
+import prisma from "../../db/prisma/client.prisma.js";
 
 const habitsRouter = express.Router();
 
-habitsRouter.get("/", async (req, res, next) => {
+habitsRouter.get("/gethabit/:studyId", async (req, res, next) => {
   try {
-    const habits = await prisma.habit.findMany();
+    const studyId = Number(req.params.studyId);
+    const habits = await prisma.habit.findMany({ where: { studyId } });
     res.status(201).json(habits);
   } catch (e) {
     next(e);
   }
 });
 
-habitsRouter.post("/", async (req, res, next) => {
+habitsRouter.patch("/patchhabit/:habitId", async (req, res, next) => {
   try {
-    const { title, studyId } = req.body;
+    const data = req.body;
+    const habitId = Number(req.params.habitId);
+    const updatedHabit = await prisma.habit.update({
+      where: { id: habitId },
+      data,
+    });
+    if (!updatedHabit) return res.status(404).send("can't find habit");
+    res.status(204).json(updatedHabit);
+  } catch (e) {
+    next(e);
+  }
+});
+
+habitsRouter.post("/posthabit/:studyId", async (req, res, next) => {
+  try {
+    const studyId = Number(req.params.studyId);
+    const { title } = req.body;
     const habit = await prisma.habit.create({
       data: { title, studyId },
     });

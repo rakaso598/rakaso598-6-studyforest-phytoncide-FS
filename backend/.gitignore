@@ -1,6 +1,8 @@
 ### node modules
 node_modules
 
+### .env 데이터베이스 주소 (유출 방지)
+.env
 
 ### .http testing file
 *.http
