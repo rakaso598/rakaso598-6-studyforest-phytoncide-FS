@@ -2,24 +2,37 @@
   width: 100%;
   max-width: 1200px;
   background-color: var(--bg-white);
-  padding: 20px 0 20px 20px;
+  padding: 20px;
 
   border-radius: 20px;
-}
-
-.title {
-  font-size: 16px;
-  font-weight: 800;
-  color: var(--text-black);
-
-  margin-bottom: 15px;
 
   transition: all 0.3s ease;
 }
 
+.title {
+  height: 10%;
+  font-size: 16px;
+  font-weight: 800;
+  color: var(--text-black);
+
+  transition: all 0.3s ease;
+}
+
+.noData {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 380px;
+  color: var(--text-gray);
+  font-size: 20px;
+}
+
 .cardListContainer {
+  margin-top: 40px;
   overflow-x: auto;
-  overflow-y: hidden;
+  overflow-y: visible;
+
+  padding: 10px 0;
 
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -32,30 +45,25 @@
 .cardList {
   display: flex;
   width: max-content;
-
-  gap: 20px;
-
-  overflow-x: auto;
-  overflow-y: hidden;
+  gap: 30px;
+  overflow-y: visible;
 }
 
 .cardWrapper {
-  width: 300px;
+  width: 320px;
 
-  transition: width 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 @media screen and (min-width: 744px) {
   .recentStudyContainer {
-    padding: 30px 0 30px 30px;
+    padding: 40px;
   }
+
   .title {
     font-size: 24px;
   }
-}
-
-@media screen and (min-width: 1200px) {
   .cardWrapper {
-    width: 370.5px;
+    width: 352px;
   }
 }
