@@ -5,9 +5,9 @@
   transform: translate(-50%, -50%);
   background-color: var(--color-white);
   width: 648px;
-  min-height: 841px;
-  max-height: 80vh;
-  overflow-y: auto;
+  height: 841px;
+  max-height: 80vh; /* 최대 높이를 80vh로 설정 */
+  overflow-y: auto; /* 세로 스크롤 가능 */
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -31,11 +31,11 @@
   display: inline-block;
   min-width: 100px;
   max-width: 380px;
-  width: auto;
+  width: 100%;
   background: transparent;
   border: none;
   outline: none;
-  border-bottom: 2px solid var(--color-gray-300);
+  text-decoration: underline;
   padding: 5px;
   text-align: center;
   color: var(--color-gray-300);
@@ -44,6 +44,7 @@
   text-align: center;
   vertical-align: middle;
 }
+
 .singleHabitBox {
   display: grid;
   place-items: center;
@@ -54,6 +55,9 @@
 }
 .wholeHabitsBox {
   margin-left: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .singleHabitBoxWithTrashIc {
   display: flex;
@@ -80,45 +84,44 @@
   border: 2px solid var(--color-black);
   text-align: center;
   margin-bottom: 24px;
-  margin-left: 40px;
+  margin-right: 24px;
   cursor: pointer;
 }
 .btns {
+  position: fixed;
+  bottom: 40px; /* 모달 하단에서 40px 떨어짐 */
+  left: 50%; /* 모달 내에서 수평 중앙 */
+  transform: translateX(-50%); /* 정확히 중앙에 위치 */
   display: flex;
   justify-content: center;
-  margin-bottom: 40px;
+  width: 100%;
 }
+
+.close,
+.confirmRevision {
+  width: 288px;
+  height: 58px;
+  border-radius: 16px;
+  border: none;
+  font-family: var(--font-jejudoldam);
+  font-weight: 400;
+  font-size: 18px;
+  padding-top: 5px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
 .close {
   background-color: var(--color-gray-200);
   margin-right: 12px;
   color: var(--color-white);
   text-shadow: 0px -2px 0px var(--color-gray-300);
-  display: grid;
-  place-items: center;
-  width: 288px;
-  height: 58px;
-  border-radius: 16px;
-  border: none;
-  font-family: var(--font-jejudoldam);
-  font-weight: 400;
-  font-size: 18px;
-  padding-top: 5px;
-  cursor: pointer;
 }
+
 .confirmRevision {
   background-color: var(--color-green-200);
   margin-left: 12px;
   color: var(--color-white);
   text-shadow: 0px -2px 0px var(--color-green-300);
-  display: grid;
-  place-items: center;
-  width: 288px;
-  height: 58px;
-  border-radius: 16px;
-  border: none;
-  font-family: var(--font-jejudoldam);
-  font-weight: 400;
-  font-size: 18px;
-  padding-top: 5px;
-  cursor: pointer;
 }

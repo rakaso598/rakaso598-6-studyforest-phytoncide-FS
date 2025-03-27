@@ -1,5 +1,5 @@
 import express from "express";
-import prisma from "../../db/prisma/client.prisma.js";
+import prisma from "@prisma/client";
 
 const editStudyModules = express.Router();
 
