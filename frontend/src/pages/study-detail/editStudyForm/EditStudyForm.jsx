@@ -9,7 +9,7 @@ import bg6 from "/images/studyBg/Frame 2609427.svg";
 import bg7 from "/images/studyBg/Frame 2609428.svg";
 import bg8 from "/images/studyBg/Frame 2609429.svg";
 import btnCloseIcon from "/images/icon/btn_visibility_on_24px-1.svg";
-import btnSeeIcon from "/images/icon/btn_visibility_on_24px.svg";
+// import btnSeeIcon from "/images/icon/btn_visibility_on_24px.svg";
 
 const backgroundImages = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8];
 
