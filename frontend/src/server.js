@@ -1,3 +1,3 @@
-const SERVER_URL = "https://six-studyforest-phytoncide-fs.onrender.com";
+const SERVER_URL = "https://six-study-forest-server.onrender.com";
 
 export default SERVER_URL;
