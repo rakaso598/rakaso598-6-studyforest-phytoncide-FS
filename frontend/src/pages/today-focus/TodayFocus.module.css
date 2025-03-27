@@ -1,8 +1,11 @@
 .container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  margin: 20px 15px 342px 15px;
+  flex-direction: column;
+  height: 942px;
+  margin: 0px 15px 0px 15px;
+  padding-top: 20px;
 }
 
 .box {
@@ -124,6 +127,7 @@
 .focusTimerContainer {
   display: flex;
   justify-content: center;
+  width: 280px;
   color: var(--text-black);
   font-weight: 800;
   font-size: 80px;
@@ -149,6 +153,10 @@
   border: none;
   outline: none;
   padding: 0;
+}
+
+.countDown {
+  color: var(--error-light);
 }
 
 .focusBtnContainer {
@@ -201,7 +209,7 @@
   width: 60px;
 }
 
-.focusRestartBtn {
+.focusResetBtn {
   background-color: var(--bg-green);
   display: flex;
   justify-content: center;
@@ -214,7 +222,7 @@
   cursor: pointer;
 }
 
-.focusRestartBtn img {
+.focusResetBtn img {
   width: 26.4px;
   height: 26.4px;
 }
@@ -224,23 +232,44 @@
   height: 24px;
 }
 
-.modal {
+.toastContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 223px;
-  height: 47px;
+}
+
+.toastWarning {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 202px;
+  height: 45px;
   border-radius: 12px;
-  padding: 14px 25px;
   background-color: var(--bg-pink);
   color: var(--error-light);
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
+  margin-bottom: 40px;
+}
+
+.toastPoint {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 202px;
+  height: 45px;
+  border-radius: 12px;
+  background-color: var(--bg-green-light);
+  color: var(--text-green);
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 40px;
 }
 
 @media (min-width: 744px) {
   .container {
-    margin: 16px 24px 200px 24px;
+    margin: 0px 24px 0px 24px;
+    padding-top: 16px;
   }
 
   .box {
@@ -271,6 +300,7 @@
 
   .focusTimerContainer {
     font-size: 120px;
+    width: 430px;
   }
 
   .focusMinTimer {
@@ -311,20 +341,34 @@
     height: 44px;
   }
 
-  .focusRestartBtn {
+  .focusResetBtn {
     width: 64px;
     height: 64px;
   }
 
-  .focusRestartBtn img {
+  .focusResetBtn img {
     width: 35.2px;
     height: 35.2px;
+  }
+
+  .toastWarning {
+    width: 223px;
+    height: 47px;
+    font-size: 16px;
+  }
+
+  .toastPoint {
+    width: 223px;
+    height: 47px;
+    font-size: 16px;
   }
 }
 
 @media (min-width: 1200px) {
   .container {
-    margin: 53.5px 24px 152.5px;
+    height: 980px;
+    margin: 0px 24px;
+    padding-top: 53.5px;
   }
 
   .box {
@@ -343,6 +387,7 @@
 
   .focusTimerContainer {
     font-size: 150px;
+    width: 517px;
   }
 
   .focusMinTimer {
