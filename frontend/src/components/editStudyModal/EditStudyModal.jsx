@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./EditStudyModal.css";
 import SERVER_URL from "../../server";
+import axios from "axios";
 
 const EditStudyModal = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState("");
@@ -18,22 +19,14 @@ const EditStudyModal = ({ isOpen, onClose }) => {
 
   const handleVerifyPassword = async () => {
     try {
-      const response = await fetch(VERIFY_PASSWORD_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId, password }),
+      const response = await axios.post(VERIFY_PASSWORD_URL, {
+        userId,
+        password,
       });
 
-      if (!response.ok) {
-        throw new Error("서버 응답 실패!");
-      }
+      console.log(response.data);
 
-      const data = await response.json();
-      console.log(data);
-
-      if (data.success) {
+      if (response.data.success) {
         navigate("/edit-study-form"); // 비밀번호 검증 성공 시 'edit-study-form' 경로로 이동
       } else {
         setErrorMessage("비밀번호 검증에 실패했습니다. 다시 시도해주세요."); // 비밀번호 검증 실패 시 오류 메시지
