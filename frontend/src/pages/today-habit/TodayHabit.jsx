@@ -60,7 +60,12 @@ const TodayHabit = () => {
       {/* 모달 열림 상태가 true일 때 TodayHabitCreate 모달 표시 */}
       {isModalOpen && (
         <div className={styles.modalBackground} onClick={closeModal}>
-          <TodayHabitCreate onClose={closeModal} />
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <TodayHabitCreate onClose={closeModal} />
+          </div>
         </div>
       )}
     </div>
