@@ -1,5 +1,6 @@
 import express from "express";
 import prisma from "../../db/prisma/client.prisma.js";
+import { nextTick } from "process";
 
 const studyVerifyPassword = express.Router();
 
@@ -26,11 +27,8 @@ studyVerifyPassword.post("/verify-password", async (req, res) => {
         .status(401)
         .json({ success: false, message: "비밀번호가 일치하지 않습니다." });
     }
-  } catch (error) {
-    console.error("비밀번호 검증 중 오류 발생", error);
-    res
-      .status(500)
-      .json({ success: false, message: "서버 오류가 발생했습니다." });
+  } catch (err) {
+    next(err);
   }
 });
 
