@@ -21,16 +21,16 @@ model User {
 }
 
 model Study {
-  id          Int                @id @default(autoincrement())
+  id          Int               @id @default(autoincrement())
   authorId    String
   nickName    String
   title       String
   description String
   password    String?
-  background  Study_backgrounds?
+  background  Study_backgrounds
   point       Int?
-  createAt    DateTime           @default(now())
-  updatedAt   DateTime           @updatedAt
+  createAt    DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
 
   author User     @relation("UserStudy", fields: [authorId], references: [id])
   Emojis Emojis[] @relation("StudyEmojis")
@@ -43,6 +43,9 @@ enum Study_backgrounds {
   bg3
   bg4
   bg5
+  bg6
+  bg7
+  bg8
 }
 
 model Emojis {
