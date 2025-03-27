@@ -1,6 +1,5 @@
 import express from "express";
 import prisma from "../../db/prisma/client.prisma.js";
-import { nextTick } from "process";
 
 const studyVerifyPassword = express.Router();
 
