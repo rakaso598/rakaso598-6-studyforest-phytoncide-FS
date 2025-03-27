@@ -3,8 +3,13 @@ import styles from "@components/Habits.module.css";
 
 function Habits() {
   const [habits, setHabits] = useState([
-    { id: 1, title: "미라클 모닝", checked: false },
+    { id: 1, title: "미라클 모닝 6시 기상", checked: false },
     { id: 2, title: "아침 챙겨 먹기", checked: false },
+    { id: 3, title: "React 스터디 책 1챕터 읽기", checked: false },
+    { id: 4, title: "스트레칭", checked: false },
+    { id: 5, title: "영양제 챙겨 먹기", checked: false },
+    { id: 6, title: "사이드 프로젝트", checked: false },
+    { id: 7, title: "물 2L 먹기", checked: false },
   ]);
   const HandleClick = (id) => {
     setHabits((prevHabits) =>

@@ -5,6 +5,8 @@ import habitsRouter from "./habitModules/habits.module.js";
 const router = express.Router();
 
 router.use("/health-check", healthCheckRouter);
+router.use("/habits", habitsRouter);
+router.use("/habitlist", habitListRouter);
 router.use("/api", editStudyModules);
 router.use("/habits", habitsRouter);
 
