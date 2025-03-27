@@ -1,7 +1,7 @@
 import express from "express";
 import healthCheckRouter from "./healthCheck.module.js";
 import editStudyModules from "./editStudyModules/editStudy.module.js";
-import habitsRouter from "./habits.module.js";
+import habitsRouter from "./habitModules/habits.module.js";
 
 const router = express.Router();
 
