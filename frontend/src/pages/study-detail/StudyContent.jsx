@@ -33,7 +33,7 @@ const StudyContent = () => {
               alt="point icon"
               className={styles.pointIcon}
             />
-            <p className={styles.pointValue}>310P 획득</p>
+            <span className={styles.pointValue}>310P 획득</span>
           </div>
         </div>
       </div>
