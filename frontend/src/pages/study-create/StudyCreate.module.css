@@ -1,7 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
 .section {
   margin-top: 40px;
 }
@@ -9,7 +5,7 @@
 .article {
   max-width: 344px;
   width: 100%;
-  margin: 0 auto;
+  margin: 0 auto 171px;
   padding: 16px 16px 20px;
   border-radius: 20px;
   background: var(--bg-white);
@@ -28,64 +24,11 @@
   margin-bottom: 24px;
 }
 
-.label {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.inputBoxTitle {
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.input {
-  width: 100%;
-  height: 48px;
-  outline: none;
-  border: 1px solid var(--color-gray-200);
-  border-radius: 15px;
-  padding: 20px;
-  font-family: var(--font-pretendard-regular);
-}
-
-.inputBox {
-  width: 100%;
-  height: 98px;
-  resize: none;
-  composes: input;
-}
-
-.studyCreateMidBgBox {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  margin-bottom: 24px;
-}
-
-.bgBox {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
 .studyCreateBottomBox {
   display: flex;
   flex-direction: column;
   gap: 24px;
   margin-bottom: 40px;
-}
-
-.pwInputBox {
-  position: relative;
-}
-
-.btnIcon {
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  transform: translateY(-50%);
-  cursor: pointer;
 }
 
 .createBtn {
@@ -103,15 +46,11 @@
 @media screen and (min-width: 744px) {
   .article {
     max-width: 696px;
+    padding: 24px 24px 40px;
+    margin: 0 auto 197px;
   }
   .studyCreateTitle {
     font-size: 24px;
     margin-bottom: 24px;
-  }
-  .inputBoxTitle {
-    font-size: 18px;
-  }
-  .bgBox {
-    grid-template-columns: repeat(4, 1fr);
   }
 }
