@@ -7,32 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String   @id @default(cuid())
-  name      String
-  email     String
-  password  String
-  createAt  DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  studies   Study[]  @relation("UserStudies")
-  emojis    Emojis[] @relation("UserEmojis")
-}
-
 model Study {
-  id          Int               @id @default(autoincrement())
-  authorId    String
-  nickName    String
-  title       String
-  description String
-  password    String?
-  background  Study_backgrounds
-  point       Int?
-  createAt    DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  author      User              @relation("UserStudies", fields: [authorId], references: [id])
-  emojis      Emojis[]          @relation("StudyEmojis")
-  focuses     Focus[]           @relation("StudyFocuses")
-  habits      Habit[]           @relation("StudyHabits")
+  id                Int               @id @default(autoincrement())
+  nickName          String
+  title             String
+  description       String
+  encryptedPassword String
+  background        Study_backgrounds
+  point             Int
+  createAt          DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+  emojis            Emojis[]          @relation("StudyEmojis")
+  focuses           Focus[]           @relation("StudyFocuses")
+  habits            Habit[]           @relation("StudyHabits")
 }
 
 enum Study_backgrounds {
@@ -47,28 +34,39 @@ enum Study_backgrounds {
 }
 
 model Emojis {
-  id           Int     @id @default(autoincrement())
-  studyId      Int?
-  checkUserId  String?
-  emojiContent String?
-  study        Study?  @relation("StudyEmojis", fields: [studyId], references: [id])
-  checkUser    User?   @relation("UserEmojis", fields: [checkUserId], references: [id])
+  id           Int    @id @default(autoincrement())
+  studyId      Int
+  emojiContent String
+  study        Study  @relation("StudyEmojis", fields: [studyId], references: [id], onDelete: Cascade)
 }
 
 model Habit {
-  id        Int      @id @default(autoincrement())
+  id        Int         @id @default(autoincrement())
   title     String
-  monday    Boolean  @default(false)
-  tuesday   Boolean  @default(false)
-  wednesday Boolean  @default(false)
-  thursday  Boolean  @default(false)
-  friday    Boolean  @default(false)
-  saturday  Boolean  @default(false)
-  sunday    Boolean  @default(false)
-  createAt  DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  study     Study    @relation("StudyHabits", fields: [studyId], references: [id])
+  createAt  DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  study     Study       @relation("StudyHabits", fields: [studyId], references: [id], onDelete: Cascade)
   studyId   Int
+  HabitDone HabitDone[]
+}
+
+model HabitDone {
+  id        Int         @id @default(autoincrement())
+  habitId   Int
+  dayOfWeek DAY_OF_WEEK
+  isDone    Boolean
+  createdAt DateTime    @default(now())
+  habit     Habit       @relation(fields: [habitId], references: [id], onDelete: Cascade)
+}
+
+enum DAY_OF_WEEK {
+  Monday
+  Tuesday
+  Wednesday
+  Thursday
+  Friday
+  Saturday
+  Sunday
 }
 
 model Focus {
@@ -77,5 +75,5 @@ model Focus {
   complete  Boolean  @default(false)
   createAt  DateTime @default(now())
   updatedAt DateTime @updatedAt
-  study     Study    @relation("StudyFocuses", fields: [studyId], references: [id])
+  study     Study    @relation("StudyFocuses", fields: [studyId], references: [id], onDelete: Cascade)
 }
