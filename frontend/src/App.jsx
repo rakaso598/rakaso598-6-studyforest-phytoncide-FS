@@ -8,6 +8,7 @@ import TodayFocus from '@today-focus/TodayFocus';
 import TodayHabit from '@today-habit/TodayHabit';
 import StudyDetail from '@study-detail/StudyDetail';
 import StudyCreate from '@study-create/StudyCreate';
+import EditStudyForm from './pages/study-detail/editStudyForm/EditStudyForm';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/study-create' element={<StudyCreate />} />
           <Route path='/study-detail/:id' element={<StudyDetail />} />
+          <Route path='/study-detail/:id/form' element={<EditStudyForm />} />
           <Route path='/today-focus' element={<TodayFocus />} />
           <Route path='/today-habit' element={<TodayHabit />} />
         </Routes>
