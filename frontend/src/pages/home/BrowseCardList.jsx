@@ -8,7 +8,8 @@ import { RiArrowDownSFill, RiArrowUpSFill } from 'react-icons/ri';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import { useNavigate } from 'react-router-dom';
-import { loadMoreStudies, saveAndNavigateToStudy } from '../../utils/study';
+import { saveAndNavigateToStudy } from '../../utils/study';
+import axiosInstance from '../../api/axiosInstance';
 
 const BrowseCardList = () => {
   const navigate = useNavigate();
@@ -31,9 +32,21 @@ const BrowseCardList = () => {
     saveAndNavigateToStudy(currentStudy, navigate);
   };
 
-  const clickMoreStudy = () => {
+  const clickMoreStudy = async () => {
     // TODO: 서버 api 개발후 offset 기반 불러오기 방식으로 수정
-    loadMoreStudies(studies, setStudies, setIsLoading);
+    // loadMoreStudies(studies, setStudies, setIsLoading);
+
+    try {
+      const response = await axiosInstance.get(`/api/study?offset=0&limit=6`);
+
+      const data = response.data;
+
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+
+    console.log('clickMoreStudy');
   };
 
   useEffect(() => {
