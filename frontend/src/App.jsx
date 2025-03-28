@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import '../public/font/Pretendard-1.3.9/web/static/pretendard.css';
@@ -7,7 +8,6 @@ import TodayFocus from '@today-focus/TodayFocus';
 import TodayHabit from '@today-habit/TodayHabit';
 import StudyDetail from '@study-detail/StudyDetail';
 import StudyCreate from '@study-create/StudyCreate';
-import StudyEditForm from '@study-detail/studyEditForm/StudyEditForm';
 
 function App() {
   return (
@@ -20,7 +20,6 @@ function App() {
           <Route path='/study-detail/:id' element={<StudyDetail />} />
           <Route path='/today-focus' element={<TodayFocus />} />
           <Route path='/today-habit' element={<TodayHabit />} />
-          <Route path='/study-edit-form' element={<StudyEditForm />} />
         </Routes>
       </main>
     </>

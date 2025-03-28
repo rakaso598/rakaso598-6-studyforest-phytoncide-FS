@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./EditStudyModal.css";
 import SERVER_URL from "../../server";
+import axios from "axios";
 
 const EditStudyModal = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState("");
@@ -9,8 +10,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
   const VERIFY_PASSWORD_URL = `${SERVER_URL}/api/verify-password`;
   const navigate = useNavigate();
 
-  const userId = "1"; // userId를 알수있어야함, 일단 지금은 해결책이 부족하므로(전역 상태에서 id를 가져온다거나 하는 설정이 없음). 일단 userId를 1로 하드코딩합니다.
-
+  const userId = "cm8qy86i90000w3h1rhd0iqqd"; // 일단 userId를 DB에 실제로 존재하는 cuid로 하드코딩했습니다.
   if (!isOpen) return null;
 
   const handlePasswordChange = (event) => {
@@ -19,23 +19,15 @@ const EditStudyModal = ({ isOpen, onClose }) => {
 
   const handleVerifyPassword = async () => {
     try {
-      const response = await fetch(VERIFY_PASSWORD_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId, password }),
+      const response = await axios.post(VERIFY_PASSWORD_URL, {
+        userId,
+        password,
       });
 
-      if (!response.ok) {
-        throw new Error("서버 응답 실패!");
-      }
+      console.log(response.data);
 
-      const data = await response.json();
-      console.log(data);
-
-      if (data.success) {
-        navigate("/study-edit-form"); // 비밀번호 검증 성공 시 'study-edit-form' 경로로 이동
+      if (response.data.success) {
+        navigate("/edit-study-form"); // 비밀번호 검증 성공 시 'edit-study-form' 경로로 이동
       } else {
         setErrorMessage("비밀번호 검증에 실패했습니다. 다시 시도해주세요."); // 비밀번호 검증 실패 시 오류 메시지
       }

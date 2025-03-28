@@ -1,9 +1,9 @@
 import express from "express";
 import prisma from "@prisma/client";
 
-const editStudyModules = express.Router();
+const studyVerifyPassword = express.Router();
 
-editStudyModules.post("/verify-password", async (req, res) => {
+studyVerifyPassword.post("/verify-password", async (req, res) => {
   const { userId, password } = req.body;
 
   try {
@@ -26,12 +26,9 @@ editStudyModules.post("/verify-password", async (req, res) => {
         .status(401)
         .json({ success: false, message: "비밀번호가 일치하지 않습니다." });
     }
-  } catch (error) {
-    console.error("비밀번호 검증 중 오류 발생", error);
-    res
-      .status(500)
-      .json({ success: false, message: "서버 오류가 발생했습니다." });
+  } catch (err) {
+    next(err);
   }
 });
 
-export default editStudyModules;
+export default studyVerifyPassword;
