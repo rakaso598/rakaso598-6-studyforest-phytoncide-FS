@@ -26,7 +26,7 @@ const TodayHabit = () => {
       <div className={styles.mainContainer}>
         <div className={styles.topContainer}>
           <div className={styles.titleContainer}>
-            <p className={styles.title}>title</p>
+            <p className={styles.title}>연우의 개발공장</p>
             <div className={styles.linkContainer}>
               <Link to="/today-focus" className={styles.link}>
                 <p className={styles.linkText}>오늘의 집중</p>
@@ -60,7 +60,12 @@ const TodayHabit = () => {
       {/* 모달 열림 상태가 true일 때 TodayHabitCreate 모달 표시 */}
       {isModalOpen && (
         <div className={styles.modalBackground} onClick={closeModal}>
-          <TodayHabitCreate onClose={closeModal} />
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <TodayHabitCreate onClose={closeModal} />
+          </div>
         </div>
       )}
     </div>

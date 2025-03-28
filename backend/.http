@@ -1,0 +1,19 @@
+###
+GET http://localhost:5090/api/habits/gethabit/10
+
+
+###
+PATCH http://localhost:5090/api/habits/patchhabit/1
+Content-Type: application/json
+
+{
+    "monday":true
+}
+
+###
+POST http://localhost:5090/api/habits/posthabit
+Content-Type: application/json
+
+{
+    "title":"11번째 습관"
+}

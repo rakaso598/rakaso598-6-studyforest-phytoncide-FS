@@ -64,6 +64,9 @@ const AUTHOR_NICKNAMES = [
   '메이커',
 ];
 
+// 배경색 옵션 추가
+const BG_COLORS = ['red', 'yellow', 'green', 'blue', 'img'];
+
 // 랜덤 숫자 생성 함수
 const getRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -98,6 +101,7 @@ const generateRandomStudy = () => {
     AUTHOR_SURNAMES[Math.floor(Math.random() * AUTHOR_SURNAMES.length)];
   const nickname =
     AUTHOR_NICKNAMES[Math.floor(Math.random() * AUTHOR_NICKNAMES.length)];
+  const bg = BG_COLORS[Math.floor(Math.random() * BG_COLORS.length)]; // 배경색 랜덤 선택
 
   return {
     id: uuidv4(),
@@ -107,6 +111,7 @@ const generateRandomStudy = () => {
     emoji: generateEmojis(),
     content: CONTENT_LIST[Math.floor(Math.random() * CONTENT_LIST.length)],
     author: `${surname}${nickname}`,
+    bg: bg, // 배경색 속성 추가
   };
 };
 
