@@ -19,13 +19,16 @@ const TodayHabitCreate = ({ onClose }) => {
 
   //습관 추가
   const handleAddHabit = () => {
-    setHabits([...habits, ""]);
+    if (habits.length < 7) {
+      setHabits([...habits, "                       "]); // 추가
+    }
   };
   //습관 삭제 habits 필터링
   const handleDeleteHabit = (index) => {
     const updatedHabits = habits.filter((_, idx) => idx !== index);
     setHabits(updatedHabits);
   };
+
   return (
     <div className={styles.habitCreateModal}>
       <p className={styles.headline}>습관 목록</p>

@@ -1,22 +1,30 @@
 import styles from './HomeCard.module.css';
 import pointIcon from '/images/icon/ic_point.svg';
 
-const HomeCard = ({ data }) => {
+const HomeCard = ({ data, onClick }) => {
+  if (!data || !data.emoji) {
+    return null;
+  }
+
   return (
-    <li key={data.id} className={styles.card}>
-      <div className={styles.cardHeader}>
+    <li
+      className={styles.card}
+      data-bg={data.bg}
+      onClick={() => onClick && onClick(data.id)}
+    >
+      <div className={styles.cardHeaderContainer}>
         <div className={styles.headerTop}>
           <div className={styles.pointsContainer}>
             <img className={styles.pointIcon} src={pointIcon} alt='points' />
-            <span className={styles.pointsText}>{data.points}</span>
+            <span className={styles.pointsText}>{data.points}P</span>
             <span className={styles.pointsText}>획득</span>
           </div>
 
           <div className={styles.cardTitleContainer}>
-            {/* TODO: 조건에 따라 작성자에 색상 넣어주기 */}
-            <span>{data.author}</span>
-            <span>의</span>
-            <span>{data.title}</span>
+            <span className={styles.cardTitle}>
+              <span className={styles.authorName}>{data.author}</span>
+              <span> 의 {data.title}</span>
+            </span>
           </div>
         </div>
 

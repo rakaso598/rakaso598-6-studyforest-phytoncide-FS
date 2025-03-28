@@ -10,7 +10,7 @@
   align-items: center;
 
   width: 100%;
-  max-width: 1400px;
+  max-width: 1440px;
 }
 
 .logo {
@@ -21,7 +21,7 @@
   cursor: pointer;
 }
 
-.logo img {
+.logo > img {
   height: 100%;
   width: auto;
 }
@@ -70,7 +70,7 @@
   transition: all 0.3s ease;
 }
 
-@media screen and (min-width: 450px) {
+@media screen and (min-width: 744px) {
   .logo {
     height: 60px;
   }
@@ -93,7 +93,7 @@
   }
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1200px) {
   .create__study__button {
     max-width: 252px;
     border-radius: 16px;
