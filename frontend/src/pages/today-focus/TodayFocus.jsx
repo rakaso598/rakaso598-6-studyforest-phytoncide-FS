@@ -12,16 +12,11 @@ const TodayFocus = () => {
   const [countDown, setCountDown] = useState(false);
   const [timeover, setTimeover] = useState(false);
   const [point, setPoint] = useState(0);
-  const [complete, setComplete] = useState(true);
+  const [complete, setComplete] = useState(false);
   const [btnToggle, setBtnToggle] = useState(false);
   const [selectTimeToggle, setSelectTimeToggle] = useState(false);
 
   // 컴포넌트 화 시키기
-  /**
-   * const [point, setPoint] = 3 + 10분당 1 point
-   * 예상 수식 : (3 + tempTime.min / 10)
-   *
-   */
 
   // 타이머 디폴트 값
   const handleTimerDefault = (e) => {
@@ -155,6 +150,7 @@ const TodayFocus = () => {
         setTimeover(!timeover);
         setBtnToggle(!btnToggle);
         setComplete(!complete);
+        setTotalPoint((prevTotalPoint) => (prevTotalPoint += point));
       }
     }, 1000);
 
