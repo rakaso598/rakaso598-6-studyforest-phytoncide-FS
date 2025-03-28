@@ -4,12 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./src/app.js"
+    "server": "node ./src/App.js",
+    "dev": "nodemon ./src/App.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "type": "module",
   "dependencies": {
     "@prisma/client": "^6.5.0",
     "@types/express": "^5.0.1",
@@ -24,6 +25,7 @@
     "typescript": "^5.8.2"
   },
   "prisma": {
-    "schema": "./src/db/prisma/schema.prisma"
+    "schema": "./src/db/prisma/schema.prisma",
+    "seed": "node ./src/db/prisma/seed.js"
   }
 }
