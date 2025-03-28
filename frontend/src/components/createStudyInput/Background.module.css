@@ -1,0 +1,38 @@
+.studyCreateMidBgBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.inputBoxTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bgBox {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.background {
+  position: relative;
+  cursor: pointer;
+}
+
+.selected {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (min-width: 744px) {
+  .inputBoxTitle {
+    font-size: 18px;
+  }
+  .bgBox {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
