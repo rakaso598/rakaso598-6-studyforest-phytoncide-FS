@@ -8,7 +8,6 @@ import TodayFocus from '@today-focus/TodayFocus';
 import TodayHabit from '@today-habit/TodayHabit';
 import StudyDetail from '@study-detail/StudyDetail';
 import StudyCreate from '@study-create/StudyCreate';
-import EditStudyForm from "@study-detail/editStudyForm/EditStudyForm";
 
 function App() {
   return (
