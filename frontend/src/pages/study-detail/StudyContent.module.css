@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
+  margin-bottom: 24px;
 }
 
 .contentTop {
@@ -12,8 +13,8 @@
 
 .title {
   margin: 0;
-  font-size: 20px;
-  font-weight: bold;
+  font-size: 24px;
+  font-weight: 800;
 }
 
 .buttons {
@@ -62,21 +63,26 @@
 }
 
 .pointDisplay {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
+  border: 1px solid #0000001a;
+  border-radius: 50px;
+  padding: 8px 12px;
+  width: fit-content;
 }
 
 .pointIcon {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 18px;
+  display: block;
 }
 
 .pointValue {
   margin: 0;
-  font-size: 14px;
-  font-weight: bold;
-  color: #578246;
+  font-size: 16px;
+  font-weight: 400px;
+  color: var(--color-black);
+  margin-left: 4px;
 }
 
 @media screen and (min-width: 744px) {
@@ -93,5 +99,23 @@
 
   .heading {
     font-size: 18px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .text {
+    font-size: 18px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .buttons {
+    gap: 16px;
+  }
+
+  .contentWrapper {
+    margin-bottom: 40px;
   }
 }

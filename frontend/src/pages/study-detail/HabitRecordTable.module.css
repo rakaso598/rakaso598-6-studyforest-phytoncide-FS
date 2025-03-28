@@ -1,0 +1,121 @@
+.container {
+  border: 1px solid var(--color-gray-200);
+  border-radius: 20px;
+  padding: 16px;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.title {
+  font-weight: 800;
+  font-size: 18px;
+  margin-bottom: 16px;
+}
+
+.gridContainer {
+  display: grid;
+  width: 100%;
+}
+
+.headerRow,
+.habitRow {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  width: 100%;
+}
+
+.emptyHeaderCell {
+  grid-column: 1;
+}
+
+.daysHeader {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  color: var(--color-gray-818181, #818181);
+  font-size: 16px;
+  gap: 0;
+}
+
+.dayCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.dayCell:nth-child(n + 4) {
+  display: none;
+}
+
+.habitNameCell {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 24px;
+  font-weight: 700;
+  color: var(--color-black-414141, #414141);
+  text-align: right;
+}
+
+.statusCells {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  gap: 0;
+}
+
+.statusCell:nth-child(n + 4) {
+  display: none;
+}
+
+.statusCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 64px;
+  padding: 14px;
+}
+
+.stickerWrapper {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sticker {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+.habitRow {
+  height: 64px;
+}
+
+@media screen and (min-width: 744px) {
+  .title {
+    font-size: 24px;
+  }
+
+  .daysHeader {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .dayCell:nth-child(n + 4) {
+    display: flex;
+  }
+
+  .statusCells {
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  .statusCell:nth-child(n + 4) {
+    display: flex;
+  }
+}
