@@ -27,9 +27,9 @@ const EditStudyModal = ({ isOpen, onClose }) => {
       console.log(response.data);
 
       if (response.data.success) {
-        navigate(`/edit-study-form/${studyId}`); // 비밀번호 검증 성공 시 'edit-study-form' 경로로 이동
+        navigate(`/study-detail/${studyId}/form`); // 비밀번호 검증 성공 시 /study-detail/:id/form 경로로 이동
       } else {
-        setErrorMessage("비밀번호 검증에 실패했습니다. 다시 시도해주세요."); // 비밀번호 검증 실패 시 오류 메시지
+        setErrorMessage("비밀번호 검증에 실패했습니다. 다시 시도해주세요.");
       }
     } catch (error) {
       console.error("비밀번호 검증 API 호출 실패!:", error);
