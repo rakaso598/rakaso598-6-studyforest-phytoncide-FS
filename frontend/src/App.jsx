@@ -21,7 +21,6 @@ function App() {
           <Route path='/study-detail/:id' element={<StudyDetail />} />
           <Route path='/today-focus' element={<TodayFocus />} />
           <Route path='/today-habit' element={<TodayHabit />} />
-          <Route path="/edit-study-form" element={<EditStudyForm />} />
         </Routes>
       </main>
     </>
