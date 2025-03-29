@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./TodayFocus.module.css";
+import { getPoint, patchPoint } from "./todayFocus.api.js";
 
 const TodayFocus = () => {
   const [totalPoint, setTotalPoint] = useState(0);
@@ -16,7 +17,39 @@ const TodayFocus = () => {
   const [btnToggle, setBtnToggle] = useState(false);
   const [selectTimeToggle, setSelectTimeToggle] = useState(false);
 
-  // 컴포넌트 화 시키기
+  // 포인트 불러오기 API
+  const pointLoad = async (id) => {
+    try {
+      const data = await getPoint(id);
+
+      setTotalPoint(data.point);
+    } catch (e) {
+      console.log(e.response.data);
+    }
+  };
+
+  // 포인트 업데이트 API
+  const pointUpdate = async (id, totalPoint) => {
+    try {
+      await patchPoint(id, totalPoint);
+    } catch (e) {
+      console.log(e.response.data);
+    }
+  };
+
+  // 처음 렌더링 때 포인트 불러오기
+  useEffect(() => {
+    // useParams 써서 studyId 넣어주기
+    pointLoad(1);
+  }, []);
+
+  // totalPoint 변경 시 포인트 업데이트
+  useEffect(() => {
+    if (!timeover) return;
+
+    // useParams 써서 studyId 넣어주기
+    pointUpdate(1, { totalPoint });
+  }, [totalPoint]);
 
   // 타이머 디폴트 값
   const handleTimerDefault = (e) => {
@@ -117,19 +150,12 @@ const TodayFocus = () => {
     }
 
     if (second === "00") {
-      console.log(1);
       if (timeover) {
-        console.log(2);
         setMinute((prevMinute) => {
-          console.log(prevMinute);
-          console.log(3);
           if (prevMinute < 9)
             return (prevMinute = "0" + (Number(prevMinute[1]) + 1));
-          console.log(4);
           if (prevMinute <= 9) return (prevMinute = 10);
-          console.log(5);
           if (prevMinute >= 10) return prevMinute + 1;
-          console.log(6);
         });
       }
     }
