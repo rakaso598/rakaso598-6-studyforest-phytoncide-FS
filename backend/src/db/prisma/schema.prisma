@@ -8,18 +8,17 @@ datasource db {
 }
 
 model Study {
-  id                Int               @id @default(autoincrement())
+  id                Int             @id @default(autoincrement())
   nickName          String
   title             String
   description       String
   encryptedPassword String
   background        Study_backgrounds
-  point             Int
-  createAt          DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  emojis            Emojis[]          @relation("StudyEmojis")
-  focuses           Focus[]           @relation("StudyFocuses")
-  habits            Habit[]           @relation("StudyHabits")
+  point             Int             @default(0) // 250329 point 기본값 0
+  createAt          DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  emojis            Emojis[]        @relation("StudyEmojis")
+  habits            Habit[]         @relation("StudyHabits")
 }
 
 enum Study_backgrounds {
@@ -34,11 +33,11 @@ enum Study_backgrounds {
 }
 
 model Emojis {
-  id           Int    @id @default(autoincrement())
+  id           Int     @id @default(autoincrement())
   studyId      Int
   emojiContent String
-  count        Int    @default(0) // 이모지카운트 추가
-  study        Study  @relation("StudyEmojis", fields: [studyId], references: [id], onDelete: Cascade)
+  count        Int     @default(0) // 250328 이모지카운트 추가
+  study        Study   @relation("StudyEmojis", fields: [studyId], references: [id], onDelete: Cascade)
 }
 
 model Habit {
@@ -70,12 +69,4 @@ enum DAY_OF_WEEK {
   Sunday
 }
 
-model Focus {
-  id         Int      @id @default(autoincrement())
-  studyId    Int
-  totalPoint Int      @default(0) // totalPoint 필드 추가
-  complete   Boolean  @default(false)
-  createAt   DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-  study      Study    @relation("StudyFocuses", fields: [studyId], references: [id], onDelete: Cascade)
-}
+// 250329 수정사항 : model Focus는 완전 삭제되었습니다.
