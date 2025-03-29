@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Input.module.css";
 
-const PasswordCheck = ({ password }) => {
+const PasswordCheck = ({ encryptedPassword }) => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    setIsActive(password !== passwordCheck);
-  }, [password, passwordCheck]);
+    if (passwordCheck === "") {
+      setIsActive(false);
+    } else {
+      setIsActive(encryptedPassword !== passwordCheck);
+    }
+  }, [encryptedPassword, passwordCheck]);
 
   return (
     <label className={styles.label}>
@@ -15,7 +19,7 @@ const PasswordCheck = ({ password }) => {
       <input
         onChange={(e) => setPasswordCheck(e.target.value)}
         className={`${styles.input} ${isActive ? styles.err : ""}`}
-        type="text"
+        type="password"
         placeholder="비밀번호를 다시 한 번 입력해주세요"
       />
       {isActive && (
