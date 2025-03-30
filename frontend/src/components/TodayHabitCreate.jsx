@@ -40,6 +40,11 @@ const TodayHabitCreate = ({ onClose }) => {
                 type="text"
                 className={styles.singleHabit}
                 value={habit}
+                onClick={() => {
+                  if (habit === "                       ") {
+                    handleInputChange(index, "");
+                  }
+                }}
                 onChange={(e) => handleInputChange(index, e.target.value)} //map에서 주는 index
                 size={habit.length || 10}
               />
