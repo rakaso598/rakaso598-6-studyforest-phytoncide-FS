@@ -17,7 +17,8 @@ export const getStudies = async ({
         orderBy,
       },
     });
-    return response.data.data;
+
+    return response.data.study;
   } catch (error) {
     console.error('Failed to fetch studies:', error);
     throw error;
