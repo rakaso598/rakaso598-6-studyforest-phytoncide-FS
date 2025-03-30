@@ -41,4 +41,15 @@ habitsRouter.post("/posthabit/:studyId", async (req, res, next) => {
   }
 });
 
+habitsRouter.delete("/deletehabit/:habitId", async (req, res, next) => {
+  try {
+    const habitId = Number(req.params.habitId);
+    const deletedHabit = await prisma.habit.delete({
+      where: { id: habitId },
+    });
+    res.json(deletedHabit);
+  } catch (e) {
+    next(e);
+  }
+});
 export default habitsRouter;
