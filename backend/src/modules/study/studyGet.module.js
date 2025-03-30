@@ -36,16 +36,23 @@ studyGetRouter.get('/', async (req, res, next) => {
           },
         ],
       },
-      include: {
-        emojis: true,
+      select: {
+        id: true,
+        nickName: true,
+        title: true,
+        description: true,
+        background: true,
+        point: true,
+        createAt: true,
+        updatedAt: true,
+        emojis: true, // 관계형 배열 필드는 그대로 true 가능
         habits: {
           include: {
             HabitDone: true,
           },
         },
-      },
-      omit: {
-        encryptedPassword: true,
+        // encryptedPassword: false ← Prisma에서는 false로 제외하는 방식 없음
+        // 그냥 생략하면 포함되지 않음
       },
       orderBy: {
         [orderBy]: sort === 'desc' ? 'desc' : 'asc',
@@ -54,9 +61,7 @@ studyGetRouter.get('/', async (req, res, next) => {
       take: Number(limit),
     });
 
-    console.log(study);
-
-    res.status(200).json({ success: true, data: study });
+    res.status(200).json({ study });
   } catch (e) {
     next(e);
   }
