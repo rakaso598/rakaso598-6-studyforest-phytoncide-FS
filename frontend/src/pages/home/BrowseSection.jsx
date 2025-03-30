@@ -7,15 +7,12 @@ import SearchBar from './SearchBar';
 import SortDropdown from './SortDropdown';
 import BrowseCardList from './BrowseCardList';
 
-const INITIAL_OFFSET = 0;
-const PLUS_OFFSET = 7;
-
 const BrowseSection = () => {
   const [studies, setStudies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchInput, setSearchInput] = useState('');
   const [sortType, setSortType] = useState('최신순');
-  const [offset, setOffset] = useState(INITIAL_OFFSET);
+  const [offset, setOffset] = useState(0);
 
   // 서버 호출에 대한 유연성을 위해 파라미터를 받아옴
   const fetchStudies = useCallback(
@@ -46,7 +43,7 @@ const BrowseSection = () => {
       const data = await fetchStudies({ search: value });
       setStudies(data);
     }, 300);
-  }, [fetchStudies]);
+  }, []);
 
   const handleSearch = (e) => {
     const value = e.target.value;
@@ -65,7 +62,7 @@ const BrowseSection = () => {
   };
 
   const clickMoreStudy = async () => {
-    const nextOffset = offset + PLUS_OFFSET;
+    const nextOffset = offset + 6;
     const data = await fetchStudies({
       offset: nextOffset,
       search: searchInput,
@@ -73,8 +70,6 @@ const BrowseSection = () => {
     });
     setStudies((prev) => [...prev, ...data]);
     setOffset(nextOffset);
-
-    console.log(studies);
   };
 
   // 초기값 설정

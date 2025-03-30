@@ -54,7 +54,9 @@ studyGetRouter.get('/', async (req, res, next) => {
       take: Number(limit),
     });
 
-    res.status(200).json({ study });
+    console.log(study);
+
+    res.status(200).json({ success: true, data: study });
   } catch (e) {
     next(e);
   }
