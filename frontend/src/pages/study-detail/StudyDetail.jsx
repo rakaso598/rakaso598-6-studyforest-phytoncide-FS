@@ -16,7 +16,6 @@ const StudyDetail = () => {
         <StudyContent />
 
         <HabitRecordTable />
-        <EditStudyModalImpl />
       </div>
     </section>
   );

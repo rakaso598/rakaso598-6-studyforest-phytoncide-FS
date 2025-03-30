@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./StudyDetailNav.module.css";
 import smileIcon from "/images/icon/ic_smile.svg";
+import EditStudyModalButton from "@components/editStudyModal/EditStudyModalButton";
 
 function StudyDetailNav() {
   return (
@@ -19,9 +20,10 @@ function StudyDetailNav() {
           공유하기
         </button>
         <span className={styles.divider}>|</span>
-        <button type="button" className={styles.editLink}>
-          수정하기
-        </button>
+        <EditStudyModalButton
+          buttonText="수정하기"
+          className={styles.editLink}
+        />
         <span className={styles.divider}>|</span>
         <button type="button" className={styles.deleteLink}>
           스터디 삭제하기
