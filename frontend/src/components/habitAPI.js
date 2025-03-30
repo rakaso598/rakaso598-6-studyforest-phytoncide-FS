@@ -31,3 +31,20 @@ export const patchHabits = async (habitId, data) => {
     handleError(e);
   }
 };
+
+export const postHabit = async (studyId, data) => {
+  try {
+    const res = await instance.post(`/posthabit/${studyId}`, data);
+    return res.data;
+  } catch (e) {
+    handleError(e);
+  }
+};
+export const deleteHabit = async (habitId) => {
+  try {
+    const res = await instance.delete(`/deletehabit/${habitId}`);
+    return res.data;
+  } catch (e) {
+    handleError(e);
+  }
+};
