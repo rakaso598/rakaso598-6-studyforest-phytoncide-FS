@@ -52,7 +52,7 @@ const StudyCreate = () => {
   return (
     <section className={styles.section}>
       <article className={styles.article}>
-        <h2 className={styles.studyCreateTitle}>스터디 만들기.</h2>
+        <h2 className={styles.studyCreateTitle}>스터디 만들기</h2>
         <div className={styles.studyCreateTopInputBox}>
           <NicknameInput setNickName={setNickName} />
           <StudyNameInput setTitle={setTitle} />
