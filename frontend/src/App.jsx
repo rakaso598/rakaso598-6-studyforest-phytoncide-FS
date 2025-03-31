@@ -19,8 +19,14 @@ function App() {
           <Route path="/study-create" element={<StudyCreate />} />
           <Route path="/study-detail/:id" element={<StudyDetail />} />
           <Route path="/study-detail/:id/form" element={<StudyEditForm />} />
-          <Route path="/today-focus" element={<TodayFocus />} />
-          <Route path="/today-habit" element={<TodayHabit />} />
+          <Route
+            path="/study-detail/:id/today-focus"
+            element={<TodayFocus />}
+          />
+          <Route
+            path="/study-detail/:id/today-habit"
+            element={<TodayHabit />}
+          />
         </Routes>
       </main>
     </>
