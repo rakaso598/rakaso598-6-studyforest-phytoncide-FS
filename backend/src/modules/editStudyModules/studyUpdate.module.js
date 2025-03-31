@@ -39,11 +39,7 @@ studyUpdate.put("/:id/update", async (req, res, next) => {
       updatedStudy,
     });
   } catch (err) {
-    console.error(err); // 오류 로깅 추가
-    return res.status(500).json({
-      success: false,
-      message: "스터디 정보 업데이트 중 오류가 발생했습니다.",
-    });
+    next(err);
   }
 });
 
