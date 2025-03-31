@@ -12,7 +12,7 @@ import selected from "/images/icon/ic_bg_selected.svg";
 
 const backgroundImages = [bg1, bg2, bg3, bg4, bg5, bg6, bg7, bg8];
 
-const Background = ({ setBg, bg }) => {
+const Background = ({ setBackground, background }) => {
   return (
     <div className={styles.studyCreateMidBgBox}>
       <p className={styles.inputBoxTitle}>배경을 선택해주세요</p>
@@ -22,9 +22,9 @@ const Background = ({ setBg, bg }) => {
             <img
               src={bgs}
               alt={`bg${idx + 1}`}
-              onClick={(e) => setBg(e.target.alt)}
+              onClick={(e) => setBackground(e.target.alt)}
             />
-            {bg.slice(2, 3) === String(idx + 1) && (
+            {background.slice(2, 3) === String(idx + 1) && (
               <img className={styles.selected} src={selected} alt="selected" />
             )}
           </span>
