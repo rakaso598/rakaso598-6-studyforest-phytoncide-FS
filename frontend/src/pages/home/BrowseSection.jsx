@@ -77,7 +77,7 @@ const BrowseSection = () => {
     const initializeStudies = async () => {
       try {
         const data = await fetchStudies();
-        setStudies(data);
+        setStudies(data || []);
       } catch (error) {
         console.error('Failed to initialize studies:', error);
       }
