@@ -4,12 +4,12 @@ import prisma from "../../db/prisma/client.prisma.js";
 const studyVerifyPassword = express.Router();
 
 studyVerifyPassword.post("/", async (req, res, next) => {
-  const { studyId, encryptedPassword } = req.body;
+  const { id: id, encryptedPassword } = req.body;
 
   try {
     const study = await prisma.study.findUnique({
       where: {
-        id: parseInt(studyId),
+        id: parseInt(id),
         encryptedPassword: encryptedPassword,
       },
     });
