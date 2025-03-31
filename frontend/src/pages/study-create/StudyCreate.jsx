@@ -19,16 +19,14 @@ const StudyCreate = () => {
 
   const handleClik = async () => {
     if (
-      !nickName ||
-      !title ||
-      !description ||
+      !nickName.trim() ||
+      !title.trim() ||
+      !description.trim() ||
       !background ||
-      !encryptedPassword
+      !encryptedPassword.trim()
     ) {
-      const confirmed = window.confirm("모든 필드를 입력해주세요");
-      if (confirmed) {
-        return;
-      }
+      alert("모든 필드를 입력해주세요");
+      return;
     }
 
     const data = {
