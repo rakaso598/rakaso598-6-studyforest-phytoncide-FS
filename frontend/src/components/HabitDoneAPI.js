@@ -33,12 +33,9 @@ export const patchHabitDone = async (habitDoneId, data) => {
   }
 };
 
-export const createHabitDone = async (data) => {
+export const postHabitDone = async (data) => {
   try {
-    const res = await axiosInstance.create(
-      `${HABIT_URL}/patchhabitdone/`,
-      data
-    );
+    const res = await axiosInstance.post(`${HABIT_URL}/posthabitdone`, data);
     return res.data;
   } catch (e) {
     handleError(e);

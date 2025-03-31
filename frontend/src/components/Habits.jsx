@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "@components/Habits.module.css";
 import { getHabits, patchHabits } from "./HabitAPI";
-import { getHabitDone } from "./HabitDoneAPI";
+import { getHabitDone, patchHabitDone, postHabitDone } from "./HabitDoneAPI";
 
 function Habits() {
   // const [habits, setHabits] = useState([
@@ -14,19 +14,29 @@ function Habits() {
   //   { id: 7, title: "물 2L 먹기", checked: false },
   // ]);
   const [habits, setHabits] = useState([]);
+  const [habitCheck, setHabitCheck] = useState([]);
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
   });
   const HandleClick = async (habitId) => {
     try {
-      const habitDone = await getHabitDone(habitId, today)
-      if (habitDone)
-    } catch(e) {
+      const habitDone = await getHabitDone(habitId, today);
+      if (habitDone) {
+        const updateHabitDone = await patchHabitDone(habitDone.id, {
+          isDone: !habitDone.isDone,
+        });
+        setHabitCheck((prev) =>
+          prev.map((habit) =>
+            habit.habitId === habitId
+              ? { ...habit, isDone: !habit.isDone }
+              : habit
+          )
+        );
+      }
+    } catch (e) {
       console.error(e);
       setHabits(habits);
     }
-
-
 
     // const habit = habits.find((habit) => habit.id === habitId);
 
@@ -47,8 +57,15 @@ function Habits() {
   const handleLoad = async () => {
     const studyId = 10;
     const result = await getHabits(studyId);
+    const checked = await Promise.all(
+      result.map(async (habit) => {
+        const habitDone = await getHabitDone(habit.id, today);
+        return { habitId: habit.id, isDone: habitDone.isDone };
+      })
+    );
 
     setHabits(result);
+    setHabitCheck(checked);
   };
 
   useEffect(() => {
