@@ -1,10 +1,6 @@
-import axios from "axios";
-import SERVER_URL from "../server.js";
+import axiosInstance from "../api/axiosInstance.js";
 
-const instance = axios.create({
-  baseURL: `${SERVER_URL}/api/habits`, //백엔드 배포 시 사용
-  // baseURL: `http://localhost:5090/api/habits/`,
-});
+const HABIT_URL = "/api/habits";
 
 const handleError = (e) => {
   if (e.response) {
@@ -16,7 +12,7 @@ const handleError = (e) => {
 
 export const getHabits = async (studyId) => {
   try {
-    const res = await instance.get(`/gethabit/${studyId}`);
+    const res = await axiosInstance.get(`${HABIT_URL}/gethabit/${studyId}`);
     return res.data;
   } catch (e) {
     handleError(e);
@@ -25,7 +21,10 @@ export const getHabits = async (studyId) => {
 
 export const patchHabits = async (habitId, data) => {
   try {
-    const res = await instance.patch(`/patchhabit/${habitId}`, data);
+    const res = await axiosInstance.patch(
+      `${HABIT_URL}/patchhabit/${habitId}`,
+      data
+    );
     return res.data;
   } catch (e) {
     handleError(e);
