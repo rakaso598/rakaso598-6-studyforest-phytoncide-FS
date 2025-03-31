@@ -133,18 +133,6 @@
   font-size: 80px;
 }
 
-.timeover {
-  color: var(--text-gray);
-}
-
-.timeover p {
-  color: var(--text-gray);
-}
-
-.timeover input {
-  color: var(--text-gray);
-}
-
 .focusMinTimer {
   text-align: end;
   color: var(--text-black);
@@ -171,6 +159,17 @@
   color: var(--error-light);
 }
 
+.countDown input {
+  color: var(--error-light);
+}
+
+.timeover {
+  color: var(--text-gray);
+}
+
+.timeover input {
+  color: var(--text-gray);
+}
 .focusBtnContainer {
   display: flex;
   gap: 8px;
