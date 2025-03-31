@@ -6,11 +6,11 @@ import DescriptionInput from "../../../components/createStudyInput/DescriptionIn
 import PasswordInput from "../../../components/createStudyInput/PasswordInput";
 import PasswordCheck from "../../../components/createStudyInput/PasswordCheck";
 import Background from "../../../components/createStudyInput/Background";
-import { useParams, useNavigate } from "react-router-dom"; // useParams, useNavigate 추가
+import { useParams, useNavigate } from "react-router-dom";
 
 const StudyEditForm = () => {
-  const { id } = useParams(); // URL 파라미터에서 id 가져오기
-  const navigate = useNavigate(); // useNavigate 추가
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [nickname, setNickname] = useState("");
   const [studyName, setStudyName] = useState("");
   const [description, setDescription] = useState("");
@@ -19,24 +19,24 @@ const StudyEditForm = () => {
 
   const handleUpdateStudy = async () => {
     try {
-      const response = await fetch(`/api/study/${id}/update`, { // 동적으로 id 사용
+      const response = await fetch(`http://localhost:5090/api/study/${id}/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id: parseInt(id), // id를 정수로 변환
+          id: parseInt(id),
           nickName: nickname,
           title: studyName,
           description: description,
-          encryptedPassword: password, // 서버 측 암호화 권장
+          encryptedPassword: password,
           background: bg,
         }),
       });
 
       if (response.ok) {
         alert("스터디 정보가 성공적으로 수정되었습니다.");
-        navigate(`/study/${id}`); // 수정 완료 후 스터디 상세 페이지로 이동
+        navigate(`/study-detail/${id}`);
       } else {
         const errorData = await response.json();
         alert(`스터디 정보 수정 실패: ${errorData.message}`);
