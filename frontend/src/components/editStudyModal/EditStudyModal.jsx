@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./EditStudyModal.css";
 import SERVER_URL from "../../server";
-import axios from "axios";
+import axiosInstance from "../../api/axiosInstance";
 
 const EditStudyModal = ({ isOpen, onClose }) => {
   const [encryptedPassword, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const VERIFY_PASSWORD_URL = `${SERVER_URL}/api/verify-password`;
+  const VERIFY_PASSWORD_URL = `${SERVER_URL}/api/study/verify-password`;
   const navigate = useNavigate();
-  const { id: studyId } = useParams(); // URL에서 studyId를 가져옵니다.
+  const { id: id } = useParams(); // URL에서 id 가져옵니다.
 
   if (!isOpen) return null;
 
@@ -19,15 +19,15 @@ const EditStudyModal = ({ isOpen, onClose }) => {
 
   const handleVerifyPassword = async () => {
     try {
-      const response = await axios.post(VERIFY_PASSWORD_URL, {
-        studyId,
+      const response = await axiosInstance.post(VERIFY_PASSWORD_URL, {
+        id: id,
         encryptedPassword,
       });
 
       console.log(response.data);
 
       if (response.data.success) {
-        navigate(`/study-detail/${studyId}/form`); // 비밀번호 검증 성공 시 /study-detail/:id/form 경로로 이동
+        navigate(`/study-detail/${id}/form`); // 비밀번호 검증 성공 시 /study-detail/:id/form 경로로 이동
       } else {
         setErrorMessage("비밀번호 검증에 실패했습니다. 다시 시도해주세요.");
       }
