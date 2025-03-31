@@ -3,7 +3,7 @@ import prisma from "../../db/prisma/client.prisma.js";
 
 const studyVerifyPassword = express.Router();
 
-studyVerifyPassword.post("/", async (req, res, next) => {
+studyVerifyPassword.post("/study/verify-password", async (req, res, next) => {
   const { studyId, encryptedPassword } = req.body;
 
   try {

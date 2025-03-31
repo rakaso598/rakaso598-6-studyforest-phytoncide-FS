@@ -17,7 +17,7 @@ const StudyEditForm = () => {
   return (
     <section className={styles.section}>
       <article className={styles.article}>
-        <h2 className={styles.studyCreateTitle}>스터디 만들기</h2>
+        <h2 className={styles.studyCreateTitle}>스터디 수정하기</h2>
         <div className={styles.studyCreateTopInputBox}>
           <NicknameInput setNickname={setNickname} />
           <StudyNameInput setStudyName={setStudyName} />
@@ -28,7 +28,7 @@ const StudyEditForm = () => {
           <PasswordInput setPassword={setPassword} />
           <PasswordCheck password={password} />
         </div>
-        <button className={styles.createBtn}>만들기</button>
+        <button className={styles.createBtn}>스터디 수정하기</button>
       </article>
     </section>
   );
