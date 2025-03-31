@@ -1,28 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./TodayHabitCreate.module.css";
 import trashIcon from "../../public/images/icon/ic_trash.svg";
 import plusIcon from "../../public/images/icon/ic_plus.svg";
+import { getHabits, postHabit, deleteHabit } from "./habitAPI";
 
 const TodayHabitCreate = ({ onClose }) => {
   //habits 설정
-  const [habits, setHabits] = useState([
-    "미라클모닝 6시 기상",
-    "새벽 운동",
-    "저녁 운동",
-  ]);
+  const [habits, setHabits] = useState([]);
+
+  const handleLoad = async () => {
+    const studyId = 10;
+    const result = await getHabits(studyId);
+
+    setHabits(result);
+  };
+
+  useEffect(() => {
+    handleLoad();
+  }, []);
+
   const handleInputChange = (index, updatingHabit) => {
-    const updatedHabits = habits.map((habit, idx) =>
-      idx === index ? updatingHabit : habit
+    setHabits((prev) =>
+      prev.map((habit, idx) =>
+        idx === index ? { ...habit, title: updatingHabit } : habit
+      )
     );
-    setHabits(updatedHabits);
   };
 
   //습관 추가
   const handleAddHabit = () => {
-    if (habits.length < 7) {
-      setHabits([...habits, "                       "]); // 추가
-    }
+    setHabits([...habits, { id: Date.now(), title: "                   " }]); // ✅ 객체 형태로 추가
   };
+
   //습관 삭제 habits 필터링
   const handleDeleteHabit = (index) => {
     const updatedHabits = habits.filter((_, idx) => idx !== index);
@@ -39,9 +48,9 @@ const TodayHabitCreate = ({ onClose }) => {
               <input
                 type="text"
                 className={styles.singleHabit}
-                value={habit}
+                value={habit.title}
                 onClick={() => {
-                  if (habit === "                       ") {
+                  if (habit.title === "                   ") {
                     handleInputChange(index, "");
                   }
                 }}
