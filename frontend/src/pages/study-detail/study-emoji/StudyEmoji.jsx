@@ -26,7 +26,7 @@ function StudyEmoji() {
   };
 
   const handleMoreEmojisClick = () => {
-    setModalOpen(!modalOpen); // 토글 기능 구현
+    setModalOpen(!modalOpen);
   };
 
   const pickerStyle = {
@@ -46,11 +46,27 @@ function StudyEmoji() {
     zIndex: 1001,
   };
 
+  const getEmojiCounts = () => {
+    const emojiCounts = {};
+    selectedEmojis.forEach((emoji) => {
+      emojiCounts[emoji] = (emojiCounts[emoji] || 0) + 1;
+    });
+    return emojiCounts;
+  };
+
+  const getDisplayedEmojis = () => {
+    const emojiCounts = getEmojiCounts();
+    return selectedEmojis.slice(0, 3).map(emoji => ({
+      emoji,
+      count: emojiCounts[emoji],
+    }));
+  };
+
   return (
     <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-      {selectedEmojis.slice(0, 3).map((emoji, index) => (
-        <button key={index} className={styles.emoji} onClick={() => handleSelectedEmojiClick(index)}>
-          {emoji}
+      {getDisplayedEmojis().map((item, index) => (
+        <button key={index} className={styles.emoji} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(item.emoji))}>
+          {item.emoji} {item.count > 1 && <span>({item.count})</span>}
         </button>
       ))}
 
@@ -80,8 +96,8 @@ function StudyEmoji() {
       {modalOpen && (
         <div style={modalStyle}>
           <p>선택된 이모지:</p>
-          {selectedEmojis.map((emoji, index) => (
-            <p key={index}>{emoji}</p>
+          {Object.entries(getEmojiCounts()).map(([emoji, count]) => (
+            <p key={emoji}>{emoji} : {count}개</p>
           ))}
         </div>
       )}
