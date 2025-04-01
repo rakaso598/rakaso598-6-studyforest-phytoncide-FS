@@ -19,7 +19,7 @@ const StudyEditForm = () => {
 
   const handleUpdateStudy = async () => {
     try {
-      const response = await fetch(`http://localhost:5090/api/study/${id}/update`, {
+      const response = await fetch(`https://six-study-forest-server.onrender.com/api/study/${id}/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
