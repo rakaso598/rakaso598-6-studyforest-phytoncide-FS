@@ -15,13 +15,13 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/study/*'>
-            <Route path='create' element={<StudyCreate />} />
-            <Route path=':id' element={<StudyDetail />} />
-            <Route path=':id/form' element={<StudyEditForm />} />
-            <Route path=':id/focus' element={<TodayFocus />} />
-            <Route path=':id/habit' element={<TodayHabit />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/study/*">
+            <Route path="create" element={<StudyCreate />} />
+            <Route path=":id" element={<StudyDetail />} />
+            <Route path=":id/form" element={<StudyEditForm />} />
+            <Route path=":id/focus" element={<TodayFocus />} />
+            <Route path=":id/habit" element={<TodayHabit />} />
           </Route>
         </Routes>
       </main>

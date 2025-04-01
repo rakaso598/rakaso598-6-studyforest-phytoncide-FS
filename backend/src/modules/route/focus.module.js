@@ -1,5 +1,5 @@
 import express from "express";
-import focusPointRouter from "../focusPointModules/focustPoint.module.js";
+import focusPointRouter from "../focus/focustPoint.module.js";
 
 const focusRouter = express.Router();
 
