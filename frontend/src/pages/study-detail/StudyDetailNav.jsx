@@ -3,7 +3,6 @@ import styles from "./StudyDetailNav.module.css";
 import smileIcon from "/images/icon/ic_smile.svg";
 import EditStudyModalButton from "@components/edit-study-modal/EditStudyModalButton";
 
-
 function StudyDetailNav() {
   return (
     <div className={styles.header}>
