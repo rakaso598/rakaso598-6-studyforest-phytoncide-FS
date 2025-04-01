@@ -1,9 +1,9 @@
 import { RiArrowDownSFill, RiArrowUpSFill } from 'react-icons/ri';
 import styles from './SortDropdown.module.css';
-import { SORT_OPTIONS } from '@api/home/getStudy.api';
 import { useState } from 'react';
+import { SORT_OPTIONS } from '@api/home/getStudy.api';
 
-const SortDropdown = ({ sortType, handleSort }) => {
+const SortDropdown = ({ sortType, clickSortOption }) => {
   const options = Object.keys(SORT_OPTIONS);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -14,11 +14,11 @@ const SortDropdown = ({ sortType, handleSort }) => {
 
         {isOpen ? (
           <span className={styles.arrow}>
-            <RiArrowUpSFill />
+            <RiArrowDownSFill />
           </span>
         ) : (
           <span className={styles.arrow}>
-            <RiArrowDownSFill />
+            <RiArrowUpSFill />
           </span>
         )}
 
@@ -27,7 +27,7 @@ const SortDropdown = ({ sortType, handleSort }) => {
             {options.map((option) => (
               <li
                 key={option}
-                onClick={() => handleSort(option)}
+                onClick={() => clickSortOption(option)}
                 className={styles.dropdownItem}
               >
                 {option}

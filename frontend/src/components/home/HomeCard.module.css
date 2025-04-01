@@ -12,6 +12,8 @@
   transition: all 0.3s ease;
   background-color: var(--bg-green-light);
   position: relative;
+
+  font-weight: 500;
 }
 
 .card:hover {
@@ -43,7 +45,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 20px;
   pointer-events: none;
 }
@@ -67,12 +69,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  width: 90px;
+
+  width: 100%;
+  max-width: 100px;
   height: 24px;
-  padding: 4px 0;
+
   border-radius: 20px;
   border: 1px solid rgb(223, 223, 223);
+  padding: 4px 12px;
+}
+
+.pointsTextContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 5px;
 }
 
 .card[data-bg^='bg']:not([data-bg^='bg5']):not([data-bg^='bg6']):not(
@@ -213,8 +224,11 @@
     flex-direction: row-reverse;
   }
 
-  .cardContent,
   .cardTitleContainer {
     font-size: 18px;
+  }
+
+  .cardContent {
+    font-size: 16px;
   }
 }
