@@ -1,4 +1,4 @@
-import axiosInstance from "../api/axiosInstance.js";
+import axiosInstance from "../axiosInstance";
 
 const HABIT_URL = "/api/habitdone";
 

@@ -1,8 +1,8 @@
-import TodayHabitCreate from "@components/TodayHabitCreate";
+import TodayHabitCreate from "@components/habit-modal/TodayHabitCreate";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "@today-habit/TodayHabit.module.css";
-import Habits from "@components/Habits";
+import Habits from "@components/habits/Habits";
 import dayjs from "dayjs";
 
 const TodayHabit = () => {

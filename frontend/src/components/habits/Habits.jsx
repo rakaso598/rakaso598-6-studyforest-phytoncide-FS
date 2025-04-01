@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import styles from "@components/Habits.module.css";
-import { getHabits, patchHabits } from "./HabitAPI";
-import { getHabitDone, patchHabitDone, postHabitDone } from "./HabitDoneAPI";
+import styles from "@components/habits/Habits.module.css";
+import { getHabitDone, patchHabitDone } from "@api/today-habit/habitDone.api";
+import { getHabits } from "@api/today-habit/habit.api";
 
 function Habits() {
   // const [habits, setHabits] = useState([
