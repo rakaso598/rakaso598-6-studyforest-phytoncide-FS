@@ -42,11 +42,7 @@ const BrowseSection = () => {
   const debouncedSearch = useMemo(() => {
     return debounce(async (value) => {
       const data = await fetchStudies({ search: value });
-      setStudies((prev) => {
-        const existingIds = new Set(prev.map((item) => item.id));
-        const newData = data.filter((item) => !existingIds.has(item.id));
-        return [...prev, ...newData];
-      });
+      setStudies(data); // 검색 결과로 완전히 대체
     }, 300);
   }, []);
 
