@@ -5,7 +5,7 @@ import smileIcon from "/images/icon/ic_smile.svg";
 function StudyEmoji() {
   return (
     <div>
-      <button className={styles.emoji}>
+      {/* <button className={styles.emoji}>
         <img src="/images/stickers/Subtract-1.svg" alt="emoji" />
       </button>
       <button className={styles.emoji}>
@@ -16,12 +16,11 @@ function StudyEmoji() {
       </button>
       <button className={styles.emoji}>
         <img src="/images/stickers/Subtract-4.svg" alt="emoji" />
-      </button>
+      </button> */}
       <button className={styles.addBtn}>
         <img src={smileIcon} />
         <p>추가</p>
       </button>
-
     </div>
   )
 }
