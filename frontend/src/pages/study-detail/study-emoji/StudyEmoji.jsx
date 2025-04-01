@@ -97,7 +97,9 @@ function StudyEmoji() {
         <div style={modalStyle}>
           <p>선택된 이모지:</p>
           {Object.entries(getEmojiCounts()).map(([emoji, count]) => (
-            <p key={emoji}>{emoji} : {count}개</p>
+            <button key={emoji} className={styles.emoji} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(emoji))}>
+              {emoji} ({count})
+            </button>
           ))}
         </div>
       )}
