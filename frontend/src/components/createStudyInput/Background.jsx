@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Background.module.css";
 import bg1 from "/images/study-bg/bg1.svg";
 import bg2 from "/images/study-bg/bg2.svg";
@@ -20,6 +20,7 @@ const Background = ({ setBackground, background }) => {
         {backgroundImages.map((bgs, idx) => (
           <span key={bgs} className={styles.background}>
             <img
+              className={styles.img}
               src={bgs}
               alt={`bg${idx + 1}`}
               onClick={(e) => setBackground(e.target.alt)}
