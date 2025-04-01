@@ -1,0 +1,47 @@
+.studyCreateMidBgBox {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.inputBoxTitle {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.bgBox {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.background {
+  position: relative;
+  cursor: pointer;
+  width: 150px;
+  height: 150px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.selected {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (min-width: 744px) {
+  .inputBoxTitle {
+    font-size: 18px;
+  }
+  .bgBox {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

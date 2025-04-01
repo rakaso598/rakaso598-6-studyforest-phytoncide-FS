@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import styles from "./StudyEditForm.module.css";
-import NicknameInput from "../../../components/createStudyInput/NicknameInput";
-import StudyNameInput from "../../../components/createStudyInput/StudyNameInput";
-import DescriptionInput from "../../../components/createStudyInput/DescriptionInput";
-import PasswordInput from "../../../components/createStudyInput/PasswordInput";
-import PasswordCheck from "../../../components/createStudyInput/PasswordCheck";
-import Background from "../../../components/createStudyInput/Background";
+import NicknameInput from "../../../components/update-study-input/NicknameInput";
+import StudyNameInput from "../../../components/update-study-input/StudyNameInput";
+import DescriptionInput from "../../../components/update-study-input/DescriptionInput";
+import PasswordInput from "../../../components/update-study-input/PasswordInput";
+import PasswordCheck from "../../../components/update-study-input/PasswordCheck";
+import Background from "../../../components/update-study-input/Background";
 import { useParams, useNavigate } from "react-router-dom";
+// import { studyCreate } from '../../api/study/studyCreate.api';
 
 const StudyEditForm = () => {
   const { id } = useParams();
