@@ -1,5 +1,6 @@
 import express from 'express';
 import prisma from '../../db/prisma/client.prisma.js';
+import { Prisma } from '@prisma/client';
 
 const studyGetRouter = express.Router();
 
@@ -13,55 +14,43 @@ studyGetRouter.get('/', async (req, res, next) => {
       orderBy = 'createAt',
     } = req.query;
 
-    const study = await prisma.study.findMany({
-      where: {
-        OR: [
-          {
-            title: {
-              contains: search,
-              mode: 'insensitive',
-            },
-          },
-          {
-            description: {
-              contains: search,
-              mode: 'insensitive',
-            },
-          },
-          {
-            nickName: {
-              contains: search,
-              mode: 'insensitive',
-            },
-          },
-        ],
-      },
-      select: {
-        id: true,
-        nickName: true,
-        title: true,
-        description: true,
-        background: true,
-        point: true,
-        createAt: true,
-        updatedAt: true,
-        emojis: true, // 관계형 배열 필드는 그대로 true 가능
-        habits: {
-          include: {
-            HabitDone: true,
-          },
-        },
-        // encryptedPassword: false ← Prisma에서는 false로 제외하는 방식 없음
-        // 그냥 생략하면 포함되지 않음
-      },
-      orderBy: {
-        [orderBy]: sort === 'desc' ? 'desc' : 'asc',
-      },
-      skip: Number(offset),
-      take: Number(limit),
-    });
+    const cleanedSearch = String(search).replace(/\s/g, '');
 
-    res.status(200).json({ study });
+    const allowedOrderBy = ['createAt', 'point'];
+    // 혹시라도 잘못 들어오는 경우 기본값 createAt으로 변경
+    const safeOrderBy = allowedOrderBy.includes(orderBy) ? orderBy : 'createAt';
+    const safeSort = sort === 'asc' ? 'ASC' : 'DESC';
+
+    const study = await prisma.$queryRaw`
+      SELECT
+        s.id,
+        s."nickName",
+        s.title,
+        s.description,
+        s.background,
+        s.point,
+        s."createAt",
+        s."updatedAt",
+      json_agg(e.*) FILTER (WHERE e.id IS NOT NULL) AS emojis
+      FROM "Study" s
+      LEFT JOIN "Emojis" e ON e."studyId" = s.id
+      WHERE
+        REPLACE(s.title, ' ', '') ILIKE ${`%${cleanedSearch}%`} OR
+        REPLACE(s.description, ' ', '') ILIKE ${`%${cleanedSearch}%`} OR
+        REPLACE(s."nickName", ' ', '') ILIKE ${`%${cleanedSearch}%`}
+      GROUP BY s.id
+      ORDER BY ${Prisma.raw(`"${safeOrderBy}"`)} ${Prisma.raw(safeSort)}
+      OFFSET ${Number(offset)}
+      LIMIT ${Number(limit)}
+    `;
+
+    // 이모지가 없는경우 빈 배열이 아닌 null을 반환해서 기본적인 포멧팅 진행
+    const formatted = study.map((item) => ({
+      ...item,
+      emojis: item.emojis ?? [],
+    }));
+
+    res.status(200).json({ study: formatted });
   } catch (e) {
     next(e);
   }

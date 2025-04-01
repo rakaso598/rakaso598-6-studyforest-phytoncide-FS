@@ -1,4 +1,4 @@
-import axiosInstance from "../api/axiosInstance.js";
+import axiosInstance from "../axiosInstance";
 
 const HABIT_URL = "/api/habits";
 
@@ -33,7 +33,10 @@ export const patchHabits = async (habitId, data) => {
 
 export const postHabit = async (studyId, data) => {
   try {
-    const res = await instance.post(`/posthabit/${studyId}`, data);
+    const res = await axiosInstance.post(
+      `${HABIT_URL}/posthabit/${studyId}`,
+      data
+    );
     return res.data;
   } catch (e) {
     handleError(e);
@@ -41,7 +44,9 @@ export const postHabit = async (studyId, data) => {
 };
 export const deleteHabit = async (habitId) => {
   try {
-    const res = await instance.delete(`/deletehabit/${habitId}`);
+    const res = await axiosInstance.delete(
+      `${HABIT_URL}/deletehabit/${habitId}`
+    );
     return res.data;
   } catch (e) {
     handleError(e);

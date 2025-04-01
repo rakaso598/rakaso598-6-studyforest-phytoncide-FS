@@ -62,8 +62,9 @@ const HomeCard = ({ data }) => {
         <div className={styles.headerTop}>
           <div className={styles.pointsContainer}>
             <img className={styles.pointIcon} src={pointIcon} alt='points' />
-            <span className={styles.pointsText}>{data.point}P</span>
-            <span className={styles.pointsText}>획득</span>
+            <span className={styles.pointsTextContainer}>
+              <span className={styles.pointsText}>{data.point}P 획득</span>
+            </span>
           </div>
 
           <div className={styles.cardTitleContainer}>

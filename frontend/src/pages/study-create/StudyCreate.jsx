@@ -1,20 +1,20 @@
-import React, { useState } from "react";
-import styles from "./StudyCreate.module.css";
-import NicknameInput from "../../components/createStudyInput/NicknameInput";
-import StudyNameInput from "../../components/createStudyInput/StudyNameInput";
-import DescriptionInput from "../../components/createStudyInput/DescriptionInput";
-import PasswordInput from "../../components/createStudyInput/PasswordInput";
-import PasswordCheck from "../../components/createStudyInput/PasswordCheck";
-import Background from "../../components/createStudyInput/Background";
-import { studyCreate } from "../../api/study/studyCreate.api";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import styles from './StudyCreate.module.css';
+import NicknameInput from '../../components/createStudyInput/NicknameInput';
+import StudyNameInput from '../../components/createStudyInput/StudyNameInput';
+import DescriptionInput from '../../components/createStudyInput/DescriptionInput';
+import PasswordInput from '../../components/createStudyInput/PasswordInput';
+import PasswordCheck from '../../components/createStudyInput/PasswordCheck';
+import Background from '../../components/createStudyInput/Background';
+import { studyCreate } from '../../api/study/studyCreate.api';
+import { useNavigate } from 'react-router-dom';
 
 const StudyCreate = () => {
-  const [nickName, setNickName] = useState("");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [background, setBackground] = useState("bg1");
-  const [encryptedPassword, setEncryptedPassword] = useState("");
+  const [nickName, setNickName] = useState('');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [background, setBackground] = useState('bg1');
+  const [encryptedPassword, setEncryptedPassword] = useState('');
   const navigate = useNavigate();
 
   const handleClik = async () => {
@@ -25,7 +25,7 @@ const StudyCreate = () => {
       !background ||
       !encryptedPassword.trim()
     ) {
-      alert("모든 필드를 입력해주세요");
+      alert('모든 필드를 입력해주세요');
       return;
     }
 
@@ -40,7 +40,7 @@ const StudyCreate = () => {
     try {
       const result = await studyCreate(data);
 
-      navigate("/");
+      navigate('/');
       console.log(result);
     } catch (e) {
       console.log(e);

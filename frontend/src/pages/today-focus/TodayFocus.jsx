@@ -8,7 +8,7 @@ import TodayFocusToast from "./TodayFocusToast";
 import TodayFocusTimer from "./TodayFocusTimer.jsx";
 
 const TodayFocus = () => {
-  const { studyId } = useParams();
+  const { id } = useParams();
   const [point, setPoint] = useState(0);
   const [totalPoint, setTotalPoint] = useState(0);
   const [start, setStart] = useState(false);
@@ -37,14 +37,15 @@ const TodayFocus = () => {
 
   // 처음 렌더링 때 포인트 불러오기
   useEffect(() => {
-    pointLoad(studyId);
+    pointLoad(id);
   }, []);
 
   // 집중 성공 시 DB에 포인트 저장
   useEffect(() => {
     if (start) return;
+    if (point === 0) return;
     if (complete) {
-      pointUpdate(studyId, { totalPoint });
+      pointUpdate(id, { totalPoint });
     }
   }, [totalPoint]);
 
@@ -59,7 +60,7 @@ const TodayFocus = () => {
 
   // 시간 설정에 따른 포인트 설정
   const rewardPointSetByTime = (e) => {
-    if (!Number(e.target.value)) return;
+    if (isNaN(e.target.value)) return;
     if (e.target.value < 10) {
       setPoint(0);
     } else {
@@ -88,7 +89,7 @@ const TodayFocus = () => {
   return (
     <div className={styles.container}>
       <div className={styles.box}>
-        <TodayFocusNavbar />
+        <TodayFocusNavbar id={id} />
         <TodayFocusPoint totalPoint={totalPoint} />
         <div className={styles.focusContainer}>
           <div className={styles.focus}>
@@ -96,7 +97,6 @@ const TodayFocus = () => {
             <TodayFocusTimer
               rewardPointSetByTime={rewardPointSetByTime}
               setComplete={setComplete}
-              pause={pause}
               setPause={setPause}
               start={start}
               setStart={setStart}
