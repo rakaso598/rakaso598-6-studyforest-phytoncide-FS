@@ -159,7 +159,9 @@ const TodayFocusTimer = ({
   return (
     <>
       <div
-        className={`${styles.focusSelectTimeContainer} ${start && styles.show}`}
+        className={`
+          ${styles.focusSelectTimeContainer} 
+          ${disabled && styles.show}`}
       >
         <img src="/images/icon/ic_timer.svg" alt="시계" />
         <p>

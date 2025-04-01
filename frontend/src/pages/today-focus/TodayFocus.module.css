@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  height: 942px;
+  height: 712px;
   margin: 0px 15px 0px 15px;
   padding-top: 20px;
 }
@@ -14,40 +14,6 @@
   max-width: 1248px;
   padding: 16px;
   border-radius: var(--radius-md);
-}
-
-.navBar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-}
-
-.navTxt {
-  font-weight: 800;
-  font-size: 24px;
-  color: var(--text-black);
-}
-
-.navBtnContainer {
-  display: flex;
-  gap: 8px;
-  row-gap: 16px;
-}
-
-.navBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  color: var(--text-gray);
-  border-radius: 15px;
-  border: 1px, solid, var(--color-gray-200);
-  padding: 7px 6px 7px 10px;
-  font-weight: 500;
-  font-size: 16px;
-  gap: 2px;
 }
 
 .pointContainer {
@@ -146,7 +112,7 @@
 }
 
 .focusMinTimer {
-  background-color: var(--bg-white);
+  background-color: transparent;
   text-align: end;
   color: var(--text-black);
   font-weight: 800;
@@ -158,7 +124,7 @@
 }
 
 .focusSecTimer {
-  background-color: var(--bg-white);
+  background-color: transparent;
   text-align: start;
   color: var(--text-black);
   font-weight: 800;
@@ -284,6 +250,7 @@
 }
 
 .toastContainer {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -300,7 +267,19 @@
   color: var(--error-light);
   font-weight: 500;
   font-size: 14px;
-  margin-bottom: 40px;
+  position: absolute;
+  bottom: 0px;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 500ms, visibility 0ms 500ms, transform 500ms ease-in-out;
+}
+
+.toastWarning.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(-40px);
+  transition: opacity 500ms, visibility 0ms, transform 500ms ease-in-out;
 }
 
 .toastPoint {
@@ -314,30 +293,30 @@
   color: var(--text-green);
   font-weight: 500;
   font-size: 14px;
-  margin-bottom: 40px;
+  position: absolute;
+  bottom: 0px;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 500ms, visibility 0ms 500ms, transform 500ms ease-in-out;
+}
+
+.toastPoint.show {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(-40px);
+  transition: opacity 500ms, visibility 0ms, transform 500ms ease-in-out;
 }
 
 @media (min-width: 744px) {
   .container {
     margin: 0px 24px 0px 24px;
     padding-top: 16px;
+    height: 942px;
   }
 
   .box {
     padding: 24px;
-  }
-
-  .navTxt {
-    font-size: 32px;
-    margin-bottom: 0;
-  }
-
-  .navBtnContainer {
-    gap: 16px;
-  }
-
-  .navBtn {
-    padding: 11px 16px 11px 24px;
   }
 
   .pointContainer {
