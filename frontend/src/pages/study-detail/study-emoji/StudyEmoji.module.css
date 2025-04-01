@@ -3,11 +3,39 @@
   align-items: center;
   justify-content: center;
   gap: 5px;
+  border: none;
+  border-radius: 50px;
+  width: 67px;
+  height: 30px;
+  background-color:rgba(0, 0, 0, 0.5);
+}
+
+.moreEmojiButtonStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: none;
+  border-radius: 50px;
+  width: 67px;
+  height: 30px;
+  background-color:rgba(0, 0, 0, 0.3);
+}
+
+.addEmojiButtonStyle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
   border: 1px solid #0000001a;
   border-radius: 50px;
   width: 67px;
   height: 30px;
-  /* background-color: gray; */
+  /* background-color:rgba(0, 0, 0, 0.3); */
+}
+
+.emojiContainer {
+  left: 26px;
 }
 
 button {

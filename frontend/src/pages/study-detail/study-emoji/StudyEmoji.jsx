@@ -69,7 +69,7 @@ function StudyEmoji() {
   }, [selectedEmojis, modalOpen]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
+    <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }} className={styles.emojiContainer}>
       {getDisplayedEmojis().map((item, index) => (
         <button key={index} className={`${styles.emoji} ${styles.commonButtonStyle}`} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(item.emoji))}>
           {item.emoji} {item.count > 0 && <span>({item.count})</span>}
@@ -82,11 +82,11 @@ function StudyEmoji() {
         </button>
       ))}
 
-      <button ref={moreEmojisButtonRef} className={`${styles.emoji} ${styles.commonButtonStyle}`} onClick={handleMoreEmojisClick}>
+      <button ref={moreEmojisButtonRef} className={`${styles.emoji} ${styles.moreEmojiButtonStyle}`} onClick={handleMoreEmojisClick}>
         +{selectedEmojis.length > 3 ? selectedEmojis.length - 3 : 0}
       </button>
 
-      <button className={`${styles.addBtn} ${styles.commonButtonStyle}`} onClick={handleAddButtonClick} ref={addButtonRef}>
+      <button className={`${styles.addBtn} ${styles.addEmojiButtonStyle}`} onClick={handleAddButtonClick} ref={addButtonRef}>
         <img src={smileIcon} alt="smile" />
         <p>추가</p>
       </button>
