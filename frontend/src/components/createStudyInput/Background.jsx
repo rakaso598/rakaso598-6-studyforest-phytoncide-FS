@@ -20,6 +20,7 @@ const Background = ({ setBackground, background }) => {
         {backgroundImages.map((bgs, idx) => (
           <span key={bgs} className={styles.background}>
             <img
+              className={styles.img}
               src={bgs}
               alt={`bg${idx + 1}`}
               onClick={(e) => setBackground(e.target.alt)}
