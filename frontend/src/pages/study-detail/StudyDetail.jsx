@@ -3,7 +3,7 @@ import styles from "./StudyDetail.module.css";
 import StudyDetailNav from "./StudyDetailNav";
 import StudyContent from "./StudyContent.jsx";
 import HabitRecordTable from "./HabitRecordTable";
-import EditStudyModalImpl from "../../components/editStudyModal/EditStudyModalImpl";
+import EditStudyModalImpl from "../../components/edit-study-modal/EditStudyModalImpl";
 
 //  url 에 id param으로 들어올것
 

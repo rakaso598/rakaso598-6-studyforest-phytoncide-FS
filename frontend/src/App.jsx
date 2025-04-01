@@ -7,7 +7,7 @@ import TodayFocus from '@today-focus/TodayFocus';
 import TodayHabit from '@today-habit/TodayHabit';
 import StudyDetail from '@study-detail/StudyDetail';
 import StudyCreate from '@study-create/StudyCreate';
-import StudyEditForm from './pages/study-detail/studyEditForm/StudyEditForm';
+import StudyEditForm from '@study-detail/study-edit-form/StudyEditForm';
 
 function App() {
   return (
