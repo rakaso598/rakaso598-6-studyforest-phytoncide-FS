@@ -5,18 +5,13 @@ import StudyContent from "./StudyContent.jsx";
 import HabitRecordTable from "./HabitRecordTable";
 import EditStudyModalImpl from "../../components/edit-study-modal/EditStudyModalImpl";
 
-//  url 에 id param으로 들어올것
-
 const StudyDetail = () => {
   return (
     <section className={styles.container}>
       <div className={styles.wrapper}>
         <StudyDetailNav />
-
         <StudyContent />
-
         <HabitRecordTable />
-        <EditStudyModalImpl />
       </div>
     </section>
   );

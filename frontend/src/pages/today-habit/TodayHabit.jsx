@@ -1,9 +1,10 @@
-import TodayHabitCreate from "@components/TodayHabitCreate";
+import TodayHabitCreate from "@components/habit-modal/TodayHabitCreate";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styles from "@today-habit/TodayHabit.module.css";
-import Habits from "@components/Habits";
+import Habits from "@components/habits/Habits";
 import dayjs from "dayjs";
+import arrowIcon from "/images/icon/ic_arrow_right.svg";
 
 const TodayHabit = () => {
   const currentTime = dayjs()
@@ -20,7 +21,9 @@ const TodayHabit = () => {
   const closeModal = () => {
     setIsModalOpen(false); // 모달 닫기
   };
-
+  const { id } = useParams();
+  console.log(id);
+  // title
   return (
     <div className={styles.container}>
       <div className={styles.mainContainer}>
@@ -28,13 +31,13 @@ const TodayHabit = () => {
           <div className={styles.titleContainer}>
             <p className={styles.title}>연우의 개발공장</p>
             <div className={styles.linkContainer}>
-              <Link to="/today-focus" className={styles.link}>
+              <Link to={`/study/${id}/focus`} className={styles.link}>
                 <p className={styles.linkText}>오늘의 집중</p>
-                <img src="/images/icon/ic_arrow_right.svg" />
+                <img src={arrowIcon} />
               </Link>
               <Link to="/" className={styles.link}>
-                <p>홈</p>
-                <img src="/images/icon/ic_arrow_right.svg" />
+                <p className={styles.linkText}>홈</p>
+                <img src={arrowIcon} />
               </Link>
             </div>
           </div>
@@ -53,7 +56,7 @@ const TodayHabit = () => {
               목록 수정
             </button>
           </div>
-          <Habits />
+          <Habits studyId={id} />
         </div>
       </div>
 

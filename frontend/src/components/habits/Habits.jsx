@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import styles from "@components/Habits.module.css";
-import { getHabits, patchHabits } from "./HabitAPI";
-import { getHabitDone, patchHabitDone, postHabitDone } from "./HabitDoneAPI";
+import styles from "@components/habits/Habits.module.css";
+import { getHabitDone, patchHabitDone } from "@api/today-habit/habitDone.api";
+import { getHabits } from "@api/today-habit/habit.api";
 
-function Habits() {
+function Habits({ studyId }) {
   // const [habits, setHabits] = useState([
   //   { id: 1, title: "미라클 모닝 6시 기상", checked: false },
   //   { id: 2, title: "아침 챙겨 먹기", checked: false },
@@ -22,8 +22,8 @@ function Habits() {
     try {
       const habitDone = await getHabitDone(habitId, today);
       if (habitDone) {
-        const updateHabitDone = await patchHabitDone(habitDone.id, {
-          isDone: !habitDone.isDone,
+        const updateHabitDone = await patchHabitDone(habitDone[0].id, {
+          isDone: !habitDone[0].isDone,
         });
         setHabitCheck((prev) =>
           prev.map((habit) =>
@@ -37,30 +37,18 @@ function Habits() {
       console.error(e);
       setHabits(habits);
     }
-
-    // const habit = habits.find((habit) => habit.id === habitId);
-
-    // if (habit) {
-    //   const updatedHabits = habits.map((h) =>
-    //     h.id === habitId ? { ...h, [today]: !h[today] } : h
-    //   );
-    //   setHabits(updatedHabits);
-    //   try {
-    //     await patchHabits(habitId, { [today]: !habit[today] });
-    //   } catch (e) {
-    //     console.error(e);
-    //     setHabits(habits);
-    //   }
-    // }
   };
 
   const handleLoad = async () => {
-    const studyId = 10;
     const result = await getHabits(studyId);
     const checked = await Promise.all(
       result.map(async (habit) => {
         const habitDone = await getHabitDone(habit.id, today);
-        return { habitId: habit.id, isDone: habitDone.isDone };
+        let isDone = false;
+        if (habitDone.length === 1) {
+          isDone = habitDone[0].isDone;
+        }
+        return { habitId: habit.id, isDone };
       })
     );
 
@@ -84,7 +72,9 @@ function Habits() {
             key={habit.id}
             onClick={() => HandleClick(habit.id)}
             className={
-              habit[today] ? styles.habitChecked : styles.habitUnchecked
+              habitCheck.find((h) => h.habitId === habit.id)?.isDone
+                ? styles.habitChecked
+                : styles.habitUnchecked
             }
           >
             {habit.title}
