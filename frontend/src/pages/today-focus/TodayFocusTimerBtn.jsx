@@ -9,11 +9,12 @@ const TodayFocusTimerBtn = ({
 }) => {
   return (
     <div className={styles.focusBtnContainer}>
-      {btnToggle && (
-        <button onClick={handleClickPause} className={styles.focusPauseBtn}>
-          <img src="/images/icon/ic_pause.svg" alt="일시정지" />
-        </button>
-      )}
+      <button
+        onClick={handleClickPause}
+        className={`${styles.focusPauseBtn} ${btnToggle && styles.show}`}
+      >
+        <img src="/images/icon/ic_pause.svg" alt="일시정지" />
+      </button>
       <button
         disabled={btnToggle}
         onClick={handleClickStart}
@@ -27,11 +28,12 @@ const TodayFocusTimerBtn = ({
         />
         <p>{timeover ? "Stop!" : "Start!"}</p>
       </button>
-      {btnToggle && (
-        <button onClick={handleClickReset} className={styles.focusResetBtn}>
-          <img src="/images/icon/ic_restart.svg" alt="초기화" />
-        </button>
-      )}
+      <button
+        onClick={handleClickReset}
+        className={`${styles.focusResetBtn} ${btnToggle && styles.show}`}
+      >
+        <img src="/images/icon/ic_restart.svg" alt="초기화" />
+      </button>
     </div>
   );
 };
