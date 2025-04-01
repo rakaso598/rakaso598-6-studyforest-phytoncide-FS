@@ -66,7 +66,7 @@ function StudyEmoji() {
     <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
       {getDisplayedEmojis().map((item, index) => (
         <button key={index} className={styles.emoji} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(item.emoji))}>
-          {item.emoji} {item.count > 1 && <span>({item.count})</span>}
+          {item.emoji} {item.count > 0 && <span>({item.count})</span>}
         </button>
       ))}
 
