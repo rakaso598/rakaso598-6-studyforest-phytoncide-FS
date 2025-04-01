@@ -27,7 +27,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
       console.log(response.data);
 
       if (response.data.success) {
-        navigate(`/study/${id}/form`); // 비밀번호 검증 성공 시 /study-detail/:id/form 경로로 이동
+        navigate(`/study/${id}/form`); // 비밀번호 검증 성공 시 /study/:id/form 경로로 이동
       } else {
         setErrorMessage("비밀번호 검증에 실패했습니다. 다시 시도해주세요.");
       }

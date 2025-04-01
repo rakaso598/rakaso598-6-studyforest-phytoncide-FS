@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./Background.module.css";
 import bg1 from "/images/study-bg/bg1.svg";
 import bg2 from "/images/study-bg/bg2.svg";
@@ -24,7 +24,7 @@ const Background = ({ setBackground, background }) => {
               alt={`bg${idx + 1}`}
               onClick={(e) => setBackground(e.target.alt)}
             />
-            {background.slice(2, 3) === String(idx + 1) && (
+            {background && background.slice(2, 3) === String(idx + 1) && ( // background가 undefined가 아닌지 확인
               <img className={styles.selected} src={selected} alt="selected" />
             )}
           </span>

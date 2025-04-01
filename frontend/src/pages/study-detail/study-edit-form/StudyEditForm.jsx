@@ -16,34 +16,40 @@ const StudyEditForm = () => {
   const [description, setDescription] = useState("");
   const [bg, setBg] = useState("bg1");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // 에러 메시지 상태 추가
 
   const handleUpdateStudy = async () => {
     try {
-      const response = await fetch(`https://six-study-forest-server.onrender.com/api/study/${id}/update`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: parseInt(id),
-          nickName: nickname,
-          title: studyName,
-          description: description,
-          encryptedPassword: password,
-          background: bg,
-        }),
-      });
+      const response = await fetch(
+        `https://six-study-forest-server.onrender.com/api/study/${id}/update`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nickName: nickname,
+            title: studyName,
+            description: description,
+            encryptedPassword: password,
+            background: bg,
+          }),
+        }
+      );
 
       if (response.ok) {
         alert("스터디 정보가 성공적으로 수정되었습니다.");
         navigate(`/study/${id}`);
       } else {
         const errorData = await response.json();
-        alert(`스터디 정보 수정 실패: ${errorData.message}`);
+        setErrorMessage(
+          `스터디 정보 수정 실패: ${errorData && errorData.message}`
+        );
+        console.error("스터디 정보 수정 실패:", errorData);
       }
     } catch (error) {
       console.error("스터디 정보 수정 중 오류 발생:", error);
-      alert("스터디 정보 수정 중 오류가 발생했습니다.");
+      setErrorMessage("스터디 정보 수정 중 오류가 발생했습니다.");
     }
   };
 
@@ -51,6 +57,7 @@ const StudyEditForm = () => {
     <section className={styles.section}>
       <article className={styles.article}>
         <h2 className={styles.studyCreateTitle}>스터디 수정하기</h2>
+        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>} {/* 에러 메시지 표시 */}
         <div className={styles.studyCreateTopInputBox}>
           <NicknameInput setNickname={setNickname} />
           <StudyNameInput setStudyName={setStudyName} />
