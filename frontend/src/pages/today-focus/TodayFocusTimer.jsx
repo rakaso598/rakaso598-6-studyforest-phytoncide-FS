@@ -5,7 +5,6 @@ import TodayFocusTimerBtn from "./TodayFocusTimerBtn";
 const TodayFocusTimer = ({
   rewardPointSetByTime,
   setComplete,
-  pause,
   setPause,
   start,
   setStart,
@@ -16,11 +15,13 @@ const TodayFocusTimer = ({
   const [countDown, setCountDown] = useState(false);
   const [timeover, setTimeover] = useState(false);
   const [btnToggle, setBtnToggle] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   // 시작 버튼
   const handleClickStart = () => {
     if (start) {
       setStart(false);
+      setDisabled(false);
       setCountDown(false);
       setTimeover(false);
       setComplete(true);
@@ -30,11 +31,11 @@ const TodayFocusTimer = ({
     }
     setStart(true);
     setBtnToggle(true);
+    setDisabled(true);
   };
 
   // 일시 정지 버튼
   const handleClickPause = () => {
-    if (pause) return;
     setPause(true);
     setStart(false);
     setCountDown(false);
@@ -45,6 +46,7 @@ const TodayFocusTimer = ({
   const handleClickReset = () => {
     setStart(false);
     setBtnToggle(false);
+    setDisabled(false);
     setCountDown(false);
     setTimeover(false);
     setMinute(tempTime.min);
@@ -71,6 +73,7 @@ const TodayFocusTimer = ({
 
   // 타이머 시간 설정
   const handleTimerValue = (e) => {
+    if (isNaN(e.target.value)) return;
     if (e.target.value.length >= 3) return;
     if (e.target.id === "minute") {
       setMinute(e.target.value);
@@ -87,6 +90,7 @@ const TodayFocusTimer = ({
     if (!start) return;
 
     const secTimer = setInterval(() => {
+      // 초(sec) 증가
       setSecond((prevSecond) => {
         if (minute === "00" && prevSecond === "00") {
           return (prevSecond = "01");
@@ -98,6 +102,7 @@ const TodayFocusTimer = ({
           return (prevSecond = "00");
         }
 
+        // 초(sec) 감소
         if (prevSecond === "00") {
           setCountDown(false);
           return (prevSecond = 59);
@@ -118,7 +123,7 @@ const TodayFocusTimer = ({
   useEffect(() => {
     if (!start) return;
 
-    // 분(min) 변경
+    // 분(min) 증가
     if (second === 59) {
       if (timeover) return;
       setMinute((prevMinute) => {
@@ -129,6 +134,7 @@ const TodayFocusTimer = ({
       });
     }
 
+    // 분(min) 감소
     if (second === "00") {
       if (timeover) {
         setMinute((prevMinute) => {
@@ -140,30 +146,14 @@ const TodayFocusTimer = ({
       }
     }
 
-    // 색상 효과
+    // 10초 카운트다운 색상 효과
     if (minute === "00" && second === "00") {
       setCountDown(false);
+      setBtnToggle(false);
+      setTimeover(true);
     } else if (minute === "00" && second <= 10) {
       setCountDown(true);
     }
-
-    // 타임오버 효과
-    const minus = setTimeout(() => {
-      if (timeover) return;
-      if (minute !== "00" || second !== "00") {
-        return;
-      } else {
-        setTimeover(true);
-        setBtnToggle(false);
-      }
-    }, 1000);
-
-    // 타임오버 해제
-    return () => {
-      if (!timeover) return;
-      if (minute !== "00" || second !== "00") return;
-      clearTimeout(minus);
-    };
   }, [start, second]);
 
   return (
@@ -184,6 +174,7 @@ const TodayFocusTimer = ({
       >
         {timeover && <p>-</p>}
         <input
+          disabled={disabled}
           onBlur={handleTimerDefault}
           onChange={handleTimerValue}
           value={minute}
@@ -192,6 +183,7 @@ const TodayFocusTimer = ({
         />
         <p>:</p>
         <input
+          disabled={disabled}
           onBlur={handleTimerDefault}
           onChange={handleTimerValue}
           value={second}
