@@ -1,17 +1,18 @@
 import { ClipLoader } from 'react-spinners';
-import { getStudies, SORT_OPTIONS } from '@api/home/getStudy.api';
+import { getStudies } from '@api/home/getStudy.api';
 import styles from './BrowseSection.module.css';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 import SearchBar from './SearchBar';
 import SortDropdown from './SortDropdown';
 import BrowseCardList from './BrowseCardList';
+import { SORT_OPTIONS } from '@api/home/getStudy.api';
 
 const BrowseSection = () => {
   const [studies, setStudies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchInput, setSearchInput] = useState('');
-  const [sortType, setSortType] = useState('최신순');
+  const [sortType, setSortType] = useState('최근 순');
   const [offset, setOffset] = useState(0);
 
   // 서버 호출에 대한 유연성을 위해 파라미터를 받아옴
@@ -41,17 +42,21 @@ const BrowseSection = () => {
   const debouncedSearch = useMemo(() => {
     return debounce(async (value) => {
       const data = await fetchStudies({ search: value });
-      setStudies(data);
+      setStudies((prev) => {
+        const existingIds = new Set(prev.map((item) => item.id));
+        const newData = data.filter((item) => !existingIds.has(item.id));
+        return [...prev, ...newData];
+      });
     }, 300);
   }, []);
 
-  const handleSearch = (e) => {
+  const handleSearchInputChange = (e) => {
     const value = e.target.value;
     setSearchInput(value); // 입력값 상태는 즉시 반영
     debouncedSearch(value); // 디바운스된 API 호출
   };
 
-  const handleSort = async (sortType) => {
+  const clickSortOption = async (sortType) => {
     setSortType(sortType);
     setOffset(0);
     const data = await fetchStudies({
@@ -61,14 +66,18 @@ const BrowseSection = () => {
     setStudies(data);
   };
 
-  const clickMoreStudy = async () => {
+  const clickGetMoreStudy = async () => {
     const nextOffset = offset + 6;
     const data = await fetchStudies({
       offset: nextOffset,
       search: searchInput,
       ...SORT_OPTIONS[sortType],
     });
-    setStudies((prev) => [...prev, ...data]);
+    setStudies((prev) => {
+      const existingIds = new Set(prev.map((item) => item.id));
+      const newData = data.filter((item) => !existingIds.has(item.id));
+      return [...prev, ...newData];
+    });
     setOffset(nextOffset);
   };
 
@@ -96,8 +105,11 @@ const BrowseSection = () => {
       <div className={styles.title}>스터디 둘러보기</div>
 
       <div className={styles.topContainer}>
-        <SearchBar searchTerm={searchInput} handleSearch={handleSearch} />
-        <SortDropdown sortType={sortType} handleSort={handleSort} />
+        <SearchBar
+          searchInput={searchInput}
+          handleSearch={handleSearchInputChange}
+        />
+        <SortDropdown sortType={sortType} clickSortOption={clickSortOption} />
       </div>
 
       <BrowseCardList isLoading={isLoading} studies={studies} />
@@ -105,7 +117,7 @@ const BrowseSection = () => {
       {studies.length > 0 && (
         <div className={styles.moreButtonContainer}>
           <button
-            onClick={clickMoreStudy}
+            onClick={clickGetMoreStudy}
             className={styles.moreButton}
             disabled={isLoading}
           >

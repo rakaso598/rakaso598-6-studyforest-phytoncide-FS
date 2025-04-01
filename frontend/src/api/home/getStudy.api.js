@@ -26,8 +26,8 @@ export const getStudies = async ({
 
 // 정렬 옵션 매핑
 export const SORT_OPTIONS = {
-  '포인트 많은순': { orderBy: 'point', sort: 'desc' },
-  '포인트 적은순': { orderBy: 'point', sort: 'asc' },
-  최신순: { orderBy: 'createAt', sort: 'desc' },
-  오래된순: { orderBy: 'createAt', sort: 'asc' },
+  '최근 순': { orderBy: 'createAt', sort: 'desc' },
+  '오래된 순': { orderBy: 'createAt', sort: 'asc' },
+  '많은 포인트 순': { orderBy: 'point', sort: 'desc' },
+  '적은 포인트 순': { orderBy: 'point', sort: 'asc' },
 };
