@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import '../public/font/Pretendard-1.3.9/web/static/pretendard.css';
@@ -16,12 +15,12 @@ function App() {
       <Header />
       <main>
         <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/study-create' element={<StudyCreate />} />
-          <Route path='/study-detail/:id' element={<StudyDetail />} />
-          <Route path='/study-detail/:id/form' element={<StudyEditForm />} />
-          <Route path='/today-focus' element={<TodayFocus />} />
-          <Route path='/today-habit' element={<TodayHabit />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/study-create" element={<StudyCreate />} />
+          <Route path="/study-detail/:id" element={<StudyDetail />} />
+          <Route path="/study-detail/:id/form" element={<StudyEditForm />} />
+          <Route path="/today-focus" element={<TodayFocus />} />
+          <Route path="/today-habit" element={<TodayHabit />} />
         </Routes>
       </main>
     </>
