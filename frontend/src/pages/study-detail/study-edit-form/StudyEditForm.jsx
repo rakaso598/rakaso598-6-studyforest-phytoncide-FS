@@ -36,7 +36,7 @@ const StudyEditForm = () => {
 
       if (response.ok) {
         alert("스터디 정보가 성공적으로 수정되었습니다.");
-        navigate(`/study-detail/${id}`);
+        navigate(`/study/${id}`);
       } else {
         const errorData = await response.json();
         alert(`스터디 정보 수정 실패: ${errorData.message}`);
