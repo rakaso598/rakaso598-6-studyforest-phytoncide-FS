@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import styles from "@components/habit-modal/TodayHabitCreate.module.css";
 import trashIcon from "/images/icon/ic_trash.svg";
 import plusIcon from "/images/icon/ic_plus.svg";
-import { getHabits } from "@api/today-habit/habit.api";
+import {
+  getHabits,
+  deleteHabit,
+  patchHabits,
+  postHabit,
+} from "@api/today-habit/habit.api";
 
 const TodayHabitCreate = ({ onClose }) => {
   //habits 설정
