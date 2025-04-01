@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./StudyDetailNav.module.css";
 import smileIcon from "/images/icon/ic_smile.svg";
-import EditStudyModalButton from "@components/editStudyModal/EditStudyModalButton";
+import EditStudyModalButton from "@components/edit-study-modal/EditStudyModalButton";
 
 
 function StudyDetailNav() {
