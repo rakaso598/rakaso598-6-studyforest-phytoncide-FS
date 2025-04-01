@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from "./StudyDetailNav.module.css";
 import smileIcon from "/images/icon/ic_smile.svg";
 import EmojiPicker from 'emoji-picker-react';
@@ -61,6 +61,12 @@ function StudyEmoji() {
       count: emojiCounts[emoji],
     }));
   };
+
+  useEffect(() => {
+    if (modalOpen && selectedEmojis.length <= 3) {
+      setModalOpen(false);
+    }
+  }, [selectedEmojis, modalOpen]);
 
   return (
     <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
