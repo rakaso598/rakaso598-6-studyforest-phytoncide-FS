@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import styles from './BrowseCardList.module.css';
-import HomeCard from './HomeCard';
+import HomeCard from '@components/home/HomeCard';
 import { ClipLoader } from 'react-spinners';
 
 const BrowseCardList = memo(({ isLoading, studies }) => {
