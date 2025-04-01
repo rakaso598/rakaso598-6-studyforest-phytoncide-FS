@@ -1,21 +1,24 @@
 import React from "react";
 import styles from "./StudyContent.module.css";
 import arrowIcon from "/images/icon/ic_arrow_right.svg";
+import { Link, useParams } from "react-router-dom";
 
 const StudyContent = () => {
+  const { id } = useParams();
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.contentTop}>
         <h1 className={styles.title}>지수의 개발공장</h1>
         <div className={styles.buttons}>
-          <button className={styles.button}>
+          {/* 임시 링크 태그임 비밀번호 요구하는 모달로 바꿔야함 */}
+          <Link to={`/study/${id}/focus`} className={styles.button}>
             <p>오늘의 집중</p>
             <img src={arrowIcon} />
-          </button>
-          <button className={styles.button}>
+          </Link>
+          <Link to={`/study/${id}/habit`} className={styles.button}>
             <p>오늘의 습관</p>
             <img src={arrowIcon} />
-          </button>
+          </Link>
         </div>
       </div>
 
