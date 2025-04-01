@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import HomeCard from './HomeCard';
+import HomeCard from '@components/home/HomeCard';
 import styles from './RecentlySection.module.css';
 
 const RecentlySection = () => {
