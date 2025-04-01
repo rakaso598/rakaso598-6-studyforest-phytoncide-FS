@@ -2,13 +2,14 @@ import React from "react";
 import styles from "./StudyDetailNav.module.css";
 import smileIcon from "/images/icon/ic_smile.svg";
 import EditStudyModalButton from "@components/edit-study-modal/EditStudyModalButton";
+import DeleteStudyModalButton from "@components/delete-study-modal/DeleteStudyModalButton";
 
 function StudyDetailNav() {
   return (
     <div className={styles.header}>
       {/* 이부분 나중에 이모지 기능 연동하면 src 변경해야함 */}
       <div className={styles.emojis}>
-        <StudyEmoji />
+        {/* <StudyEmoji /> */}
         {/* <button className={styles.emoji}>
           <img src="/images/stickers/Subtract-1.svg" alt="emoji" />
         </button>
@@ -38,9 +39,7 @@ function StudyDetailNav() {
           className={styles.editLink}
         />
         <span className={styles.divider}>|</span>
-        <button type="button" className={styles.deleteLink}>
-          스터디 삭제하기
-        </button>
+        <DeleteStudyModalButton buttonText="스터디 삭제하기" />
       </nav>
     </div>
   );
