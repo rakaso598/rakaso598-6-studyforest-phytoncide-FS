@@ -1,4 +1,4 @@
-import styles from "./TodayFocus.module.css";
+import styles from "./TodayFocusToast.module.css";
 
 const TodayFocusToast = ({ pause, complete, point }) => {
   return (

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./TodayFocus.module.css";
+import styles from "./TodayFocusTimer.module.css";
 import TodayFocusTimerBtn from "./TodayFocusTimerBtn";
 
 const TodayFocusTimer = ({

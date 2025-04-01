@@ -1,4 +1,4 @@
-import styles from "./TodayFocus.module.css";
+import styles from "./TodayFocusPoint.module.css";
 
 const TodayFocusPoint = ({ totalPoint }) => {
   return (
