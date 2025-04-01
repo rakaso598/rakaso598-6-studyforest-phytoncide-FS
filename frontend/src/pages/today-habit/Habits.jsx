@@ -1,18 +1,10 @@
 import React, { useEffect, useState } from "react";
-import styles from "@components/habits/Habits.module.css";
+import styles from "@today-habit/Habits.module.css";
 import { getHabitDone, patchHabitDone } from "@api/today-habit/habitDone.api";
 import { getHabits } from "@api/today-habit/habit.api";
+import { postHabitDone } from "../../api/today-habit/habitDone.api";
 
 function Habits({ studyId }) {
-  // const [habits, setHabits] = useState([
-  //   { id: 1, title: "미라클 모닝 6시 기상", checked: false },
-  //   { id: 2, title: "아침 챙겨 먹기", checked: false },
-  //   { id: 3, title: "React 스터디 책 1챕터 읽기", checked: false },
-  //   { id: 4, title: "스트레칭", checked: false },
-  //   { id: 5, title: "영양제 챙겨 먹기", checked: false },
-  //   { id: 6, title: "사이드 프로젝트", checked: false },
-  //   { id: 7, title: "물 2L 먹기", checked: false },
-  // ]);
   const [habits, setHabits] = useState([]);
   const [habitCheck, setHabitCheck] = useState([]);
   const today = new Date().toLocaleDateString("en-US", {
@@ -45,7 +37,13 @@ function Habits({ studyId }) {
       result.map(async (habit) => {
         const habitDone = await getHabitDone(habit.id, today);
         let isDone = false;
-        if (habitDone.length === 1) {
+        const data = { isDone, dayOfWeek: today };
+        if (habitDone.length === 0) {
+          await postHabitDone(habit.id, data);
+          console.log(checked);
+        }
+
+        if (habitDone.length >= 1) {
           isDone = habitDone[0].isDone;
         }
         return { habitId: habit.id, isDone };

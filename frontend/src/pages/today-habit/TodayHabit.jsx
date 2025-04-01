@@ -1,16 +1,32 @@
-import TodayHabitCreate from "@components/habit-modal/TodayHabitCreate";
-import React, { useState } from "react";
+import HabitModal from "@today-habit/HabitModal";
+import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from "@today-habit/TodayHabit.module.css";
-import Habits from "@components/habits/Habits";
+import Habits from "@today-habit/Habits";
 import dayjs from "dayjs";
-import arrowIcon from "/images/icon/ic_arrow_right.svg";
+import StudyNavbar from "@components/study-navbar/StudyNavbar";
+import { getHabits } from "../../api/today-habit/habit.api";
 
 const TodayHabit = () => {
-  const currentTime = dayjs()
-    .format("YYYY-MM-DD A HH:mm")
-    .replace("AM", "오전")
-    .replace("PM", "오후");
+  const [currentTime, setCurrentTime] = useState(
+    dayjs()
+      .format("YYYY-MM-DD A HH:mm")
+      .replace("AM", "오전")
+      .replace("PM", "오후")
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(
+        dayjs()
+          .format("YYYY-MM-DD A HH:mm")
+          .replace("AM", "오전")
+          .replace("PM", "오후"),
+        1000
+      );
+      return () => clearInterval(interval);
+    });
+  });
 
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 관리
 
@@ -23,24 +39,17 @@ const TodayHabit = () => {
   };
   const { id } = useParams();
   console.log(id);
-  // title
+  // const study = await getstudy(id)
+
   return (
     <div className={styles.container}>
       <div className={styles.mainContainer}>
         <div className={styles.topContainer}>
-          <div className={styles.titleContainer}>
-            <p className={styles.title}>연우의 개발공장</p>
-            <div className={styles.linkContainer}>
-              <Link to={`/study/${id}/focus`} className={styles.link}>
-                <p className={styles.linkText}>오늘의 집중</p>
-                <img src={arrowIcon} />
-              </Link>
-              <Link to="/" className={styles.link}>
-                <p className={styles.linkText}>홈</p>
-                <img src={arrowIcon} />
-              </Link>
-            </div>
-          </div>
+          <StudyNavbar
+            id={id}
+            link={`/study/${id}/focus`}
+            pageName={"오늘의 집중"}
+          />
           <div className={styles.timeContainer}>
             <p className={styles.timeTitle}>현재 시간</p>
             <div className={styles.timeNow}>{currentTime}</div>
@@ -67,7 +76,7 @@ const TodayHabit = () => {
             className={styles.modalContent}
             onClick={(e) => e.stopPropagation()}
           >
-            <TodayHabitCreate onClose={closeModal} />
+            <HabitModal onClose={closeModal} studyId={id} />
           </div>
         </div>
       )}

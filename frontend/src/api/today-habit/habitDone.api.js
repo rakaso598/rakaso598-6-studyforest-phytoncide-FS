@@ -33,10 +33,10 @@ export const patchHabitDone = async (habitDoneId, data) => {
   }
 };
 
-export const postHabitDone = async (data) => {
+export const postHabitDone = async (habitId, data) => {
   try {
     const res = await axiosInstance.post(
-      `${HABITDONE_URL}/posthabitdone`,
+      `${HABITDONE_URL}/posthabitdone/${habitId}`,
       data
     );
     return res.data;
