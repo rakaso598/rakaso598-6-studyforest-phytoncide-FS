@@ -1,0 +1,97 @@
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  outline: none;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  height: 70px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.shareLink {
+  color: var(--color-green-300);
+}
+
+.editLink {
+  color: var(--color-green-300);
+}
+
+.deleteLink {
+  color: var(--color-gray-300);
+}
+
+.divider {
+  color: var(--color-green-300);
+}
+
+.divider:nth-of-type(2) {
+  color: var(--color-gray-200);
+}
+
+.emojis {
+  display: flex;
+  gap: 8px;
+  max-width: 240px;
+}
+
+.emojis img {
+  width: 24px;
+  height: 24px;
+}
+
+.emoji {
+  width: 56px;
+  height: 31px;
+  border: none;
+  border-radius: 50px;
+}
+
+.addBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border: 1px solid #0000001a;
+  border-radius: 50px;
+  width: 67px;
+  height: 30px;
+}
+
+.addBtn p {
+  color: var(--color-black);
+  white-space: nowrap;
+}
+
+@media screen and (min-width: 744px) {
+  button {
+    font-size: 16px;
+  }
+
+  .header {
+    flex-wrap: nowrap;
+  }
+
+  .nav {
+    gap: 16px;
+  }
+}
