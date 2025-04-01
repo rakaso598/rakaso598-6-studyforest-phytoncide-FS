@@ -76,7 +76,7 @@ function StudyEmoji() {
         </button>
       ))}
 
-      {Array(selectedEmojis.length >= 3 ? 1 : 3 - selectedEmojis.length).fill(null).map((_, index) => (
+      {selectedEmojis.length < 3 && Array(3 - selectedEmojis.length).fill(null).map((_, index) => (
         <button key={`empty-${index}`} className={`${styles.emoji} ${styles.commonButtonStyle}`}>
           {/* 빈칸 */}
         </button>
