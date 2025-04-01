@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./DeleteStudyModal.module.css";
 import axiosInstance from "@api/axiosInstance";
+import SERVER_URL from "../../server";
 import { deleteStudy } from "@api/study/deleteStudy.api.js";
 
 const DeleteStudyModal = ({ isOpen, onClose }) => {
   const [encryptedPassword, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const VERIFY_PASSWORD_URL = `/api/study/verify-password`;
+  const VERIFY_PASSWORD_URL = `${SERVER_URL}/api/study/verify-password`;
   const navigate = useNavigate();
   const { id } = useParams();
 

@@ -4,6 +4,7 @@ export const useDeleteStudyModalController = () => {
   const [deleteStudyModal, setDeleteStudyModal] = useState(false);
 
   const handleOpenDeleteModal = () => {
+    console.log("modal clicked");
     setDeleteStudyModal(true);
   };
 
