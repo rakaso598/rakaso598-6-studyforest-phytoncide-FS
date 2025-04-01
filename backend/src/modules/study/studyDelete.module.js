@@ -10,7 +10,7 @@ studyDeleteRouter.delete("/:id/delete", async (req, res, next) => {
     const { id } = req.params;
     const { encryptedPassword } = req.body;
 
-    // 스터디 id로 조회하여 불러옴
+    // 스터디 id로 조회하여 불러옴 이부분 나중에 팀원이 구현한 studyGetRouter 써서 대체할것임
     const study = await prisma.study.findUnique({
       where: {
         id: parseInt(id),
