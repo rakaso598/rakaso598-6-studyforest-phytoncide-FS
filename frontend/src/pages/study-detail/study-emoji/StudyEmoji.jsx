@@ -76,17 +76,15 @@ function StudyEmoji() {
         </button>
       ))}
 
-      {selectedEmojis.length > 3 && (
-        <button ref={moreEmojisButtonRef} className={`${styles.emoji} ${styles.commonButtonStyle}`} onClick={handleMoreEmojisClick}>
-          +{selectedEmojis.length - 3}
-        </button>
-      )}
-
       {Array(selectedEmojis.length >= 3 ? 1 : 3 - selectedEmojis.length).fill(null).map((_, index) => (
         <button key={`empty-${index}`} className={`${styles.emoji} ${styles.commonButtonStyle}`}>
           {/* 빈칸 */}
         </button>
       ))}
+
+      <button ref={moreEmojisButtonRef} className={`${styles.emoji} ${styles.commonButtonStyle}`} onClick={handleMoreEmojisClick}>
+        +{selectedEmojis.length > 3 ? selectedEmojis.length - 3 : 0}
+      </button>
 
       <button className={`${styles.addBtn} ${styles.commonButtonStyle}`} onClick={handleAddButtonClick} ref={addButtonRef}>
         <img src={smileIcon} alt="smile" />
