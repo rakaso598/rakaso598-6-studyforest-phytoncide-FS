@@ -3,14 +3,18 @@ import { useState } from "react";
 export const useDeleteStudyModalController = () => {
   const [deleteStudyModal, setDeleteStudyModal] = useState(false);
 
-  const handleOpenDeleteModal = () => {
+  const handleOpenDeleteStudyModal = () => {
     console.log("modal clicked");
     setDeleteStudyModal(true);
   };
 
-  const handleCloseDeleteModal = () => {
+  const handleCloseDeleteStudyModal = () => {
     setDeleteStudyModal(false);
   };
 
-  return { deleteStudyModal, handleOpenDeleteModal, handleCloseDeleteModal };
+  return {
+    deleteStudyModal,
+    handleOpenDeleteStudyModal,
+    handleCloseDeleteStudyModal,
+  };
 };
