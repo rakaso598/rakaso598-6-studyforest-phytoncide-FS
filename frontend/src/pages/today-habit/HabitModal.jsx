@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styles from "@components/habit-modal/TodayHabitCreate.module.css";
+import styles from "@today-habit/HabitModal.module.css";
 import trashIcon from "/images/icon/ic_trash.svg";
 import plusIcon from "/images/icon/ic_plus.svg";
 import {
@@ -9,13 +9,12 @@ import {
   postHabit,
 } from "@api/today-habit/habit.api";
 
-const TodayHabitCreate = ({ onClose }) => {
+const HabitModal = ({ studyId, onClose }) => {
   //habits 설정
   const [habits, setHabits] = useState([]);
   console.log(habits);
 
   const handleLoad = async () => {
-    const studyId = 10;
     const result = await getHabits(studyId);
 
     setHabits(result);
@@ -46,7 +45,6 @@ const TodayHabitCreate = ({ onClose }) => {
   //수정 완료 시 변경 습관들 서버로
   const handleConfirmRevision = async () => {
     try {
-      const studyId = 10;
       const result = await getHabits(studyId);
 
       // 1. 새로운 습관: habits에는 있고 result에는 없는 습관들
@@ -131,4 +129,4 @@ const TodayHabitCreate = ({ onClose }) => {
   );
 };
 
-export default TodayHabitCreate;
+export default HabitModal;
