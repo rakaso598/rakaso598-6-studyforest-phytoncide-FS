@@ -3,10 +3,10 @@ import styles from "./StudyEmoji.module.css";
 import smileIcon from "/images/icon/ic_smile.svg";
 import EmojiPicker from 'emoji-picker-react';
 import axiosInstance from '../../../api/axiosInstance';
-import { useParams } from 'react-router-dom'; // useParams 훅 import
+import { useParams } from 'react-router-dom';
 
-function StudyEmoji() { // studyId prop 제거
-  const { id } = useParams(); // URL 파라미터로부터 id 추출
+function StudyEmoji() {
+  const { id } = useParams();
   const [showPicker, setShowPicker] = useState(false);
   const addButtonRef = useRef(null);
   const [selectedEmojis, setSelectedEmojis] = useState([]);
@@ -68,7 +68,7 @@ function StudyEmoji() { // studyId prop 제거
     }
   }, [modalOpen, getEmojiCounts]);
 
-  const sendEmojiData = async () => {
+  const sendEmojiData = useCallback(async () => {
     try {
       const emojiCounts = getEmojiCounts();
       const response = await axiosInstance.post(`/api/study/${id}/emojis`, {
@@ -76,12 +76,12 @@ function StudyEmoji() { // studyId prop 제거
       });
 
       if (response.status === 200) {
-        console.log('이모지 데이터가 성공적으로 전송되었습니다.');
+        console.log('이모지 데이터가 성공적으로 업데이트되었습니다.');
       } else {
-        console.error('이모지 데이터 전송 실패:', response.status);
+        console.error('이모지 데이터 업데이트 실패:', response.status);
       }
     } catch (error) {
-      console.error('이모지 데이터 전송 중 오류 발생:', error);
+      console.error('이모지 데이터 업데이트 중 오류 발생:', error);
       if (error.response) {
         console.error('서버 응답:', error.response.data);
         console.error('상태 코드:', error.response.status);
@@ -92,11 +92,14 @@ function StudyEmoji() { // studyId prop 제거
         console.error('Axios 오류:', error.message);
       }
     }
-  };
+  }, [getEmojiCounts, id]); // getEmojiCounts와 id에 의존성 추가
 
-  const handleSaveEmojis = () => {
-    sendEmojiData();
-  };
+  // selectedEmojis 상태가 변경될 때마다 sendEmojiData 함수 호출
+  useEffect(() => {
+    if (selectedEmojis.length > 0) { // 초기 렌더링 시 불필요한 호출 방지
+      sendEmojiData();
+    }
+  }, [selectedEmojis, sendEmojiData]); // selectedEmojis와 sendEmojiData를 의존성 배열에 추가
 
   return (
     <div className={styles.emojiContainer}>
@@ -133,8 +136,6 @@ function StudyEmoji() { // studyId prop 제거
           ))}
         </div>
       )}
-
-      <button onClick={handleSaveEmojis}>이모지 저장</button>
     </div>
   );
 }
