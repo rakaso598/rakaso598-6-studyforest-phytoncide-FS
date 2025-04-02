@@ -38,7 +38,6 @@ const TodayHabit = () => {
     setIsModalOpen(false); // 모달 닫기
   };
   const { id } = useParams();
-  console.log(id);
   // const study = await getstudy(id)
 
   return (

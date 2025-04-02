@@ -38,18 +38,17 @@
   color: var(--color-gray-300);
   font-weight: 400;
   font-size: 18px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 .timeNow {
   color: var(--color-black);
   font-size: 16px;
-  padding: 8px 12px 4px 12px;
+  padding: 8px 12px 8px 12px;
   font-weight: 500;
   border-radius: 50px;
   display: inline-flex;
   width: fit-content;
   border: 1px solid var(--color-gray-200);
-  margin-bottom: 24px;
   text-align: center;
 }
 .habitContainer {
@@ -60,6 +59,7 @@
   padding: 24px 16px;
   border-radius: 20px;
   border: 1px solid var(--color-gray-200);
+  margin-top: 0px;
 }
 .habitTopContainer {
   display: flex;
@@ -89,44 +89,21 @@
 }
 
 @media screen and (min-width: 744px) {
-  .titleContainer {
-    flex-direction: row;
-  }
-  .topContainer {
-    height: 128px;
-    margin-bottom: 40px;
-  }
-  .linkContainer {
-    gap: 16px;
-  }
   .mainContainer {
     padding: 24px;
+    margin-top: 16px;
   }
   .habitTitle {
     font-size: 24px;
   }
-  .title {
-    font-size: 32px;
-  }
   .habitContainer {
     padding: 40px 24px;
-  }
-  .link {
-    padding: 12px 16px 12px 24px;
-  }
-  .mainContainer {
-    margin-top: 16px;
   }
 }
 
 @media screen and (min-width: 1200px) {
-  .titleContainer {
-    flex-direction: row;
-  }
   .mainContainer {
     padding: 40px;
-  }
-  .mainContainer {
     margin-top: 39px;
   }
 }
