@@ -43,6 +43,11 @@
   cursor: pointer;
 }
 
+.disabledBtn {
+  background-color: var(--color-gray-300);
+  cursor: not-allowed;
+}
+
 @media screen and (min-width: 744px) {
   .article {
     max-width: 696px;
