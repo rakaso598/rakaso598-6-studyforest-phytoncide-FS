@@ -1,15 +1,14 @@
 .emojiContainer {
   position: relative;
-  left: 26px;
-  width: 100%; /* 컨테이너 너비 고정 */
-  white-space: nowrap; /* 버튼들이 한 줄에 표시되도록 설정 */
+  width: 100%;
+  white-space: nowrap;
 }
 
 .commonButtonStyle,
 .moreEmojiButtonStyle,
 .addEmojiButtonStyle {
-  display: inline-block; /* inline-block으로 변경 */
-  vertical-align: middle; /* 세로 정렬 설정 */
+  display: inline-block;
+  vertical-align: middle;
   gap: 5px;
   border-radius: 50px;
   width: 67px;
@@ -21,7 +20,6 @@
   margin-right: 5px;
 }
 
-/* 마지막 요소의 오른쪽 간격 제거 */
 .commonButtonStyle:last-child,
 .moreEmojiButtonStyle:last-child,
 .addEmojiButtonStyle:last-child {
@@ -47,6 +45,9 @@
 
 .addBtn {
   border: 1px solid rgba(0, 0, 0, 0.1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .addBtn p {
@@ -91,7 +92,6 @@
 .emojis {
   display: flex;
   gap: 8px;
-  max-width: 240px;
 }
 
 .emojis img {
