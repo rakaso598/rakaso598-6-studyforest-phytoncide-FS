@@ -4,7 +4,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--color-white);
-  width: 648px;
+  width: min(100% - 32px, 648px); /* 좌우 마진 고려 */
   height: auto;
   padding: 20px;
   display: flex;
@@ -16,9 +16,8 @@
 .headline {
   color: var(--color-black);
   font-weight: 800;
-  font-size: 24px;
-  margin-top: 40px;
-  margin-bottom: 24px;
+  font-size: 20px;
+  margin-bottom: 27px;
   line-height: 100%;
   letter-spacing: 0%;
   text-align: center;
@@ -46,13 +45,12 @@
 .singleHabitBox {
   display: grid;
   place-items: center;
-  width: 400px;
+  width: 256px;
   height: 54px;
   border-radius: 20px;
   background: var(--color-gray-100);
 }
 .wholeHabitsBox {
-  margin-left: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,14 +58,13 @@
 .singleHabitBoxWithTrashIc {
   display: flex;
   margin-bottom: 20px;
-  margin-left: 40px;
 }
 
 .trashIcon {
   width: 24px;
   height: 24px;
   background-color: var(--color-pink-100);
-  padding: 14px 16px;
+  padding: 12px;
   border-radius: 35px;
   margin-left: 8px;
   box-sizing: content-box;
@@ -76,13 +73,12 @@
 .createBox {
   display: grid;
   place-items: center;
-  width: 400px;
+  width: 312px; /* 기본 크기 */
   height: 54px;
   border-radius: 20px;
   border: 2px solid var(--color-black);
   text-align: center;
   margin-bottom: 24px;
-  margin-right: 24px;
   cursor: pointer;
 }
 .btns {
@@ -119,4 +115,24 @@
   margin-left: 12px;
   color: var(--color-white);
   text-shadow: 0px -2px 0px var(--color-green-300);
+}
+@media screen and (min-width: 375px) {
+  .createBox {
+    width: calc(312px + (100vw - 375px) * 0.3);
+    max-width: 400px;
+  }
+  .singleHabitBox {
+    width: calc(256px + (100vw - 375px) * 0.3);
+    max-width: 400px;
+  }
+  .headline {
+    font-size: 24px;
+    margin-top: 20px;
+    margin-bottom: 24px;
+  }
+}
+@media screen and (min-width: 744px) {
+  .singleHabitBox {
+    margin-left: 50px;
+  }
 }
