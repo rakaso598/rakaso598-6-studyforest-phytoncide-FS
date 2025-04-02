@@ -27,77 +27,10 @@
   margin-top: 20px;
 }
 
-.timeContainer {
-  display: flex;
-  flex-direction: column;
-  height: 64px;
-  margin-bottom: 24px;
-  margin-top: 16px;
-}
-.timeTitle {
-  color: var(--color-gray-300);
-  font-weight: 400;
-  font-size: 18px;
-  margin-bottom: 12px;
-}
-.timeNow {
-  color: var(--color-black);
-  font-size: 16px;
-  padding: 8px 12px 8px 12px;
-  font-weight: 500;
-  border-radius: 50px;
-  display: inline-flex;
-  width: fit-content;
-  border: 1px solid var(--color-gray-200);
-  text-align: center;
-}
-.habitContainer {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px 16px;
-  border-radius: 20px;
-  border: 1px solid var(--color-gray-200);
-  margin-top: 0px;
-}
-.habitTopContainer {
-  display: flex;
-  flex-direction: row;
-  max-width: 400px;
-  width: 100%;
-  align-items: center;
-  margin-bottom: 24px;
-  position: relative;
-  height: 29px;
-}
-.habitTitle {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  color: var(--color-black);
-  font-weight: 800;
-  font-size: 18px;
-}
-.listText {
-  position: absolute;
-  color: var(--color-gray-300);
-  right: 0%;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-}
-
 @media screen and (min-width: 744px) {
   .mainContainer {
     padding: 24px;
     margin-top: 16px;
-  }
-  .habitTitle {
-    font-size: 24px;
-  }
-  .habitContainer {
-    padding: 40px 24px;
   }
 }
 
