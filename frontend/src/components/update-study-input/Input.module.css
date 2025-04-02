@@ -29,6 +29,11 @@
   color: var(--error-text);
 }
 
+.successMessage {
+  color: green;
+  font-size: 14px;
+}
+
 @media screen and (min-width: 744px) {
   .inputBoxTitle {
     font-size: 18px;

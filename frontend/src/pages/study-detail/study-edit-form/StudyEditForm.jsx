@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./StudyEditForm.module.css";
 import NicknameInput from "../../../components/update-study-input/NicknameInput";
 import StudyNameInput from "../../../components/update-study-input/StudyNameInput";
@@ -17,6 +17,7 @@ const StudyEditForm = () => {
   const [bg, setBg] = useState("bg1");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isPasswordMatch, setIsPasswordMatch] = useState(true);
 
   useEffect(() => {
     const fetchStudyData = async () => {
@@ -42,7 +43,21 @@ const StudyEditForm = () => {
     fetchStudyData();
   }, [id]);
 
+  const handlePasswordCheck = useCallback((match) => {
+    setIsPasswordMatch(match);
+  }, []);
+
   const handleUpdateStudy = async () => {
+    if (!isPasswordMatch) {
+      setErrorMessage("비밀번호가 일치하지 않습니다.");
+      alert("비밀번호가 일치하지 않습니다.");
+      return;
+    }
+
+    if (!nickname || !studyName || !description || !password || !bg) {
+      setErrorMessage("모든 필수 항목을 입력해주세요.");
+      return;
+    }
     try {
       const response = await fetch(
         `https://six-study-forest-server.onrender.com/api/study/${id}/update`,
@@ -90,9 +105,15 @@ const StudyEditForm = () => {
         <Background setBg={setBg} bg={bg} />
         <div className={styles.studyCreateBottomBox}>
           <PasswordInput setPassword={setPassword} />
-          <PasswordCheck password={password} />
+          <PasswordCheck password={password} onPasswordCheck={handlePasswordCheck} />
         </div>
-        <button className={styles.createBtn} onClick={handleUpdateStudy}>
+        <button
+          className={`${styles.createBtn} ${
+            !isPasswordMatch ? styles.disabledBtn : ""
+          }`}
+          onClick={handleUpdateStudy}
+          disabled={!isPasswordMatch}
+        >
           스터디 수정하기
         </button>
       </article>

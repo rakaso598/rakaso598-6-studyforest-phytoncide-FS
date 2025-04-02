@@ -3,7 +3,7 @@ import styles from "./PasswordInput.module.css";
 import btnCloseIcon from "/images/icon/btn_visibility_on_24px-1.svg";
 import btnSeeIcon from "/images/icon/btn_visibility_on_24px.svg";
 
-const PasswordInput = ({ setEncryptedPassword }) => {
+const PasswordInput = ({ setPassword }) => {
   const [see, setSee] = useState(false);
 
   const handleClike = () => {
@@ -19,7 +19,7 @@ const PasswordInput = ({ setEncryptedPassword }) => {
       <p className={styles.inputBoxTitle}>비밀번호</p>
       <div className={styles.pwInputBox}>
         <input
-          onChange={(e) => setEncryptedPassword(e.target.value)}
+          onChange={(e) => setPassword(e.target.value)}
           className={styles.input}
           type={see ? "text" : "password"}
           placeholder="비밀번호를 입력해주세요"

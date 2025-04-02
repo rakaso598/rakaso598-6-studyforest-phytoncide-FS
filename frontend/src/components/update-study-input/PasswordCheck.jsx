@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Input.module.css";
 
-const PasswordCheck = ({ encryptedPassword }) => {
+const PasswordCheck = ({ password, onPasswordCheck }) => {
   const [passwordCheck, setPasswordCheck] = useState("");
   const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
     if (passwordCheck === "") {
       setIsActive(false);
+      onPasswordCheck(true);
     } else {
-      setIsActive(encryptedPassword !== passwordCheck);
+      const match = password === passwordCheck;
+      setIsActive(!match);
+      onPasswordCheck(match);
     }
-  }, [encryptedPassword, passwordCheck]);
+  }, [password, passwordCheck, onPasswordCheck]);
 
   return (
     <label className={styles.label}>
@@ -22,8 +25,9 @@ const PasswordCheck = ({ encryptedPassword }) => {
         type="password"
         placeholder="비밀번호를 다시 한 번 입력해주세요"
       />
-      {isActive && (
-        <p className={styles.errMessage}>*비밀번호가 일치하지 않습니다.</p>
+      {isActive && <p className={styles.errMessage}>*비밀번호가 일치하지 않습니다.</p>}
+      {!isActive && passwordCheck !== "" && (
+        <p className={styles.successMessage}>비밀번호가 일치합니다.</p>
       )}
     </label>
   );
