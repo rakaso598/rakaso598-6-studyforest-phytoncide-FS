@@ -62,6 +62,7 @@ const TodayFocusTimer = ({
     const id = e.target.id;
     const time = e.target.value;
 
+    if (time.includes(" ")) return;
     if (isNaN(time)) return;
     if (time.length >= 3) return;
 
@@ -69,9 +70,16 @@ const TodayFocusTimer = ({
       setMinute(time);
       setTempTime({ ...tempTime, min: time });
       rewardPointSetByTime(e);
-    } else {
-      setSecond(time);
-      setTempTime({ ...tempTime, sec: time });
+    }
+
+    if (id === "second") {
+      if (time[0] >= 6) {
+        setSecond("0" + time);
+        setTempTime({ ...tempTime, sec: "0" + time });
+      } else {
+        setSecond(time);
+        setTempTime({ ...tempTime, sec: time });
+      }
     }
   };
 
