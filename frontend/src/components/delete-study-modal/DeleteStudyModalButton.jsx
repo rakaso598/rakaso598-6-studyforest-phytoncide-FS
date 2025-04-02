@@ -16,7 +16,7 @@ const DeleteStudyModalButton = ({ buttonText }) => {
         className={styles.deleteStudyModalButton}
         onClick={handleOpenDeleteStudyModal}
       >
-        {buttonText || "스터디 삭제하기"}
+        {buttonText}
       </button>
       <DeleteStudyModal
         isOpen={deleteStudyModal}
