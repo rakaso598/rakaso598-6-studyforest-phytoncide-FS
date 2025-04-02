@@ -1,18 +1,18 @@
-import { ClipLoader } from 'react-spinners';
-import { getStudies } from '@api/home/getStudy.api';
-import styles from './BrowseSection.module.css';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { debounce } from 'lodash';
-import SearchBar from './SearchBar';
-import SortDropdown from './SortDropdown';
-import BrowseCardList from './BrowseCardList';
-import { SORT_OPTIONS } from '@api/home/getStudy.api';
+import { ClipLoader } from "react-spinners";
+import { getStudies } from "@api/home/getStudy.api";
+import styles from "./BrowseSection.module.css";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { debounce } from "lodash";
+import SearchBar from "./SearchBar";
+import SortDropdown from "./SortDropdown";
+import BrowseCardList from "./BrowseCardList";
+import { SORT_OPTIONS } from "@api/home/getStudy.api";
 
 const BrowseSection = () => {
   const [studies, setStudies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [searchInput, setSearchInput] = useState('');
-  const [sortType, setSortType] = useState('최근 순');
+  const [searchInput, setSearchInput] = useState("");
+  const [sortType, setSortType] = useState("최근 순");
   const [offset, setOffset] = useState(0);
 
   // 서버 호출에 대한 유연성을 위해 파라미터를 받아옴
@@ -28,7 +28,7 @@ const BrowseSection = () => {
         });
         return data;
       } catch (error) {
-        console.error('Failed to fetch studies:', error);
+        console.error("Failed to fetch studies:", error);
         throw error;
       } finally {
         setIsLoading(false);
@@ -84,7 +84,7 @@ const BrowseSection = () => {
         const data = await fetchStudies();
         setStudies(data || []);
       } catch (error) {
-        console.error('Failed to initialize studies:', error);
+        console.error("Failed to initialize studies:", error);
       }
     };
     initializeStudies();
@@ -118,9 +118,9 @@ const BrowseSection = () => {
             disabled={isLoading}
           >
             {isLoading ? (
-              <ClipLoader size={20} color='#578246' loading={true} />
+              <ClipLoader size={20} color="#578246" loading={true} />
             ) : (
-              '더보기'
+              "더보기"
             )}
           </button>
         </div>
