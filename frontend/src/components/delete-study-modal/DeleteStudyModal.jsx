@@ -26,6 +26,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
       const deleteResponse = await deleteStudy(id, password);
 
       if (deleteResponse && deleteResponse.success) {
+        // 삭제 성공시 localStorage 업데이트하여 현재 삭제한 id를 가지고있는 parsedData에 일치하는 스터디 있으면 걸러서 안보이게
         const storedData = localStorage.getItem("studyForest");
         if (storedData) {
           const parsedData = JSON.parse(storedData);
@@ -77,7 +78,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
           )}
         </div>
         <button
-          className={`${styles.modalVerifyButton} ${styles.deleteButton}`}
+          className={`${styles.modalVerifyButton}`}
           type="button"
           onClick={handleDeleteStudy}
         >
