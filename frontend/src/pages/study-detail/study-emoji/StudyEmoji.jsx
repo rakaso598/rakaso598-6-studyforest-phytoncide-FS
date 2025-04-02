@@ -49,8 +49,16 @@ function StudyEmoji() {
     setShowPicker(false);
   };
 
-  const handleSelectedEmojiClick = (emojiToRemoveId) => {
-    setSelectedEmojis(selectedEmojis.filter(item => item.id !== emojiToRemoveId));
+  const handleSelectedEmojiClick = (emojiToRemove) => {
+    setSelectedEmojis(prevEmojis => {
+      const indexToRemove = prevEmojis.findIndex(item => item.emoji === emojiToRemove.emoji);
+      if (indexToRemove !== -1) {
+        const newEmojis = [...prevEmojis];
+        newEmojis.splice(indexToRemove, 1);
+        return newEmojis;
+      }
+      return prevEmojis;
+    });
   };
 
   const handleMoreEmojisClick = () => {
@@ -144,10 +152,7 @@ function StudyEmoji() {
     <div className={styles.emojiContainer}>
       {getDisplayedEmojis().map((item, index) => (
         <button key={index} className={`${styles.commonButtonStyle} ${styles.emoji}`} onClick={() => {
-          const firstOccurrence = selectedEmojis.find(se => se.emoji === item.emoji);
-          if (firstOccurrence) {
-            handleSelectedEmojiClick(firstOccurrence.id);
-          }
+          handleSelectedEmojiClick(item);
         }}>
           {item.emoji} {item.count > 0 && <span>{item.count}</span>}
         </button>
@@ -175,10 +180,7 @@ function StudyEmoji() {
           <p>더 많은 이모지:</p>
           {getRemainingEmojis().map(([emoji, count]) => (
             <button key={emoji} className={`${styles.commonButtonStyle} ${styles.emoji}`} onClick={() => {
-              const firstOccurrence = selectedEmojis.find(se => se.emoji === emoji);
-              if (firstOccurrence) {
-                handleSelectedEmojiClick(firstOccurrence.id);
-              }
+              handleSelectedEmojiClick({ emoji });
             }}>
               {emoji} {count > 0 && <span>{count}</span>}
             </button>
