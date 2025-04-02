@@ -9,20 +9,21 @@ function StudyEmoji() {
   const { id } = useParams();
   const [showPicker, setShowPicker] = useState(false);
   const addButtonRef = useRef(null);
-  const [selectedEmojis, setSelectedEmojis] = useState([]); // 이 state를 DB 데이터로 초기화해야 함
+  const [selectedEmojis, setSelectedEmojis] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const moreEmojisButtonRef = useRef(null);
+  const [loadingInitialEmojis, setLoadingInitialEmojis] = useState(true);
 
   useEffect(() => {
     const fetchInitialEmojis = async () => {
+      setLoadingInitialEmojis(true);
       try {
         const response = await axiosInstance.get(`/api/study/${id}/emojis`);
         if (response.status === 200) {
-          // DB에서 가져온 이모지 데이터를 selectedEmojis state에 반영
           const initialEmojis = [];
           response.data.forEach(item => {
             for (let i = 0; i < item.count; i++) {
-              initialEmojis.push({ emoji: item.emojiContent, id: Date.now() + Math.random() * i }); // 임시 id 생성
+              initialEmojis.push({ emoji: item.emojiContent, id: Date.now() + Math.random() * i });
             }
           });
           setSelectedEmojis(initialEmojis);
@@ -31,10 +32,12 @@ function StudyEmoji() {
         }
       } catch (error) {
         console.error('초기 이모지 데이터 불러오기 중 오류 발생:', error);
+      } finally {
+        setLoadingInitialEmojis(false);
       }
     };
 
-    fetchInitialEmojis(); // 컴포넌트 마운트 시 초기 이모지 데이터 불러오기
+    fetchInitialEmojis();
   }, [id]);
 
   const handleAddButtonClick = () => {
@@ -132,10 +135,10 @@ function StudyEmoji() {
   }, [getEmojiCounts, id]);
 
   useEffect(() => {
-    if (selectedEmojis.length >= 0) {
+    if (!loadingInitialEmojis && selectedEmojis.length >= 0) {
       sendEmojiData();
     }
-  }, [selectedEmojis, sendEmojiData]);
+  }, [selectedEmojis, sendEmojiData, loadingInitialEmojis]);
 
   return (
     <div className={styles.emojiContainer}>
