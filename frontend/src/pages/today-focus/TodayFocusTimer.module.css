@@ -57,7 +57,7 @@
   padding: 0;
 }
 
-::selection {
+.focusTimerContainer input::selection {
   background-color: var(--color-gray-100);
 }
 
