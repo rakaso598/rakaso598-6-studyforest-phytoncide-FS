@@ -56,11 +56,13 @@ studyGetRouter.get("/", async (req, res, next) => {
   }
 });
 
-studyGetRouter.get("/:id", async (req, res, next) => {
+studyGetRouter.get("/:studyId", async (req, res, next) => {
   try {
-    const id = Number(req.params.id);
+    const studyId = Number(req.params.studyId);
 
-    const studyDetail = await prisma.study.findUnique({ where: { id } });
+    const studyDetail = await prisma.study.findUnique({
+      where: { id: studyId },
+    });
     if (!studyDetail) return res.status(404).send("Study가 존재하지 않습니다.");
 
     res.status(200).json(studyDetail);
