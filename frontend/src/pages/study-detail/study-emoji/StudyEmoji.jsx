@@ -39,12 +39,12 @@ function StudyEmoji() {
   const modalStyle = {
     position: 'absolute',
     top: moreEmojisButtonRef.current ? moreEmojisButtonRef.current.offsetHeight + moreEmojisButtonRef.current.offsetTop : 'auto',
-    left: moreEmojisButtonRef.current ? moreEmojisButtonRef.current.offsetLeft : 'auto',
     background: 'white',
     padding: '20px',
     border: '1px solid gray',
     zIndex: 1001,
   };
+
 
   const getEmojiCounts = () => {
     const emojiCounts = {};
