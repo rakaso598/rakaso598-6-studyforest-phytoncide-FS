@@ -4,12 +4,12 @@ import prisma from "../../db/prisma/client.prisma.js";
 const focusPointRouter = express.Router();
 
 // 포인트 불러오기
-focusPointRouter.get("/:id/focus", async (req, res, next) => {
+focusPointRouter.get("/:studyId/focus", async (req, res, next) => {
   try {
-    const id = Number(req.params.id);
+    const studyId = Number(req.params.studyId);
 
     const point = await prisma.study.findUnique({
-      where: { id },
+      where: { id: studyId },
       select: { point: true },
     });
     if (!point)
@@ -24,20 +24,20 @@ focusPointRouter.get("/:id/focus", async (req, res, next) => {
 });
 
 // 포인트 업데이트
-focusPointRouter.patch("/:id/focus", async (req, res, next) => {
+focusPointRouter.patch("/:studyId/focus", async (req, res, next) => {
   try {
-    const id = Number(req.params.id);
+    const studyId = Number(req.params.studyId);
     const { totalPoint } = req.body;
 
     await prisma.$transaction(async (tx) => {
-      const study = await tx.study.findUnique({ where: { id } });
+      const study = await tx.study.findUnique({ where: { id: studyId } });
       if (!study)
         return res
           .status(404)
           .send("잘못된 요청으로 인해 point를 업데이트 할 수 없습니다.");
 
       const updatePoint = await tx.study.update({
-        where: { id },
+        where: { id: studyId },
         data: { point: totalPoint },
         select: { point: true },
       });

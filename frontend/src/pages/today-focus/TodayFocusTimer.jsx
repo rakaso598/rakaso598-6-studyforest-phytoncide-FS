@@ -18,7 +18,7 @@ const TodayFocusTimer = ({
   const [disabled, setDisabled] = useState(false);
 
   // 시작 버튼
-  const handleClickStart = () => {
+  const handleStartClick = () => {
     if (start) {
       setStart(false);
       setDisabled(false);
@@ -35,7 +35,7 @@ const TodayFocusTimer = ({
   };
 
   // 일시 정지 버튼
-  const handleClickPause = () => {
+  const handlePauseClick = () => {
     setPause(true);
     setStart(false);
     setCountDown(false);
@@ -43,7 +43,7 @@ const TodayFocusTimer = ({
   };
 
   // 리셋 버튼
-  const handleClickReset = () => {
+  const handleResetClick = () => {
     setStart(false);
     setBtnToggle(false);
     setDisabled(false);
@@ -53,35 +53,54 @@ const TodayFocusTimer = ({
     setSecond(tempTime.sec);
   };
 
-  // 타이머 디폴트 값
-  const handleTimerDefault = (e) => {
-    if (e.target.value.length >= 2) return;
-    if (e.target.id === "minute" && (!minute || minute === "0")) {
-      setMinute("00");
-      setTempTime({ ...tempTime, min: "00" });
-    } else if (!second || second === "0") {
-      setSecond("00");
-      setTempTime({ ...tempTime, sec: "00" });
-    } else if (e.target.id === "minute" && Number(e.target.value) <= 10) {
-      setMinute("0" + e.target.value);
-      setTempTime({ ...tempTime, min: "0" + e.target.value });
-    } else {
-      setSecond("0" + e.target.value);
-      setTempTime({ ...tempTime, sec: "0" + e.target.value });
-    }
+  const handleTimerClick = (e) => {
+    e.target.select();
   };
 
   // 타이머 시간 설정
-  const handleTimerValue = (e) => {
-    if (isNaN(e.target.value)) return;
-    if (e.target.value.length >= 3) return;
-    if (e.target.id === "minute") {
-      setMinute(e.target.value);
-      setTempTime({ ...tempTime, min: e.target.value });
+  const handleTimerInput = (e) => {
+    const id = e.target.id;
+    const time = e.target.value;
+
+    if (isNaN(time)) return;
+    if (time.length >= 3) return;
+
+    if (id === "minute") {
+      setMinute(time);
+      setTempTime({ ...tempTime, min: time });
       rewardPointSetByTime(e);
     } else {
-      setSecond(e.target.value);
-      setTempTime({ ...tempTime, sec: e.target.value });
+      setSecond(time);
+      setTempTime({ ...tempTime, sec: time });
+    }
+  };
+
+  // 타이머 디폴트 값
+  const handleTimerDefaultValue = (e) => {
+    const { id, value } = e.target;
+    const DEFAULT_TIME_00 = "00";
+    const DEFAULT_TIME_0 = "0" + value;
+
+    if (value.length >= 2) return;
+
+    if (id === "minute") {
+      if (!minute || minute === "0") {
+        setMinute(DEFAULT_TIME_00);
+        setTempTime({ ...tempTime, min: DEFAULT_TIME_00 });
+      } else if (Number(value) < 10) {
+        setMinute(DEFAULT_TIME_0);
+        setTempTime({ ...tempTime, min: DEFAULT_TIME_0 });
+      }
+    }
+
+    if (id === "second") {
+      if (!second || second === "0") {
+        setSecond(DEFAULT_TIME_00);
+        setTempTime({ ...tempTime, sec: DEFAULT_TIME_00 });
+      } else if (Number(value) < 10) {
+        setSecond(DEFAULT_TIME_0);
+        setTempTime({ ...tempTime, sec: DEFAULT_TIME_0 });
+      }
     }
   };
 
@@ -90,14 +109,13 @@ const TodayFocusTimer = ({
     if (!start) return;
 
     const secTimer = setInterval(() => {
-      // 초(sec) 증가
       setSecond((prevSecond) => {
-        if (minute === "00" && prevSecond === "00") {
-          return (prevSecond = "01");
-        } else if (timeover) {
+        // 초(sec) 증가
+        if (timeover) {
+          console.log(prevSecond);
           if (prevSecond < 9)
             return (prevSecond = "0" + (Number(prevSecond[1]) + 1));
-          if (prevSecond <= 9) return (prevSecond = 10);
+          if (prevSecond < 10) return (prevSecond = 10);
           if (prevSecond < 59) return prevSecond + 1;
           return (prevSecond = "00");
         }
@@ -123,25 +141,26 @@ const TodayFocusTimer = ({
   useEffect(() => {
     if (!start) return;
 
-    // 분(min) 증가
-    if (second === 59) {
-      if (timeover) return;
+    // 분(min) 감소
+    if (second === 59 && !timeover) {
       setMinute((prevMinute) => {
         if (prevMinute <= 10) {
           return "0" + (prevMinute - 1);
+        } else {
+          return prevMinute - 1;
         }
-        return prevMinute - 1;
       });
     }
 
-    // 분(min) 감소
+    // 분(min) 증가
     if (second === "00") {
       if (timeover) {
         setMinute((prevMinute) => {
           if (prevMinute < 9)
             return (prevMinute = "0" + (Number(prevMinute[1]) + 1));
-          if (prevMinute <= 9) return (prevMinute = 10);
-          if (prevMinute >= 10) return prevMinute + 1;
+          if (prevMinute < 10) return (prevMinute = 10);
+          if (prevMinute < 99) return prevMinute + 1;
+          if (prevMinute === 99) return (prevMinute = "00");
         });
       }
     }
@@ -168,7 +187,7 @@ const TodayFocusTimer = ({
           {tempTime.min}:{tempTime.sec}
         </p>
       </div>
-      <div
+      <section
         className={`
           ${styles.focusTimerContainer} 
           ${timeover && styles.timeover}
@@ -177,8 +196,9 @@ const TodayFocusTimer = ({
         {timeover && <p>-</p>}
         <input
           disabled={disabled}
-          onBlur={handleTimerDefault}
-          onChange={handleTimerValue}
+          onClick={handleTimerClick}
+          onChange={handleTimerInput}
+          onBlur={handleTimerDefaultValue}
           value={minute}
           className={`${styles.focusMinTimer}`}
           id="minute"
@@ -186,19 +206,20 @@ const TodayFocusTimer = ({
         <p>:</p>
         <input
           disabled={disabled}
-          onBlur={handleTimerDefault}
-          onChange={handleTimerValue}
+          onClick={handleTimerClick}
+          onChange={handleTimerInput}
+          onBlur={handleTimerDefaultValue}
           value={second}
           className={`${styles.focusSecTimer}`}
           id="second"
         />
-      </div>
+      </section>
       <TodayFocusTimerBtn
         timeover={timeover}
         btnToggle={btnToggle}
-        handleClickStart={handleClickStart}
-        handleClickPause={handleClickPause}
-        handleClickReset={handleClickReset}
+        handleStartClick={handleStartClick}
+        handlePauseClick={handlePauseClick}
+        handleResetClick={handleResetClick}
       />
     </>
   );
