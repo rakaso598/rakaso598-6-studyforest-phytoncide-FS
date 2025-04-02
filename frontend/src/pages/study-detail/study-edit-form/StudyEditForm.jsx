@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./StudyEditForm.module.css";
 import NicknameInput from "../../../components/update-study-input/NicknameInput";
 import StudyNameInput from "../../../components/update-study-input/StudyNameInput";
@@ -7,7 +7,6 @@ import PasswordInput from "../../../components/update-study-input/PasswordInput"
 import PasswordCheck from "../../../components/update-study-input/PasswordCheck";
 import Background from "../../../components/update-study-input/Background";
 import { useParams, useNavigate } from "react-router-dom";
-// import { studyCreate } from '../../api/study/studyCreate.api';
 
 const StudyEditForm = () => {
   const { id } = useParams();
@@ -17,7 +16,31 @@ const StudyEditForm = () => {
   const [description, setDescription] = useState("");
   const [bg, setBg] = useState("bg1");
   const [password, setPassword] = useState("");
-  const [errorMessage, setErrorMessage] = useState(""); // 에러 메시지 상태 추가
+  const [errorMessage, setErrorMessage] = useState("");
+
+  useEffect(() => {
+    const fetchStudyData = async () => {
+      try {
+        const response = await fetch(
+          `https://six-study-forest-server.onrender.com/api/study/${id}`
+        );
+        if (response.ok) {
+          const studyData = await response.json();
+          setNickname(studyData.nickName);
+          setStudyName(studyData.title);
+          setDescription(studyData.description);
+          setPassword(studyData.encryptedPassword);
+          setBg(studyData.background);
+        } else {
+          console.error("스터디 정보 불러오기 실패");
+        }
+      } catch (error) {
+        console.error("스터디 정보 불러오기 중 오류 발생:", error);
+      }
+    };
+
+    fetchStudyData();
+  }, [id]);
 
   const handleUpdateStudy = async () => {
     try {
@@ -58,11 +81,11 @@ const StudyEditForm = () => {
     <section className={styles.section}>
       <article className={styles.article}>
         <h2 className={styles.studyCreateTitle}>스터디 수정하기</h2>
-        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>} {/* 에러 메시지 표시 */}
+        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
         <div className={styles.studyCreateTopInputBox}>
-          <NicknameInput setNickname={setNickname} />
-          <StudyNameInput setStudyName={setStudyName} />
-          <DescriptionInput setDescription={setDescription} />
+          <NicknameInput setNickname={setNickname} nickname={nickname} />
+          <StudyNameInput setStudyName={setStudyName} studyName={studyName} />
+          <DescriptionInput setDescription={setDescription} description={description} />
         </div>
         <Background setBg={setBg} bg={bg} />
         <div className={styles.studyCreateBottomBox}>

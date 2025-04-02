@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styles from "./Input.module.css";
 
-const StudyNameInput = ({ setTitle }) => {
+const StudyNameInput = ({ setStudyName, studyName }) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleChange = (e) => {
-    setTitle(e.target.value);
+    setStudyName(e.target.value);
 
     if (!e.target.value) {
       setIsActive(true);
@@ -22,10 +22,9 @@ const StudyNameInput = ({ setTitle }) => {
         className={`${styles.input} ${isActive && styles.err}`}
         type="text"
         placeholder="스터디 이름을 입력해주세요"
+        value={studyName} // value 속성 추가
       />
-      {isActive && (
-        <p className={styles.errMessage}>*스터디 이름을 입력해주세요.</p>
-      )}
+      {isActive && <p className={styles.errMessage}>*스터디 이름을 입력해주세요.</p>}
     </label>
   );
 };
