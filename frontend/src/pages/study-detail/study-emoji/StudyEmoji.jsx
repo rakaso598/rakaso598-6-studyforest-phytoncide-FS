@@ -18,12 +18,12 @@ function StudyEmoji() {
   };
 
   const handleEmojiClick = (emojiObject) => {
-    setSelectedEmojis([...selectedEmojis, emojiObject.emoji]);
+    setSelectedEmojis([...selectedEmojis, { emoji: emojiObject.emoji, id: Date.now() + Math.random() }]);
     setShowPicker(false);
   };
 
-  const handleSelectedEmojiClick = (emojiToRemove) => {
-    setSelectedEmojis(selectedEmojis.filter(emoji => emoji !== emojiToRemove));
+  const handleSelectedEmojiClick = (emojiToRemoveId) => {
+    setSelectedEmojis(selectedEmojis.filter(item => item.id !== emojiToRemoveId));
   };
 
   const handleMoreEmojisClick = () => {
@@ -48,18 +48,31 @@ function StudyEmoji() {
 
   const getEmojiCounts = useCallback(() => {
     const emojiCounts = {};
-    selectedEmojis.forEach((emoji) => {
-      emojiCounts[emoji] = (emojiCounts[emoji] || 0) + 1;
+    selectedEmojis.forEach(item => {
+      emojiCounts[item.emoji] = (emojiCounts[item.emoji] || 0) + 1;
     });
     return emojiCounts;
   }, [selectedEmojis]);
 
   const getDisplayedEmojis = () => {
     const emojiCounts = getEmojiCounts();
-    return Object.entries(emojiCounts).slice(0, 3).map(([emoji, count]) => ({
-      emoji,
-      count,
-    }));
+    return Object.entries(emojiCounts)
+      .sort(([, countA], [, countB]) => countB - countA) // 개수 순으로 정렬
+      .slice(0, 3)
+      .map(([emoji, count]) => ({ emoji, count }));
+  };
+
+  const getRemainingEmojis = () => {
+    const allEmojis = getEmojiCounts();
+    const displayedEmojis = getDisplayedEmojis().map(item => item.emoji);
+    const remainingEmojis = {};
+
+    for (const emoji in allEmojis) {
+      if (!displayedEmojis.includes(emoji)) {
+        remainingEmojis[emoji] = allEmojis[emoji];
+      }
+    }
+    return Object.entries(remainingEmojis);
   };
 
   useEffect(() => {
@@ -92,19 +105,23 @@ function StudyEmoji() {
         console.error('Axios 오류:', error.message);
       }
     }
-  }, [getEmojiCounts, id]); // getEmojiCounts와 id에 의존성 추가
+  }, [getEmojiCounts, id]);
 
-  // selectedEmojis 상태가 변경될 때마다 sendEmojiData 함수 호출
   useEffect(() => {
-    if (selectedEmojis.length > 0) { // 초기 렌더링 시 불필요한 호출 방지
+    if (selectedEmojis.length >= 0) {
       sendEmojiData();
     }
-  }, [selectedEmojis, sendEmojiData]); // selectedEmojis와 sendEmojiData를 의존성 배열에 추가
+  }, [selectedEmojis, sendEmojiData]);
 
   return (
     <div className={styles.emojiContainer}>
       {getDisplayedEmojis().map((item, index) => (
-        <button key={index} className={`${styles.commonButtonStyle} ${styles.emoji}`} onClick={() => handleSelectedEmojiClick(item.emoji)}>
+        <button key={index} className={`${styles.commonButtonStyle} ${styles.emoji}`} onClick={() => {
+          const firstOccurrence = selectedEmojis.find(se => se.emoji === item.emoji);
+          if (firstOccurrence) {
+            handleSelectedEmojiClick(firstOccurrence.id);
+          }
+        }}>
           {item.emoji} {item.count > 0 && <span>{item.count}</span>}
         </button>
       ))}
@@ -128,10 +145,15 @@ function StudyEmoji() {
 
       {modalOpen && (
         <div style={modalStyle}>
-          <p>선택된 이모지:</p>
-          {Object.entries(getEmojiCounts()).map(([emoji, count]) => (
-            <button key={emoji} className={`${styles.commonButtonStyle} ${styles.emoji}`} onClick={() => handleSelectedEmojiClick(emoji)}>
-              {emoji} {count}
+          <p>더 많은 이모지:</p>
+          {getRemainingEmojis().map(([emoji, count]) => (
+            <button key={emoji} className={`${styles.commonButtonStyle} ${styles.emoji}`} onClick={() => {
+              const firstOccurrence = selectedEmojis.find(se => se.emoji === emoji);
+              if (firstOccurrence) {
+                handleSelectedEmojiClick(firstOccurrence.id);
+              }
+            }}>
+              {emoji} {count > 0 && <span>{count}</span>}
             </button>
           ))}
         </div>
