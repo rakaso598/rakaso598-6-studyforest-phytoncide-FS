@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./TodayFocus.module.css";
-import { getPoint, patchPoint } from "@api/study/studyPoint.api.js";
+import { getPoint, patchPoint } from "@api/focus/focusPoint.api.js";
 import TodayFocusPoint from "./TodayFocusPoint.jsx";
 import TodayFocusToast from "./TodayFocusToast";
 import TodayFocusTimer from "./TodayFocusTimer.jsx";

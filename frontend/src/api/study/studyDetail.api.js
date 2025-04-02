@@ -1,8 +1,8 @@
 import axiosInstance from "../axiosInstance";
 
-export const getStudyDetail = async (id) => {
+export const getStudyDetail = async (studyId) => {
   try {
-    const res = await axiosInstance.get(`/api/study/${id}`);
+    const res = await axiosInstance.get(`/studies/${studyId}`);
 
     return res.data;
   } catch (e) {
