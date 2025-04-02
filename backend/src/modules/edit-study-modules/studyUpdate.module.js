@@ -1,36 +1,38 @@
 import express from "express";
 import prisma from "../../db/prisma/client.prisma.js";
+import bcrypt from "bcrypt";
 
 const studyUpdate = express.Router();
+const SALT_ROUNDS = 10;
 
-studyUpdate.put("/:id/update", async (req, res, next) => {
+studyUpdate.put("/:id/update", async (req, res) => {
   const { id } = req.params;
-  const data = req.body;
+  const { nickName, title, description, encryptedPassword, background } =
+    req.body;
+
+  if (
+    typeof nickName !== "string" ||
+    typeof title !== "string" ||
+    typeof description !== "string" ||
+    typeof encryptedPassword !== "string" ||
+    typeof background !== "string"
+  ) {
+    return res
+      .status(400)
+      .json({ message: "요청 데이터 형식이 올바르지 않습니다." });
+  }
 
   try {
-    console.log("스터디업데이트호출됨");
-    // 유효성 검사
-    if (
-      !data.nickName ||
-      !data.title ||
-      !data.description ||
-      !data.encryptedPassword ||
-      !data.background
-    ) {
-      return res
-        .status(400)
-        .json({ message: "요청 데이터가 올바르지 않습니다." });
-    }
+    const hashedPassword = await bcrypt.hash(encryptedPassword, SALT_ROUNDS);
 
-    // 스터디 업데이트
-    const updatedStudy = await prisma.study.update({
+    await prisma.study.update({
       where: { id: parseInt(id) },
       data: {
-        nickName: data.nickName,
-        title: data.title,
-        description: data.description,
-        encryptedPassword: data.encryptedPassword,
-        background: data.background,
+        nickName,
+        title,
+        description,
+        encryptedPassword: hashedPassword,
+        background,
       },
     });
 
@@ -38,8 +40,24 @@ studyUpdate.put("/:id/update", async (req, res, next) => {
       success: true,
       message: "스터디 정보가 성공적으로 업데이트되었습니다.",
     });
-  } catch (err) {
-    next(err);
+  } catch (error) {
+    console.error("스터디 정보 업데이트 중 오류 발생:", error);
+
+    if (error instanceof bcrypt.BcryptError) {
+      return res
+        .status(500)
+        .json({ message: "비밀번호 암호화 중 오류가 발생했습니다." });
+    }
+
+    if (error instanceof prisma.PrismaClientKnownRequestError) {
+      return res.status(500).json({
+        message: `데이터베이스 오류가 발생했습니다: ${error.message}`,
+      });
+    }
+
+    return res.status(500).json({
+      message: "스터디 정보 업데이트 중 예상치 못한 오류가 발생했습니다.",
+    });
   }
 });
 
