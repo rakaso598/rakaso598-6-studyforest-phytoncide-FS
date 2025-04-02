@@ -1,6 +1,6 @@
-import BrowseSection from './BrowseSection';
-import styles from './Home.module.css';
-import RecentlySection from './RecentlySection';
+import BrowseSection from "./BrowseSection";
+import styles from "./Home.module.css";
+import RecentlySection from "./RecentlySection";
 
 const Home = () => {
   return (

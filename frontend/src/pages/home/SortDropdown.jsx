@@ -1,7 +1,7 @@
-import { RiArrowDownSFill, RiArrowUpSFill } from 'react-icons/ri';
-import styles from './SortDropdown.module.css';
-import { useState } from 'react';
-import { SORT_OPTIONS } from '@api/home/getStudy.api';
+import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
+import styles from "./SortDropdown.module.css";
+import { useState } from "react";
+import { SORT_OPTIONS } from "@api/home/getStudy.api";
 
 const SortDropdown = ({ sortType, clickSortOption }) => {
   const options = Object.keys(SORT_OPTIONS);

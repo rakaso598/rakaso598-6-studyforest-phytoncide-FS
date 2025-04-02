@@ -1,14 +1,14 @@
-import styles from "./TodayFocus.module.css";
+import styles from "./TodayFocusToast.module.css";
 
 const TodayFocusToast = ({ pause, complete, point }) => {
   return (
     <div className={styles.toastContainer}>
-      {pause && (
-        <p className={styles.toastWarning}>🚨 집중이 중단되었습니다.</p>
-      )}
-      {complete && (
-        <p className={styles.toastPoint}>🎉 {point}포인트를 획득했습니다!</p>
-      )}
+      <p className={`${styles.toastWarning} ${pause && styles.show}`}>
+        🚨 집중이 중단되었습니다.
+      </p>
+      <p className={`${styles.toastPoint} ${complete && styles.show}`}>
+        🎉 {point}포인트를 획득했습니다!
+      </p>
     </div>
   );
 };

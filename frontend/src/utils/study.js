@@ -1,4 +1,4 @@
-import { getStudies } from '@api/home/getStudy.api';
+import { getStudies } from "@api/home/getStudy.api";
 
 const loadMoreStudies = async (currentStudies, setStudies, setIsLoading) => {
   try {
@@ -9,14 +9,14 @@ const loadMoreStudies = async (currentStudies, setStudies, setIsLoading) => {
     });
     setStudies([...currentStudies, ...data]);
   } catch (error) {
-    console.error('Failed to load more studies:', error);
+    console.error("Failed to load more studies:", error);
   } finally {
     setIsLoading(false);
   }
 };
 
 const saveAndNavigateToStudy = (study, navigate) => {
-  const storedData = localStorage.getItem('studyForest');
+  const storedData = localStorage.getItem("studyForest");
   const parsedData = storedData ? JSON.parse(storedData) : [];
 
   const isDuplicate = parsedData.some((item) => item.id === study.id);
@@ -25,7 +25,7 @@ const saveAndNavigateToStudy = (study, navigate) => {
     const newData = [study, ...parsedData];
     // 우선 최대 10개만
     const limitedData = newData.slice(0, 10);
-    localStorage.setItem('studyForest', JSON.stringify(limitedData));
+    localStorage.setItem("studyForest", JSON.stringify(limitedData));
   }
 
   navigate(`/study/${study.id}`);

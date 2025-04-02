@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
-  height: 942px;
+  height: 712px;
   margin: 0px 15px 0px 15px;
   padding-top: 20px;
 }
@@ -14,76 +14,6 @@
   max-width: 1248px;
   padding: 16px;
   border-radius: var(--radius-md);
-}
-
-.navBar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 16px;
-}
-
-.navTxt {
-  font-weight: 800;
-  font-size: 24px;
-  color: var(--text-black);
-}
-
-.navBtnContainer {
-  display: flex;
-  gap: 8px;
-  row-gap: 16px;
-}
-
-.navBtn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  color: var(--text-gray);
-  border-radius: 15px;
-  border: 1px, solid, var(--color-gray-200);
-  padding: 7px 6px 7px 10px;
-  font-weight: 500;
-  font-size: 16px;
-  gap: 2px;
-}
-
-.pointContainer {
-  display: flex;
-  flex-direction: column;
-  row-gap: 8px;
-  margin: 16px 0 24px 0;
-}
-
-.pointTxt {
-  font-weight: 400;
-  font-size: 18px;
-  color: var(--text-gray);
-}
-
-.point {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  border: 1px, solid, var(--color-gray-200);
-  border-radius: 50px;
-  padding: 8px 12px;
-  gap: 4px;
-  height: 35px;
-  margin-right: auto;
-}
-
-.point img {
-  width: 19px;
-  height: 19px;
-}
-
-.pointTotalTxt {
-  font-weight: 500;
-  font-size: 16px;
-  color: var(--text-black);
 }
 
 .focusContainer {
@@ -110,314 +40,20 @@
   font-size: 24px;
 }
 
-.focusSelectTimeContainer {
-  position: absolute;
-  top: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px, solid, var(--color-gray-200);
-  border-radius: 50px;
-  padding: 5px 8px;
-  gap: 4px;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s, visibility 0s 0.3s;
-}
-
-.focusSelectTimeContainer p {
-  font-weight: 500;
-  font-size: 16px;
-}
-
-.focusSelectTimeContainer.show {
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 0.5s, visibility 0s;
-}
-
-.focusTimerContainer {
-  display: flex;
-  justify-content: center;
-  width: 280px;
-  color: var(--text-black);
-  font-weight: 800;
-  font-size: 80px;
-}
-
-.focusMinTimer {
-  background-color: var(--bg-white);
-  text-align: end;
-  color: var(--text-black);
-  font-weight: 800;
-  font-size: 80px;
-  width: 100%;
-  border: none;
-  outline: none;
-  padding: 0;
-}
-
-.focusSecTimer {
-  background-color: var(--bg-white);
-  text-align: start;
-  color: var(--text-black);
-  font-weight: 800;
-  font-size: 80px;
-  width: 100%;
-  border: none;
-  outline: none;
-  padding: 0;
-}
-
-.countDown {
-  color: var(--error-light);
-}
-
-.countDown input {
-  color: var(--error-light);
-}
-
-.timeover {
-  color: var(--text-gray);
-}
-
-.timeover input {
-  color: var(--text-gray);
-}
-
-.focusBtnContainer {
-  display: flex;
-  gap: 8px;
-  justify-content: center;
-  align-items: center;
-}
-
-.focusPauseBtn {
-  background-color: var(--text-green);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 100%;
-  padding: 0;
-  width: 48px;
-  height: 48px;
-  cursor: pointer;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 400ms, visibility 0s 400ms;
-}
-
-.focusPauseBtn img {
-  width: 26.4px;
-  height: 26.4px;
-}
-
-.focusPauseBtn.show {
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 0.5s, visibility 0s;
-}
-
-.focusStartBtn {
-  color: var(--text-white);
-  background-color: var(--bg-green);
-  font-weight: 800;
-  font-size: 18px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 50px;
-  padding: 10px 28px 10px 20px;
-  gap: 8px;
-  cursor: pointer;
-  height: 45px;
-  margin-top: 1px;
-  margin-bottom: 2px;
-}
-
-.focusStartBtn:hover {
-  background-color: var(--text-green);
-  transition: all, 500ms;
-}
-
-.focusStartBtn.disable {
-  background-color: var(--text-gray);
-  cursor: default;
-}
-
-.focusStartBtn p {
-  width: 60px;
-}
-
-.focusStartBtn img {
-  width: 24px;
-  height: 24px;
-}
-
-.focusResetBtn {
-  background-color: var(--bg-green);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  border-radius: 100%;
-  padding: 0;
-  width: 48px;
-  height: 48px;
-  cursor: pointer;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 400ms, visibility 0s 400ms;
-}
-
-.focusResetBtn img {
-  width: 26.4px;
-  height: 26.4px;
-}
-
-.focusResetBtn.show {
-  visibility: visible;
-  opacity: 1;
-  transition: opacity 0.5s, visibility 0s;
-}
-
-.toastContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.toastWarning {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 202px;
-  height: 45px;
-  border-radius: 12px;
-  background-color: var(--bg-pink);
-  color: var(--error-light);
-  font-weight: 500;
-  font-size: 14px;
-  margin-bottom: 40px;
-}
-
-.toastPoint {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 202px;
-  height: 45px;
-  border-radius: 12px;
-  background-color: var(--bg-green-light);
-  color: var(--text-green);
-  font-weight: 500;
-  font-size: 14px;
-  margin-bottom: 40px;
-}
-
 @media (min-width: 744px) {
   .container {
     margin: 0px 24px 0px 24px;
     padding-top: 16px;
+    height: 942px;
   }
 
   .box {
     padding: 24px;
   }
 
-  .navTxt {
-    font-size: 32px;
-    margin-bottom: 0;
-  }
-
-  .navBtnContainer {
-    gap: 16px;
-  }
-
-  .navBtn {
-    padding: 11px 16px 11px 24px;
-  }
-
-  .pointContainer {
-    margin: 16px 0 40px 0;
-  }
-
   .focusContainer {
     padding: 40px 24px;
     height: 510px;
-  }
-
-  .focusSelectTimeContainer {
-    top: 53px;
-  }
-
-  .focusTimerContainer {
-    font-size: 120px;
-    width: 430px;
-  }
-
-  .focusMinTimer {
-    font-size: 120px;
-  }
-
-  .focusSecTimer {
-    font-size: 120px;
-  }
-
-  .focusBtnContainer {
-    gap: 24px;
-  }
-
-  .focusPauseBtn {
-    width: 64px;
-    height: 64px;
-  }
-
-  .focusPauseBtn img {
-    width: 35.2px;
-    height: 35.2px;
-  }
-
-  .focusStartBtn {
-    font-size: 28px;
-    padding: 8px 105px 8px 78px;
-    gap: 16px;
-    height: 60px;
-    margin-top: 0px;
-    margin-bottom: 4px;
-  }
-
-  .focusStartBtn p {
-    width: 90px;
-  }
-
-  .focusStartBtn img {
-    width: 44px;
-    height: 44px;
-  }
-
-  .focusResetBtn {
-    width: 64px;
-    height: 64px;
-  }
-
-  .focusResetBtn img {
-    width: 35.2px;
-    height: 35.2px;
-  }
-
-  .toastWarning {
-    width: 223px;
-    height: 47px;
-    font-size: 16px;
-  }
-
-  .toastPoint {
-    width: 223px;
-    height: 47px;
-    font-size: 16px;
   }
 }
 
@@ -434,24 +70,7 @@
     padding: 40px;
   }
 
-  .pointContainer {
-    margin: 16px 0 20px 0;
-  }
-
   .focusContainer {
     height: 546px;
-  }
-
-  .focusTimerContainer {
-    font-size: 150px;
-    width: 517px;
-  }
-
-  .focusMinTimer {
-    font-size: 150px;
-  }
-
-  .focusSecTimer {
-    font-size: 150px;
   }
 }

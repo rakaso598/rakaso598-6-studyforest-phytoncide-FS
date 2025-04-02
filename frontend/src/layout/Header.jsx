@@ -8,7 +8,7 @@ const Header = () => {
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === "/" || location.pathname === "/study-create") {
+    if (location.pathname === "/" || location.pathname === "/study/create") {
       setIsOpen(true);
     } else {
       setIsOpen(false);
@@ -42,7 +42,7 @@ const Header = () => {
         <div className={styles.nav}>
           <ul className={styles.nav__list}>
             <li className={styles.nav__item}>
-              <Link to="/study-detail" className={styles.nav__link}>
+              <Link to="/study/10" className={styles.nav__link}>
                 스터디 상세
               </Link>
             </li>
@@ -54,7 +54,7 @@ const Header = () => {
             </li>
 
             <li className={styles.nav__item}>
-              <Link to="/today-focus" className={styles.nav__link}>
+              <Link to="/study/10/focus" className={styles.nav__link}>
                 오늘의 집중
               </Link>
             </li>

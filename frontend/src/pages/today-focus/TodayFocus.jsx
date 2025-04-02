@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./TodayFocus.module.css";
 import { getPoint, patchPoint } from "@api/todayFocus/todayFocus.api.js";
-import TodayFocusNavbar from "./TodayFocusNavbar.jsx";
 import TodayFocusPoint from "./TodayFocusPoint.jsx";
 import TodayFocusToast from "./TodayFocusToast";
 import TodayFocusTimer from "./TodayFocusTimer.jsx";
+import StudyNavbar from "@components/study-navbar/StudyNavbar.jsx";
 
 const TodayFocus = () => {
   const { id } = useParams();
@@ -18,9 +18,8 @@ const TodayFocus = () => {
   // 포인트 불러오기 API
   const pointLoad = async (id) => {
     try {
-      const data = await getPoint(id);
-
-      setTotalPoint(data.point);
+      const { point } = await getPoint(id);
+      return point;
     } catch (e) {
       console.log(e.response.data);
     }
@@ -37,7 +36,13 @@ const TodayFocus = () => {
 
   // 처음 렌더링 때 포인트 불러오기
   useEffect(() => {
-    pointLoad(id);
+    const getPoint = async () => {
+      const point = await pointLoad(id);
+
+      setTotalPoint(point);
+    };
+
+    getPoint();
   }, []);
 
   // 집중 성공 시 DB에 포인트 저장
@@ -89,7 +94,11 @@ const TodayFocus = () => {
   return (
     <div className={styles.container}>
       <div className={styles.box}>
-        <TodayFocusNavbar id={id} />
+        <StudyNavbar
+          id={id}
+          link={`/study/${id}/habit`}
+          pageName={"오늘의 습관"}
+        />
         <TodayFocusPoint totalPoint={totalPoint} />
         <div className={styles.focusContainer}>
           <div className={styles.focus}>
