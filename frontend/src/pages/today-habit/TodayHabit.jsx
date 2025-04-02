@@ -3,31 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import styles from "@today-habit/TodayHabit.module.css";
 import Habits from "@today-habit/Habits";
-import dayjs from "dayjs";
 import StudyNavbar from "@components/study-navbar/StudyNavbar";
-import { getHabits } from "../../api/today-habit/habit.api";
+import CurrentTime from "@today-habit/CurrentTime";
 
 const TodayHabit = () => {
-  const [currentTime, setCurrentTime] = useState(
-    dayjs()
-      .format("YYYY-MM-DD A HH:mm")
-      .replace("AM", "오전")
-      .replace("PM", "오후")
-  );
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTime(
-        dayjs()
-          .format("YYYY-MM-DD A HH:mm")
-          .replace("AM", "오전")
-          .replace("PM", "오후"),
-        1000
-      );
-      return () => clearInterval(interval);
-    });
-  });
-
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 관리
 
   const openModal = () => {
@@ -38,8 +17,6 @@ const TodayHabit = () => {
     setIsModalOpen(false); // 모달 닫기
   };
   const { id } = useParams();
-  console.log(id);
-  // const study = await getstudy(id)
 
   return (
     <div className={styles.container}>
@@ -50,23 +27,9 @@ const TodayHabit = () => {
             link={`/study/${id}/focus`}
             pageName={"오늘의 집중"}
           />
-          <div className={styles.timeContainer}>
-            <p className={styles.timeTitle}>현재 시간</p>
-            <div className={styles.timeNow}>{currentTime}</div>
-          </div>
+          <CurrentTime />
         </div>
-        <div className={styles.habitContainer}>
-          <div className={styles.habitTopContainer}>
-            <p className={styles.habitTitle}>오늘의 습관</p>
-            <button
-              className={styles.listText}
-              onClick={openModal} // 목록 수정 클릭 시 모달 열기
-            >
-              목록 수정
-            </button>
-          </div>
-          <Habits studyId={id} />
-        </div>
+        <Habits studyId={id} refresh={isModalOpen} openModal={openModal} />
       </div>
 
       {/* 모달 열림 상태가 true일 때 TodayHabitCreate 모달 표시 */}

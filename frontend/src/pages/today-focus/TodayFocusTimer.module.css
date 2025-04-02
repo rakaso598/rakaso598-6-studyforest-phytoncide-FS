@@ -57,6 +57,10 @@
   padding: 0;
 }
 
+.focusTimerContainer input::selection {
+  background-color: var(--color-gray-100);
+}
+
 .countDown {
   color: var(--error-light);
 }

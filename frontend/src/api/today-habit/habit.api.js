@@ -12,7 +12,7 @@ const handleError = (e) => {
 
 export const getHabits = async (studyId) => {
   try {
-    const res = await axiosInstance.get(`${HABIT_URL}/gethabit/${studyId}`);
+    const res = await axiosInstance.get(`${HABIT_URL}/${studyId}`);
     return res.data;
   } catch (e) {
     handleError(e);
@@ -21,10 +21,7 @@ export const getHabits = async (studyId) => {
 
 export const patchHabits = async (habitId, data) => {
   try {
-    const res = await axiosInstance.patch(
-      `${HABIT_URL}/patchhabit/${habitId}`,
-      data
-    );
+    const res = await axiosInstance.patch(`${HABIT_URL}/${habitId}`, data);
     return res.data;
   } catch (e) {
     handleError(e);
@@ -33,10 +30,7 @@ export const patchHabits = async (habitId, data) => {
 
 export const postHabit = async (studyId, data) => {
   try {
-    const res = await axiosInstance.post(
-      `${HABIT_URL}/posthabit/${studyId}`,
-      data
-    );
+    const res = await axiosInstance.post(`${HABIT_URL}/${studyId}`, data);
     return res.data;
   } catch (e) {
     handleError(e);
@@ -44,9 +38,7 @@ export const postHabit = async (studyId, data) => {
 };
 export const deleteHabit = async (habitId) => {
   try {
-    const res = await axiosInstance.delete(
-      `${HABIT_URL}/deletehabit/${habitId}`
-    );
+    const res = await axiosInstance.delete(`${HABIT_URL}/${habitId}`);
     return res.data;
   } catch (e) {
     handleError(e);
