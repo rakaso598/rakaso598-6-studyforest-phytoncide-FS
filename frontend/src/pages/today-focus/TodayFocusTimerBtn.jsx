@@ -1,4 +1,4 @@
-import styles from "./TodayFocus.module.css";
+import styles from "./TodayFocusTimerBtn.module.css";
 
 const TodayFocusTimerBtn = ({
   timeover,
