@@ -7,6 +7,7 @@ import PasswordInput from "../../../components/update-study-input/PasswordInput"
 import PasswordCheck from "../../../components/update-study-input/PasswordCheck";
 import Background from "../../../components/update-study-input/Background";
 import { useParams, useNavigate } from "react-router-dom";
+import axiosInstance from "../../../api/axiosInstance";
 
 const StudyEditForm = () => {
   const { id } = useParams();
@@ -22,15 +23,14 @@ const StudyEditForm = () => {
   useEffect(() => {
     const fetchStudyData = async () => {
       try {
-        const response = await fetch(
+        const response = await axiosInstance.get(
           `https://six-study-forest-server.onrender.com/api/study/${id}`
         );
-        if (response.ok) {
-          const studyData = await response.json();
+        if (response.status === 200) {
+          const studyData = response.data;
           setNickname(studyData.nickName);
           setStudyName(studyData.title);
           setDescription(studyData.description);
-          // setPassword(studyData.encryptedPassword);
           setBg(studyData.background);
         } else {
           console.error("스터디 정보 불러오기 실패");
@@ -59,32 +59,25 @@ const StudyEditForm = () => {
       return;
     }
     try {
-      const response = await fetch(
+      const response = await axiosInstance.put(
         `https://six-study-forest-server.onrender.com/api/study/${id}/update`,
         {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            nickName: nickname,
-            title: studyName,
-            description: description,
-            encryptedPassword: password,
-            background: bg,
-          }),
+          nickName: nickname,
+          title: studyName,
+          description: description,
+          encryptedPassword: password,
+          background: bg,
         }
       );
 
-      if (response.ok) {
+      if (response.status === 200) {
         alert("스터디 정보가 성공적으로 수정되었습니다.");
         navigate(`/study/${id}`);
       } else {
-        const errorData = await response.json();
         setErrorMessage(
-          `스터디 정보 수정 실패: ${errorData && errorData.message}`
+          `스터디 정보 수정 실패: ${response.data && response.data.message}`
         );
-        console.error("스터디 정보 수정 실패:", errorData);
+        console.error("스터디 정보 수정 실패:", response.data);
       }
     } catch (error) {
       console.error("스터디 정보 수정 중 오류 발생:", error);
