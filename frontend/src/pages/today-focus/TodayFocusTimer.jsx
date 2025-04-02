@@ -53,6 +53,10 @@ const TodayFocusTimer = ({
     setSecond(tempTime.sec);
   };
 
+  const handleTimerClick = (e) => {
+    e.target.select();
+  };
+
   // 타이머 시간 설정
   const handleTimerInput = (e) => {
     const id = e.target.id;
@@ -192,6 +196,7 @@ const TodayFocusTimer = ({
         {timeover && <p>-</p>}
         <input
           disabled={disabled}
+          onClick={handleTimerClick}
           onChange={handleTimerInput}
           onBlur={handleTimerDefaultValue}
           value={minute}
@@ -201,6 +206,7 @@ const TodayFocusTimer = ({
         <p>:</p>
         <input
           disabled={disabled}
+          onClick={handleTimerClick}
           onChange={handleTimerInput}
           onBlur={handleTimerDefaultValue}
           value={second}
