@@ -12,9 +12,7 @@ const handleError = (e) => {
 
 export const getHabitDone = async (habitId, day) => {
   try {
-    const res = await axiosInstance.get(
-      `${HABITDONE_URL}/gethabitdone/${habitId}/${day}`
-    );
+    const res = await axiosInstance.get(`${HABITDONE_URL}/${habitId}/${day}`);
     return res.data;
   } catch (e) {
     handleError(e);
@@ -24,7 +22,7 @@ export const getHabitDone = async (habitId, day) => {
 export const patchHabitDone = async (habitDoneId, data) => {
   try {
     const res = await axiosInstance.patch(
-      `${HABITDONE_URL}/patchhabitdone/${habitDoneId}`,
+      `${HABITDONE_URL}/${habitDoneId}`,
       data
     );
     return res.data;
@@ -35,10 +33,7 @@ export const patchHabitDone = async (habitDoneId, data) => {
 
 export const postHabitDone = async (habitId, data) => {
   try {
-    const res = await axiosInstance.post(
-      `${HABITDONE_URL}/posthabitdone/${habitId}`,
-      data
-    );
+    const res = await axiosInstance.post(`${HABITDONE_URL}/${habitId}`, data);
     return res.data;
   } catch (e) {
     handleError(e);
