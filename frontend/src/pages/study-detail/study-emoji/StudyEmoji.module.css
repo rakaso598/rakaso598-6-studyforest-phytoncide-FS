@@ -1,16 +1,15 @@
 .emojiContainer {
-  display: flex;
-  align-items: center;
   position: relative;
   left: 26px;
+  width: 100%; /* 컨테이너 너비 고정 */
+  white-space: nowrap; /* 버튼들이 한 줄에 표시되도록 설정 */
 }
 
 .commonButtonStyle,
 .moreEmojiButtonStyle,
 .addEmojiButtonStyle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block; /* inline-block으로 변경 */
+  vertical-align: middle; /* 세로 정렬 설정 */
   gap: 5px;
   border-radius: 50px;
   width: 67px;
@@ -19,7 +18,7 @@
   font-weight: 500;
   cursor: pointer;
   border: none;
-  margin-right: 5px; /* 오른쪽 간격 추가 */
+  margin-right: 5px;
 }
 
 /* 마지막 요소의 오른쪽 간격 제거 */
