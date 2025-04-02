@@ -1,55 +1,58 @@
-.commonButtonStyle {
+.emojiContainer {
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 5px;
-  border: none;
-  border-radius: 50px;
-  width: 67px;
-  height: 30px;
-  background-color:rgba(0, 0, 0, 0.5);
+  position: relative;
+  left: 26px;
 }
 
-.moreEmojiButtonStyle {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  border: none;
-  border-radius: 50px;
-  width: 67px;
-  height: 30px;
-  background-color:rgba(0, 0, 0, 0.3);
-}
-
+.commonButtonStyle,
+.moreEmojiButtonStyle,
 .addEmojiButtonStyle {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 5px;
-  border: 1px solid #0000001a;
   border-radius: 50px;
   width: 67px;
   height: 30px;
-  /* background-color:rgba(0, 0, 0, 0.3); */
-}
-
-.emojiContainer {
-  left: 26px;
-}
-
-button {
-  background: none;
-  border: none;
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  outline: none;
-  cursor: pointer;
-  text-decoration: none;
-  font-weight: 500;
   font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  margin-right: 5px; /* 오른쪽 간격 추가 */
+}
+
+/* 마지막 요소의 오른쪽 간격 제거 */
+.commonButtonStyle:last-child,
+.moreEmojiButtonStyle:last-child,
+.addEmojiButtonStyle:last-child {
+  margin-right: 0;
+}
+
+.commonButtonStyle {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.moreEmojiButtonStyle {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.addEmojiButtonStyle {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.emoji {
+  width: 56px;
+  height: 31px;
+}
+
+.addBtn {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.addBtn p {
+  color: var(--color-black);
+  white-space: nowrap;
 }
 
 .header {
@@ -68,10 +71,7 @@ button {
   gap: 8px;
 }
 
-.shareLink {
-  color: var(--color-green-300);
-}
-
+.shareLink,
 .editLink {
   color: var(--color-green-300);
 }
@@ -80,7 +80,8 @@ button {
   color: var(--color-gray-300);
 }
 
-.divider {
+.divider,
+.divider:nth-of-type(2) {
   color: var(--color-green-300);
 }
 
@@ -99,31 +100,10 @@ button {
   height: 24px;
 }
 
-.emoji {
-  width: 56px;
-  height: 31px;
-  /* border: none; */
-  border-radius: 50px;
-}
-
-.addBtn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  border: 1px solid #0000001a;
-  border-radius: 50px;
-  width: 67px;
-  height: 30px;
-}
-
-.addBtn p {
-  color: var(--color-black);
-  white-space: nowrap;
-}
-
 @media screen and (min-width: 744px) {
-  button {
+  .commonButtonStyle,
+  .moreEmojiButtonStyle,
+  .addEmojiButtonStyle {
     font-size: 16px;
   }
 

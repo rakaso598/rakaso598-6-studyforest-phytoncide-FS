@@ -56,9 +56,9 @@ function StudyEmoji() {
 
   const getDisplayedEmojis = () => {
     const emojiCounts = getEmojiCounts();
-    return selectedEmojis.slice(0, 3).map(emoji => ({
+    return Object.entries(emojiCounts).slice(0, 3).map(([emoji, count]) => ({
       emoji,
-      count: emojiCounts[emoji],
+      count,
     }));
   };
 
@@ -69,22 +69,18 @@ function StudyEmoji() {
   }, [selectedEmojis, modalOpen]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }} className={styles.emojiContainer}>
+    <div className={styles.emojiContainer}>
       {getDisplayedEmojis().map((item, index) => (
-        <button key={index} className={`${styles.emoji} ${styles.commonButtonStyle}`} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(item.emoji))}>
+        <button key={index} className={`${styles.commonButtonStyle} ${styles.emoji}`} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(item.emoji))}>
           {item.emoji} {item.count > 0 && <span>({item.count})</span>}
         </button>
       ))}
 
-      {selectedEmojis.length < 3 && Array(3 - selectedEmojis.length).fill(null).map((_, index) => (
-        <button key={`empty-${index}`} className={`${styles.emoji} ${styles.commonButtonStyle}`}>
-          {/* 빈칸 */}
+      {Object.keys(getEmojiCounts()).length > 3 && (
+        <button ref={moreEmojisButtonRef} className={`${styles.moreEmojiButtonStyle} ${styles.emoji}`} onClick={handleMoreEmojisClick}>
+          +{Object.keys(getEmojiCounts()).length - 3}
         </button>
-      ))}
-
-      <button ref={moreEmojisButtonRef} className={`${styles.emoji} ${styles.moreEmojiButtonStyle}`} onClick={handleMoreEmojisClick}>
-        +{selectedEmojis.length > 3 ? selectedEmojis.length - 3 : 0}
-      </button>
+      )}
 
       <button className={`${styles.addBtn} ${styles.addEmojiButtonStyle}`} onClick={handleAddButtonClick} ref={addButtonRef}>
         <img src={smileIcon} alt="smile" />
@@ -101,7 +97,7 @@ function StudyEmoji() {
         <div style={modalStyle}>
           <p>선택된 이모지:</p>
           {Object.entries(getEmojiCounts()).map(([emoji, count]) => (
-            <button key={emoji} className={styles.emoji} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(emoji))}>
+            <button key={emoji} className={`${styles.commonButtonStyle} ${styles.emoji}`} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(emoji))}>
               {emoji} ({count})
             </button>
           ))}
