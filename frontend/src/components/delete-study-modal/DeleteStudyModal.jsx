@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./DeleteStudyModal.module.css";
 import { deleteStudy } from "@api/study/deleteStudy.api.js";
@@ -26,8 +26,15 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
       const deleteResponse = await deleteStudy(id, password);
 
       if (deleteResponse && deleteResponse.success) {
-        console.log("스터디가 성공적으로 삭제되었습니다");
-        alert("스터디가 성공적으로 삭제되었습니다");
+        const storedData = localStorage.getItem("studyForest");
+        if (storedData) {
+          const parsedData = JSON.parse(storedData);
+          const updatedData = parsedData.filter(
+            (study) => study.id != parseInt(id)
+          );
+          localStorage.setItem("studyForest", JSON.stringify(updatedData));
+        }
+
         navigate("/"); // 삭제 성공 시 공부의 숲 홈으로 이동
       } else {
         setErrorMessage(
@@ -45,6 +52,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
+          {/* 여기에 studyDetail.api.js에 getStudyDetail 불러서현재 study.nickName 의 study.title 라고 구현해야함*/}
           <p className={styles.modalTitle}>스터디 삭제</p>
           <button
             type="button"

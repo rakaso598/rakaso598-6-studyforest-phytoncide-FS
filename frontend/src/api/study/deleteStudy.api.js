@@ -2,7 +2,6 @@ import axiosInstance from "@api/axiosInstance";
 
 export const deleteStudy = async (id, password) => {
   try {
-    console.log("Study api client function called");
     const res = await axiosInstance.delete(`api/study/${id}/delete`, {
       data: { password },
     });
