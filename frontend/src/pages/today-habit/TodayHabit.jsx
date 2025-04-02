@@ -5,7 +5,6 @@ import styles from "@today-habit/TodayHabit.module.css";
 import Habits from "@today-habit/Habits";
 import dayjs from "dayjs";
 import StudyNavbar from "@components/study-navbar/StudyNavbar";
-import { getHabits } from "../../api/today-habit/habit.api";
 
 const TodayHabit = () => {
   const [currentTime, setCurrentTime] = useState(
@@ -64,7 +63,7 @@ const TodayHabit = () => {
               목록 수정
             </button>
           </div>
-          <Habits studyId={id} />
+          <Habits studyId={id} refresh={isModalOpen} />
         </div>
       </div>
 

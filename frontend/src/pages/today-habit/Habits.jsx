@@ -4,13 +4,13 @@ import { getHabitDone, patchHabitDone } from "@api/today-habit/habitDone.api";
 import { getHabits } from "@api/today-habit/habit.api";
 import { postHabitDone } from "../../api/today-habit/habitDone.api";
 
-function Habits({ studyId }) {
+function Habits({ studyId, refresh }) {
   const [habits, setHabits] = useState([]);
   const [habitCheck, setHabitCheck] = useState([]);
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
   });
-  const HandleClick = async (habitId) => {
+  const handleClick = async (habitId) => {
     try {
       const habitDone = await getHabitDone(habitId, today);
       if (habitDone) {
@@ -27,7 +27,6 @@ function Habits({ studyId }) {
       }
     } catch (e) {
       console.error(e);
-      setHabits(habits);
     }
   };
 
@@ -40,7 +39,6 @@ function Habits({ studyId }) {
         const data = { isDone, dayOfWeek: today };
         if (habitDone.length === 0) {
           await postHabitDone(habit.id, data);
-          console.log(checked);
         }
 
         if (habitDone.length >= 1) {
@@ -56,7 +54,7 @@ function Habits({ studyId }) {
 
   useEffect(() => {
     handleLoad();
-  }, []);
+  }, [refresh]);
 
   return (
     <div className={styles.habitList}>
@@ -68,7 +66,7 @@ function Habits({ studyId }) {
         habits.map((habit) => (
           <button
             key={habit.id}
-            onClick={() => HandleClick(habit.id)}
+            onClick={() => handleClick(habit.id)}
             className={
               habitCheck.find((h) => h.habitId === habit.id)?.isDone
                 ? styles.habitChecked
