@@ -1,5 +1,6 @@
 import express from "express";
 import prisma from "../../db/prisma/client.prisma.js";
+import bcrypt from "bcrypt"; // bcrypt 라이브러리 import
 
 const studyUpdate = express.Router();
 
@@ -22,6 +23,9 @@ studyUpdate.put("/:id/update", async (req, res, next) => {
         .json({ message: "요청 데이터가 올바르지 않습니다." });
     }
 
+    // 비밀번호 암호화
+    const hashedPassword = await bcrypt.hash(data.encryptedPassword, 10);
+
     // 스터디 업데이트
     const updatedStudy = await prisma.study.update({
       where: { id: parseInt(id) },
@@ -29,7 +33,7 @@ studyUpdate.put("/:id/update", async (req, res, next) => {
         nickName: data.nickName,
         title: data.title,
         description: data.description,
-        encryptedPassword: data.encryptedPassword,
+        encryptedPassword: hashedPassword, // 암호화된 비밀번호 저장
         background: data.background,
       },
     });
