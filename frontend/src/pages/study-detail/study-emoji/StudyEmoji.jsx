@@ -78,7 +78,7 @@ function StudyEmoji() {
 
       {Object.keys(getEmojiCounts()).length > 3 && (
         <button ref={moreEmojisButtonRef} className={`${styles.moreEmojiButtonStyle} ${styles.emoji}`} onClick={handleMoreEmojisClick}>
-          + {Object.keys(getEmojiCounts()).length - 3}
+          + {Object.keys(getEmojiCounts()).length - 3}..
         </button>
       )}
 
