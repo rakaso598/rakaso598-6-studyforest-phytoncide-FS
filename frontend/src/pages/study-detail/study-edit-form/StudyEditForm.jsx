@@ -30,7 +30,7 @@ const StudyEditForm = () => {
           setNickname(studyData.nickName);
           setStudyName(studyData.title);
           setDescription(studyData.description);
-          setPassword(studyData.encryptedPassword);
+          // setPassword(studyData.encryptedPassword);
           setBg(studyData.background);
         } else {
           console.error("스터디 정보 불러오기 실패");
@@ -108,9 +108,8 @@ const StudyEditForm = () => {
           <PasswordCheck password={password} onPasswordCheck={handlePasswordCheck} />
         </div>
         <button
-          className={`${styles.createBtn} ${
-            !isPasswordMatch ? styles.disabledBtn : ""
-          }`}
+          className={`${styles.createBtn} ${!isPasswordMatch ? styles.disabledBtn : ""
+            }`}
           onClick={handleUpdateStudy}
           disabled={!isPasswordMatch}
         >
