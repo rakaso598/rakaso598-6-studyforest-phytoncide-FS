@@ -72,13 +72,13 @@ function StudyEmoji() {
     <div className={styles.emojiContainer}>
       {getDisplayedEmojis().map((item, index) => (
         <button key={index} className={`${styles.commonButtonStyle} ${styles.emoji}`} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(item.emoji))}>
-          {item.emoji} {item.count > 0 && <span>({item.count})</span>}
+          {item.emoji} {item.count > 0 && <span>{item.count}</span>}
         </button>
       ))}
 
       {Object.keys(getEmojiCounts()).length > 3 && (
         <button ref={moreEmojisButtonRef} className={`${styles.moreEmojiButtonStyle} ${styles.emoji}`} onClick={handleMoreEmojisClick}>
-          +{Object.keys(getEmojiCounts()).length - 3}
+          + {Object.keys(getEmojiCounts()).length - 3}
         </button>
       )}
 
@@ -98,7 +98,7 @@ function StudyEmoji() {
           <p>선택된 이모지:</p>
           {Object.entries(getEmojiCounts()).map(([emoji, count]) => (
             <button key={emoji} className={`${styles.commonButtonStyle} ${styles.emoji}`} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(emoji))}>
-              {emoji} ({count})
+              {emoji} {count}
             </button>
           ))}
         </div>

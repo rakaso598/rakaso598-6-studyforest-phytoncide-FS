@@ -28,10 +28,12 @@
 
 .commonButtonStyle {
   background-color: rgba(0, 0, 0, 0.5);
+  color: white;
 }
 
 .moreEmojiButtonStyle {
   background-color: rgba(0, 0, 0, 0.3);
+  color: white;
 }
 
 .addEmojiButtonStyle {
@@ -39,8 +41,10 @@
 }
 
 .emoji {
-  width: 56px;
+  width: auto; /* 내용에 따라 너비 자동 조절 */
+  min-width: 49px; /* 최소 너비 설정 (height와 동일하게 설정) */
   height: 31px;
+  padding: 0 10px; /* 좌우 padding 추가 (선택 사항) */
 }
 
 .addBtn {
@@ -113,4 +117,9 @@
   .nav {
     gap: 16px;
   }
+}
+
+.commonButtonStyle span,
+.moreEmojiButtonStyle span {
+  color: white;
 }
