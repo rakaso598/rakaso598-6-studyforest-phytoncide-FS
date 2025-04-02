@@ -1,13 +1,13 @@
-import { useEffect, useState } from 'react';
-import HomeCard from '@components/home/HomeCard';
-import styles from './RecentlySection.module.css';
+import { useEffect, useState } from "react";
+import HomeCard from "@components/home/HomeCard";
+import styles from "./RecentlySection.module.css";
 
 const RecentlySection = () => {
   const [studyForestLocalStorageData, setStudyForestLocalStorageData] =
     useState([]);
 
   useEffect(() => {
-    const data = localStorage.getItem('studyForest');
+    const data = localStorage.getItem("studyForest");
     if (data) {
       const parsedData = JSON.parse(data);
       setStudyForestLocalStorageData(parsedData);

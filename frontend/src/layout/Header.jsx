@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Header.module.css';
-import logo1 from '/images/logo/logo_icon.svg';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import styles from "./Header.module.css";
+import logo1 from "/images/logo/logo_icon.svg";
+import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    if (location.pathname === '/' || location.pathname === '/study/create') {
+    if (location.pathname === "/" || location.pathname === "/study/create") {
       setIsOpen(true);
     } else {
       setIsOpen(false);
@@ -38,7 +38,7 @@ const Header = () => {
 
       {/* TODO: 작업용 임시 네비게이션 메뉴 입니다. 나중에 삭제해야 합니다. */}
 
-      {location.pathname === '/' && (
+      {location.pathname === "/" && (
         <div className={styles.nav}>
           <ul className={styles.nav__list}>
             <li className={styles.nav__item}>
