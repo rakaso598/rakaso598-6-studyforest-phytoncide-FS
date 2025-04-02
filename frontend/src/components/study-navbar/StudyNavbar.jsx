@@ -3,19 +3,19 @@ import styles from "./StudyNavbar.module.css";
 import { getStudyDetail } from "@api/study/studyDetail.api";
 import { useEffect, useState } from "react";
 
-const StudyNavbar = ({ id, link, pageName }) => {
+const StudyNavbar = ({ studyId, link, pageName }) => {
   const [study, setStudy] = useState({ nickName: "", title: "" });
 
   // 스터디 상세 불러오기
-  const studyLoad = async (id) => {
-    const study = await getStudyDetail(id);
+  const studyLoad = async (studyId) => {
+    const study = await getStudyDetail(studyId);
     return study;
   };
 
   // 스터디 nickName, title 추출하기
   useEffect(() => {
     const getStudy = async () => {
-      const { nickName, title } = await studyLoad(id);
+      const { nickName, title } = await studyLoad(studyId);
 
       setStudy((prevStudy) => ({ ...prevStudy, nickName, title }));
     };
