@@ -8,9 +8,7 @@ studyDeleteRouter.delete("/:id/delete", async (req, res, next) => {
   try {
     console.log("study delete 호출됨");
     const { id } = req.params;
-    const { encryptedPassword } = req.body;
-
-    // 스터디 id로 조회하여 불러옴 이부분 나중에 팀원이 구현한 studyGetRouter 써서 대체할것임
+    const { password } = req.body;
     const study = await prisma.study.findUnique({
       where: {
         id: parseInt(id),
@@ -21,10 +19,10 @@ studyDeleteRouter.delete("/:id/delete", async (req, res, next) => {
       return res.status(404).json({ message: "스터디를 찾을 수 없습니다." });
     }
 
-    // bcrypt 로 req.body로 넘어온 비밀번호와 데비터베이스에 있는 비밀번호 study.encryptedPassword 대조
+    // bcrypt로 평문 비밀번호와 저장된, 이미 암호화된 비밀번호 비교
     const passwordMatch = await bcrypt.compare(
-      encryptedPassword,
-      study.encryptedPassword
+      password, // 사용자가 입력한 평문 비밀번호
+      study.encryptedPassword // DB에 저장된 암호화된 비밀번호
     );
 
     if (!passwordMatch) {
