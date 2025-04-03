@@ -59,7 +59,7 @@ const StudyEditForm = () => {
       return;
     }
     try {
-      const response = await axiosInstance.put(
+      const response = await axiosInstance.patch(
         `/studies/${studyId}/update`,
         {
           nickName: nickname,
@@ -72,7 +72,7 @@ const StudyEditForm = () => {
 
       if (response.status === 200) {
         alert("스터디 정보가 성공적으로 수정되었습니다.");
-        navigate(`/study/${studyId}`);
+        navigate(`/studies/${studyId}`);
       } else {
         setErrorMessage(
           `스터디 정보 수정 실패: ${response.data && response.data.message}`

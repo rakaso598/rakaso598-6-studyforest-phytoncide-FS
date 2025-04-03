@@ -6,7 +6,7 @@ const studyPatchRouter = express.Router();
 const SALT_ROUNDS = 10;
 
 studyPatchRouter.patch("/:studyId/update", async (req, res) => {
-  const { id: studyId } = req.params;
+  const { studyId } = req.params;
   const { nickName, title, description, encryptedPassword, background } =
     req.body;
 
@@ -42,12 +42,6 @@ studyPatchRouter.patch("/:studyId/update", async (req, res) => {
     });
   } catch (error) {
     console.error("스터디 정보 업데이트 중 오류 발생:", error);
-
-    if (error instanceof bcrypt.BcryptError) {
-      return res
-        .status(500)
-        .json({ message: "비밀번호 암호화 중 오류가 발생했습니다." });
-    }
 
     if (error instanceof prisma.PrismaClientKnownRequestError) {
       return res.status(500).json({
