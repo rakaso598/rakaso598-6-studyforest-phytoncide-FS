@@ -68,6 +68,8 @@ const TodayFocus = () => {
     const time = e.target.value;
 
     if (isNaN(time)) return;
+    if (time.length >= 3) return setPoint(0);
+
     if (time < 10) {
       setPoint(0);
     } else {

@@ -64,21 +64,41 @@ const TodayFocusTimer = ({
 
     if (time.includes(" ")) return;
     if (isNaN(time)) return;
-    if (time.length >= 3) return;
 
+    // 분(min) 설정
     if (id === "minute") {
-      setMinute(time);
+      if (time.length >= 3) {
+        setMinute("" + time.slice(-1));
+      } else {
+        setMinute(time);
+      }
       setTempTime({ ...tempTime, min: time });
       rewardPointSetByTime(e);
     }
 
+    // 초(sec) 설정
     if (id === "second") {
       if (time[0] >= 6) {
         setSecond("0" + time);
         setTempTime({ ...tempTime, sec: "0" + time });
-      } else {
+        return;
+      }
+
+      if (time.length >= 3) {
+        if (time.slice(-1) >= 6) {
+          setSecond("0" + time.slice(-1));
+          setTempTime({ ...tempTime, sec: "0" + time.slice(-1) });
+          return;
+        }
+        setSecond("" + time.slice(-1));
+        setTempTime({ ...tempTime, sec: time });
+        return;
+      }
+
+      if (time.length <= 2) {
         setSecond(time);
         setTempTime({ ...tempTime, sec: time });
+        return;
       }
     }
   };
