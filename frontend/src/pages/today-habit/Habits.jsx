@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "@today-habit/Habits.module.css";
-import { getHabitDone, patchHabitDone } from "@api/today-habit/habitDone.api";
+import { getHabitDone, putHabitDone } from "@api/today-habit/habitDone.api";
 import { getHabits } from "@api/today-habit/habit.api";
-import { postHabitDone } from "@api/today-habit/habitDone.api";
 
 function Habits({ studyId, refresh, openModal }) {
   const [habits, setHabits] = useState([]);
@@ -12,19 +11,14 @@ function Habits({ studyId, refresh, openModal }) {
   });
   const handleClick = async (habitId) => {
     try {
-      const habitDone = await getHabitDone(habitId, today);
-      if (habitDone) {
-        await patchHabitDone(habitDone[0].id, {
-          isDone: !habitDone[0].isDone,
-        });
-        setHabitCheck((prev) =>
-          prev.map((habit) =>
-            habit.habitId === habitId
-              ? { ...habit, isDone: !habit.isDone }
-              : habit
-          )
-        );
-      }
+      await putHabitDone(studyId, habitId, today);
+      setHabitCheck((prev) =>
+        prev.map((habit) =>
+          habit.habitId === habitId
+            ? { ...habit, isDone: !habit.isDone }
+            : habit
+        )
+      );
     } catch (e) {
       console.error(e);
     }
@@ -34,15 +28,10 @@ function Habits({ studyId, refresh, openModal }) {
     const result = await getHabits(studyId);
     const checked = await Promise.all(
       result.map(async (habit) => {
-        const habitDone = await getHabitDone(habit.id, today);
+        const habitDone = await getHabitDone(studyId, habit.id, today);
         let isDone = false;
-        const data = { isDone, dayOfWeek: today };
-        if (habitDone.length === 0) {
-          await postHabitDone(habit.id, data);
-        }
-
-        if (habitDone.length >= 1) {
-          isDone = habitDone[0].isDone;
+        if (habitDone) {
+          isDone = true;
         }
         return { habitId: habit.id, isDone };
       })

@@ -45,7 +45,7 @@
 .singleHabitBox {
   display: grid;
   place-items: center;
-  width: 256px;
+  width: 204px;
   height: 54px;
   border-radius: 20px;
   background: var(--color-gray-100);
@@ -73,7 +73,7 @@
 .createBox {
   display: grid;
   place-items: center;
-  width: 312px; /* 기본 크기 */
+  width: 260px; /* 기본 크기 */
   height: 54px;
   border-radius: 20px;
   border: 2px solid var(--color-black);

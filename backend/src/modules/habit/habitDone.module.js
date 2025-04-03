@@ -3,49 +3,45 @@ import prisma from "../../db/prisma/client.prisma.js";
 
 const habitDoneRouter = express.Router();
 
-habitDoneRouter.get("/:habitId/:day", async (req, res, next) => {
-  try {
-    const habitId = Number(req.params.habitId);
-    const day = req.params.day;
-    const habits = await prisma.habitDone.findMany({
-      where: { habitId, dayOfWeek: day },
-    });
-    res.status(201).json(habits);
-  } catch (e) {
-    next(e);
+habitDoneRouter.get(
+  "/:studyId/habits/:habitId/:day",
+  async (req, res, next) => {
+    try {
+      const habitId = Number(req.params.habitId);
+      const day = req.params.day;
+      const habits = await prisma.habitDone.findFirst({
+        where: { habitId, dayOfWeek: day },
+      });
+      res.status(201).json(habits);
+    } catch (e) {
+      next(e);
+    }
   }
-});
+);
 
-habitDoneRouter.post("/:habitId", async (req, res, next) => {
-  try {
-    const habitId = Number(req.params.habitId);
-    const { isDone, dayOfWeek } = req.body;
-    const habits = await prisma.habitDone.create({
-      data: {
-        habitId,
-        isDone,
-        dayOfWeek,
-      },
-    });
-    res.status(201).json(habits);
-  } catch (e) {
-    next(e);
+habitDoneRouter.put(
+  "/:studyId/habits/:habitId/:day",
+  async (req, res, next) => {
+    try {
+      const habitId = Number(req.params.habitId);
+      const day = req.params.day;
+      await prisma.$transaction(async (tx) => {
+        const habitDone = await tx.habitDone.findFirst({
+          where: { habitId, dayOfWeek: day },
+        });
+        if (habitDone) {
+          await tx.habitDone.delete({ where: { id: habitDone.id } });
+        } else {
+          await tx.habitDone.create({
+            data: { dayOfWeek: day, habitId },
+          });
+        }
+      });
+      res.status(200).send("OK");
+    } catch (e) {
+      next(e);
+    }
   }
-});
-
-habitDoneRouter.patch("/:habitDoneId", async (req, res, next) => {
-  try {
-    const data = req.body;
-    const habitDoneId = Number(req.params.habitDoneId);
-    const updatedHabit = await prisma.habitDone.update({
-      where: { id: habitDoneId },
-      data,
-    });
-    if (!updatedHabit) return res.status(404).send("can't find habit");
-    res.status(204).json(updatedHabit);
-  } catch (e) {
-    next(e);
-  }
-});
+);
 
 export default habitDoneRouter;
