@@ -42,19 +42,19 @@ const Header = () => {
         <div className={styles.nav}>
           <ul className={styles.nav__list}>
             <li className={styles.nav__item}>
-              <Link to="/study/10" className={styles.nav__link}>
+              <Link to="/studies/10" className={styles.nav__link}>
                 스터디 상세
               </Link>
             </li>
 
             <li className={styles.nav__item}>
-              <Link to="/study/10/habit" className={styles.nav__link}>
+              <Link to="/studies/10/habit" className={styles.nav__link}>
                 오늘의 습관
               </Link>
             </li>
 
             <li className={styles.nav__item}>
-              <Link to="/study/10/focus" className={styles.nav__link}>
+              <Link to="/studies/10/focus" className={styles.nav__link}>
                 오늘의 집중
               </Link>
             </li>
