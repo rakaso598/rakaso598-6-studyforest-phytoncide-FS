@@ -1,6 +1,6 @@
 import express from "express";
 import prisma from "../../db/prisma/client.prisma.js";
-import bcrypt from "bcrypt"; // bcrypt import 추가
+import bcrypt from "bcrypt";
 
 const editFormVerifyPassword = express.Router();
 
@@ -24,7 +24,6 @@ editFormVerifyPassword.post(
         });
       }
 
-      // bcrypt.compare()를 사용하여 입력된 비밀번호와 DB의 해시된 비밀번호 비교
       const isPasswordMatch = await bcrypt.compare(
         encryptedPassword,
         study.encryptedPassword
