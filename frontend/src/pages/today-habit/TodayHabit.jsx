@@ -24,7 +24,7 @@ const TodayHabit = () => {
         <div className={styles.topContainer}>
           <StudyNavbar
             studyId={studyId}
-            link={`/study/${studyId}/focus`}
+            link={`/studies/${studyId}/focus`}
             pageName={"오늘의 집중"}
           />
           <CurrentTime />
