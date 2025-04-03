@@ -3,10 +3,12 @@ import prisma from "../../db/prisma/client.prisma.js";
 
 const habitsRouter = express.Router();
 
-habitsRouter.get("/:studyId", async (req, res, next) => {
+habitsRouter.get("/:studyId/habits", async (req, res, next) => {
   try {
     const studyId = Number(req.params.studyId);
-    const habits = await prisma.habit.findMany({ where: { studyId } });
+    const habits = await prisma.habit.findMany({
+      where: { studyId, isDone: false },
+    });
     res.status(201).json(habits);
   } catch (e) {
     next(e);

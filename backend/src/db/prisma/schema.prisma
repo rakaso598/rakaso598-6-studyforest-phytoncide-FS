@@ -47,6 +47,7 @@ model Habit {
   updatedAt DateTime    @updatedAt
   study     Study       @relation("StudyHabits", fields: [studyId], references: [id], onDelete: Cascade)
   studyId   Int
+  isDone    Boolean     @default(false)
   HabitDone HabitDone[]
 }
 
@@ -54,7 +55,6 @@ model HabitDone {
   id        Int         @id @default(autoincrement())
   habitId   Int
   dayOfWeek DAY_OF_WEEK
-  isDone    Boolean
   createdAt DateTime    @default(now())
   habit     Habit       @relation(fields: [habitId], references: [id], onDelete: Cascade)
 }

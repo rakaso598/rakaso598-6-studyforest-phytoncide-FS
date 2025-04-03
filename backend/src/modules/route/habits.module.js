@@ -1,6 +1,6 @@
 import express from "express";
-import habitsRouter from "../habit-modules/habits.module.js";
-import habitDoneRouter from "../habit-modules/habitDone.module.js";
+import habitsRouter from "../habit/habits.module.js";
+import habitDoneRouter from "../habit/habitDone.module.js";
 
 const habitRouter = express.Router();
 
