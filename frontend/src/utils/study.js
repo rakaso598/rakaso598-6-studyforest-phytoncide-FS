@@ -28,7 +28,7 @@ const saveAndNavigateToStudy = (study, navigate) => {
     localStorage.setItem("studyForest", JSON.stringify(limitedData));
   }
 
-  navigate(`/study/${study.id}`);
+  navigate(`/studies/${study.id}`);
 };
 
 export { loadMoreStudies, saveAndNavigateToStudy };
