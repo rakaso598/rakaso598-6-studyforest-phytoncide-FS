@@ -99,7 +99,6 @@ const BrowseSection = () => {
   return (
     <div className={styles.browseStudyContainer}>
       <div className={styles.title}>스터디 둘러보기</div>
-
       <div className={styles.topContainer}>
         <SearchBar
           searchInput={searchInput}
@@ -107,9 +106,7 @@ const BrowseSection = () => {
         />
         <SortDropdown sortType={sortType} clickSortOption={clickSortOption} />
       </div>
-
       <BrowseCardList isLoading={isLoading} studies={studies} />
-
       {studies.length > 0 && (
         <div className={styles.moreButtonContainer}>
           <button

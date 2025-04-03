@@ -45,13 +45,14 @@ const HomeCard = ({ data }) => {
     }
   }, [data.background]);
 
+  // 이미지다
   return (
     <li
       className={styles.card}
       data-bg={data.background}
       onClick={clickDetailStudy}
       style={{
-        backgroundImage: background ? `url(${background})` : "none",
+        backgroundImage: background && `url(${background})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}

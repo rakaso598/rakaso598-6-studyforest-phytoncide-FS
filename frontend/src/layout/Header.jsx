@@ -35,32 +35,6 @@ const Header = () => {
           )}
         </div>
       </header>
-
-      {/* TODO: 작업용 임시 네비게이션 메뉴 입니다. 나중에 삭제해야 합니다. */}
-
-      {location.pathname === "/" && (
-        <div className={styles.nav}>
-          <ul className={styles.nav__list}>
-            <li className={styles.nav__item}>
-              <Link to="/studies/10" className={styles.nav__link}>
-                스터디 상세
-              </Link>
-            </li>
-
-            <li className={styles.nav__item}>
-              <Link to="/studies/10/habit" className={styles.nav__link}>
-                오늘의 습관
-              </Link>
-            </li>
-
-            <li className={styles.nav__item}>
-              <Link to="/studies/10/focus" className={styles.nav__link}>
-                오늘의 집중
-              </Link>
-            </li>
-          </ul>
-        </div>
-      )}
     </>
   );
 };

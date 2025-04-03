@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1200px;
   background-color: var(--bg-white);
-  padding: 20px;
+  padding: 16px 16px 6px 16px;
 
   border-radius: 20px;
 
@@ -10,10 +10,11 @@
 }
 
 .title {
-  height: 10%;
   font-size: 16px;
   font-weight: 800;
   color: var(--text-black);
+
+  margin-bottom: 6px;
 
   transition: all 0.3s ease;
 }
@@ -28,7 +29,6 @@
 }
 
 .cardListContainer {
-  margin-top: 40px;
   overflow-x: auto;
   overflow-y: visible;
 
@@ -45,7 +45,7 @@
 .cardList {
   display: flex;
   width: max-content;
-  gap: 30px;
+  gap: 16px;
   overflow-y: visible;
 }
 
@@ -57,13 +57,24 @@
 
 @media screen and (min-width: 744px) {
   .recentStudyContainer {
-    padding: 40px;
+    padding: 40px 40px 30px 40px;
   }
 
   .title {
     font-size: 24px;
+    margin-bottom: 8px;
   }
   .cardWrapper {
-    width: 352px;
+    width: 357px;
+  }
+
+  .cardList {
+    gap: 24px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .title {
+    margin-bottom: 20px;
   }
 }

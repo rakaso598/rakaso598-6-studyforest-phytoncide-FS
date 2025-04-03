@@ -2,7 +2,7 @@
   width: 100%;
   max-width: 1200px;
   background-color: var(--bg-white);
-  padding: 20px;
+  padding: 16px 16px 20px 16px;
 
   border-radius: 20px;
   transition: all 0.3s ease;
@@ -12,8 +12,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  margin: 24px 0;
 }
 
 .title {
@@ -21,7 +19,7 @@
   font-weight: 800;
   color: var(--text-black);
 
-  margin-bottom: 15px;
+  margin-bottom: 16px;
   transition: all 0.3s ease;
 }
 
@@ -29,7 +27,7 @@
   display: flex;
   width: 100%;
   justify-content: center;
-  margin-top: 10px;
+  margin-top: 30px;
 }
 
 .moreButton {
@@ -42,8 +40,6 @@
 
   border: 1px solid #dddddd;
   border-radius: 20px;
-
-  margin-top: 20px;
 
   cursor: pointer;
 
@@ -67,10 +63,13 @@
 
   .title {
     font-size: 24px;
+    margin-bottom: 24px;
   }
   .topContainer {
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
+
+    margin-bottom: 24px;
   }
 }
