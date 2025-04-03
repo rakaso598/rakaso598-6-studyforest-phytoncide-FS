@@ -13,6 +13,7 @@ function StudyEmoji() {
   const [modalOpen, setModalOpen] = useState(false);
   const moreEmojisButtonRef = useRef(null);
   const isInitialLoad = useRef(true);
+  const hasEmojiChanged = useRef(false);
 
   useEffect(() => {
     const fetchInitialEmojis = async () => {
@@ -46,17 +47,29 @@ function StudyEmoji() {
   };
 
   const handleEmojiClick = (emojiObject) => {
-    setSelectedEmojis((prevEmojis) => [
-      ...prevEmojis,
-      { emoji: emojiObject.emoji, id: Date.now() + Math.random() },
-    ]);
+    setSelectedEmojis((prevEmojis) => {
+      hasEmojiChanged.current = true; // 이모지가 추가됨을 표시
+      return [
+        ...prevEmojis,
+        { emoji: emojiObject.emoji, id: Date.now() + Math.random() },
+      ];
+    });
     setShowPicker(false);
   };
 
   const handleSelectedEmojiClick = (emojiToRemove) => {
-    setSelectedEmojis((prevEmojis) =>
-      prevEmojis.filter((item) => item.emoji !== emojiToRemove.emoji)
-    );
+    setSelectedEmojis((prevEmojis) => {
+      const indexToRemove = prevEmojis.findIndex(
+        (item) => item.emoji === emojiToRemove.emoji
+      );
+      if (indexToRemove !== -1) {
+        hasEmojiChanged.current = true;
+        const newEmojis = [...prevEmojis];
+        newEmojis.splice(indexToRemove, 1);
+        return newEmojis;
+      }
+      return prevEmojis;
+    });
   };
 
   const handleMoreEmojisClick = () => {
@@ -81,11 +94,12 @@ function StudyEmoji() {
     zIndex: 1001,
   };
 
-  const getEmojiCounts = useCallback(() => {
+  const getEmojiCounts = () => {
     return selectedEmojis.reduce((acc, curr) => {
       acc[curr.emoji] = (acc[curr.emoji] || 0) + 1;
       return acc;
     }, {});
+
   }, [selectedEmojis]);
 
   const displayedEmojis = useCallback(() => {
@@ -104,17 +118,17 @@ function StudyEmoji() {
     );
   }, [getEmojiCounts, displayedEmojis]);
 
+
   useEffect(() => {
-    if (modalOpen && Object.keys(getEmojiCounts()).length <= 3) {
+    if (modalOpen && Object.keys(emojiCounts).length <= 3) {
       setModalOpen(false);
     }
-  }, [modalOpen, getEmojiCounts]);
+  }, [modalOpen, emojiCounts]);
 
-  const sendEmojiData = useCallback(async () => {
+  const sendEmojiData = async () => {
     try {
-      const emojiCounts = getEmojiCounts();
       const response = await axiosInstance.post(`/studies/${studyId}/emojis`, {
-        studyId: studyId, // 요청 본문에 studyId를 명시적으로 포함 (선택 사항)
+        studyId: studyId,
         emojis: Object.entries(emojiCounts),
       });
 
@@ -126,17 +140,18 @@ function StudyEmoji() {
     } catch (error) {
       console.error("이모지 데이터 업데이트 중 오류 발생:", error);
     }
-  }, [getEmojiCounts, studyId]);
+  };
 
   useEffect(() => {
-    if (!isInitialLoad.current) {
+    if (!isInitialLoad.current && hasEmojiChanged.current) {
       sendEmojiData();
+      hasEmojiChanged.current = false;
     }
   }, [selectedEmojis, sendEmojiData]);
 
   return (
     <div className={styles.emojiContainer}>
-      {displayedEmojis().map((item, index) => (
+      {displayedEmojis.map((item, index) => (
         <button
           key={index}
           className={`${styles.commonButtonStyle} ${styles.emoji}`}
@@ -146,13 +161,13 @@ function StudyEmoji() {
         </button>
       ))}
 
-      {Object.keys(getEmojiCounts()).length > 3 && (
+      {Object.keys(emojiCounts).length > 3 && (
         <button
           ref={moreEmojisButtonRef}
           className={`${styles.moreEmojiButtonStyle} ${styles.emoji}`}
           onClick={handleMoreEmojisClick}
         >
-          + {Object.keys(getEmojiCounts()).length - 3}..
+          + {Object.keys(emojiCounts).length - 3}..
         </button>
       )}
 
@@ -174,7 +189,7 @@ function StudyEmoji() {
       {modalOpen && (
         <div style={modalStyle}>
           <p>더 많은 이모지:</p>
-          {remainingEmojis().map(([emoji, count]) => (
+          {remainingEmojis.map(([emoji, count]) => (
             <button
               key={emoji}
               className={`${styles.commonButtonStyle} ${styles.emoji}`}
