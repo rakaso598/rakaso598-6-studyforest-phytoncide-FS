@@ -4,7 +4,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: var(--color-white);
-  width: min(100% - 32px, 648px); /* 좌우 마진 고려 */
+  width: min(100% - 32px, 648px);
   height: auto;
   padding: 20px;
   display: flex;
@@ -45,7 +45,7 @@
 .singleHabitBox {
   display: grid;
   place-items: center;
-  width: 204px;
+  width: 184px;
   height: 54px;
   border-radius: 20px;
   background: var(--color-gray-100);
@@ -73,7 +73,7 @@
 .createBox {
   display: grid;
   place-items: center;
-  width: 260px; /* 기본 크기 */
+  width: 240px;
   height: 54px;
   border-radius: 20px;
   border: 2px solid var(--color-black);
@@ -82,7 +82,7 @@
   cursor: pointer;
 }
 .btns {
-  bottom: 40px; /* 모달 하단에서 40px 떨어짐 */
+  bottom: 40px;
   display: flex;
   justify-content: center;
   width: 100%;

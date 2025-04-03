@@ -24,7 +24,7 @@ const Header = () => {
           </Link>
 
           {isOpen && (
-            <Link to="/study/create" className={styles.create__study__button}>
+            <Link to="/studies/create" className={styles.create__study__button}>
               <span className={styles.create__study__button__text__bg}>
                 스터디 만들기
               </span>

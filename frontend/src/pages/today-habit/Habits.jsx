@@ -19,6 +19,7 @@ function Habits({ studyId, refresh, openModal }) {
             : habit
         )
       );
+      console.log(habits);
     } catch (e) {
       console.error(e);
     }
