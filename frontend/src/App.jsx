@@ -1,17 +1,20 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Routes, Route } from "react-router-dom";
 import "../public/font/Pretendard-1.3.9/web/static/pretendard.css";
-import Home from "@home/Home";
-import TodayFocus from "@today-focus/TodayFocus";
-import TodayHabit from "@today-habit/TodayHabit";
-import StudyDetail from "@study-detail/StudyDetail";
-import StudyCreate from "@study-create/StudyCreate";
-import StudyEditForm from "@study-detail/study-edit-form/StudyEditForm";
 import Layout from "./layout/Layout";
+
+const Home = lazy(() => import("@home/Home"));
+const TodayFocus = lazy(() => import("@today-focus/TodayFocus"));
+const TodayHabit = lazy(() => import("@today-habit/TodayHabit"));
+const StudyDetail = lazy(() => import("@study-detail/StudyDetail"));
+const StudyCreate = lazy(() => import("@study-create/StudyCreate"));
+const StudyEditForm = lazy(() =>
+  import("@study-detail/study-edit-form/StudyEditForm")
+);
 
 function App() {
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
@@ -24,7 +27,7 @@ function App() {
           </Route>
         </Route>
       </Routes>
-    </>
+    </Suspense>
   );
 }
 
