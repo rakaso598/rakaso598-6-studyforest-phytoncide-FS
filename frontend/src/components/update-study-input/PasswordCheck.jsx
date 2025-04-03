@@ -42,7 +42,7 @@ const PasswordCheck = ({ password, onPasswordCheck }) => {
         />
       </div>
 
-      {isActive && <p className={styles.errMessage}>비밀번호가 일치하지 않습니다.</p>}
+      {isActive && <p className={styles.errMessage}>*비밀번호가 일치하지 않습니다.</p>}
       {!isActive && passwordCheck !== "" && (
         <p className={styles.successMessage}>비밀번호가 일치합니다.</p>
       )}
