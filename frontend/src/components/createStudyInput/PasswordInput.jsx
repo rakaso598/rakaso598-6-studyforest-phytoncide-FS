@@ -6,7 +6,7 @@ import btnSeeIcon from "/images/icon/btn_visibility_on_24px.svg";
 const PasswordInput = ({ setEncryptedPassword }) => {
   const [see, setSee] = useState(false);
 
-  const handleClike = () => {
+  const handleClik = () => {
     if (see) {
       setSee(false);
     } else {
@@ -25,7 +25,7 @@ const PasswordInput = ({ setEncryptedPassword }) => {
           placeholder="비밀번호를 입력해주세요"
         />
         <img
-          onClick={handleClike}
+          onClick={handleClik}
           className={styles.btnIcon}
           src={see ? btnSeeIcon : btnCloseIcon}
           alt="btnSeeIcon"
