@@ -1,12 +1,13 @@
 .habitContainer {
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   flex-direction: column;
   align-items: center;
   padding: 24px 16px;
   border-radius: 20px;
   border: 1px solid var(--color-gray-200);
   margin-top: 0px;
+  min-height: 631px;
 }
 .habitTopContainer {
   display: flex;
@@ -33,6 +34,8 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .habitList {
@@ -79,6 +82,8 @@
   text-align: center;
   color: var(--color-gray-300);
   font-size: 16px;
+  font-weight: 500;
+  margin-top: 225px;
 }
 
 @media screen and (min-width: 744px) {
@@ -90,5 +95,6 @@
   }
   .habitContainer {
     padding: 40px 24px;
+    margin-top: 40px;
   }
 }

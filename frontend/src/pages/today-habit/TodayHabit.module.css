@@ -13,6 +13,7 @@
 .container {
   display: flex;
   width: 100%;
+  padding-bottom: 20px;
   justify-content: center;
 }
 .mainContainer {
@@ -23,20 +24,20 @@
   flex-direction: column;
   border-radius: 20px;
   max-width: 1248px;
-  width: 90%;
-  margin-top: 20px;
+  width: 100%;
+  margin: 20px 15px 141px 16px;
 }
 
 @media screen and (min-width: 744px) {
   .mainContainer {
     padding: 24px;
-    margin-top: 16px;
+    margin: 16px 24px 79px 24px;
   }
 }
 
 @media screen and (min-width: 1200px) {
   .mainContainer {
     padding: 40px;
-    margin-top: 39px;
+    margin: 39px 24px 100px 24px;
   }
 }

@@ -1,10 +1,12 @@
 import express from "express";
 import prisma from "../../db/prisma/client.prisma.js";
+import errorHandler from "../../middlewares/errorHandler.module.js";
 
 const habitDoneRouter = express.Router();
 
 habitDoneRouter.get(
   "/:studyId/habits/:habitId/:day",
+  errorHandler,
   async (req, res, next) => {
     try {
       const habitId = Number(req.params.habitId);
@@ -21,6 +23,7 @@ habitDoneRouter.get(
 
 habitDoneRouter.put(
   "/:studyId/habits/:habitId/:day",
+  errorHandler,
   async (req, res, next) => {
     try {
       const habitId = Number(req.params.habitId);
