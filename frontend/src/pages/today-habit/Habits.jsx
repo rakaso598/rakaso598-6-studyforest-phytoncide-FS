@@ -17,6 +17,7 @@ function Habits({ studyId, refresh, openModal }) {
         newCheck.set(habitId, !newCheck.get(habitId));
         return newCheck;
       });
+
     } catch (e) {
       console.error(e);
     }
