@@ -2,13 +2,40 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./DeleteStudyModal.module.css";
 import { deleteStudy } from "@api/study/deleteStudy.api.js";
+import { getStudyDetail } from "@api/study/studyDetail.api";
 
 const DeleteStudyModal = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [studyTitle, setStudyTitle] = useState("");
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { studyId } = useParams();
 
+  // 모달 오픈시 폼과 토스트 메세지 리셋
+  useEffect(() => {
+    if (isOpen) {
+      setPassword("");
+      setErrorMessage("");
+    }
+  }, [isOpen]);
+
+  // 모달 오픈시 스터디 디테일 로드
+  useEffect(() => {
+    const fetchStudyDetail = async () => {
+      try {
+        const study = await getStudyDetail(studyId);
+        setStudyTitle(study.title);
+        console.log(`Study title = ${study.title}`);
+        console.log(`Study info = ${study}`);
+      } catch (error) {
+        console.error("스터디 기능 불러오기에서 에러가 발생하였습니다", error);
+      }
+    };
+
+    if (isOpen && studyId) {
+      fetchStudyDetail();
+    }
+  }, [isOpen, studyId]);
   if (!isOpen) return null;
 
   const handlePasswordChange = (event) => {
@@ -23,7 +50,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
 
     try {
       // 삭제 프론트 API 함수 호출 - 백엔드 스터디 삭제 API 에서 비밀번호 검증도 함께 수행됨
-      const deleteResponse = await deleteStudy(id, password);
+      const deleteResponse = await deleteStudy(studyId, password);
 
       if (deleteResponse && deleteResponse.success) {
         // 삭제 성공시 localStorage 업데이트하여 현재 삭제한 id를 가지고있는 parsedData에 일치하는 스터디 있으면 걸러서 안보이게
@@ -31,7 +58,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
         if (storedData) {
           const parsedData = JSON.parse(storedData);
           const updatedData = parsedData.filter(
-            (study) => study.id != parseInt(id)
+            (study) => study.id != parseInt(studyId)
           );
           localStorage.setItem("studyForest", JSON.stringify(updatedData));
         }
@@ -53,8 +80,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          {/* 여기에 studyDetail.api.js에 getStudyDetail 불러서현재 study.nickName 의 study.title 라고 구현해야함*/}
-          <p className={styles.modalTitle}>스터디 삭제</p>
+          <p className={styles.modalTitle}>{studyTitle}</p>
           <button
             type="button"
             onClick={onClose}

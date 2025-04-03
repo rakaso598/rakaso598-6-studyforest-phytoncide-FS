@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route element={<Layout />}>
           <Route path="/" element={<Home />} />
-          <Route path="/study/*">
+          <Route path="/studies/*">
             <Route path="create" element={<StudyCreate />} />
             <Route path=":studyId" element={<StudyDetail />} />
             <Route path=":studyId/form" element={<StudyEditForm />} />
