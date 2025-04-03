@@ -15,7 +15,7 @@ habitsRouter.get("/:studyId/habits", async (req, res, next) => {
   }
 });
 
-habitsRouter.patch("/:habitId", async (req, res, next) => {
+habitsRouter.patch("/:studyId/habits/:habitId", async (req, res, next) => {
   try {
     const data = req.body;
     const habitId = Number(req.params.habitId);
@@ -30,7 +30,7 @@ habitsRouter.patch("/:habitId", async (req, res, next) => {
   }
 });
 
-habitsRouter.post("/:studyId", async (req, res, next) => {
+habitsRouter.post("/:studyId/habits", async (req, res, next) => {
   try {
     const studyId = Number(req.params.studyId);
     const { title } = req.body;
@@ -43,7 +43,7 @@ habitsRouter.post("/:studyId", async (req, res, next) => {
   }
 });
 
-habitsRouter.delete("/:habitId", async (req, res, next) => {
+habitsRouter.delete("/:studyId/habits/:habitId", async (req, res, next) => {
   try {
     const habitId = Number(req.params.habitId);
     const deletedHabit = await prisma.habit.delete({
