@@ -5,7 +5,7 @@ import plusIcon from "/images/icon/ic_plus.svg";
 import {
   getHabits,
   deleteHabit,
-  patchHabits,
+  patchHabit,
   postHabit,
 } from "@api/today-habit/habit.api";
 
@@ -72,9 +72,11 @@ const HabitModal = ({ studyId, onClose }) => {
         ...updatedHabits.map(
           (
             { id, ...updatedHabit } //아이디 빼고 나머지를 보낼거임
-          ) => patchHabits(id, updatedHabit)
+          ) => patchHabit(studyId, id, updatedHabit)
         ), // 수정된 습관 업데이트
-        ...deletedHabits.map((deletedHabit) => deleteHabit(deletedHabit.id)),
+        ...deletedHabits.map((deletedHabit) =>
+          deleteHabit(studyId, deletedHabit.id)
+        ),
       ]);
       alert("습관 수정 완료");
     } catch (error) {
