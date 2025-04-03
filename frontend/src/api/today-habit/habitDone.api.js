@@ -1,7 +1,5 @@
 import axiosInstance from "../axiosInstance";
 
-const HABITDONE_URL = "/api/habitdone";
-
 const handleError = (e) => {
   if (e.response) {
     console.error(`${e.response.status}: ${e.response.statusText}`);
@@ -10,20 +8,10 @@ const handleError = (e) => {
   }
 };
 
-export const getHabitDone = async (habitId, day) => {
+export const getHabitDone = async (studyId, habitId, day) => {
   try {
-    const res = await axiosInstance.get(`${HABITDONE_URL}/${habitId}/${day}`);
-    return res.data;
-  } catch (e) {
-    handleError(e);
-  }
-};
-
-export const patchHabitDone = async (habitDoneId, data) => {
-  try {
-    const res = await axiosInstance.patch(
-      `${HABITDONE_URL}/${habitDoneId}`,
-      data
+    const res = await axiosInstance.get(
+      `studies/${studyId}/habits/${habitId}/${day}`
     );
     return res.data;
   } catch (e) {
@@ -31,9 +19,11 @@ export const patchHabitDone = async (habitDoneId, data) => {
   }
 };
 
-export const postHabitDone = async (habitId, data) => {
+export const putHabitDone = async (studyId, habitId, day) => {
   try {
-    const res = await axiosInstance.post(`${HABITDONE_URL}/${habitId}`, data);
+    const res = await axiosInstance.put(
+      `studies/${studyId}/habits/${habitId}/${day}`
+    ); //주소 수정해야함
     return res.data;
   } catch (e) {
     handleError(e);
