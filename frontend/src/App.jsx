@@ -17,10 +17,10 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/study/*">
             <Route path="create" element={<StudyCreate />} />
-            <Route path=":id" element={<StudyDetail />} />
-            <Route path=":id/form" element={<StudyEditForm />} />
-            <Route path=":id/focus" element={<TodayFocus />} />
-            <Route path=":id/habit" element={<TodayHabit />} />
+            <Route path=":studyId" element={<StudyDetail />} />
+            <Route path=":studyId/form" element={<StudyEditForm />} />
+            <Route path=":studyId/focus" element={<TodayFocus />} />
+            <Route path=":studyId/habit" element={<TodayHabit />} />
           </Route>
         </Route>
       </Routes>

@@ -12,16 +12,17 @@
 }
 
 .modalContent {
-  background-color: white;
+  background-color: var(--color-white);
   padding: 20px;
   border-radius: var(--radius-sm);
-  width: 648px;
-  height: 369px;
+  width: 344px;
+  height: 341px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: stretch;
   gap: 20px;
+  padding: 24px 16px;
 }
 
 .modalHeader {
@@ -75,27 +76,32 @@
 .modalVerifyButton {
   font-family: var(--font-jejudoldam);
   background-color: var(--color-green-200);
-  color: white;
+  color: var(--color-white);
   padding: 16px;
   border: none;
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 18px;
+  width: 312px;
+  height: 58px;
 }
 
 .modalVerifyButton:hover {
   background-color: var(--color-green-300);
 }
 
-.deleteButton {
-  background-color: var(--color-red-200);
-}
-
-.deleteButton:hover {
-  background-color: var(--color-red-300);
-}
-
 .errorMessage {
   color: var(--color-red-300);
   margin-top: 8px;
+}
+
+@media screen and (min-width: 744px) {
+  .modalVerifyButton {
+    width: 600px;
+  }
+  .modalContent {
+    width: 648px;
+    height: 369px;
+    padding: 40px 24px;
+  }
 }

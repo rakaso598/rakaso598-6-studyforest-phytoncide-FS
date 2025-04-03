@@ -1,28 +1,60 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import styles from "./StudyEmoji.module.css";
 import smileIcon from "/images/icon/ic_smile.svg";
 import EmojiPicker from 'emoji-picker-react';
+import axiosInstance from '../../../api/axiosInstance';
+import { useParams } from 'react-router-dom';
 
 function StudyEmoji() {
+  const { id } = useParams();
   const [showPicker, setShowPicker] = useState(false);
   const addButtonRef = useRef(null);
   const [selectedEmojis, setSelectedEmojis] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const moreEmojisButtonRef = useRef(null);
+  const isInitialLoad = useRef(true);
+
+  useEffect(() => {
+    const fetchInitialEmojis = async () => {
+      try {
+        const response = await axiosInstance.get(`/api/study/${id}/emojis`);
+        if (response.status === 200) {
+          const initialEmojis = response.data.flatMap(item =>
+            Array(item.count).fill(item.emojiContent).map((emoji) => ({
+              emoji,
+              id: Date.now() + Math.random(),
+            }))
+          );
+          setSelectedEmojis(initialEmojis);
+        } else {
+          console.error('초기 이모지 데이터 불러오기 실패:', response.status);
+        }
+      } catch (error) {
+        console.error('초기 이모지 데이터 불러오기 중 오류 발생:', error);
+      } finally {
+        isInitialLoad.current = false;
+      }
+    };
+
+    fetchInitialEmojis();
+  }, [id]);
 
   const handleAddButtonClick = () => {
     setShowPicker(!showPicker);
   };
 
   const handleEmojiClick = (emojiObject) => {
-    setSelectedEmojis([...selectedEmojis, emojiObject.emoji]);
+    setSelectedEmojis((prevEmojis) => [
+      ...prevEmojis,
+      { emoji: emojiObject.emoji, id: Date.now() + Math.random() },
+    ]);
     setShowPicker(false);
   };
 
-  const handleSelectedEmojiClick = (index) => {
-    const newEmojis = [...selectedEmojis];
-    newEmojis.splice(index, 1);
-    setSelectedEmojis(newEmojis);
+  const handleSelectedEmojiClick = (emojiToRemove) => {
+    setSelectedEmojis((prevEmojis) =>
+      prevEmojis.filter((item) => item.emoji !== emojiToRemove.emoji)
+    );
   };
 
   const handleMoreEmojisClick = () => {
@@ -31,62 +63,97 @@ function StudyEmoji() {
 
   const pickerStyle = {
     position: 'absolute',
-    top: addButtonRef.current ? addButtonRef.current.offsetHeight + 10 : '50px',
-    left: addButtonRef.current ? addButtonRef.current.offsetLeft : '0',
+    top: addButtonRef.current?.offsetHeight + 10 || '50px',
+    left: addButtonRef.current?.offsetLeft || '0',
     zIndex: 1000,
   };
 
   const modalStyle = {
     position: 'absolute',
-    top: moreEmojisButtonRef.current ? moreEmojisButtonRef.current.offsetHeight + moreEmojisButtonRef.current.offsetTop : 'auto',
-    left: moreEmojisButtonRef.current ? moreEmojisButtonRef.current.offsetLeft : 'auto',
+    top: moreEmojisButtonRef.current?.offsetHeight + moreEmojisButtonRef.current?.offsetTop || 'auto',
     background: 'white',
     padding: '20px',
     border: '1px solid gray',
     zIndex: 1001,
   };
 
-  const getEmojiCounts = () => {
-    const emojiCounts = {};
-    selectedEmojis.forEach((emoji) => {
-      emojiCounts[emoji] = (emojiCounts[emoji] || 0) + 1;
-    });
-    return emojiCounts;
-  };
+  const getEmojiCounts = useCallback(() => {
+    return selectedEmojis.reduce((acc, curr) => {
+      acc[curr.emoji] = (acc[curr.emoji] || 0) + 1;
+      return acc;
+    }, {});
+  }, [selectedEmojis]);
 
-  const getDisplayedEmojis = () => {
+  const displayedEmojis = useCallback(() => {
     const emojiCounts = getEmojiCounts();
-    return selectedEmojis.slice(0, 3).map(emoji => ({
-      emoji,
-      count: emojiCounts[emoji],
-    }));
-  };
+    return Object.entries(emojiCounts)
+      .sort(([, countA], [, countB]) => countB - countA)
+      .slice(0, 3)
+      .map(([emoji, count]) => ({ emoji, count }));
+  }, [getEmojiCounts]);
+
+  const remainingEmojis = useCallback(() => {
+    const emojiCounts = getEmojiCounts();
+    const displayed = displayedEmojis().map((item) => item.emoji);
+    return Object.entries(emojiCounts).filter(([emoji]) => !displayed.includes(emoji));
+  }, [getEmojiCounts, displayedEmojis]);
 
   useEffect(() => {
-    if (modalOpen && selectedEmojis.length <= 3) {
+    if (modalOpen && Object.keys(getEmojiCounts()).length <= 3) {
       setModalOpen(false);
     }
-  }, [selectedEmojis, modalOpen]);
+  }, [modalOpen, getEmojiCounts]);
+
+  const sendEmojiData = useCallback(async () => {
+    try {
+      const emojiCounts = getEmojiCounts();
+      const response = await axiosInstance.post(`/api/study/${id}/emojis`, {
+        emojis: Object.entries(emojiCounts),
+      });
+
+      if (response.status === 200) {
+        console.log('이모지 데이터가 성공적으로 업데이트되었습니다.');
+      } else {
+        console.error('이모지 데이터 업데이트 실패:', response.status);
+      }
+    } catch (error) {
+      console.error('이모지 데이터 업데이트 중 오류 발생:', error);
+    }
+  }, [getEmojiCounts, id]);
+
+  useEffect(() => {
+    if (!isInitialLoad.current) {
+      sendEmojiData();
+    }
+  }, [selectedEmojis, sendEmojiData]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', position: 'relative' }}>
-      {getDisplayedEmojis().map((item, index) => (
-        <button key={index} className={`${styles.emoji} ${styles.commonButtonStyle}`} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(item.emoji))}>
-          {item.emoji} {item.count > 0 && <span>({item.count})</span>}
+    <div className={styles.emojiContainer}>
+      {displayedEmojis().map((item, index) => (
+        <button
+          key={index}
+          className={`${styles.commonButtonStyle} ${styles.emoji}`}
+          onClick={() => handleSelectedEmojiClick(item)}
+        >
+          {item.emoji} {item.count > 0 && <span>{item.count}</span>}
         </button>
       ))}
 
-      {selectedEmojis.length < 3 && Array(3 - selectedEmojis.length).fill(null).map((_, index) => (
-        <button key={`empty-${index}`} className={`${styles.emoji} ${styles.commonButtonStyle}`}>
-          {/* 빈칸 */}
+      {Object.keys(getEmojiCounts()).length > 3 && (
+        <button
+          ref={moreEmojisButtonRef}
+          className={`${styles.moreEmojiButtonStyle} ${styles.emoji}`}
+          onClick={handleMoreEmojisClick}
+        >
+          + {Object.keys(getEmojiCounts()).length - 3}..
         </button>
-      ))}
+      )}
 
-      <button ref={moreEmojisButtonRef} className={`${styles.emoji} ${styles.commonButtonStyle}`} onClick={handleMoreEmojisClick}>
-        +{selectedEmojis.length > 3 ? selectedEmojis.length - 3 : 0}
-      </button>
-
-      <button className={`${styles.addBtn} ${styles.commonButtonStyle}`} onClick={handleAddButtonClick} ref={addButtonRef}>
+      <button
+        className={`${styles.addBtn} ${styles.addEmojiButtonStyle}`}
+        onClick={handleAddButtonClick}
+        ref={addButtonRef}
+      >
         <img src={smileIcon} alt="smile" />
         <p>추가</p>
       </button>
@@ -99,10 +166,14 @@ function StudyEmoji() {
 
       {modalOpen && (
         <div style={modalStyle}>
-          <p>선택된 이모지:</p>
-          {Object.entries(getEmojiCounts()).map(([emoji, count]) => (
-            <button key={emoji} className={styles.emoji} onClick={() => handleSelectedEmojiClick(selectedEmojis.indexOf(emoji))}>
-              {emoji} ({count})
+          <p>더 많은 이모지:</p>
+          {remainingEmojis().map(([emoji, count]) => (
+            <button
+              key={emoji}
+              className={`${styles.commonButtonStyle} ${styles.emoji}`}
+              onClick={() => handleSelectedEmojiClick({ emoji })}
+            >
+              {emoji} {count > 0 && <span>{count}</span>}
             </button>
           ))}
         </div>

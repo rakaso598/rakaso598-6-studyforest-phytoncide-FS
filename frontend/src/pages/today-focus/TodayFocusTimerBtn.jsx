@@ -3,21 +3,21 @@ import styles from "./TodayFocusTimerBtn.module.css";
 const TodayFocusTimerBtn = ({
   timeover,
   btnToggle,
-  handleClickStart,
-  handleClickPause,
-  handleClickReset,
+  handleStartClick,
+  handlePauseClick,
+  handleResetClick,
 }) => {
   return (
     <div className={styles.focusBtnContainer}>
       <button
-        onClick={handleClickPause}
+        onClick={handlePauseClick}
         className={`${styles.focusPauseBtn} ${btnToggle && styles.show}`}
       >
         <img src="/images/icon/ic_pause.svg" alt="일시정지" />
       </button>
       <button
         disabled={btnToggle}
-        onClick={handleClickStart}
+        onClick={handleStartClick}
         className={`${styles.focusStartBtn} ${btnToggle && styles.disable}`}
       >
         <img
@@ -29,7 +29,7 @@ const TodayFocusTimerBtn = ({
         <p>{timeover ? "Stop!" : "Start!"}</p>
       </button>
       <button
-        onClick={handleClickReset}
+        onClick={handleResetClick}
         className={`${styles.focusResetBtn} ${btnToggle && styles.show}`}
       >
         <img src="/images/icon/ic_restart.svg" alt="초기화" />

@@ -1,13 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./DeleteStudyModal.module.css";
-import axiosInstance from "@api/axiosInstance";
 import { deleteStudy } from "@api/study/deleteStudy.api.js";
 
 const DeleteStudyModal = ({ isOpen, onClose }) => {
-  const [encryptedPassword, setPassword] = useState("");
+  const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const VERIFY_PASSWORD_URL = `/api/study/verify-password`;
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -17,41 +15,37 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
     setPassword(event.target.value);
   };
 
-  const handleVerifyPassword = async () => {
-    if (!encryptedPassword) {
+  const handleDeleteStudy = async () => {
+    if (!password) {
       setErrorMessage("비밀번호를 입력해주세요.");
       return;
     }
 
     try {
-      // 1. 비밀번호 검증 단계
-      const verifyResponse = await axiosInstance.post(VERIFY_PASSWORD_URL, {
-        id: id,
-        encryptedPassword,
-      });
+      // 삭제 프론트 API 함수 호출 - 백엔드 스터디 삭제 API 에서 비밀번호 검증도 함께 수행됨
+      const deleteResponse = await deleteStudy(id, password);
 
-      // 2. 비밀번호 검증 성공 시 삭제 단계 진행
-      if (verifyResponse.data.success) {
-        try {
-          // 3. 여기서 deleteStudy API 함수 활용
-          const deleteResponse = await deleteStudy(id, encryptedPassword);
-
-          if (deleteResponse && deleteResponse.success) {
-            console.log("삭제되었습니다");
-            navigate("/"); // 삭제 성공 시 홈으로 이동
-          } else {
-            setErrorMessage("스터디 삭제에 실패했습니다.");
-          }
-        } catch (deleteError) {
-          console.error("스터디 삭제 중 오류:", deleteError);
-          setErrorMessage("스터디 삭제 중 오류가 발생했습니다.");
+      if (deleteResponse && deleteResponse.success) {
+        // 삭제 성공시 localStorage 업데이트하여 현재 삭제한 id를 가지고있는 parsedData에 일치하는 스터디 있으면 걸러서 안보이게
+        const storedData = localStorage.getItem("studyForest");
+        if (storedData) {
+          const parsedData = JSON.parse(storedData);
+          const updatedData = parsedData.filter(
+            (study) => study.id != parseInt(id)
+          );
+          localStorage.setItem("studyForest", JSON.stringify(updatedData));
         }
+
+        navigate("/"); // 삭제 성공 시 공부의 숲 홈으로 이동
       } else {
-        setErrorMessage("비밀번호 검증에 실패했습니다. 다시 시도해주세요.");
+        setErrorMessage(
+          deleteResponse?.message || "스터디 삭제에 실패했습니다."
+        );
       }
     } catch (error) {
-      console.error("비밀번호 검증 API 호출 실패:", error);
-      setErrorMessage("비밀번호 검증에 실패했습니다. 다시 시도해주세요.");
+      console.error("스터디 삭제 중 오류:", error);
+      const errorMsg = error.response?.data?.message;
+      setErrorMessage(errorMsg || "스터디 삭제 중 오류가 발생했습니다.");
     }
   };
 
@@ -59,6 +53,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
+          {/* 여기에 studyDetail.api.js에 getStudyDetail 불러서현재 study.nickName 의 study.title 라고 구현해야함*/}
           <p className={styles.modalTitle}>스터디 삭제</p>
           <button
             type="button"
@@ -74,7 +69,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
           <input
             placeholder="비밀번호를 입력해 주세요"
             type="password"
-            value={encryptedPassword}
+            value={password}
             onChange={handlePasswordChange}
             className={styles.modalInput}
           />
@@ -83,9 +78,9 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
           )}
         </div>
         <button
-          className={`${styles.modalVerifyButton} ${styles.deleteButton}`}
+          className={`${styles.modalVerifyButton}`}
           type="button"
-          onClick={handleVerifyPassword}
+          onClick={handleDeleteStudy}
         >
           삭제하기
         </button>
