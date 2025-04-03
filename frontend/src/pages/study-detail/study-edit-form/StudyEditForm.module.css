@@ -28,7 +28,7 @@
   display: flex;
   flex-direction: column;
   gap: 24px;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .createBtn {
@@ -47,6 +47,7 @@
 .errorMessage {
   font-size: 14px;
   color: var(--error-text);
+  margin-top: 16px;
 }
 
 @media screen and (min-width: 744px) {

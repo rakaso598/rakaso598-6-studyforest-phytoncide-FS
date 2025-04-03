@@ -22,7 +22,7 @@ const NicknameInput = ({ setNickname, nickname }) => {
         className={`${styles.input} ${isActive && styles.err}`}
         type="text"
         placeholder="닉네임을 입력해주세요"
-        value={nickname} // value 속성 추가
+        value={nickname}
       />
       {isActive && <p className={styles.errMessage}>*닉네임을 입력해주세요.</p>}
     </label>
