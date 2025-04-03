@@ -2,11 +2,11 @@ import express from "express";
 import prisma from "../../db/prisma/client.prisma.js";
 import bcrypt from "bcrypt";
 
-const studyUpdate = express.Router();
+const studyPatchRouter = express.Router();
 const SALT_ROUNDS = 10;
 
-studyUpdate.put("/:id/update", async (req, res) => {
-  const { id } = req.params;
+studyPatchRouter.patch("/:studyId/update", async (req, res) => {
+  const { id: studyId } = req.params;
   const { nickName, title, description, encryptedPassword, background } =
     req.body;
 
@@ -26,7 +26,7 @@ studyUpdate.put("/:id/update", async (req, res) => {
     const hashedPassword = await bcrypt.hash(encryptedPassword, SALT_ROUNDS);
 
     await prisma.study.update({
-      where: { id: parseInt(id) },
+      where: { id: parseInt(studyId) },
       data: {
         nickName,
         title,
@@ -61,4 +61,4 @@ studyUpdate.put("/:id/update", async (req, res) => {
   }
 });
 
-export default studyUpdate;
+export default studyPatchRouter;

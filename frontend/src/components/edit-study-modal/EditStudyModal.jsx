@@ -7,9 +7,8 @@ import axiosInstance from "../../api/axiosInstance";
 const EditStudyModal = ({ isOpen, onClose }) => {
   const [encryptedPassword, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const VERIFY_PASSWORD_URL = `${SERVER_URL}/api/study/verify-password`;
   const navigate = useNavigate();
-  const { id: id } = useParams(); // URL에서 id 가져옵니다.
+  const { studyId } = useParams();
 
   if (!isOpen) return null;
 
@@ -17,17 +16,19 @@ const EditStudyModal = ({ isOpen, onClose }) => {
     setPassword(event.target.value);
   };
 
+  // const VERIFY_PASSWORD_URL = `${SERVER_URL}/studies/${studyId}/verify-password`;
+  const VERIFY_PASSWORD_URL = `http://localhost:5090/studies/${studyId}/verify-password`;
   const handleVerifyPassword = async () => {
     try {
       const response = await axiosInstance.post(VERIFY_PASSWORD_URL, {
-        id: id,
+        studyId: studyId, // 요청 본문에서도 studyId를 사용하도록 수정
         encryptedPassword,
       });
 
       console.log(response.data);
 
       if (response.data.success) {
-        navigate(`/study/${id}/form`); // 비밀번호 검증 성공 시 /study/:id/form 경로로 이동
+        navigate(`/studies/${studyId}/form`);
       } else {
         setErrorMessage("비밀번호 검증에 실패했습니다. 다시 시도해주세요.");
       }
