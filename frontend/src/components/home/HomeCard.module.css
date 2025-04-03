@@ -55,14 +55,14 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .headerTop {
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 8px;
+  gap: 4px;
 }
 
 .pointsContainer {
