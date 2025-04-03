@@ -2,28 +2,19 @@ import React, { useState, useEffect } from "react";
 import styles from "@today-habit/HabitModal.module.css";
 import trashIcon from "/images/icon/ic_trash.svg";
 import plusIcon from "/images/icon/ic_plus.svg";
-import {
-  getHabits,
-  deleteHabit,
-  patchHabit,
-  postHabit,
-} from "@api/today-habit/habit.api";
+import { putHabits, getHabits } from "@api/today-habit/habit.api";
 
-const HabitModal = ({ studyId, onClose }) => {
-  //habits 설정
+const HabitModal = ({ onClose, studyId }) => {
   const [habits, setHabits] = useState([]);
-  console.log(habits);
-
-  const handleLoad = async () => {
-    const result = await getHabits(studyId);
-
-    setHabits(result);
-  };
 
   useEffect(() => {
+    const handleLoad = async () => {
+      const result = await getHabits(studyId);
+      setHabits(result);
+    };
     handleLoad();
-  }, []);
-  //prev는 배열임
+  }, [studyId]);
+
   const handleInputChange = (index, updatingHabit) => {
     setHabits((prev) =>
       prev.map((habit, idx) =>
@@ -31,54 +22,26 @@ const HabitModal = ({ studyId, onClose }) => {
       )
     );
   };
-  //습관 추가
   const handleAddHabit = () => {
-    setHabits([...habits, { id: Date.now(), title: "                   " }]);
+    setHabits((prev) => [
+      ...prev,
+      { id: Date.now(), title: "                   ", isDone: false },
+    ]);
   };
-
-  //습관 삭제 habits 필터링
-  const handleDeleteHabit = (index) => {
-    const updatedHabits = habits.filter((_, idx) => idx !== index);
-    setHabits(updatedHabits);
+  const handleDeleteHabit = (habitToDelete) => {
+    setHabits((prev) =>
+      prev
+        .map((habit) =>
+          habit.id === habitToDelete.id ? { ...habit, isDone: true } : habit
+        )
+        .filter((habit) => !habit.isDone)
+    );
   };
-
-  //수정 완료 시 변경 습관들 서버로
   const handleConfirmRevision = async () => {
     try {
-      const result = await getHabits(studyId);
-
-      // 1. 새로운 습관: habits에는 있고 result에는 없는 습관들
-      const newHabits = habits.filter(
-        (habit) => !result.some((rHabit) => rHabit.id === habit.id)
-      );
-
-      // 2. 수정된 습관: habits와 result에서 id는 같지만 title이 다른 습관들
-      const updatedHabits = habits.filter((habit) => {
-        const existingHabit = result.find((rHabit) => rHabit.id === habit.id);
-        return existingHabit && existingHabit.title !== habit.title;
-      });
-
-      //3. 삭제 된 습관: result에는 있고 habits에는 없는 습관들
-      const deletedHabits = result.filter(
-        (result) => !habits.some((habit) => habit.id === result.id)
-      );
-
-      console.log("새로운 습관들:", newHabits);
-      console.log("수정된 습관들:", updatedHabits);
-      console.log("삭제한 습관들:", deletedHabits);
-
-      await Promise.all([
-        ...newHabits.map((newHabit) => postHabit(studyId, newHabit)), // 새 습관 추가
-        ...updatedHabits.map(
-          (
-            { id, ...updatedHabit } //아이디 빼고 나머지를 보낼거임
-          ) => patchHabit(studyId, id, updatedHabit)
-        ), // 수정된 습관 업데이트
-        ...deletedHabits.map((deletedHabit) =>
-          deleteHabit(studyId, deletedHabit.id)
-        ),
-      ]);
+      await putHabits(studyId, habits);
       alert("습관 수정 완료");
+      onClose();
     } catch (error) {
       alert("습관 수정 실패");
     }
@@ -89,7 +52,7 @@ const HabitModal = ({ studyId, onClose }) => {
       <p className={styles.headline}>습관 목록</p>
       <div className={styles.wholeHabitsBox}>
         {habits.map((habit, index) => (
-          <div className={styles.singleHabitBoxWithTrashIc} key={index}>
+          <div className={styles.singleHabitBoxWithTrashIc} key={habit.id}>
             <div className={styles.singleHabitBox}>
               <input
                 type="text"
@@ -100,14 +63,14 @@ const HabitModal = ({ studyId, onClose }) => {
                     handleInputChange(index, "");
                   }
                 }}
-                onChange={(e) => handleInputChange(index, e.target.value)} //map에서 주는 index
-                size={habit.length || 10}
+                onChange={(e) => handleInputChange(index, e.target.value)}
+                size={habit.title.length || 10}
               />
             </div>
             <img
               src={trashIcon}
               className={styles.trashIcon}
-              onClick={() => handleDeleteHabit(index)}
+              onClick={() => handleDeleteHabit(habit)}
               alt="삭제 아이콘"
             />
           </div>
@@ -122,7 +85,10 @@ const HabitModal = ({ studyId, onClose }) => {
         </button>
         <button
           className={styles.confirmRevision}
-          onClick={handleConfirmRevision}
+          onClick={() => {
+            handleConfirmRevision();
+            onClose();
+          }}
         >
           수정 완료
         </button>
