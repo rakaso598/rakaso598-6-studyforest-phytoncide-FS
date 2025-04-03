@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./HabitRecordTable.module.css";
 import stickerWhite from "/images/stickers/sticker-white.svg";
 import stickerBlue100 from "/images/stickers/sticker-blue-100.svg";
@@ -19,31 +19,32 @@ import stickerPink300 from "/images/stickers/sticker-pink-300.svg";
 import stickerPink400 from "/images/stickers/sticker-pink-400.svg";
 import stickerPurple100 from "/images/stickers/sticker-purple-100.svg";
 import stickerPurple200 from "/images/stickers/sticker-purple-200.svg";
+import { useParams } from "react-router-dom";
+import { getAllHabits } from "@api/today-habit/habit.api";
 
 function HabitRecordTable() {
-  // Mock data - 나중에 DB 불러와서 수정
-  const habits = [
-    "미라클모닝 6시 기상",
-    "30분 유산소",
-    "5분 아침 명상",
-    "건강하게 먹기",
-    "1시간 수영",
-    "찬물샤워",
-    "코딩 8시간하기",
-    "웨이트 트레이닝",
-    "5키로 걷기",
-    "스트레칭 20분 하기",
-    "물 최소 5잔 마시기",
-    "취침 1시간 전 스마트폰 사용하지말기",
-    "눈에 휴식 취하기",
-    "책 읽기",
-    "습관 1",
-    "습관 2",
-    "습관 3",
-    "습관 4",
-    "습관 5",
-  ];
+  const { studyId } = useParams();
+  const [habits, setHabits] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchHabits = async () => {
+      try {
+        setLoading(true);
+        const habitData = await getAllHabits(studyId);
+        setHabits(habitData);
+        console.log("habit data 가져온것:", habitData);
+      } catch (error) {
+        console.error("Habit 데이터 가져오는데 에러발생:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (studyId) {
+      fetchHabits();
+    }
+  }, [studyId]);
   const days = ["월", "화", "수", "목", "금", "토", "일"];
 
   const allStickers = [
@@ -92,7 +93,7 @@ function HabitRecordTable() {
         {/* 습관 행열 모음 */}
         {habits.map((habit, rowIndex) => (
           <div key={`habit-${rowIndex}`} className={styles.habitRow}>
-            <div className={styles.habitNameCell}>{habit}</div>
+            <div className={styles.habitNameCell}>{habit.title}</div>
             <div className={styles.statusCells}>
               {days.map((_, dayIndex) => (
                 <div
@@ -101,7 +102,7 @@ function HabitRecordTable() {
                 >
                   <div className={styles.stickerWrapper}>
                     <img
-                      src={getStickerForRow(rowIndex)}
+                      src={stickerWhite}
                       alt="Sticker"
                       className={styles.sticker}
                     />

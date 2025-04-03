@@ -50,7 +50,6 @@ const StudyEditForm = () => {
   const handleUpdateStudy = async () => {
     if (!isPasswordMatch) {
       setErrorMessage("비밀번호가 일치하지 않습니다.");
-      alert("비밀번호가 일치하지 않습니다.");
       return;
     }
 
@@ -89,7 +88,6 @@ const StudyEditForm = () => {
     <section className={styles.section}>
       <article className={styles.article}>
         <h2 className={styles.studyCreateTitle}>스터디 수정하기</h2>
-        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
         <div className={styles.studyCreateTopInputBox}>
           <NicknameInput setNickname={setNickname} nickname={nickname} />
           <StudyNameInput setStudyName={setStudyName} studyName={studyName} />
@@ -108,6 +106,7 @@ const StudyEditForm = () => {
         >
           스터디 수정하기
         </button>
+        {errorMessage && <p className={styles.errorMessage}>*{errorMessage}</p>}
       </article>
     </section>
   );
