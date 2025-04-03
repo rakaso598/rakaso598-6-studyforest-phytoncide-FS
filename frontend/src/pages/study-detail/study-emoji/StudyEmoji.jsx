@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect } from 'react';
 import styles from "./StudyEmoji.module.css";
 import smileIcon from "/images/icon/ic_smile.svg";
-import EmojiPicker from "emoji-picker-react";
-import axiosInstance from "../../../api/axiosInstance";
-import { useParams } from "react-router-dom";
+import EmojiPicker from 'emoji-picker-react';
+import axiosInstance from '../../../api/axiosInstance';
+import { useParams } from 'react-router-dom';
 
 function StudyEmoji() {
   const { studyId } = useParams();
@@ -20,20 +20,18 @@ function StudyEmoji() {
       try {
         const response = await axiosInstance.get(`/studies/${studyId}/emojis`);
         if (response.status === 200) {
-          const initialEmojis = response.data.flatMap((item) =>
-            Array(item.count)
-              .fill(item.emojiContent)
-              .map((emoji) => ({
-                emoji,
-                id: Date.now() + Math.random(),
-              }))
+          const initialEmojis = response.data.flatMap(item =>
+            Array(item.count).fill(item.emojiContent).map((emoji) => ({
+              emoji,
+              id: Date.now() + Math.random(),
+            }))
           );
           setSelectedEmojis(initialEmojis);
         } else {
-          console.error("초기 이모지 데이터 불러오기 실패:", response.status);
+          console.error('초기 이모지 데이터 불러오기 실패:', response.status);
         }
       } catch (error) {
-        console.error("초기 이모지 데이터 불러오기 중 오류 발생:", error);
+        console.error('초기 이모지 데이터 불러오기 중 오류 발생:', error);
       } finally {
         isInitialLoad.current = false;
       }
@@ -77,20 +75,18 @@ function StudyEmoji() {
   };
 
   const pickerStyle = {
-    position: "absolute",
-    top: addButtonRef.current?.offsetHeight + 10 || "50px",
-    left: addButtonRef.current?.offsetLeft || "0",
+    position: 'absolute',
+    top: addButtonRef.current?.offsetHeight + 10 || '50px',
+    left: addButtonRef.current?.offsetLeft || '0',
     zIndex: 1000,
   };
 
   const modalStyle = {
-    position: "absolute",
-    top:
-      moreEmojisButtonRef.current?.offsetHeight +
-        moreEmojisButtonRef.current?.offsetTop || "auto",
-    background: "white",
-    padding: "20px",
-    border: "1px solid gray",
+    position: 'absolute',
+    top: moreEmojisButtonRef.current?.offsetHeight + moreEmojisButtonRef.current?.offsetTop || 'auto',
+    background: 'white',
+    padding: '20px',
+    border: '1px solid gray',
     zIndex: 1001,
   };
 
@@ -99,25 +95,17 @@ function StudyEmoji() {
       acc[curr.emoji] = (acc[curr.emoji] || 0) + 1;
       return acc;
     }, {});
+  };
 
-  }, [selectedEmojis]);
+  const emojiCounts = getEmojiCounts();
+  const displayedEmojis = Object.entries(emojiCounts)
+    .sort(([, countA], [, countB]) => countB - countA)
+    .slice(0, 3)
+    .map(([emoji, count]) => ({ emoji, count }));
 
-  const displayedEmojis = useCallback(() => {
-    const emojiCounts = getEmojiCounts();
-    return Object.entries(emojiCounts)
-      .sort(([, countA], [, countB]) => countB - countA)
-      .slice(0, 3)
-      .map(([emoji, count]) => ({ emoji, count }));
-  }, [getEmojiCounts]);
-
-  const remainingEmojis = useCallback(() => {
-    const emojiCounts = getEmojiCounts();
-    const displayed = displayedEmojis().map((item) => item.emoji);
-    return Object.entries(emojiCounts).filter(
-      ([emoji]) => !displayed.includes(emoji)
-    );
-  }, [getEmojiCounts, displayedEmojis]);
-
+  const remainingEmojis = Object.entries(emojiCounts).filter(
+    ([emoji]) => !displayedEmojis.map((item) => item.emoji).includes(emoji)
+  );
 
   useEffect(() => {
     if (modalOpen && Object.keys(emojiCounts).length <= 3) {
@@ -133,12 +121,12 @@ function StudyEmoji() {
       });
 
       if (response.status === 200) {
-        console.log("이모지 데이터가 성공적으로 업데이트되었습니다.");
+        console.log('이모지 데이터가 성공적으로 업데이트되었습니다.');
       } else {
-        console.error("이모지 데이터 업데이트 실패:", response.status);
+        console.error('이모지 데이터 업데이트 실패:', response.status);
       }
     } catch (error) {
-      console.error("이모지 데이터 업데이트 중 오류 발생:", error);
+      console.error('이모지 데이터 업데이트 중 오류 발생:', error);
     }
   };
 
