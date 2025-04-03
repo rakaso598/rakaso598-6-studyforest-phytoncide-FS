@@ -1,6 +1,6 @@
 import axiosInstance from "../axiosInstance";
 
-const HABIT_URL = "/api/habits";
+const HABIT_URL = "/studies";
 
 const handleError = (e) => {
   if (e.response) {
@@ -12,7 +12,7 @@ const handleError = (e) => {
 
 export const getHabits = async (studyId) => {
   try {
-    const res = await axiosInstance.get(`${HABIT_URL}/${studyId}`);
+    const res = await axiosInstance.get(`${HABIT_URL}/${studyId}/habits`);
     return res.data;
   } catch (e) {
     handleError(e);

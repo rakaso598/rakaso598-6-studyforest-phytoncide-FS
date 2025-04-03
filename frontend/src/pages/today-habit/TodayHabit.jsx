@@ -16,20 +16,20 @@ const TodayHabit = () => {
   const closeModal = () => {
     setIsModalOpen(false); // 모달 닫기
   };
-  const { id } = useParams();
+  const { studyId } = useParams();
 
   return (
     <div className={styles.container}>
       <div className={styles.mainContainer}>
         <div className={styles.topContainer}>
           <StudyNavbar
-            id={id}
-            link={`/study/${id}/focus`}
+            studyId={studyId}
+            link={`/study/${studyId}/focus`}
             pageName={"오늘의 집중"}
           />
           <CurrentTime />
         </div>
-        <Habits studyId={id} refresh={isModalOpen} openModal={openModal} />
+        <Habits studyId={studyId} refresh={isModalOpen} openModal={openModal} />
       </div>
 
       {/* 모달 열림 상태가 true일 때 TodayHabitCreate 모달 표시 */}
@@ -39,7 +39,7 @@ const TodayHabit = () => {
             className={styles.modalContent}
             onClick={(e) => e.stopPropagation()}
           >
-            <HabitModal onClose={closeModal} studyId={id} />
+            <HabitModal onClose={closeModal} studyId={studyId} />
           </div>
         </div>
       )}
