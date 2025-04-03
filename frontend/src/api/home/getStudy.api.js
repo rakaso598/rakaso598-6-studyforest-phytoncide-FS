@@ -8,7 +8,7 @@ export const getStudies = async ({
   orderBy = "createAt",
 } = {}) => {
   try {
-    const response = await axiosInstance.get("/api/study", {
+    const response = await axiosInstance.get("/studies", {
       params: {
         offset,
         limit,

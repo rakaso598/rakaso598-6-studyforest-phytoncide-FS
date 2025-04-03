@@ -20,22 +20,22 @@
   transform: translateY(-10px);
 }
 
-.card[data-bg^='bg1'] {
+.card[data-bg^="bg1"] {
   background-color: var(--bg-blue);
 }
-.card[data-bg^='bg2'] {
+.card[data-bg^="bg2"] {
   background-color: var(--bg-yellow);
 }
-.card[data-bg^='bg3'] {
+.card[data-bg^="bg3"] {
   background-color: var(--bg-pink);
 }
-.card[data-bg^='bg4'] {
+.card[data-bg^="bg4"] {
   background-color: var(--bg-green-light);
 }
-.card[data-bg^='bg5'],
-.card[data-bg^='bg6'],
-.card[data-bg^='bg7'],
-.card[data-bg^='bg8'] {
+.card[data-bg^="bg5"],
+.card[data-bg^="bg6"],
+.card[data-bg^="bg7"],
+.card[data-bg^="bg8"] {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
@@ -86,17 +86,17 @@
   margin-left: 5px;
 }
 
-.card[data-bg^='bg']:not([data-bg^='bg5']):not([data-bg^='bg6']):not(
-    [data-bg^='bg7']
-  ):not([data-bg^='bg8'])
+.card[data-bg^="bg"]:not([data-bg^="bg5"]):not([data-bg^="bg6"]):not(
+    [data-bg^="bg7"]
+  ):not([data-bg^="bg8"])
   .pointsContainer {
   background-color: rgba(255, 255, 255, 0.3);
 }
 
-.card[data-bg^='bg5'] .pointsContainer,
-.card[data-bg^='bg6'] .pointsContainer,
-.card[data-bg^='bg7'] .pointsContainer,
-.card[data-bg^='bg8'] .pointsContainer {
+.card[data-bg^="bg5"] .pointsContainer,
+.card[data-bg^="bg6"] .pointsContainer,
+.card[data-bg^="bg7"] .pointsContainer,
+.card[data-bg^="bg8"] .pointsContainer {
   background-color: rgba(0, 0, 0, 0.6);
   border: none;
 }
@@ -106,17 +106,17 @@
   font-size: 12px;
 }
 
-.card[data-bg^='bg']:not([data-bg^='bg5']):not([data-bg^='bg6']):not(
-    [data-bg^='bg7']
-  ):not([data-bg^='bg8'])
+.card[data-bg^="bg"]:not([data-bg^="bg5"]):not([data-bg^="bg6"]):not(
+    [data-bg^="bg7"]
+  ):not([data-bg^="bg8"])
   .pointsText {
   color: var(--text-gray);
 }
 
-.card[data-bg^='bg5'] .pointsText,
-.card[data-bg^='bg6'] .pointsText,
-.card[data-bg^='bg7'] .pointsText,
-.card[data-bg^='bg8'] .pointsText {
+.card[data-bg^="bg5"] .pointsText,
+.card[data-bg^="bg6"] .pointsText,
+.card[data-bg^="bg7"] .pointsText,
+.card[data-bg^="bg8"] .pointsText {
   color: var(--text-white);
 }
 
@@ -133,29 +133,36 @@
   line-height: 1.4;
 }
 
-.card[data-bg='bg1'] .authorName {
+.authorName {
+  max-width: 100px;
+  word-break: break-word;
+  white-space: normal;
+  overflow-wrap: break-word;
+}
+
+.card[data-bg="bg1"] .authorName {
   color: var(--text-blue);
 }
 
-.card[data-bg='bg2'] .authorName {
+.card[data-bg="bg2"] .authorName {
   color: var(--text-yellow);
 }
 
-.card[data-bg='bg3'] .authorName {
+.card[data-bg="bg3"] .authorName {
   color: var(--text-pink);
 }
 
-.card[data-bg='bg4'] .authorName {
+.card[data-bg="bg4"] .authorName {
   color: var(--text-green);
 }
-.card[data-bg^='bg5'] .authorName,
-.card[data-bg^='bg6'] .authorName,
-.card[data-bg^='bg7'] .authorName,
-.card[data-bg^='bg8'] .authorName,
-.card[data-bg^='bg5'] .cardTitle,
-.card[data-bg^='bg6'] .cardTitle,
-.card[data-bg^='bg7'] .cardTitle,
-.card[data-bg^='bg8'] .cardTitle {
+.card[data-bg^="bg5"] .authorName,
+.card[data-bg^="bg6"] .authorName,
+.card[data-bg^="bg7"] .authorName,
+.card[data-bg^="bg8"] .authorName,
+.card[data-bg^="bg5"] .cardTitle,
+.card[data-bg^="bg6"] .cardTitle,
+.card[data-bg^="bg7"] .cardTitle,
+.card[data-bg^="bg8"] .cardTitle {
   color: var(--text-white);
 }
 
@@ -165,10 +172,10 @@
   color: var(--text-gray);
 }
 
-.card[data-bg^='bg5'] .cardDayContainer,
-.card[data-bg^='bg6'] .cardDayContainer,
-.card[data-bg^='bg7'] .cardDayContainer,
-.card[data-bg^='bg8'] .cardDayContainer {
+.card[data-bg^="bg5"] .cardDayContainer,
+.card[data-bg^="bg6"] .cardDayContainer,
+.card[data-bg^="bg7"] .cardDayContainer,
+.card[data-bg^="bg8"] .cardDayContainer {
   color: var(--text-white);
 }
 
@@ -183,10 +190,10 @@
   color: var(--text-black);
 }
 
-.card[data-bg^='bg5'] .cardContent,
-.card[data-bg^='bg6'] .cardContent,
-.card[data-bg^='bg7'] .cardContent,
-.card[data-bg^='bg8'] .cardContent {
+.card[data-bg^="bg5"] .cardContent,
+.card[data-bg^="bg6"] .cardContent,
+.card[data-bg^="bg7"] .cardContent,
+.card[data-bg^="bg8"] .cardContent {
   color: var(--text-white);
 }
 
@@ -211,10 +218,10 @@
   border-radius: 50px;
 }
 
-.card[data-bg='bg5'] .emoji,
-.card[data-bg='bg6'] .emoji,
-.card[data-bg='bg7'] .emoji,
-.card[data-bg='bg8'] .emoji {
+.card[data-bg="bg5"] .emoji,
+.card[data-bg="bg6"] .emoji,
+.card[data-bg="bg7"] .emoji,
+.card[data-bg="bg8"] .emoji {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
