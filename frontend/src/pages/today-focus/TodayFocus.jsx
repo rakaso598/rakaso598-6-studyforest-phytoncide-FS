@@ -96,7 +96,7 @@ const TodayFocus = () => {
       <div className={styles.box}>
         <StudyNavbar
           studyId={studyId}
-          link={`/study/${studyId}/habit`}
+          link={`/studies/${studyId}/habit`}
           pageName={"오늘의 습관"}
         />
         <TodayFocusPoint totalPoint={totalPoint} />
