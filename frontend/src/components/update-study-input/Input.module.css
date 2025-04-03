@@ -1,12 +1,20 @@
+/* Input.module.css */
+
 .label {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
 
 .inputBoxTitle {
   font-size: 16px;
   font-weight: 600;
+}
+
+.pwInputBox {
+  position: relative; /* 아이콘 위치 설정을 위해 */
+  width: 100%;
 }
 
 .input {
@@ -15,9 +23,10 @@
   outline: none;
   border: 1px solid var(--color-gray-200);
   border-radius: 15px;
-  padding: 20px;
+  padding: 20px 48px 20px 20px; /* 오른쪽 padding 추가하여 아이콘 공간 확보 */
   font-family: var(--font-pretendard-regular);
   transition: border-color 0.3s;
+  box-sizing: border-box; /* padding이 전체 width에 포함되도록 */
 }
 
 .input.err {
@@ -32,6 +41,16 @@
 .successMessage {
   color: green;
   font-size: 14px;
+}
+
+.btnIcon {
+  position: absolute;
+  top: 50%;
+  right: 16px;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
 }
 
 @media screen and (min-width: 744px) {
