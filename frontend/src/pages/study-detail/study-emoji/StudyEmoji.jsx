@@ -13,6 +13,7 @@ function StudyEmoji() {
   const [modalOpen, setModalOpen] = useState(false);
   const moreEmojisButtonRef = useRef(null);
   const isInitialLoad = useRef(true);
+  const hasEmojiChanged = useRef(false); // 이모지 변경 여부를 추적하는 ref
 
   useEffect(() => {
     const fetchInitialEmojis = async () => {
@@ -44,10 +45,13 @@ function StudyEmoji() {
   };
 
   const handleEmojiClick = (emojiObject) => {
-    setSelectedEmojis((prevEmojis) => [
-      ...prevEmojis,
-      { emoji: emojiObject.emoji, id: Date.now() + Math.random() },
-    ]);
+    setSelectedEmojis((prevEmojis) => {
+      hasEmojiChanged.current = true; // 이모지가 추가됨을 표시
+      return [
+        ...prevEmojis,
+        { emoji: emojiObject.emoji, id: Date.now() + Math.random() },
+      ];
+    });
     setShowPicker(false);
   };
 
@@ -57,6 +61,7 @@ function StudyEmoji() {
         (item) => item.emoji === emojiToRemove.emoji
       );
       if (indexToRemove !== -1) {
+        hasEmojiChanged.current = true; // 이모지가 삭제됨을 표시
         const newEmojis = [...prevEmojis];
         newEmojis.splice(indexToRemove, 1);
         return newEmojis;
@@ -126,8 +131,9 @@ function StudyEmoji() {
   };
 
   useEffect(() => {
-    if (!isInitialLoad.current) {
+    if (!isInitialLoad.current && hasEmojiChanged.current) {
       sendEmojiData();
+      hasEmojiChanged.current = false; // 데이터 전송 후 변경 상태 초기화
     }
   }, [selectedEmojis, sendEmojiData]);
 
