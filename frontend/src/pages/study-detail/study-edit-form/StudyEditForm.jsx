@@ -10,7 +10,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../../../api/axiosInstance";
 
 const StudyEditForm = () => {
-  const { id } = useParams();
+  const { studyId } = useParams();
   const navigate = useNavigate();
   const [nickname, setNickname] = useState("");
   const [studyName, setStudyName] = useState("");
@@ -24,7 +24,7 @@ const StudyEditForm = () => {
     const fetchStudyData = async () => {
       try {
         const response = await axiosInstance.get(
-          `https://six-study-forest-server.onrender.com/api/study/${id}`
+          `/studies/${studyId}`
         );
         if (response.status === 200) {
           const studyData = response.data;
@@ -41,7 +41,7 @@ const StudyEditForm = () => {
     };
 
     fetchStudyData();
-  }, [id]);
+  }, [studyId]);
 
   const handlePasswordCheck = useCallback((match) => {
     setIsPasswordMatch(match);
@@ -59,8 +59,8 @@ const StudyEditForm = () => {
       return;
     }
     try {
-      const response = await axiosInstance.put(
-        `https://six-study-forest-server.onrender.com/api/study/${id}/update`,
+      const response = await axiosInstance.patch(
+        `/studies/${studyId}/update`,
         {
           nickName: nickname,
           title: studyName,
@@ -72,7 +72,7 @@ const StudyEditForm = () => {
 
       if (response.status === 200) {
         alert("스터디 정보가 성공적으로 수정되었습니다.");
-        navigate(`/study/${id}`);
+        navigate(`/studies/${studyId}`);
       } else {
         setErrorMessage(
           `스터디 정보 수정 실패: ${response.data && response.data.message}`

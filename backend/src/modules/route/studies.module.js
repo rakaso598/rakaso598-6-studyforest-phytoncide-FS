@@ -1,6 +1,6 @@
 import express from "express";
-import studyVerifyPassword from "../edit-study-modules/studyVerifyPassword.module.js";
-import studyUpdate from "../edit-study-modules/studyUpdate.module.js";
+import editFormVerifyPassword from "../study/editFormVerifyPassword.module.js";
+import studyPatchRouter from "../study/studyPatch.module.js";
 import studyGetRouter from "../study/studyGet.module.js";
 import postStudyRouter from "../study/postStudy.module.js";
 import studyDeleteRouter from "../study/studyDelete.module.js";
@@ -12,9 +12,9 @@ studyRouter.use(
   "/",
   studyGetRouter,
   postStudyRouter,
-  studyUpdate,
+  studyPatchRouter,
   studyDeleteRouter,
-  studyVerifyPassword,
+  editFormVerifyPassword,
   emojiRouter
 ); // http://localhost:5090/studies
 // studyRouter.use("/", postStudyRouter); // http://localhost:5090/studies
