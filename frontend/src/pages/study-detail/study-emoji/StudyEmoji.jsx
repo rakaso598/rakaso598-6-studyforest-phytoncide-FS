@@ -13,7 +13,7 @@ function StudyEmoji() {
   const [modalOpen, setModalOpen] = useState(false);
   const moreEmojisButtonRef = useRef(null);
   const isInitialLoad = useRef(true);
-  const hasEmojiChanged = useRef(false); // 이모지 변경 여부를 추적하는 ref
+  const hasEmojiChanged = useRef(false);
 
   useEffect(() => {
     const fetchInitialEmojis = async () => {
@@ -61,7 +61,7 @@ function StudyEmoji() {
         (item) => item.emoji === emojiToRemove.emoji
       );
       if (indexToRemove !== -1) {
-        hasEmojiChanged.current = true; // 이모지가 삭제됨을 표시
+        hasEmojiChanged.current = true;
         const newEmojis = [...prevEmojis];
         newEmojis.splice(indexToRemove, 1);
         return newEmojis;
@@ -133,7 +133,7 @@ function StudyEmoji() {
   useEffect(() => {
     if (!isInitialLoad.current && hasEmojiChanged.current) {
       sendEmojiData();
-      hasEmojiChanged.current = false; // 데이터 전송 후 변경 상태 초기화
+      hasEmojiChanged.current = false;
     }
   }, [selectedEmojis, sendEmojiData]);
 
