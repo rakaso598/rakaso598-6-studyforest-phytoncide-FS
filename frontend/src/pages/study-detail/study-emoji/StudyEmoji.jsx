@@ -6,7 +6,7 @@ import axiosInstance from '../../../api/axiosInstance';
 import { useParams } from 'react-router-dom';
 
 function StudyEmoji() {
-  const { id: studyId } = useParams();
+  const { studyId } = useParams();
   const [showPicker, setShowPicker] = useState(false);
   const addButtonRef = useRef(null);
   const [selectedEmojis, setSelectedEmojis] = useState([]);
@@ -17,7 +17,7 @@ function StudyEmoji() {
   useEffect(() => {
     const fetchInitialEmojis = async () => {
       try {
-        const response = await axiosInstance.get(`/api/study/${studyId}/emojis`);
+        const response = await axiosInstance.get(`https://six-study-forest-server.onrender.com/studies/${studyId}/emojis`);
         if (response.status === 200) {
           const initialEmojis = response.data.flatMap(item =>
             Array(item.count).fill(item.emojiContent).map((emoji) => ({
@@ -107,7 +107,8 @@ function StudyEmoji() {
   const sendEmojiData = useCallback(async () => {
     try {
       const emojiCounts = getEmojiCounts();
-      const response = await axiosInstance.post(`/api/study/${studyId}/emojis`, {
+      const response = await axiosInstance.post(`/studies/${studyId}/emojis`, {
+        studyId: studyId, // 요청 본문에 studyId를 명시적으로 포함 (선택 사항)
         emojis: Object.entries(emojiCounts),
       });
 

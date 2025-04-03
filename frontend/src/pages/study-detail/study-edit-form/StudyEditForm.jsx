@@ -10,7 +10,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axiosInstance from "../../../api/axiosInstance";
 
 const StudyEditForm = () => {
-  const { id: studyId } = useParams();
+  const { studyId } = useParams();
   const navigate = useNavigate();
   const [nickname, setNickname] = useState("");
   const [studyName, setStudyName] = useState("");
@@ -24,7 +24,7 @@ const StudyEditForm = () => {
     const fetchStudyData = async () => {
       try {
         const response = await axiosInstance.get(
-          `https://six-study-forest-server.onrender.com/api/study/${studyId}`
+          `https://six-study-forest-server.onrender.com/studies/${studyId}`
         );
         if (response.status === 200) {
           const studyData = response.data;
@@ -60,7 +60,7 @@ const StudyEditForm = () => {
     }
     try {
       const response = await axiosInstance.put(
-        `https://six-study-forest-server.onrender.com/api/study/${studyId}/update`,
+        `https://six-study-forest-server.onrender.com/studies/${studyId}/update`,
         {
           nickName: nickname,
           title: studyName,

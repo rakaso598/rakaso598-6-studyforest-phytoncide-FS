@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import "./EditStudyModal.css";
-import SERVER_URL from "../../server";
 import axiosInstance from "../../api/axiosInstance";
 
 const EditStudyModal = ({ isOpen, onClose }) => {
@@ -16,12 +15,12 @@ const EditStudyModal = ({ isOpen, onClose }) => {
     setPassword(event.target.value);
   };
 
-  // const VERIFY_PASSWORD_URL = `${SERVER_URL}/studies/${studyId}/verify-password`;
-  const VERIFY_PASSWORD_URL = `http://localhost:5090/studies/${studyId}/verify-password`;
+  // const VERIFY_PASSWORD_URL = `https://six-study-forest-server.onrender.com/studies/${studyId}/verify-password`;
+  const VERIFY_PASSWORD_URL = `https://six-study-forest-server.onrender.com/studies/${studyId}/verify-password`;
   const handleVerifyPassword = async () => {
     try {
       const response = await axiosInstance.post(VERIFY_PASSWORD_URL, {
-        studyId: studyId, // 요청 본문에서도 studyId를 사용하도록 수정
+        studyId: studyId,
         encryptedPassword,
       });
 
