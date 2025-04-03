@@ -21,16 +21,16 @@
 }
 
 .card[data-bg^="bg1"] {
-  background-color: var(--bg-blue);
+  background-color: var(--bg-green-light);
 }
 .card[data-bg^="bg2"] {
   background-color: var(--bg-yellow);
 }
 .card[data-bg^="bg3"] {
-  background-color: var(--bg-pink);
+  background-color: var(--bg-blue);
 }
 .card[data-bg^="bg4"] {
-  background-color: var(--bg-green-light);
+  background-color: var(--bg-pink);
 }
 .card[data-bg^="bg5"],
 .card[data-bg^="bg6"],
@@ -141,7 +141,7 @@
 }
 
 .card[data-bg="bg1"] .authorName {
-  color: var(--text-blue);
+  color: var(--text-green);
 }
 
 .card[data-bg="bg2"] .authorName {
@@ -149,11 +149,11 @@
 }
 
 .card[data-bg="bg3"] .authorName {
-  color: var(--text-pink);
+  color: var(--text-blue);
 }
 
 .card[data-bg="bg4"] .authorName {
-  color: var(--text-green);
+  color: var(--text-pink);
 }
 .card[data-bg^="bg5"] .authorName,
 .card[data-bg^="bg6"] .authorName,

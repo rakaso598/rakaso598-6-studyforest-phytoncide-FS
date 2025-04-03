@@ -47,3 +47,13 @@ export const deleteHabit = async (studyId, habitId) => {
     handleError(e);
   }
 };
+
+export const getAllHabits = async (studyId) => {
+  try {
+    const res = await axiosInstance.get(`/studies/${studyId}/habits?all=true`); // Use query parameter
+    return res.data;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+};
