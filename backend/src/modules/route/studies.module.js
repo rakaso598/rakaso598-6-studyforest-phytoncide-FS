@@ -2,7 +2,7 @@ import express from "express";
 import editFormVerifyPassword from "../study/editFormVerifyPassword.module.js";
 import studyPatchRouter from "../study/studyPatch.module.js";
 import studyGetRouter from "../study/studyGet.module.js";
-import postStudyRouter from "../study/postStudy.module.js";
+import studyPostRouter from "../study/studyPost.module.js";
 import studyDeleteRouter from "../study/studyDelete.module.js";
 import emojiRouter from "../emoji/emojis.module.js";
 
@@ -11,7 +11,7 @@ const studyRouter = express.Router();
 studyRouter.use(
   "/",
   studyGetRouter,
-  postStudyRouter,
+  studyPostRouter,
   studyPatchRouter,
   studyDeleteRouter,
   editFormVerifyPassword,

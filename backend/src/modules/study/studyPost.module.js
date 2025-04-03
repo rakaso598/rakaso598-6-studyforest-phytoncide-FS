@@ -2,9 +2,9 @@ import express from "express";
 import prisma from "../../db/prisma/client.prisma.js";
 import bcrypt from "bcrypt";
 
-const postStudyRouter = express.Router();
+const studyPostRouter = express.Router();
 
-postStudyRouter.post("/", async (req, res, next) => {
+studyPostRouter.post("/", async (req, res, next) => {
   try {
     const data = req.body;
 
@@ -36,4 +36,4 @@ postStudyRouter.post("/", async (req, res, next) => {
   }
 });
 
-export default postStudyRouter;
+export default studyPostRouter;
