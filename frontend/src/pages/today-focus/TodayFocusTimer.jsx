@@ -19,6 +19,7 @@ const TodayFocusTimer = ({
 
   // 시작 버튼
   const handleStartClick = () => {
+    if (!timeover && minute === "00" && second === "00") return;
     if (start) {
       setStart(false);
       setDisabled(false);
