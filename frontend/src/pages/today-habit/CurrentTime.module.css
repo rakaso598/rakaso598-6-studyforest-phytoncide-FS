@@ -9,7 +9,7 @@
   color: var(--color-gray-300);
   font-weight: 400;
   font-size: 18px;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 .timeNow {
   color: var(--color-black);
@@ -21,4 +21,16 @@
   width: fit-content;
   border: 1px solid var(--color-gray-200);
   text-align: center;
+}
+
+@media screen and (min-width: 744px) {
+  .timeContainer {
+    margin-bottom: 40px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .timeContainer {
+    margin-bottom: 24px;
+  }
 }
