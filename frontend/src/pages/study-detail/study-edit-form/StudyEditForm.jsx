@@ -88,7 +88,7 @@ const StudyEditForm = () => {
   return (
     <section className={styles.section}>
       <article className={styles.article}>
-        <h2 className={styles.studyCreateTitle}>스터디 수정하기</h2>
+        <h2 className={styles.studyUpdateTitle}>스터디 수정하기</h2>
         {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
         <div className={styles.studyCreateTopInputBox}>
           <NicknameInput setNickname={setNickname} nickname={nickname} />
