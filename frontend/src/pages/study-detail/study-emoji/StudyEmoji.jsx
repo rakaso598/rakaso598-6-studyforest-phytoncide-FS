@@ -17,7 +17,7 @@ function StudyEmoji() {
   useEffect(() => {
     const fetchInitialEmojis = async () => {
       try {
-        const response = await axiosInstance.get(`https://six-study-forest-server.onrender.com/studies/${studyId}/emojis`);
+        const response = await axiosInstance.get(`/studies/${studyId}/emojis`);
         if (response.status === 200) {
           const initialEmojis = response.data.flatMap(item =>
             Array(item.count).fill(item.emojiContent).map((emoji) => ({

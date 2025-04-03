@@ -24,7 +24,7 @@ const StudyEditForm = () => {
     const fetchStudyData = async () => {
       try {
         const response = await axiosInstance.get(
-          `https://six-study-forest-server.onrender.com/studies/${studyId}`
+          `/studies/${studyId}`
         );
         if (response.status === 200) {
           const studyData = response.data;
@@ -60,7 +60,7 @@ const StudyEditForm = () => {
     }
     try {
       const response = await axiosInstance.put(
-        `https://six-study-forest-server.onrender.com/studies/${studyId}/update`,
+        `/studies/${studyId}/update`,
         {
           nickName: nickname,
           title: studyName,

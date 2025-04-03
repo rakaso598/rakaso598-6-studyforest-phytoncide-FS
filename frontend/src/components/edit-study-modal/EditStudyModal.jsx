@@ -15,8 +15,7 @@ const EditStudyModal = ({ isOpen, onClose }) => {
     setPassword(event.target.value);
   };
 
-  // const VERIFY_PASSWORD_URL = `https://six-study-forest-server.onrender.com/studies/${studyId}/verify-password`;
-  const VERIFY_PASSWORD_URL = `https://six-study-forest-server.onrender.com/studies/${studyId}/verify-password`;
+  const VERIFY_PASSWORD_URL = `/studies/${studyId}/verify-password`;
   const handleVerifyPassword = async () => {
     try {
       const response = await axiosInstance.post(VERIFY_PASSWORD_URL, {
