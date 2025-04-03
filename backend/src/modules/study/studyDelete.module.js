@@ -4,14 +4,13 @@ import bcrypt from "bcrypt";
 
 const studyDeleteRouter = express.Router();
 
-studyDeleteRouter.delete("/:id/delete", async (req, res, next) => {
+studyDeleteRouter.delete("/:studyId", async (req, res, next) => {
   try {
-    console.log("study delete 호출됨");
-    const { id } = req.params;
+    const { studyId } = req.params;
     const { password } = req.body;
     const study = await prisma.study.findUnique({
       where: {
-        id: parseInt(id),
+        id: parseInt(studyId),
       },
     });
 
@@ -35,7 +34,7 @@ studyDeleteRouter.delete("/:id/delete", async (req, res, next) => {
     // 비밀번호 확인 되었으므로 삭제 실행
     await prisma.study.delete({
       where: {
-        id: parseInt(id),
+        id: parseInt(studyId),
       },
     });
 

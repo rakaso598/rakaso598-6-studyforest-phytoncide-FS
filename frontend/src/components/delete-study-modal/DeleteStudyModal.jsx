@@ -9,7 +9,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [studyTitle, setStudyTitle] = useState("");
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { studyId } = useParams();
 
   // 모달 오픈시 폼과 토스트 메세지 리셋
   useEffect(() => {
@@ -23,7 +23,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
   useEffect(() => {
     const fetchStudyDetail = async () => {
       try {
-        const study = await getStudyDetail(id);
+        const study = await getStudyDetail(studyId);
         setStudyTitle(study.title);
         console.log(`Study title = ${study.title}`);
         console.log(`Study info = ${study}`);
@@ -32,10 +32,10 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
       }
     };
 
-    if (isOpen && id) {
+    if (isOpen && studyId) {
       fetchStudyDetail();
     }
-  }, [isOpen, id]);
+  }, [isOpen, studyId]);
   if (!isOpen) return null;
 
   const handlePasswordChange = (event) => {
@@ -50,7 +50,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
 
     try {
       // 삭제 프론트 API 함수 호출 - 백엔드 스터디 삭제 API 에서 비밀번호 검증도 함께 수행됨
-      const deleteResponse = await deleteStudy(id, password);
+      const deleteResponse = await deleteStudy(studyId, password);
 
       if (deleteResponse && deleteResponse.success) {
         // 삭제 성공시 localStorage 업데이트하여 현재 삭제한 id를 가지고있는 parsedData에 일치하는 스터디 있으면 걸러서 안보이게
@@ -58,7 +58,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
         if (storedData) {
           const parsedData = JSON.parse(storedData);
           const updatedData = parsedData.filter(
-            (study) => study.id != parseInt(id)
+            (study) => study.id != parseInt(studyId)
           );
           localStorage.setItem("studyForest", JSON.stringify(updatedData));
         }
