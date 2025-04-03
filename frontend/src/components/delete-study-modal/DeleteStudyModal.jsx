@@ -2,13 +2,40 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styles from "./DeleteStudyModal.module.css";
 import { deleteStudy } from "@api/study/deleteStudy.api.js";
+import { getStudyDetail } from "@api/study/studyDetail.api";
 
 const DeleteStudyModal = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [studyTitle, setStudyTitle] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
+  // 모달 오픈시 폼과 토스트 메세지 리셋
+  useEffect(() => {
+    if (isOpen) {
+      setPassword("");
+      setErrorMessage("");
+    }
+  }, [isOpen]);
+
+  // 모달 오픈시 스터디 디테일 로드
+  useEffect(() => {
+    const fetchStudyDetail = async () => {
+      try {
+        const study = await getStudyDetail(id);
+        setStudyTitle(study.title);
+        console.log(`Study title = ${study.title}`);
+        console.log(`Study info = ${study}`);
+      } catch (error) {
+        console.error("스터디 기능 불러오기에서 에러가 발생하였습니다", error);
+      }
+    };
+
+    if (isOpen && id) {
+      fetchStudyDetail();
+    }
+  }, [isOpen, id]);
   if (!isOpen) return null;
 
   const handlePasswordChange = (event) => {
@@ -53,8 +80,7 @@ const DeleteStudyModal = ({ isOpen, onClose }) => {
     <div className={styles.modalOverlay}>
       <div className={styles.modalContent}>
         <div className={styles.modalHeader}>
-          {/* 여기에 studyDetail.api.js에 getStudyDetail 불러서현재 study.nickName 의 study.title 라고 구현해야함*/}
-          <p className={styles.modalTitle}>스터디 삭제</p>
+          <p className={styles.modalTitle}>{studyTitle}</p>
           <button
             type="button"
             onClick={onClose}
