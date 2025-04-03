@@ -5,20 +5,18 @@ import { getHabits } from "@api/today-habit/habit.api";
 
 function Habits({ studyId, refresh, openModal }) {
   const [habits, setHabits] = useState([]);
-  const [habitCheck, setHabitCheck] = useState([]);
+  const [habitCheck, setHabitCheck] = useState(new Map());
   const today = new Date().toLocaleDateString("en-US", {
     weekday: "long",
   });
   const handleClick = async (habitId) => {
     try {
       await putHabitDone(studyId, habitId, today);
-      setHabitCheck((prev) =>
-        prev.map((habit) =>
-          habit.habitId === habitId
-            ? { ...habit, isDone: !habit.isDone }
-            : habit
-        )
-      );
+      setHabitCheck((prev) => {
+        const newCheck = new Map(prev);
+        newCheck.set(habitId, !newCheck.get(habitId));
+        return newCheck;
+      });
     } catch (e) {
       console.error(e);
     }
@@ -26,15 +24,17 @@ function Habits({ studyId, refresh, openModal }) {
 
   const handleLoad = async () => {
     const result = await getHabits(studyId);
-    const checked = await Promise.all(
-      result.map(async (habit) => {
-        const habitDone = await getHabitDone(studyId, habit.id, today);
-        let isDone = false;
-        if (habitDone) {
-          isDone = true;
-        }
-        return { habitId: habit.id, isDone };
-      })
+    const checked = new Map(
+      await Promise.all(
+        result.map(async (habit) => {
+          const habitDone = await getHabitDone(studyId, habit.id, today);
+          let isDone = false;
+          if (habitDone) {
+            isDone = true;
+          }
+          return [habit.id, isDone];
+        })
+      )
     );
 
     setHabits(result);
@@ -67,7 +67,7 @@ function Habits({ studyId, refresh, openModal }) {
               key={habit.id}
               onClick={() => handleClick(habit.id)}
               className={
-                habitCheck.find((h) => h.habitId === habit.id)?.isDone
+                habitCheck.get(habit.id)
                   ? styles.habitChecked
                   : styles.habitUnchecked
               }
