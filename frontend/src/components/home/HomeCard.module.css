@@ -5,7 +5,7 @@
   gap: 12px;
   width: 100%;
   height: 240px;
-  padding: 30px;
+  padding: 16px;
   border: 1px solid #dddddd;
   border-radius: 20px;
   cursor: pointer;
@@ -55,14 +55,14 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
 .headerTop {
   display: flex;
   flex-direction: column;
   align-items: start;
-  gap: 4px;
+  gap: 6px;
 }
 
 .pointsContainer {
@@ -76,7 +76,7 @@
 
   border-radius: 20px;
   border: 1px solid rgb(223, 223, 223);
-  padding: 4px 12px;
+  padding: 4px 8px;
 }
 
 .pointsTextContainer {
@@ -211,11 +211,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
+
   gap: 5px;
   font-size: 12px;
   padding: 6px 8px;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 50px;
+}
+
+.emojiContent {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
 }
 
 .card[data-bg="bg5"] .emoji,

@@ -37,7 +37,9 @@
 }
 
 .arrow {
-  font-size: 20px;
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
 
   color: var(--color-gray-300);
 }
