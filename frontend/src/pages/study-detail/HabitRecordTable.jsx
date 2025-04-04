@@ -26,6 +26,25 @@ function HabitRecordTable() {
   const { studyId } = useParams();
   const [habits, setHabits] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [currentWeekDates, setCurrentWeekDates] = useState([]);
+  const [habitCompletions, setHabitCompletions] = useState({});
+
+  // 현재 주의 날짜(월요일-일요일) 생성
+  const getCurrentWeekDates = () => {
+    const today = new Date();
+    const currentDay = today.getDay();
+
+    const daysToMonday = currentDay === 0 ? 6 : currentDay - 1;
+    const monday = new Date(today);
+    monday.setDate(today.getDate() - daysToMonday);
+    const weekDates = [];
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(monday);
+      date.setDate(monday.getDate() + i);
+      weekDates.push(date.toISOString().split("T")[0]); // 예 '2025-04-04'
+    }
+    return weekDates;
+  };
 
   useEffect(() => {
     const fetchHabits = async () => {
@@ -33,7 +52,18 @@ function HabitRecordTable() {
         setLoading(true);
         const habitData = await getAllHabits(studyId);
         setHabits(habitData);
+
+        // 현재 주에 해당하는 날짜를 배열에 추가
+        const weekDates = getCurrentWeekDates();
+        setCurrentWeekDates(weekDates);
+
+        // 현재 스터디에 해당하는 습관들의 완료상태를 정리한 객체를 생성
+        const completions = processHabitCompletions(habitData, weekDates);
+        setHabitCompletions(completions);
+
         console.log("habit data 가져온것:", habitData);
+        console.log("this week date:", weekDates);
+        console.log("habit completion status:", completions);
       } catch (error) {
         console.error("Habit 데이터 가져오는데 에러발생:", error);
       } finally {
@@ -45,6 +75,48 @@ function HabitRecordTable() {
       fetchHabits();
     }
   }, [studyId]);
+
+  // 습관별 완료 상태 처리 함수
+  const processHabitCompletions = (habits, weekDates) => {
+    console.log("processHabitCompletions 실행, habits:", habits);
+    console.log("processHabitCompletions 실행, weekDates:", weekDates);
+
+    const completions = {};
+
+    habits.forEach((habit) => {
+      console.log(`습관 ID ${habit.id}, 제목: ${habit.title} 처리 중...`);
+      console.log(`이 습관의 HabitDone:`, habit.HabitDone);
+
+      completions[habit.id] = {};
+
+      // completions 초기화
+      weekDates.forEach((date) => {
+        completions[habit.id][date] = false;
+      });
+
+      if (habit.HabitDone && habit.HabitDone.length > 0) {
+        habit.HabitDone.forEach((done) => {
+          console.log(`HabitDone 기록:`, done);
+          const doneDate =
+            done.createdAt instanceof Date
+              ? done.createdAt.toISOString().split("T")[0]
+              : String(done.createdAt).split("T")[0];
+
+          console.log(`변환된 doneDate: ${doneDate}, 타입: ${typeof doneDate}`);
+          console.log(`이번 주에 포함?: ${weekDates.includes(doneDate)}`);
+
+          // 이번 주에 해당하는 날짜일시 해당 completions 값 업데이트
+          if (weekDates.includes(doneDate)) {
+            console.log(`${doneDate}에 완료됨으로 표시`);
+            completions[habit.id][doneDate] = true;
+          }
+        });
+      }
+    });
+
+    return completions;
+  };
+
   const days = ["월", "화", "수", "목", "금", "토", "일"];
 
   const allStickers = [
@@ -95,20 +167,33 @@ function HabitRecordTable() {
           <div key={`habit-${rowIndex}`} className={styles.habitRow}>
             <div className={styles.habitNameCell}>{habit.title}</div>
             <div className={styles.statusCells}>
-              {days.map((_, dayIndex) => (
-                <div
-                  key={`status-${rowIndex}-${dayIndex}`}
-                  className={styles.statusCell}
-                >
-                  <div className={styles.stickerWrapper}>
-                    <img
-                      src={stickerWhite}
-                      alt="Sticker"
-                      className={styles.sticker}
-                    />
+              {days.map((_, dayIndex) => {
+                // 해당 요일의 날짜
+                const dateForDay = currentWeekDates[dayIndex];
+                // 해당 날짜에 습관이 완료되었는지 확인
+                const isCompleted =
+                  habitCompletions[habit.id] &&
+                  habitCompletions[habit.id][dateForDay];
+
+                return (
+                  <div
+                    key={`status-${rowIndex}-${dayIndex}`}
+                    className={styles.statusCell}
+                  >
+                    <div className={styles.stickerWrapper}>
+                      <img
+                        src={
+                          isCompleted
+                            ? getStickerForRow(rowIndex)
+                            : stickerWhite
+                        }
+                        alt="Sticker"
+                        className={styles.sticker}
+                      />
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         ))}
