@@ -41,6 +41,7 @@ const HabitModal = ({ onClose, studyId }) => {
     try {
       await putHabits(studyId, habits);
       alert("습관 수정 완료");
+
       onClose();
     } catch (error) {
       alert("습관 수정 실패");

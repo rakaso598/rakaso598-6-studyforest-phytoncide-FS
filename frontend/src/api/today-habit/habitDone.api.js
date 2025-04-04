@@ -23,7 +23,7 @@ export const putHabitDone = async (studyId, habitId, day) => {
   try {
     const res = await axiosInstance.put(
       `studies/${studyId}/habits/${habitId}/${day}`
-    ); //주소 수정해야함
+    );
     return res.data;
   } catch (e) {
     handleError(e);
