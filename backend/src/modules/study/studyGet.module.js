@@ -56,6 +56,49 @@ studyGetRouter.get("/", async (req, res, next) => {
   }
 });
 
+studyGetRouter.get("/recently", async (req, res, next) => {
+  try {
+    const { studyIds } = req.query;
+
+    if (!studyIds) {
+      return res
+        .status(400)
+        .json({ message: "studyIds 파라미터가 필요합니다." });
+    }
+
+    // 문자열을 숫자 배열로 변환
+    const studyIdsArray = studyIds
+      .split(",")
+      .map((id) => parseInt(id.trim(), 10))
+      .filter((id) => !isNaN(id));
+
+    if (studyIdsArray.length === 0) {
+      return res.status(400).json({ message: "유효한 studyIds가 없습니다." });
+    }
+
+    const study = await prisma.study.findMany({
+      where: { id: { in: studyIdsArray } },
+      omit: { encryptedPassword: true },
+    });
+
+    // 클라이언트가 요청한 ID 순서에 맞게 결과를 정렬
+    const orderedResult = [];
+
+    // studyIdsArray의 순서대로 결과를 재배열
+    for (const id of studyIdsArray) {
+      const found = study.find((item) => item.id === id);
+      if (found) {
+        orderedResult.push(found);
+      }
+    }
+
+    res.status(200).json(orderedResult);
+  } catch (e) {
+    console.error("오류 발생:", e);
+    next(e);
+  }
+});
+
 studyGetRouter.get("/:studyId", async (req, res, next) => {
   try {
     const studyId = Number(req.params.studyId);
