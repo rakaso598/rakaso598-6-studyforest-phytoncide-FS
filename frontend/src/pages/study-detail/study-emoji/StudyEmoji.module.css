@@ -125,9 +125,9 @@
   border-radius: 15px;
   display: flex;
   width: 257px;
-  flex-wrap: wrap; /* 이모지가 너비를 넘어가면 줄바꿈 */
-  align-items: flex-start; /* 아이템들을 컨테이너의 시작 부분에 정렬 */
-  height: auto; /* 내용에 따라 높이 자동 조절 */
+  flex-wrap: wrap;
+  align-items: flex-start;
+  height: auto;
   top: 100%;
   left: 0%;
 }
@@ -151,16 +151,14 @@
 }
 
 @media screen and (max-width: 743px) {
-  /* 모바일 화면에 적용할 스타일 */
   .commonButtonStyle,
   .moreEmojiButtonStyle,
   .addEmojiButtonStyle {
-    font-size: 14px; /* 예시: 모바일에서 더 작은 글꼴 크기 */
+    font-size: 14px;
     font-weight: 300;
     padding: 4px 6px;
   }
 
-  /* ... 기타 모바일 스타일 ... */
   .emoji {
     min-width: 48px;
   }
@@ -174,7 +172,6 @@
     top: 16%;
     left: 20%;
   }
-
 }
 
 .commonButtonStyle span,
