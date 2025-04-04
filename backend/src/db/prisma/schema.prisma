@@ -52,21 +52,10 @@ model Habit {
 }
 
 model HabitDone {
-  id        Int         @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
   habitId   Int
-  dayOfWeek DAY_OF_WEEK
-  createdAt DateTime    @default(now())
-  habit     Habit       @relation(fields: [habitId], references: [id], onDelete: Cascade)
-}
-
-enum DAY_OF_WEEK {
-  Monday
-  Tuesday
-  Wednesday
-  Thursday
-  Friday
-  Saturday
-  Sunday
+  createdAt DateTime @default(now()) @db.Date
+  habit     Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
 }
 
 // 250329 수정사항 : model Focus는 완전 삭제되었습니다.

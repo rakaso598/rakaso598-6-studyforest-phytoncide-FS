@@ -6,9 +6,7 @@ import { getHabits } from "@api/today-habit/habit.api";
 function Habits({ studyId, isModalOpen, openModal, isLoading, setIsLoading }) {
   const [habits, setHabits] = useState([]);
   const [habitCheck, setHabitCheck] = useState(new Map());
-  const today = new Date().toLocaleDateString("en-US", {
-    weekday: "long",
-  });
+  const today = new Date().toISOString().split("T")[0];
   const handleClick = async (habitId) => {
     try {
       await putHabitDone(studyId, habitId, today);
