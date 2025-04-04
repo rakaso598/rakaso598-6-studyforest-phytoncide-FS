@@ -60,10 +60,6 @@ function HabitRecordTable() {
         // 현재 스터디에 해당하는 습관들의 완료상태를 정리한 객체를 생성
         const completions = processHabitCompletions(habitData, weekDates);
         setHabitCompletions(completions);
-
-        console.log("habit data 가져온것:", habitData);
-        console.log("this week date:", weekDates);
-        console.log("habit completion status:", completions);
       } catch (error) {
         console.error("Habit 데이터 가져오는데 에러발생:", error);
       } finally {
@@ -78,15 +74,9 @@ function HabitRecordTable() {
 
   // 습관별 완료 상태 처리 함수
   const processHabitCompletions = (habits, weekDates) => {
-    console.log("processHabitCompletions 실행, habits:", habits);
-    console.log("processHabitCompletions 실행, weekDates:", weekDates);
-
     const completions = {};
 
     habits.forEach((habit) => {
-      console.log(`습관 ID ${habit.id}, 제목: ${habit.title} 처리 중...`);
-      console.log(`이 습관의 HabitDone:`, habit.HabitDone);
-
       completions[habit.id] = {};
 
       // completions 초기화
@@ -96,18 +86,13 @@ function HabitRecordTable() {
 
       if (habit.HabitDone && habit.HabitDone.length > 0) {
         habit.HabitDone.forEach((done) => {
-          console.log(`HabitDone 기록:`, done);
           const doneDate =
             done.createdAt instanceof Date
               ? done.createdAt.toISOString().split("T")[0]
               : String(done.createdAt).split("T")[0];
 
-          console.log(`변환된 doneDate: ${doneDate}, 타입: ${typeof doneDate}`);
-          console.log(`이번 주에 포함?: ${weekDates.includes(doneDate)}`);
-
           // 이번 주에 해당하는 날짜일시 해당 completions 값 업데이트
           if (weekDates.includes(doneDate)) {
-            console.log(`${doneDate}에 완료됨으로 표시`);
             completions[habit.id][doneDate] = true;
           }
         });
