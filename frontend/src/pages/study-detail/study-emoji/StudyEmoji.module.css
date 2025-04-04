@@ -12,7 +12,7 @@
 .addEmojiButtonStyle {
   display: inline-block;
   vertical-align: middle;
-  gap: 5px;
+  gap: 4px;
   border-radius: 50px;
   width: 67px;
   height: 31px;
@@ -43,11 +43,12 @@
 
 .emoji {
   width: auto;
-  min-width: 54px;
+  min-width: 52px;
   height: 31px;
   padding: 6px;
   gap: 5px;
   display: inline-flex;
+  justify-content: center;
   align-items: center;
 }
 
@@ -108,8 +109,10 @@
 }
 
 .emojiPickerContainer {
-  position: absolute;
   z-index: 1000;
+  position: fixed;
+  top: 27%;
+  left: 20%;
 }
 
 .moreEmojisModal {
@@ -125,6 +128,8 @@
   flex-wrap: wrap; /* 이모지가 너비를 넘어가면 줄바꿈 */
   align-items: flex-start; /* 아이템들을 컨테이너의 시작 부분에 정렬 */
   height: auto; /* 내용에 따라 높이 자동 조절 */
+  top: 100%;
+  left: 0%;
 }
 
 @media screen and (min-width: 744px) {
@@ -143,6 +148,33 @@
   .nav {
     gap: 16px;
   }
+}
+
+@media screen and (max-width: 743px) {
+  /* 모바일 화면에 적용할 스타일 */
+  .commonButtonStyle,
+  .moreEmojiButtonStyle,
+  .addEmojiButtonStyle {
+    font-size: 14px; /* 예시: 모바일에서 더 작은 글꼴 크기 */
+    font-weight: 300;
+    padding: 4px 6px;
+  }
+
+  /* ... 기타 모바일 스타일 ... */
+  .emoji {
+    min-width: 48px;
+  }
+
+  .moreEmojisModal {
+    width: 233px;
+  }
+
+  .emojiPickerContainer {
+    transform: scale(0.7);
+    top: 16%;
+    left: 20%;
+  }
+
 }
 
 .commonButtonStyle span,

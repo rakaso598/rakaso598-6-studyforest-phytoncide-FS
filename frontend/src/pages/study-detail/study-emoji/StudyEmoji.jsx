@@ -154,21 +154,13 @@ function StudyEmoji() {
       </button>
 
       {showPicker && (
-        <div className={styles.emojiPickerContainer}
-          style={{
-            top: addButtonRef.current?.offsetHeight + 10 || '50px',
-            left: addButtonRef.current?.offsetLeft || '0',
-          }}>
+        <div className={styles.emojiPickerContainer}>
           <EmojiPicker onEmojiClick={handleEmojiClick} />
         </div>
       )}
 
       {modalOpen && (
-        <div className={styles.moreEmojisModal}
-          style={{
-            top: moreEmojisButtonRef.current?.offsetHeight + moreEmojisButtonRef.current?.offsetTop || 'auto',
-            left: moreEmojisButtonRef.current?.offsetLeft || '0',
-          }}>
+        <div className={styles.moreEmojisModal}>
           {remainingEmojis.map(([emoji, count]) => (
             <button
               key={emoji}
