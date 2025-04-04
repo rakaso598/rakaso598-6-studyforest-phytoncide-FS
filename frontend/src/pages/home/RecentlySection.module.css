@@ -19,6 +19,13 @@
   transition: all 0.3s ease;
 }
 
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 380px;
+}
+
 .noData {
   display: flex;
   align-items: center;

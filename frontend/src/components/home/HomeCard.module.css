@@ -234,6 +234,9 @@
 }
 
 @media screen and (min-width: 744px) {
+  .card {
+    padding: 30px;
+  }
   .headerTop {
     justify-content: space-between;
     flex-direction: row-reverse;

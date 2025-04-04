@@ -45,7 +45,6 @@ const HomeCard = ({ data }) => {
     }
   }, [data.background]);
 
-  // 이미지다
   return (
     <li
       className={styles.card}
