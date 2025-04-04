@@ -58,7 +58,7 @@
 
 @media screen and (min-width: 744px) {
   .browseStudyContainer {
-    padding: 40px;
+    padding: 24px;
   }
 
   .title {
@@ -71,5 +71,14 @@
     justify-content: space-between;
 
     margin-bottom: 24px;
+  }
+  .moreButtonContainer {
+    margin-top: 60px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .browseStudyContainer {
+    padding: 40px;
   }
 }

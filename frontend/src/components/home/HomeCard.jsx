@@ -71,7 +71,7 @@ const HomeCard = ({ data }) => {
           <div className={styles.cardTitleContainer}>
             <span className={styles.cardTitle}>
               <span className={styles.authorName}>{data.nickName}</span>
-              <span> 의 {data.title}</span>
+              <span>의 {data.title}</span>
             </span>
           </div>
         </div>
@@ -91,7 +91,7 @@ const HomeCard = ({ data }) => {
         <ul className={styles.emojiContainer}>
           {data.emojis.slice(0, 3).map((emoji) => (
             <li key={emoji.id} className={styles.emoji}>
-              <span>{emoji.emojiContent}</span>
+              <span className={styles.emojiContent}>{emoji.emojiContent}</span>
               <span>{emoji.count}</span>
             </li>
           ))}

@@ -22,7 +22,8 @@
   justify-content: center;
   height: 600px;
   color: var(--text-gray);
-  font-size: 20px;
+  font-size: 16px;
+  font-weight: 500;
 }
 
 @media screen and (min-width: 744px) {
@@ -30,9 +31,13 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
   }
+
+  .noData {
+    font-size: 20px;
+  }
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-width: 1250px) {
   .cardList {
     grid-template-columns: repeat(3, 357px);
   }
