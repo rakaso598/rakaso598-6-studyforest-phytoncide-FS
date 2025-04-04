@@ -1,14 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./StudyContent.module.css";
 import arrowIcon from "/images/icon/ic_arrow_right.svg";
 import { Link, useParams } from "react-router-dom";
+import { getStudyDetail } from "@api/study/studyDetail.api";
 
 const StudyContent = () => {
   const { studyId } = useParams();
+  const [study, setStudy] = useState({
+    title: "",
+    nickName: "",
+    description: "",
+    point: 0,
+  });
+  useEffect(() => {
+    const fetchStudyData = async () => {
+      try {
+        const studyData = await getStudyDetail(studyId);
+        setStudy(studyData);
+      } catch (error) {
+        console.error("Failed to fetch study details:", error);
+      }
+    };
+
+    fetchStudyData();
+  }, [studyId]);
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.contentTop}>
-        <h1 className={styles.title}>지수의 개발공장</h1>
+        <h1 className={styles.title}>{study.title}</h1>
         <div className={styles.buttons}>
           {/* 임시 링크 태그임 비밀번호 요구하는 모달로 바꿔야함 */}
           <Link to={`/studies/${studyId}/focus`} className={styles.button}>
@@ -25,7 +44,7 @@ const StudyContent = () => {
       <div className={styles.contentBottom}>
         <div className={styles.intro}>
           <h2 className={styles.heading}>소개</h2>
-          <p className={styles.text}>오늘 하루도 화이팅</p>
+          <p className={styles.text}>{study.description}</p>
         </div>
 
         <div className={styles.points}>
@@ -36,7 +55,7 @@ const StudyContent = () => {
               alt="point icon"
               className={styles.pointIcon}
             />
-            <span className={styles.pointValue}>310P 획득</span>
+            <span className={styles.pointValue}>{study.point}P 획득</span>
           </div>
         </div>
       </div>
