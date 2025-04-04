@@ -2,6 +2,8 @@
   position: relative;
   width: 100%;
   white-space: nowrap;
+  gap: 5px;
+  display: flex;
 }
 
 .commonButtonStyle,
@@ -17,14 +19,12 @@
   font-weight: 400;
   cursor: pointer;
   border: none;
-  margin-right: 5px;
 }
 
-.commonButtonStyle:last-child,
-.moreEmojiButtonStyle:last-child,
-.addEmojiButtonStyle:last-child {
-  margin-right: 0;
+.moreEmojiButtonStyle {
+  margin-right: 3px;
 }
+
 
 .commonButtonStyle {
   background-color: rgba(0, 0, 0, 0.5);
@@ -42,9 +42,9 @@
 
 .emoji {
   width: auto;
-  min-width: 49px;
+  min-width: 52px;
   height: 31px;
-  padding: 6px 8px;
+  padding: 6px;
   gap: 5px;
   display: inline-flex;
   align-items: center;
@@ -106,11 +106,32 @@
   height: 24px;
 }
 
+.emojiPickerContainer {
+  position: absolute;
+  z-index: 1000;
+}
+
+.moreEmojisModal {
+  position: absolute;
+  background: white;
+  padding: 12px;
+  gap: 10px;
+  border: 1px solid #DDDDDD;
+  z-index: 1001;
+  border-radius: 15px;
+  display: flex;
+  flex-wrap: wrap; /* 이모지가 너비를 넘어가면 줄바꿈 */
+  align-items: flex-start; /* 아이템들을 컨테이너의 시작 부분에 정렬 */
+  height: auto; /* 내용에 따라 높이 자동 조절 */
+}
+
 @media screen and (min-width: 744px) {
   .commonButtonStyle,
   .moreEmojiButtonStyle,
   .addEmojiButtonStyle {
     font-size: 16px;
+    font-weight: 500;
+    padding: 8px;
   }
 
   .header {

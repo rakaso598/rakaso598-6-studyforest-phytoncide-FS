@@ -75,22 +75,6 @@ function StudyEmoji() {
     setModalOpen(!modalOpen);
   };
 
-  const pickerStyle = {
-    position: 'absolute',
-    top: addButtonRef.current?.offsetHeight + 10 || '50px',
-    left: addButtonRef.current?.offsetLeft || '0',
-    zIndex: 1000,
-  };
-
-  const modalStyle = {
-    position: 'absolute',
-    top: moreEmojisButtonRef.current?.offsetHeight + moreEmojisButtonRef.current?.offsetTop || 'auto',
-    background: 'white',
-    padding: '20px',
-    border: '1px solid gray',
-    zIndex: 1001,
-  };
-
   const getEmojiCounts = () => {
     return selectedEmojis.reduce((acc, curr) => {
       acc[curr.emoji] = (acc[curr.emoji] || 0) + 1;
@@ -170,13 +154,21 @@ function StudyEmoji() {
       </button>
 
       {showPicker && (
-        <div style={pickerStyle}>
+        <div className={styles.emojiPickerContainer}
+          style={{
+            top: addButtonRef.current?.offsetHeight + 10 || '50px',
+            left: addButtonRef.current?.offsetLeft || '0',
+          }}>
           <EmojiPicker onEmojiClick={handleEmojiClick} />
         </div>
       )}
 
       {modalOpen && (
-        <div style={modalStyle}>
+        <div className={styles.moreEmojisModal}
+          style={{
+            top: moreEmojisButtonRef.current?.offsetHeight + moreEmojisButtonRef.current?.offsetTop || 'auto',
+            left: moreEmojisButtonRef.current?.offsetLeft || '0',
+          }}>
           {remainingEmojis.map(([emoji, count]) => (
             <button
               key={emoji}
