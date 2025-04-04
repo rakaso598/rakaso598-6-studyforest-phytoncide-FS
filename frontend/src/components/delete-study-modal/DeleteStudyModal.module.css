@@ -1,4 +1,4 @@
-.modalOverlay {
+.overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -11,21 +11,17 @@
   z-index: 1000;
 }
 
-.modalContent {
+.content {
   background-color: var(--color-white);
-  padding: 20px;
   border-radius: var(--radius-sm);
   width: 344px;
-  height: 341px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  gap: 20px;
   padding: 24px 16px;
 }
 
-.modalHeader {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -33,14 +29,14 @@
   margin-top: 24px;
 }
 
-.modalTitle {
+.title {
   font-size: 24px;
   font-weight: bold;
+  text-align: center;
   flex-grow: 1;
-  margin-left: 218px;
 }
 
-.modalCloseButton {
+.closeButton {
   background: none;
   border: none;
   font-size: 16px;
@@ -48,32 +44,31 @@
   color: var(--color-green-300);
 }
 
-.modalMessage {
+.message {
   margin-bottom: 20px;
   text-align: center;
   color: var(--color-gray-300);
 }
 
-.modalInputContainer {
+.inputContainer {
   margin-bottom: 15px;
 }
 
-.modalInputLabel {
+.inputLabel {
   display: block;
   margin-bottom: 6px;
   font-weight: bold;
 }
 
-.modalInput {
+.input {
   width: 100%;
-  padding: 8px;
   border: 1px solid #ccc;
   border-radius: var(--radius-sm);
   margin-top: 10px;
   padding: 14px;
 }
 
-.modalVerifyButton {
+.deleteButton {
   font-family: var(--font-jejudoldam);
   background-color: var(--color-green-200);
   color: var(--color-white);
@@ -82,26 +77,23 @@
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: 18px;
-  width: 312px;
+  width: 100%;
   height: 58px;
+  margin-top: 10px;
 }
 
-.modalVerifyButton:hover {
+.deleteButton:hover {
   background-color: var(--color-green-300);
 }
 
-.errorMessage {
+.error {
   color: var(--color-red-300);
   margin-top: 8px;
 }
 
 @media screen and (min-width: 744px) {
-  .modalVerifyButton {
-    width: 600px;
-  }
-  .modalContent {
+  .content {
     width: 648px;
-    height: 369px;
     padding: 40px 24px;
   }
 }

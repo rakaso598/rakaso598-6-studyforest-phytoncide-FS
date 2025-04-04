@@ -9,6 +9,7 @@ habitsRouter.get("/:studyId/habits", async (req, res, next) => {
     const includeDeletedHabit = req.query.all === "true";
     const habits = await prisma.habit.findMany({
       where: { studyId, ...(includeDeletedHabit ? {} : { isDone: false }) },
+      include: { HabitDone: true },
     });
     res.status(201).json(habits);
   } catch (e) {
