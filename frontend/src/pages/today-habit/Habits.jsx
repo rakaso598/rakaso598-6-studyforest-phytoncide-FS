@@ -3,7 +3,13 @@ import styles from "@today-habit/Habits.module.css";
 import { getHabitDone, putHabitDone } from "@api/today-habit/habitDone.api";
 import { getHabits } from "@api/today-habit/habit.api";
 
-function Habits({ studyId, isModalOpen, openModal, isLoading, setIsLoading }) {
+function Habits({
+  studyId,
+  isModalLoading,
+  openModal,
+  isLoading,
+  setIsLoading,
+}) {
   const [habits, setHabits] = useState([]);
   const [habitCheck, setHabitCheck] = useState(new Map());
   const today = new Date().toISOString().split("T")[0];
@@ -47,10 +53,10 @@ function Habits({ studyId, isModalOpen, openModal, isLoading, setIsLoading }) {
   };
 
   useEffect(() => {
-    if (!isModalOpen) {
+    if (!isModalLoading) {
       handleLoad();
     }
-  }, [isModalOpen]);
+  }, [isModalLoading]);
 
   return (
     <div className={styles.habitContainer}>
@@ -64,7 +70,7 @@ function Habits({ studyId, isModalOpen, openModal, isLoading, setIsLoading }) {
         </button>
       </div>
       <div className={styles.habitList}>
-        {isLoading ? (
+        {isLoading || isModalLoading ? (
           <p className={styles.noHabitText}>로딩중...</p>
         ) : habits.length === 0 ? (
           <p className={styles.noHabitText}>

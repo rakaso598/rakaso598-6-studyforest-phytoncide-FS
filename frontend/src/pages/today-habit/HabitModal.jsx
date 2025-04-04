@@ -4,7 +4,7 @@ import trashIcon from "/images/icon/ic_trash.svg";
 import plusIcon from "/images/icon/ic_plus.svg";
 import { putHabits, getHabits } from "@api/today-habit/habit.api";
 
-const HabitModal = ({ onClose, studyId }) => {
+const HabitModal = ({ onClose, studyId, setIsModalLoading }) => {
   const [habits, setHabits] = useState([]);
 
   useEffect(() => {
@@ -39,12 +39,15 @@ const HabitModal = ({ onClose, studyId }) => {
   };
   const handleConfirmRevision = async () => {
     try {
+      setIsModalLoading(true);
       await putHabits(studyId, habits);
       alert("습관 수정 완료");
 
       onClose();
     } catch (error) {
       alert("습관 수정 실패");
+    } finally {
+      setIsModalLoading(false);
     }
   };
 
