@@ -9,6 +9,7 @@ import CurrentTime from "@today-habit/CurrentTime";
 const TodayHabit = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 관리
   const [isLoading, setIsLoading] = useState(true);
+  const [isModalLoading, setIsModalLoading] = useState(false);
 
   const openModal = () => {
     setIsModalOpen(true); // 모달 열기
@@ -32,7 +33,7 @@ const TodayHabit = () => {
         </div>
         <Habits
           studyId={studyId}
-          isModalOpen={isModalOpen}
+          isModalLoading={isModalLoading}
           openModal={openModal}
           isLoading={isLoading}
           setIsLoading={setIsLoading}
@@ -46,7 +47,11 @@ const TodayHabit = () => {
             className={styles.modalContent}
             onClick={(e) => e.stopPropagation()}
           >
-            <HabitModal onClose={closeModal} studyId={studyId} />
+            <HabitModal
+              onClose={closeModal}
+              studyId={studyId}
+              setIsModalLoading={setIsModalLoading}
+            />
           </div>
         </div>
       )}
