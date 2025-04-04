@@ -177,7 +177,6 @@ function StudyEmoji() {
 
       {modalOpen && (
         <div style={modalStyle}>
-          <p>더 많은 이모지:</p>
           {remainingEmojis.map(([emoji, count]) => (
             <button
               key={emoji}
