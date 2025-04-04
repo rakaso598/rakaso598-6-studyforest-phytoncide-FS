@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from "./StudyEmoji.module.css";
-import smileIcon from "/images/icon/ic_smile.svg";
 import EmojiPicker from 'emoji-picker-react';
+import smileIcon from "/images/icon/ic_smile.svg";
+import plusIcon from "/images/icon/ic_plus-1.svg";
 import axiosInstance from '../../../api/axiosInstance';
 import { useParams } from 'react-router-dom';
 
@@ -12,6 +13,8 @@ function StudyEmoji() {
   const [selectedEmojis, setSelectedEmojis] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const moreEmojisButtonRef = useRef(null);
+  const modalRef = useRef(null); // 모달 ref 추가
+  const pickerRef = useRef(null); // 피커 ref 추가
   const isInitialLoad = useRef(true);
   const hasEmojiChanged = useRef(false);
 
@@ -74,22 +77,6 @@ function StudyEmoji() {
     setModalOpen(!modalOpen);
   };
 
-  const pickerStyle = {
-    position: 'absolute',
-    top: addButtonRef.current?.offsetHeight + 10 || '50px',
-    left: addButtonRef.current?.offsetLeft || '0',
-    zIndex: 1000,
-  };
-
-  const modalStyle = {
-    position: 'absolute',
-    top: moreEmojisButtonRef.current?.offsetHeight + moreEmojisButtonRef.current?.offsetTop || 'auto',
-    background: 'white',
-    padding: '20px',
-    border: '1px solid gray',
-    zIndex: 1001,
-  };
-
   const getEmojiCounts = () => {
     return selectedEmojis.reduce((acc, curr) => {
       acc[curr.emoji] = (acc[curr.emoji] || 0) + 1;
@@ -137,8 +124,42 @@ function StudyEmoji() {
     }
   }, [selectedEmojis, sendEmojiData]);
 
+  // 모달 외부 클릭 감지 로직
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalOpen && modalRef.current && !modalRef.current.contains(event.target)) {
+        setModalOpen(false);
+      }
+    };
+
+    if (modalOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [modalOpen]);
+
+  // 이모지 피커 외부 클릭 감지 로직
+  useEffect(() => {
+    const handleClickOutsidePicker = (event) => {
+      if (showPicker && pickerRef.current && !pickerRef.current.contains(event.target) && addButtonRef.current !== event.target && !addButtonRef.current?.contains(event.target)) {
+        setShowPicker(false);
+      }
+    };
+
+    if (showPicker) {
+      document.addEventListener('mousedown', handleClickOutsidePicker);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutsidePicker);
+    };
+  }, [showPicker]);
+
   return (
-    <div className={styles.emojiContainer}>
+    <div className={styles.emojiContainer} ref={pickerRef}> {/* 피커 ref를 감싸는 div에 적용 */}
       {displayedEmojis.map((item, index) => (
         <button
           key={index}
@@ -155,7 +176,7 @@ function StudyEmoji() {
           className={`${styles.moreEmojiButtonStyle} ${styles.emoji}`}
           onClick={handleMoreEmojisClick}
         >
-          + {Object.keys(emojiCounts).length - 3}..
+          <img src={plusIcon} alt="더보기" /> {Object.keys(emojiCounts).length - 3}..
         </button>
       )}
 
@@ -169,14 +190,13 @@ function StudyEmoji() {
       </button>
 
       {showPicker && (
-        <div style={pickerStyle}>
+        <div className={styles.emojiPickerContainer}>
           <EmojiPicker onEmojiClick={handleEmojiClick} />
         </div>
       )}
 
       {modalOpen && (
-        <div style={modalStyle}>
-          <p>더 많은 이모지:</p>
+        <div className={styles.moreEmojisModal} ref={modalRef}> {/* 모달 ref 적용 */}
           {remainingEmojis.map(([emoji, count]) => (
             <button
               key={emoji}
