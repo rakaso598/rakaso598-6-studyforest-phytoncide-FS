@@ -24,6 +24,22 @@ export const getStudies = async ({
   }
 };
 
+export const getRecentlyViewedStudies = async (studyIds) => {
+  const formattedStudyIds = studyIds.slice(1, -1);
+
+  try {
+    const response = await axiosInstance.get("/studies/recently", {
+      params: {
+        studyIds: formattedStudyIds,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Failed to fetch studies:", error);
+    throw error;
+  }
+};
+
 // 정렬 옵션 매핑
 export const SORT_OPTIONS = {
   "최근 순": { orderBy: "createAt", sort: "desc" },
