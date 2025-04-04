@@ -8,6 +8,7 @@ import CurrentTime from "@today-habit/CurrentTime";
 
 const TodayHabit = () => {
   const [isModalOpen, setIsModalOpen] = useState(false); // 모달 상태 관리
+  const [isLoading, setIsLoading] = useState(true);
 
   const openModal = () => {
     setIsModalOpen(true); // 모달 열기
@@ -29,7 +30,13 @@ const TodayHabit = () => {
           />
           <CurrentTime />
         </div>
-        <Habits studyId={studyId} refresh={isModalOpen} openModal={openModal} />
+        <Habits
+          studyId={studyId}
+          isModalOpen={isModalOpen}
+          openModal={openModal}
+          isLoading={isLoading}
+          setIsLoading={setIsLoading}
+        />
       </div>
 
       {/* 모달 열림 상태가 true일 때 TodayHabitCreate 모달 표시 */}
