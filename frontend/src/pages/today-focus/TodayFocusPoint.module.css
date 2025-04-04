@@ -6,6 +6,9 @@
 }
 
 .pointTxt {
+  display: flex;
+  align-items: center;
+  height: 21px;
   font-weight: 400;
   font-size: 18px;
   color: var(--text-gray);
