@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styles from "./StudyEmoji.module.css";
-import smileIcon from "/images/icon/ic_smile.svg";
 import EmojiPicker from 'emoji-picker-react';
+import smileIcon from "/images/icon/ic_smile.svg";
+import plusIcon from "/images/icon/ic_plus-1.svg";
 import axiosInstance from '../../../api/axiosInstance';
 import { useParams } from 'react-router-dom';
 
@@ -155,7 +156,7 @@ function StudyEmoji() {
           className={`${styles.moreEmojiButtonStyle} ${styles.emoji}`}
           onClick={handleMoreEmojisClick}
         >
-          + {Object.keys(emojiCounts).length - 3}..
+          <img src={plusIcon} alt="더보기" /> {Object.keys(emojiCounts).length - 3}..
         </button>
       )}
 
