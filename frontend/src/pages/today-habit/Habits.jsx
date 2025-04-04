@@ -3,7 +3,7 @@ import styles from "@today-habit/Habits.module.css";
 import { getHabitDone, putHabitDone } from "@api/today-habit/habitDone.api";
 import { getHabits } from "@api/today-habit/habit.api";
 
-function Habits({ studyId, refresh, openModal }) {
+function Habits({ studyId, isModalOpen, openModal, isLoading, setIsLoading }) {
   const [habits, setHabits] = useState([]);
   const [habitCheck, setHabitCheck] = useState(new Map());
   const today = new Date().toLocaleDateString("en-US", {
@@ -17,34 +17,42 @@ function Habits({ studyId, refresh, openModal }) {
         newCheck.set(habitId, !newCheck.get(habitId));
         return newCheck;
       });
-
     } catch (e) {
       console.error(e);
     }
   };
 
   const handleLoad = async () => {
-    const result = await getHabits(studyId);
-    const checked = new Map(
-      await Promise.all(
-        result.map(async (habit) => {
-          const habitDone = await getHabitDone(studyId, habit.id, today);
-          let isDone = false;
-          if (habitDone) {
-            isDone = true;
-          }
-          return [habit.id, isDone];
-        })
-      )
-    );
+    try {
+      setIsLoading(true);
+      const result = await getHabits(studyId);
+      const checked = new Map(
+        await Promise.all(
+          result.map(async (habit) => {
+            const habitDone = await getHabitDone(studyId, habit.id, today);
+            let isDone = false;
+            if (habitDone) {
+              isDone = true;
+            }
+            return [habit.id, isDone];
+          })
+        )
+      );
 
-    setHabits(result);
-    setHabitCheck(checked);
+      setHabits(result);
+      setHabitCheck(checked);
+    } catch (e) {
+      console.error("데이터 로딩 에러", e);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
-    handleLoad();
-  }, [refresh]);
+    if (!isModalOpen) {
+      handleLoad();
+    }
+  }, [isModalOpen]);
 
   return (
     <div className={styles.habitContainer}>
@@ -58,7 +66,9 @@ function Habits({ studyId, refresh, openModal }) {
         </button>
       </div>
       <div className={styles.habitList}>
-        {habits.length === 0 ? (
+        {isLoading ? (
+          <p className={styles.noHabitText}>로딩중...</p>
+        ) : habits.length === 0 ? (
           <p className={styles.noHabitText}>
             아직 습관이 없어요 <br /> 목록 수정을 눌러 습관을 생성해보세요{" "}
           </p>
