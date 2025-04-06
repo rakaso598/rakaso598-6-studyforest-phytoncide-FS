@@ -96,6 +96,22 @@
   height: 64px;
 }
 
+.noHabitsContainer {
+  min-width: 312px;
+  min-height: 244px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.noHabitsMessage {
+  min-width: 233px;
+  height: 38px;
+  text-align: center;
+  line-height: 100%;
+  color: var(--color-gray-300);
+  font-weight: 500;
+}
+
 @media screen and (min-width: 744px) {
   .container {
     padding: 24px;
@@ -105,6 +121,11 @@
     font-size: 24px;
   }
 
+  .noHabitsMessage {
+    width: 292px;
+    height: 48px;
+    font-size: 20px;
+  }
   .daysHeader {
     grid-template-columns: repeat(7, 1fr);
   }

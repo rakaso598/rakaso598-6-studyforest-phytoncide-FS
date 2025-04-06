@@ -137,55 +137,65 @@ function HabitRecordTable() {
     <div className={styles.container}>
       <h1 className={styles.title}>습관 기록표</h1>
 
-      <div className={styles.gridContainer}>
-        {/* 요일 헤더 */}
-        <div className={styles.headerRow}>
-          <div className={styles.emptyHeaderCell}></div>
-          <div className={styles.daysHeader}>
-            {days.map((day, index) => (
-              <div key={`day-${index}`} className={styles.dayCell}>
-                {day}
-              </div>
-            ))}
-          </div>
+      {habits.length === 0 ? (
+        <div className={styles.noHabitsContainer}>
+          <p className={styles.noHabitsMessage}>
+            아직 습관이 없어요
+            <br />
+            오늘의 습관에서 습관을 생성해보세요
+          </p>
         </div>
-
-        {/* 습관 행열 모음 */}
-        {habits.map((habit, rowIndex) => (
-          <div key={`habit-${rowIndex}`} className={styles.habitRow}>
-            <div className={styles.habitNameCell}>{habit.title}</div>
-            <div className={styles.statusCells}>
-              {days.map((_, dayIndex) => {
-                // 해당 요일의 날짜
-                const dateForDay = currentWeekDates[dayIndex];
-                // 해당 날짜에 습관이 완료되었는지 확인
-                const isCompleted =
-                  habitCompletions[habit.id] &&
-                  habitCompletions[habit.id][dateForDay];
-
-                return (
-                  <div
-                    key={`status-${rowIndex}-${dayIndex}`}
-                    className={styles.statusCell}
-                  >
-                    <div className={styles.stickerWrapper}>
-                      <img
-                        src={
-                          isCompleted
-                            ? getStickerForRow(rowIndex)
-                            : stickerWhite
-                        }
-                        alt="Sticker"
-                        className={styles.sticker}
-                      />
-                    </div>
-                  </div>
-                );
-              })}
+      ) : (
+        <div className={styles.gridContainer}>
+          {/* 요일 헤더 */}
+          <div className={styles.headerRow}>
+            <div className={styles.emptyHeaderCell}></div>
+            <div className={styles.daysHeader}>
+              {days.map((day, index) => (
+                <div key={`day-${index}`} className={styles.dayCell}>
+                  {day}
+                </div>
+              ))}
             </div>
           </div>
-        ))}
-      </div>
+
+          {/* 습관 행열 모음 */}
+          {habits.map((habit, rowIndex) => (
+            <div key={`habit-${rowIndex}`} className={styles.habitRow}>
+              <div className={styles.habitNameCell}>{habit.title}</div>
+              <div className={styles.statusCells}>
+                {days.map((_, dayIndex) => {
+                  // 해당 요일의 날짜
+                  const dateForDay = currentWeekDates[dayIndex];
+                  // 해당 날짜에 습관이 완료되었는지 확인
+                  const isCompleted =
+                    habitCompletions[habit.id] &&
+                    habitCompletions[habit.id][dateForDay];
+
+                  return (
+                    <div
+                      key={`status-${rowIndex}-${dayIndex}`}
+                      className={styles.statusCell}
+                    >
+                      <div className={styles.stickerWrapper}>
+                        <img
+                          src={
+                            isCompleted
+                              ? getStickerForRow(rowIndex)
+                              : stickerWhite
+                          }
+                          alt="Sticker"
+                          className={styles.sticker}
+                        />
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

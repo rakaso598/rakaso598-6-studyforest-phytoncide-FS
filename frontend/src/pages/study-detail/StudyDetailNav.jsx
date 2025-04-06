@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import styles from "./StudyDetailNav.module.css";
 import EditStudyModalButton from "@components/edit-study-modal/EditStudyModalButton";
 import StudyEmoji from "./study-emoji/StudyEmoji";
 import DeleteStudyModalButton from "@components/delete-study-modal/DeleteStudyModalButton";
+import ShareModal from "./components/ShareModal";
 
 function StudyDetailNav() {
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+
   return (
     <div className={styles.header}>
       <div className={styles.emojis}>
@@ -12,8 +15,11 @@ function StudyDetailNav() {
       </div>
 
       <nav className={styles.nav}>
-        {/* 이부분 공유 모달 버튼 컴포넌트 만들어서 대체 예정 */}
-        <button type="button" className={styles.shareLink}>
+        <button
+          type="button"
+          className={styles.shareLink}
+          onClick={() => setShareModalOpen(true)}
+        >
           공유하기
         </button>
         <span className={styles.divider}>|</span>
@@ -23,6 +29,11 @@ function StudyDetailNav() {
         />
         <span className={styles.divider}>|</span>
         <DeleteStudyModalButton buttonText="스터디 삭제하기" />
+
+        <ShareModal
+          isOpen={shareModalOpen}
+          onClose={() => setShareModalOpen(false)}
+        />
       </nav>
     </div>
   );
