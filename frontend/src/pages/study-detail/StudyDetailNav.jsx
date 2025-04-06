@@ -12,7 +12,7 @@ function StudyDetailNav() {
       </div>
 
       <nav className={styles.nav}>
-        {/* 이부분 Link 달아서 변경해야함 */}
+        {/* 이부분 공유 모달 버튼 컴포넌트 만들어서 대체 예정 */}
         <button type="button" className={styles.shareLink}>
           공유하기
         </button>

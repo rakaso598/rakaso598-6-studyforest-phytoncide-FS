@@ -1,6 +1,13 @@
+.pageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .container {
-  width: 344px;
-  margin: 20px auto 56px auto;
+  width: 100%;
+  max-width: 1248px;
+  margin: 20px 16px 56px;
   border-radius: 20px;
   background-color: var(--color-white);
   padding: 16px;
@@ -15,7 +22,7 @@
 @media screen and (min-width: 744px) {
   .container {
     min-width: 696px;
-    margin: 16px auto 81px auto;
+    margin: 16px 24px 81px;
     padding: 24px;
   }
 }

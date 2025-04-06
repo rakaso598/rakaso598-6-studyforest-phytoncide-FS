@@ -35,8 +35,11 @@ function HabitRecordTable() {
     const currentDay = today.getDay();
 
     const daysToMonday = currentDay === 0 ? 6 : currentDay - 1;
+    console.log(`currentDay= ${currentDay}, daysToMonday= ${daysToMonday}`);
     const monday = new Date(today);
+    console.log("monday reset to today:", monday);
     monday.setDate(today.getDate() - daysToMonday);
+    console.log("monday adjusted to :", monday);
     const weekDates = [];
     for (let i = 0; i < 7; i++) {
       const date = new Date(monday);
@@ -84,7 +87,7 @@ function HabitRecordTable() {
         completions[habit.id][date] = false;
       });
 
-      if (habit.HabitDone && habit.HabitDone.length > 0) {
+      if (habit.HabitDone.length > 0) {
         habit.HabitDone.forEach((done) => {
           const doneDate =
             done.createdAt instanceof Date
