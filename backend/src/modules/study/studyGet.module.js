@@ -78,15 +78,24 @@ studyGetRouter.get("/recently", async (req, res, next) => {
 
     const study = await prisma.study.findMany({
       where: { id: { in: studyIdsArray } },
+      include: {
+        emojis: true,
+      },
       omit: { encryptedPassword: true },
     });
+
+    // 이모지가 null인 경우 빈 배열로 변환
+    const studyWithEmojis = study.map((item) => ({
+      ...item,
+      emojis: item.emojis ?? [],
+    }));
 
     // 클라이언트가 요청한 ID 순서에 맞게 결과를 정렬
     const orderedResult = [];
 
     // studyIdsArray의 순서대로 결과를 재배열
     for (const id of studyIdsArray) {
-      const found = study.find((item) => item.id === id);
+      const found = studyWithEmojis.find((item) => item.id === id);
       if (found) {
         orderedResult.push(found);
       }
@@ -94,7 +103,6 @@ studyGetRouter.get("/recently", async (req, res, next) => {
 
     res.status(200).json(orderedResult);
   } catch (e) {
-    console.error("오류 발생:", e);
     next(e);
   }
 });
