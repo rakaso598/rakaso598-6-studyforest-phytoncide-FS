@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./StudyDetailNav.module.css";
 import StudyEmoji from "./study-emoji/StudyEmoji";
-import DeleteStudyModalButton from "@components/delete-study-modal/DeleteStudyModalButton";
+import DeleteStudyModalButton from "./components/DeleteStudyModalButton";
 import ShareModal from "./components/ShareModal";
 import EditStudyModalButton from "./components/EditStudyModalButton";
 
