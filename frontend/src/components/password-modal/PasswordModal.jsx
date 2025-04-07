@@ -1,7 +1,8 @@
-// src/components/common/password-modal/PasswordModal.jsx
 import React, { useState, useEffect } from "react";
 import styles from "./PasswordModal.module.css";
 import { useParams } from "react-router-dom";
+import btnCloseIcon from "/images/icon/btn_visibility_on_24px-1.svg";
+import btnSeeIcon from "/images/icon/btn_visibility_on_24px.svg";
 
 const PasswordModal = ({
   isOpen,
@@ -12,19 +13,20 @@ const PasswordModal = ({
   actionButtonText,
   closeButtonText = "나가기",
   verifyPassword,
-  customToastContainer = false, // 커스텀 토스트 컨테이너 사용 여부
+  customToastContainer = false,
 }) => {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [showErrorToast, setShowErrorToast] = useState(false);
   const { studyId } = useParams();
+  const [see, setSee] = useState(false);
 
-  // 모달이 열릴 때 폼 리셋
   useEffect(() => {
     if (isOpen) {
       setPassword("");
       setErrorMessage("");
       setShowErrorToast(false);
+      setSee(false);
     }
   }, [isOpen]);
 
@@ -32,6 +34,10 @@ const PasswordModal = ({
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleVisibilityToggle = () => {
+    setSee((prevSee) => !prevSee);
   };
 
   const handleSubmit = async () => {
@@ -77,13 +83,21 @@ const PasswordModal = ({
         <p className={styles.message}>{message}</p>
         <div className={styles.inputContainer}>
           <p className={styles.inputLabel}>비밀번호</p>
-          <input
-            placeholder="비밀번호를 입력해 주세요"
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
-            className={styles.input}
-          />
+          <div className={styles.passwordInputWrapper}>
+            <input
+              placeholder="비밀번호를 입력해 주세요"
+              type={see ? "text" : "password"}
+              value={password}
+              onChange={handlePasswordChange}
+              className={styles.input}
+            />
+            <img
+              onClick={handleVisibilityToggle}
+              className={styles.visibilityToggle}
+              src={see ? btnSeeIcon : btnCloseIcon}
+              alt="비밀번호 표시 전환"
+            />
+          </div>
           {!customToastContainer && (
             <p
               className={`${styles.toastError} ${
