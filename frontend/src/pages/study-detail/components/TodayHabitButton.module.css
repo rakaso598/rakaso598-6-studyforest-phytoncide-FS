@@ -1,0 +1,22 @@
+.todayHabitButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 40px;
+  padding: 8px 6px 8px 10px;
+  border: 1px solid var(--color-gray-200);
+  border-radius: 15px;
+  background-color: var(--color-white);
+  color: var(--color-gray-300);
+  cursor: pointer;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+@media screen and (min-width: 744px) {
+  .todayHabitButton {
+    width: 144px;
+    height: 48px;
+  }
+}

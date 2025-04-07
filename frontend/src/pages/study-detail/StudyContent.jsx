@@ -3,6 +3,8 @@ import styles from "./StudyContent.module.css";
 import arrowIcon from "/images/icon/ic_arrow_right.svg";
 import { Link, useParams } from "react-router-dom";
 import { getStudyDetail } from "@api/study/studyDetail.api";
+import TodayHabitButton from "./components/TodayHabitButton";
+import TodayFocusButton from "./components/TodayFocusButton";
 
 const StudyContent = () => {
   const { studyId } = useParams();
@@ -29,15 +31,23 @@ const StudyContent = () => {
       <div className={styles.contentTop}>
         <h1 className={styles.title}>{study.title}</h1>
         <div className={styles.buttons}>
-          {/* 임시 링크 태그임 비밀번호 요구하는 모달로 바꿔야함 */}
-          <Link to={`/studies/${studyId}/focus`} className={styles.button}>
-            <p>오늘의 집중</p>
-            <img src={arrowIcon} />
-          </Link>
-          <Link to={`/studies/${studyId}/habit`} className={styles.button}>
-            <p>오늘의 습관</p>
-            <img src={arrowIcon} />
-          </Link>
+          <TodayFocusButton
+            buttonText={
+              <>
+                <p>오늘의 집중</p>
+                <img src={arrowIcon} alt="오른쪽 화살표" />
+              </>
+            }
+          ></TodayFocusButton>
+
+          <TodayHabitButton
+            buttonText={
+              <>
+                <p>오늘의 습관</p>
+                <img src={arrowIcon} alt="오른쪽 화살표" />
+              </>
+            }
+          ></TodayHabitButton>
         </div>
       </div>
 

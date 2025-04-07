@@ -35,7 +35,6 @@ const PasswordModal = ({
   };
 
   const handleSubmit = async () => {
-    // 비밀번호 미입력 검사
     if (!password) {
       setErrorMessage("비밀번호를 입력해주세요.");
       setShowErrorToast(true);
@@ -48,10 +47,8 @@ const PasswordModal = ({
       const result = await verifyPassword(studyId, password);
 
       if (result.success) {
-        // 성공 시 콜백 함수 호출
         onSuccess(password);
       } else {
-        // 실패 시 에러 메시지 표시
         setErrorMessage(result.message || "비밀번호가 일치하지 않습니다.");
         setShowErrorToast(true);
         setTimeout(() => setShowErrorToast(false), 3000);
