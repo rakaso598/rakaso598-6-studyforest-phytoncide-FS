@@ -8,7 +8,6 @@ import PasswordCheck from "../../components/create-Study-Input/PasswordCheck";
 import Background from "../../components/create-Study-Input/Background";
 import { studyCreate } from "../../api/study/studyCreate.api";
 import { useNavigate } from "react-router-dom";
-import Input from "../../components/create-Study-Input/Input";
 
 const StudyCreate = () => {
   const [nickName, setNickName] = useState("");
