@@ -3,7 +3,7 @@ import axiosInstance from "@api/axiosInstance";
 export const verifyStudyPassword = async (studyId, password) => {
   try {
     const response = await axiosInstance.post(
-      `/api/study/${studyId}/verify-password`,
+      `/studies/${studyId}/verify-password`,
       {
         encryptedPassword: password,
       }
