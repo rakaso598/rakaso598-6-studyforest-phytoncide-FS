@@ -49,13 +49,12 @@ const PasswordModal = ({
     }
 
     try {
-      // 비밀번호 검증 함수 호출 (props로 받은 함수)
       const result = await verifyPassword(studyId, password);
 
       if (result.success) {
         onSuccess(password);
       } else {
-        setErrorMessage(result.message || "비밀번호가 일치하지 않습니다.");
+        setErrorMessage("비밀번호가 일치하지 않습니다. 다시 입력해주세요.");
         setShowErrorToast(true);
         setTimeout(() => setShowErrorToast(false), 3000);
       }
@@ -104,7 +103,9 @@ const PasswordModal = ({
                 showErrorToast && styles.show
               }`}
             >
-              🚨 {errorMessage || "비밀번호가 일치하지 않습니다."}
+              🚨{" "}
+              {errorMessage ||
+                "비밀번호가 일치하지 않습니다. 다시 입력해주세요."}
             </p>
           )}
         </div>
