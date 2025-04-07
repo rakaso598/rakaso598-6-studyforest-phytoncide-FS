@@ -15,18 +15,20 @@ const StudyNameInput = ({ setTitle }) => {
   };
 
   return (
-    <label className={styles.label}>
-      <p className={styles.inputBoxTitle}>스터디 이름</p>
-      <input
-        onChange={handleChange}
-        className={`${styles.input} ${isActive && styles.err}`}
-        type="text"
-        placeholder="스터디 이름을 입력해주세요"
-      />
+    <span>
+      <label className={styles.label}>
+        <p className={styles.inputBoxTitle}>스터디 이름</p>
+        <input
+          onChange={handleChange}
+          className={`${styles.input} ${isActive && styles.err}`}
+          type="text"
+          placeholder="스터디 이름을 입력해주세요"
+        />
+      </label>
       {isActive && (
         <p className={styles.errMessage}>*스터디 이름을 입력해주세요.</p>
       )}
-    </label>
+    </span>
   );
 };
 
