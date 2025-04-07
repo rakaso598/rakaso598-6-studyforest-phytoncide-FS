@@ -140,7 +140,6 @@ const TodayFocusTimer = ({
       setSecond((prevSecond) => {
         // 초(sec) 증가
         if (timeover) {
-          console.log(prevSecond);
           if (prevSecond < 9)
             return (prevSecond = "0" + (Number(prevSecond[1]) + 1));
           if (prevSecond < 10) return (prevSecond = 10);
