@@ -13,11 +13,11 @@ function StudyEmoji() {
   const [selectedEmojis, setSelectedEmojis] = useState([]);
   const [modalOpen, setModalOpen] = useState(false);
   const moreEmojisButtonRef = useRef(null);
-  const modalRef = useRef(null); // 모달 ref 추가
-  const pickerRef = useRef(null); // 피커 ref 추가
+  const modalRef = useRef(null);
+  const pickerRef = useRef(null);
   const isInitialLoad = useRef(true);
   const hasEmojiChanged = useRef(false);
-  const isModalClosing = useRef(false); // 모달이 닫히는 중인지 추적
+  const isModalClosing = useRef(false);
 
   useEffect(() => {
     const fetchInitialEmojis = async () => {
@@ -50,7 +50,7 @@ function StudyEmoji() {
 
   const handleEmojiClick = (emojiObject) => {
     setSelectedEmojis((prevEmojis) => {
-      hasEmojiChanged.current = true; // 이모지가 추가됨을 표시
+      hasEmojiChanged.current = true;
       return [
         ...prevEmojis,
         { emoji: emojiObject.emoji, id: Date.now() + Math.random() },
@@ -127,20 +127,18 @@ function StudyEmoji() {
     }
   }, [selectedEmojis, sendEmojiData]);
 
-  // 모달 외부 클릭 감지 로직
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalOpen && modalRef.current && !modalRef.current.contains(event.target)) {
-        isModalClosing.current = true; // 닫기 시작
+        isModalClosing.current = true;
         setModalOpen(false);
         setTimeout(() => {
-          isModalClosing.current = false; // 닫기 완료
-        }, 250); // 적절한 시간 (애니메이션 시간 등) 설정
+          isModalClosing.current = false;
+        }, 250);
       }
     };
 
     const handleModalClick = (event) => {
-      // 모달 내부 클릭은 무시
       if (modalOpen && modalRef.current && modalRef.current.contains(event.target)) {
         event.stopPropagation();
       }
@@ -148,7 +146,7 @@ function StudyEmoji() {
 
     if (modalOpen) {
       document.addEventListener('mousedown', handleClickOutside);
-      document.addEventListener('click', handleModalClick); // 모달 내부 클릭 방지
+      document.addEventListener('click', handleModalClick);
     }
 
     return () => {
@@ -157,7 +155,6 @@ function StudyEmoji() {
     };
   }, [modalOpen]);
 
-  // 이모지 피커 외부 클릭 감지 로직
   useEffect(() => {
     const handleClickOutsidePicker = (event) => {
       if (showPicker && pickerRef.current && !pickerRef.current.contains(event.target) && addButtonRef.current !== event.target && !addButtonRef.current?.contains(event.target)) {
@@ -175,7 +172,7 @@ function StudyEmoji() {
   }, [showPicker]);
 
   return (
-    <div className={styles.emojiContainer} ref={pickerRef}> {/* 피커 ref를 감싸는 div에 적용 */}
+    <div className={styles.emojiContainer} ref={pickerRef}>
       {displayedEmojis.map((item, index) => (
         <button
           key={index}
@@ -212,7 +209,7 @@ function StudyEmoji() {
       )}
 
       {modalOpen && (
-        <div className={styles.moreEmojisModal} ref={modalRef}> {/* 모달 ref 적용 */}
+        <div className={styles.moreEmojisModal} ref={modalRef}>
           {remainingEmojis.map(([emoji, count]) => (
             <button
               key={emoji}

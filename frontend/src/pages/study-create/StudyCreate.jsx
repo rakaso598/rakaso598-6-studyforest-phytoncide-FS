@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styles from "./StudyCreate.module.css";
-import NicknameInput from "../../components/createStudyInput/NicknameInput";
-import StudyNameInput from "../../components/createStudyInput/StudyNameInput";
-import DescriptionInput from "../../components/createStudyInput/DescriptionInput";
-import PasswordInput from "../../components/createStudyInput/PasswordInput";
-import PasswordCheck from "../../components/createStudyInput/PasswordCheck";
-import Background from "../../components/createStudyInput/Background";
+import NicknameInput from "../../components/create-Study-Input/NicknameInput";
+import StudyNameInput from "../../components/create-Study-Input/StudyNameInput";
+import DescriptionInput from "../../components/create-Study-Input/DescriptionInput";
+import PasswordInput from "../../components/create-Study-Input/PasswordInput";
+import PasswordCheck from "../../components/create-Study-Input/PasswordCheck";
+import Background from "../../components/create-Study-Input/Background";
 import { studyCreate } from "../../api/study/studyCreate.api";
 import { useNavigate } from "react-router-dom";
 
@@ -15,17 +15,36 @@ const StudyCreate = () => {
   const [description, setDescription] = useState("");
   const [background, setBackground] = useState("bg1");
   const [encryptedPassword, setEncryptedPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
   const navigate = useNavigate();
 
   const handleClik = async () => {
-    if (
-      !nickName.trim() ||
-      !title.trim() ||
-      !description.trim() ||
-      !background ||
-      !encryptedPassword.trim()
-    ) {
-      alert("모든 필드를 입력해주세요");
+    if (!nickName.trim()) {
+      alert("닉네임을 입력해주세요");
+      return;
+    }
+
+    if (!title.trim()) {
+      alert("제목을 입력해주세요");
+      return;
+    }
+
+    if (!description.trim()) {
+      alert("소개를를 입력해주세요");
+      return;
+    }
+
+    if (!background) {
+      alert("배경을 선택해주세요");
+      return;
+    }
+
+    if (!encryptedPassword.trim()) {
+      alert("비밀번호를 입력해주세요");
+      return;
+    }
+    if (!passwordCheck.trim()) {
+      alert("비밀번호를 확인해주세요");
       return;
     }
 
@@ -59,7 +78,11 @@ const StudyCreate = () => {
         <Background setBackground={setBackground} background={background} />
         <div className={styles.studyCreateBottomBox}>
           <PasswordInput setEncryptedPassword={setEncryptedPassword} />
-          <PasswordCheck encryptedPassword={encryptedPassword} />
+          <PasswordCheck
+            encryptedPassword={encryptedPassword}
+            passwordCheck={passwordCheck}
+            setPasswordCheck={setPasswordCheck}
+          />
         </div>
         <button onClick={handleClik} className={styles.createBtn}>
           만들기

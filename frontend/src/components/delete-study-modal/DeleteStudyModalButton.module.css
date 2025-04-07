@@ -22,7 +22,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 260px;
+  width: 349px;
   height: 45px;
   border-radius: 12px;
   background-color: var(--bg-green-light);
@@ -50,9 +50,6 @@
 
 @media screen and (min-width: 744px) {
   .deleteStudyModalButton {
-    all: unset;
-    cursor: pointer;
-    color: var(--color-gray-300);
     font-size: 16px;
   }
 
@@ -61,7 +58,7 @@
   }
 
   .toastSuccess {
-    width: 300px;
+    width: 391px;
     height: 47px;
     font-size: 16px;
   }
