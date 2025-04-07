@@ -74,7 +74,6 @@ const TodayFocusTimer = ({
         setMinute(time);
       }
       setTempTime({ ...tempTime, min: time });
-      rewardPointSetByTime(e);
     }
 
     // 초(sec) 설정
@@ -141,7 +140,6 @@ const TodayFocusTimer = ({
       setSecond((prevSecond) => {
         // 초(sec) 증가
         if (timeover) {
-          console.log(prevSecond);
           if (prevSecond < 9)
             return (prevSecond = "0" + (Number(prevSecond[1]) + 1));
           if (prevSecond < 10) return (prevSecond = 10);
@@ -227,7 +225,10 @@ const TodayFocusTimer = ({
           disabled={disabled}
           onClick={handleTimerClick}
           onChange={handleTimerInput}
-          onBlur={handleTimerDefaultValue}
+          onBlur={(e) => {
+            handleTimerDefaultValue(e);
+            rewardPointSetByTime(minute);
+          }}
           value={minute}
           className={`${styles.focusMinTimer}`}
           id="minute"

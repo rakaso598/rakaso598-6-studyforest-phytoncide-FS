@@ -33,7 +33,7 @@ const StudyNavbar = ({ studyId, link, pageName }) => {
           {pageName}
           <img src="/images/icon/ic_arrow_right.svg" alt="오른쪽 화살표" />
         </Link>
-        <Link to="/" className={styles.navBtn}>
+        <Link to={`/studies/${studyId}`} className={styles.navBtn}>
           <p>홈</p>
           <img src="/images/icon/ic_arrow_right.svg" alt="오른쪽 화살표" />
         </Link>
