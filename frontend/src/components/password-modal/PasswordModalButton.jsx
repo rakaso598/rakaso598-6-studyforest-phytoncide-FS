@@ -1,7 +1,6 @@
 import React from "react";
 import PasswordModal from "./PasswordModal";
 import { usePasswordModalController } from "./PasswordModalController";
-import styles from "./PasswordModalButton.module.css";
 
 const PasswordModalButton = ({
   buttonText,
@@ -18,10 +17,7 @@ const PasswordModalButton = ({
 
   return (
     <>
-      <button
-        className={buttonClassName || styles.passwordModalButton}
-        onClick={handleOpen}
-      >
+      <button className={buttonClassName} onClick={handleOpen}>
         {buttonText}
       </button>
       <PasswordModal
