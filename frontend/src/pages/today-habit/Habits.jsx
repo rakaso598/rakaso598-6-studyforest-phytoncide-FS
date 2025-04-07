@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "@today-habit/Habits.module.css";
-import { getHabitDone, putHabitDone } from "@api/today-habit/habitDone.api";
+import { putHabitDone } from "@api/today-habit/habitDone.api";
 import { getHabits } from "@api/today-habit/habit.api";
 
 function Habits({
@@ -31,16 +31,16 @@ function Habits({
       setIsLoading(true);
       const result = await getHabits(studyId);
       const checked = new Map(
-        await Promise.all(
-          result.map(async (habit) => {
-            const habitDone = await getHabitDone(studyId, habit.id, today);
-            let isDone = false;
-            if (habitDone) {
-              isDone = true;
-            }
-            return [habit.id, isDone];
-          })
-        )
+        result.map((habit) => {
+          const habitDone = habit.HabitDone.find(
+            (habitdone) => habitdone.createdAt.split("T")[0] === today
+          );
+          let isDone = false;
+          if (habitDone) {
+            isDone = true;
+          }
+          return [habit.id, isDone];
+        })
       );
 
       setHabits(result);

@@ -1,4 +1,3 @@
-import Habits from "../../pages/today-habit/Habits";
 import axiosInstance from "../axiosInstance";
 
 const handleError = (e) => {
