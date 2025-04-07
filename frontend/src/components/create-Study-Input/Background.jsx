@@ -25,15 +25,14 @@ const Background = ({ setBackground, background }) => {
               alt={`bg${idx + 1}`}
               onClick={(e) => setBackground(e.target.alt)}
             />
-            {background &&
-              background.slice(2, 3) === String(idx + 1) && ( // background가 undefined가 아닌지 확인
-                <img
-                  className={styles.selected}
-                  src={selected}
-                  alt="selected"
-                  loading="lazy"
-                />
-              )}
+            {background && background.slice(2, 3) === String(idx + 1) && (
+              <img
+                className={styles.selected}
+                src={selected}
+                alt="selected"
+                loading="lazy"
+              />
+            )}
           </span>
         ))}
       </div>
