@@ -103,9 +103,7 @@ const PasswordModal = ({
                 showErrorToast && styles.show
               }`}
             >
-              🚨{" "}
-              {errorMessage ||
-                "비밀번호가 일치하지 않습니다. 다시 입력해주세요."}
+              🚨 {errorMessage}
             </p>
           )}
         </div>
