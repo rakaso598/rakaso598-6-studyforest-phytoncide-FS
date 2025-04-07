@@ -1,4 +1,3 @@
-// src/components/delete-study-modal/DeleteStudyModalButton.jsx
 import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteStudy } from "@api/study/deleteStudy.api.js";
@@ -21,16 +20,19 @@ const DeleteStudyModalButton = ({ buttonText }) => {
       if (deleteResponse && deleteResponse.success) {
         setShowSuccessToast(true);
 
-        // 로컬 스토리지에서 삭제된 스터디 제거
-        const storedData = localStorage.getItem("studyForest");
+        // 유저의 로컬 스토리지에서 삭제된 스터디 제거
+        const storedData = localStorage.getItem("studyForestCardIds");
         if (storedData) {
           const parsedData = JSON.parse(storedData);
           const updatedData = parsedData.filter(
             (study) => study.id != parseInt(studyId)
           );
-          localStorage.setItem("studyForest", JSON.stringify(updatedData));
+          localStorage.setItem(
+            "studyForestCardIds",
+            JSON.stringify(updatedData)
+          );
         }
-
+        console.log("ignore");
         // 2초 후 홈으로 이동
         setTimeout(() => {
           navigate("/");
