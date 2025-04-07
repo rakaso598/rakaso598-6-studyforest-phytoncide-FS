@@ -77,7 +77,7 @@ const HabitModal = ({ onClose, studyId, setIsModalLoading }) => {
           </div>
         ))}
         <div className={styles.createBox} onClick={handleAddHabit}>
-          <img src={plusIcon} alt="추가 아이콘" />
+          <img src={plusIcon} className={styles.plusIc} alt="추가 아이콘" />
         </div>
       </div>
       <div className={styles.btns}>
