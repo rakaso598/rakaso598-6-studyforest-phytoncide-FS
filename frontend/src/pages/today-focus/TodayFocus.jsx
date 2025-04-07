@@ -9,7 +9,7 @@ import StudyNavbar from "@components/study-navbar/StudyNavbar.jsx";
 
 const TodayFocus = () => {
   const { studyId } = useParams();
-  const [point, setPoint] = useState(0);
+  const [point, setPoint] = useState(3);
   const [totalPoint, setTotalPoint] = useState(0);
   const [start, setStart] = useState(false);
   const [pause, setPause] = useState(false);
@@ -64,17 +64,8 @@ const TodayFocus = () => {
   }, [start, point]);
 
   // 시간 설정에 따른 포인트 설정
-  const rewardPointSetByTime = (e) => {
-    const time = e.target.value;
-
-    if (isNaN(time)) return;
-    if (time.length >= 3) return setPoint(0);
-
-    if (time < 10) {
-      setPoint(0);
-    } else {
-      setPoint(time <= 19 ? 3 : 3 + Math.floor(time / 10 - 1));
-    }
+  const rewardPointSetByTime = (minute) => {
+    setPoint(3 + Math.floor(minute / 10));
   };
 
   // toast 팝업 자동종료
