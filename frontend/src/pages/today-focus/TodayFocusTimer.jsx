@@ -180,16 +180,14 @@ const TodayFocusTimer = ({
     }
 
     // 분(min) 증가
-    if (second === "00") {
-      if (timeover) {
-        setMinute((prevMinute) => {
-          if (prevMinute < 9)
-            return (prevMinute = "0" + (Number(prevMinute[1]) + 1));
-          if (prevMinute < 10) return (prevMinute = 10);
-          if (prevMinute < 99) return prevMinute + 1;
-          if (prevMinute === 99) return (prevMinute = "00");
-        });
-      }
+    if (second === "00" && timeover) {
+      setMinute((prevMinute) => {
+        if (prevMinute < 9)
+          return (prevMinute = "0" + (Number(prevMinute[1]) + 1));
+        if (prevMinute < 10) return (prevMinute = 10);
+        if (prevMinute < 99) return prevMinute + 1;
+        if (prevMinute === 99) return (prevMinute = "00");
+      });
     }
 
     // 10초 카운트다운 색상 효과
