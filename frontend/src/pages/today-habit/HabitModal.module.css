@@ -27,7 +27,7 @@
 .singleHabit {
   display: inline-block;
   min-width: 100px;
-  max-width: 380px;
+  max-width: 400px;
   width: 100%;
   background: transparent;
   border: none;
@@ -57,7 +57,7 @@
 }
 .singleHabitBoxWithTrashIc {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 
 .trashIcon {
@@ -73,7 +73,8 @@
 .createBox {
   display: grid;
   place-items: center;
-  width: 240px;
+  min-width: 256px;
+  max-width: 400px;
   height: 54px;
   border-radius: 20px;
   border: 2px solid var(--color-black);
@@ -120,19 +121,31 @@
   .createBox {
     width: calc(312px + (100vw - 375px) * 0.3);
     max-width: 400px;
+    margin-top: 16px;
+  }
+  .headline {
+    font-size: 24px;
+    margin-bottom: 24px;
   }
   .singleHabitBox {
     width: calc(256px + (100vw - 375px) * 0.3);
     max-width: 400px;
   }
-  .headline {
-    font-size: 24px;
-    margin-top: 20px;
-    margin-bottom: 24px;
-  }
 }
+
 @media screen and (min-width: 744px) {
+  .headline {
+    margin-top: 16px;
+  }
   .singleHabitBox {
     margin-left: 50px;
+    width: 400px;
+  }
+  .singleHabitBoxWithTrashIc {
+    margin-bottom: 20px;
+  }
+  .createBox {
+    margin-top: 0px;
+    width: 400px;
   }
 }
