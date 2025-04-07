@@ -5,7 +5,6 @@
   transform: translate(-50%, -50%);
   background-color: var(--color-white);
   width: min(100% - 32px, 648px);
-  height: auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -27,7 +26,7 @@
 .singleHabit {
   display: inline-block;
   min-width: 100px;
-  max-width: 380px;
+  max-width: 400px;
   width: 100%;
   background: transparent;
   border: none;
@@ -41,7 +40,12 @@
   text-align: center;
   vertical-align: middle;
 }
-
+.wholeHabitsBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow-y: scroll;
+}
 .singleHabitBox {
   display: grid;
   place-items: center;
@@ -50,14 +54,10 @@
   border-radius: 20px;
   background: var(--color-gray-100);
 }
-.wholeHabitsBox {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+
 .singleHabitBoxWithTrashIc {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 }
 
 .trashIcon {
@@ -71,15 +71,23 @@
   cursor: pointer;
 }
 .createBox {
-  display: grid;
-  place-items: center;
-  width: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 256px;
+  max-width: 400px;
   height: 54px;
   border-radius: 20px;
   border: 2px solid var(--color-black);
   text-align: center;
   margin-bottom: 24px;
   cursor: pointer;
+}
+.plusIc {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 24px;
+  height: 24px;
 }
 .btns {
   bottom: 40px;
@@ -116,23 +124,53 @@
   color: var(--color-white);
   text-shadow: 0px -2px 0px var(--color-green-300);
 }
+.wholeHabitsBox::-webkit-scrollbar {
+  width: 6px;
+}
+
+.wholeHabitsBox::-webkit-scrollbar-thumb {
+  background-color: var(--color-gray-200);
+  border-radius: 8px;
+}
 @media screen and (min-width: 374px) {
   .createBox {
-    width: calc(312px + (100vw - 375px) * 0.3);
+    width: calc(294px + (100vw - 375px) * 0.3);
     max-width: 400px;
-  }
-  .singleHabitBox {
-    width: calc(256px + (100vw - 375px) * 0.3);
-    max-width: 400px;
+    margin-top: 16px;
+    margin-left: 16px;
+    margin-right: 10px;
   }
   .headline {
     font-size: 24px;
-    margin-top: 20px;
     margin-bottom: 24px;
+  }
+  .singleHabitBox {
+    width: calc(238px + (100vw - 375px) * 0.3);
+    max-width: 400px;
+  }
+  .habitCreateModal {
+    max-height: 741px;
+  }
+  .singleHabitBoxWithTrashIc {
+    max-height: 496px;
+    margin-left: 16px;
+    margin-right: 10px;
   }
 }
 @media screen and (min-width: 744px) {
+  .headline {
+    margin-top: 16px;
+  }
   .singleHabitBox {
     margin-left: 50px;
+    width: 400px;
+  }
+  .singleHabitBoxWithTrashIc {
+    margin-bottom: 20px;
+    max-height: 592px;
+  }
+  .createBox {
+    width: 400px;
+    margin-top: 0px;
   }
 }

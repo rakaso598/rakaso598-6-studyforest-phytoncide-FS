@@ -8,17 +8,6 @@ const handleError = (e) => {
   }
 };
 
-export const getHabitDone = async (studyId, habitId, day) => {
-  try {
-    const res = await axiosInstance.get(
-      `studies/${studyId}/habits/${habitId}/${day}`
-    );
-    return res.data;
-  } catch (e) {
-    handleError(e);
-  }
-};
-
 export const putHabitDone = async (studyId, habitId, day) => {
   try {
     const res = await axiosInstance.put(
