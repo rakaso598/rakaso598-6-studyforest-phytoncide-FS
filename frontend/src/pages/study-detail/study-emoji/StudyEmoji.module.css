@@ -111,8 +111,8 @@
 .emojiPickerContainer {
   z-index: 1000;
   position: absolute;
-  top: 27%;
-  left: 20%;
+  top: 120%;
+  left: 40%;
 }
 
 .moreEmojisModal {
@@ -124,12 +124,13 @@
   z-index: 1001;
   border-radius: 15px;
   display: flex;
-  width: 257px;
+  width: 250px;
   flex-wrap: wrap;
   align-items: flex-start;
   height: auto;
-  top: 100%;
-  left: 0%;
+  top: 120%;
+  left: -8%;
+  justify-content: flex-start;
 }
 
 @media screen and (min-width: 744px) {
@@ -164,13 +165,16 @@
   }
 
   .moreEmojisModal {
-    width: 233px;
+    top: 120%;
+    left: -3%;
+    width: 234px;
+    justify-content: flex-start;
   }
 
   .emojiPickerContainer {
     transform: scale(0.7);
-    top: 20%;
-    left: 8%;
+    top: -100%;
+    left: -10%;
   }
 }
 

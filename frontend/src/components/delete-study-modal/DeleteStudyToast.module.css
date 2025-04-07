@@ -1,3 +1,17 @@
+/* src/components/delete-study-modal/DeleteStudyModalButton.module.css */
+.deleteStudyModalButton {
+  all: unset;
+  cursor: pointer;
+  color: var(--color-gray-300);
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.deleteStudyModalButton:hover {
+  text-decoration: underline;
+}
+
 .toastContainer {
   position: fixed;
   display: flex;
@@ -7,32 +21,6 @@
   left: 0;
   bottom: 24px;
   z-index: 10000;
-}
-
-.toastError {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 260px;
-  height: 45px;
-  border-radius: 12px;
-  background-color: var(--bg-pink);
-  color: var(--error-light);
-  font-weight: 500;
-  font-size: 14px;
-  position: absolute;
-  bottom: 0;
-  visibility: hidden;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 500ms, visibility 0ms 500ms, transform 500ms ease-in-out;
-}
-
-.toastError.show {
-  visibility: visible;
-  opacity: 1;
-  transform: translateY(-20px);
-  transition: opacity 500ms, visibility 0ms, transform 500ms ease-in-out;
 }
 
 .toastSuccess {
@@ -61,12 +49,18 @@
   transition: opacity 500ms, visibility 0ms, transform 500ms ease-in-out;
 }
 
-@media (min-width: 744px) {
+@media screen and (min-width: 744px) {
+  .deleteStudyModalButton {
+    all: unset;
+    cursor: pointer;
+    color: var(--color-gray-300);
+    font-size: 16px;
+  }
+
   .toastContainer {
     bottom: 40px;
   }
 
-  .toastError,
   .toastSuccess {
     width: 300px;
     height: 47px;

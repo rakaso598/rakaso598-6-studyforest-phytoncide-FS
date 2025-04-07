@@ -22,6 +22,8 @@
   gap: 8px;
 }
 
+/* 오늘의집중 <TodayFocusButton> 을 StudyContent에 적용후 삭제해야함 */
+
 .button {
   display: flex;
   justify-content: center;
@@ -94,7 +96,7 @@
     justify-content: space-between;
     align-items: center;
   }
-
+  /* 삭제해야함 */
   .button {
     width: 144px;
     height: 48px;

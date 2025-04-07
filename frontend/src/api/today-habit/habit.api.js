@@ -60,7 +60,7 @@ export const putHabits = async (studyId, habits) => {
 
 export const getAllHabits = async (studyId) => {
   try {
-    const res = await axiosInstance.get(`/studies/${studyId}/habits?all=true`); // Use query parameter
+    const res = await axiosInstance.get(`/studies/${studyId}/habits?all=true`);
     return res.data;
   } catch (e) {
     console.log(e);
