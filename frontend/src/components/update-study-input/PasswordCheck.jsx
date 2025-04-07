@@ -25,7 +25,7 @@ const PasswordCheck = ({ password, onPasswordCheck }) => {
 
   return (
     <label className={styles.label}>
-      <p className={styles.inputBoxTitle}>비밀번호 확인</p>
+      <p className={styles.inputBoxTitle}>새 비밀번호 확인</p>
       <div className={styles.pwInputBox}>
         <input
           onChange={(e) => setPasswordCheck(e.target.value)}
