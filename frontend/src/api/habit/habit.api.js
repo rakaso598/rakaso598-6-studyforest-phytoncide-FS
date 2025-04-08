@@ -7,6 +7,8 @@ const handleError = (e) => {
     console.error("Request failed");
   }
 };
+
+//스터디에 해당하는 습관 조회
 export const getHabits = async (studyId) => {
   try {
     const res = await axiosInstance.get(`/studies/${studyId}/habits`);
@@ -16,36 +18,18 @@ export const getHabits = async (studyId) => {
   }
 };
 
-// export const patchHabit = async (studyId, habitId, data) => {
-//   try {
-//     const res = await axiosInstance.patch(
-//       `/studies/${studyId}/habits/${habitId}`,
-//       data
-//     );
-//     return res.data;
-//   } catch (e) {
-//     handleError(e);
-//   }
-// };
+//습관 체크
+export const putHabitDone = async (studyId, habitId, day) => {
+  try {
+    const res = await axiosInstance.put(
+      `studies/${studyId}/habits/${habitId}/${day}`
+    );
+    return res.data;
+  } catch (e) {
+    handleError(e);
+  }
+};
 
-// export const postHabit = async (studyId, data) => {
-//   try {
-//     const res = await axiosInstance.post(`/studies/${studyId}/habits`, data);
-//     return res.data;
-//   } catch (e) {
-//     handleError(e);
-//   }
-// };
-// export const deleteHabit = async (studyId, habitId) => {
-//   try {
-//     const res = await axiosInstance.delete(
-//       `/studies/${studyId}/habits/${habitId}`
-//     );
-//     return res.data;
-//   } catch (e) {
-//     handleError(e);
-//   }
-// };
 export const putHabits = async (studyId, habits) => {
   try {
     const res = await axiosInstance.put(`/studies/${studyId}/habits`, {

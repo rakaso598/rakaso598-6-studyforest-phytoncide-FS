@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "@today-habit/HabitModal.module.css";
 import trashIcon from "/images/icon/ic_trash.svg";
 import plusIcon from "/images/icon/ic_plus.svg";
-import { putHabits, getHabits } from "@api/today-habit/habit.api";
+import { putHabits, getHabits } from "@api/habit/habit.api";
 
 const HabitModal = ({ onClose, studyId, setIsModalLoading }) => {
   const [habits, setHabits] = useState([]);
