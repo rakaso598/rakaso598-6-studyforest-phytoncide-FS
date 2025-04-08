@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styles from "./StudyCreate.module.css";
-import NicknameInput from "../../components/create-Study-Input/NicknameInput";
-import StudyNameInput from "../../components/create-Study-Input/StudyNameInput";
-import DescriptionInput from "../../components/create-Study-Input/DescriptionInput";
-import PasswordInput from "../../components/create-Study-Input/PasswordInput";
-import PasswordCheck from "../../components/create-Study-Input/PasswordCheck";
-import Background from "../../components/create-Study-Input/Background";
+import NicknameInput from "../../components/createStudyInput/NicknameInput";
+import StudyNameInput from "../../components/createStudyInput/StudyNameInput";
+import DescriptionInput from "../../components/createStudyInput/descriptionInput/DescriptionInput";
+import PasswordInput from "../../components/createStudyInput/passwordInput/PasswordInput";
+import PasswordCheck from "../../components/createStudyInput/PasswordCheck";
+import Background from "../../components/createStudyInput/background/Background";
 import { studyCreate } from "../../api/study/studyCreate.api";
 import { useNavigate } from "react-router-dom";
 
@@ -71,13 +71,19 @@ const StudyCreate = () => {
       <article className={styles.article}>
         <h2 className={styles.studyCreateTitle}>스터디 만들기</h2>
         <div className={styles.studyCreateTopInputBox}>
-          <NicknameInput setNickName={setNickName} />
-          <StudyNameInput setTitle={setTitle} />
-          <DescriptionInput setDescription={setDescription} />
+          <NicknameInput nickName={nickName} setNickName={setNickName} />
+          <StudyNameInput title={title} setTitle={setTitle} />
+          <DescriptionInput
+            description={description}
+            setDescription={setDescription}
+          />
         </div>
         <Background setBackground={setBackground} background={background} />
         <div className={styles.studyCreateBottomBox}>
-          <PasswordInput setEncryptedPassword={setEncryptedPassword} />
+          <PasswordInput
+            encryptedPassword={encryptedPassword}
+            setEncryptedPassword={setEncryptedPassword}
+          />
           <PasswordCheck
             encryptedPassword={encryptedPassword}
             passwordCheck={passwordCheck}

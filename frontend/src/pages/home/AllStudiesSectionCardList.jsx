@@ -1,9 +1,9 @@
 import { memo } from "react";
-import styles from "./BrowseCardList.module.css";
-import HomeCard from "@components/home/HomeCard";
+import styles from "./AllStudiesSectionCardList.module.css";
 import { ClipLoader } from "react-spinners";
+import HomeCard from "./HomeCard";
 
-const BrowseCardList = memo(({ isLoading, studies }) => {
+const AllStudiesSectionCardList = memo(({ isLoading, studies }) => {
   return (
     <div className={styles.cardListContainer}>
       {isLoading && studies.length === 0 ? (
@@ -25,4 +25,4 @@ const BrowseCardList = memo(({ isLoading, studies }) => {
   );
 });
 
-export default BrowseCardList;
+export default AllStudiesSectionCardList;

@@ -1,5 +1,6 @@
 import axiosInstance from "@api/axiosInstance";
 
+// 스터디 목록 조회
 export const getStudies = async ({
   offset = 0,
   limit = 6,
@@ -24,6 +25,7 @@ export const getStudies = async ({
   }
 };
 
+// 최근 조회한 스터디 목록 조회
 export const getRecentlyViewedStudies = async (studyIds) => {
   const formattedStudyIds = studyIds.slice(1, -1);
 
@@ -42,8 +44,8 @@ export const getRecentlyViewedStudies = async (studyIds) => {
 
 // 정렬 옵션 매핑
 export const SORT_OPTIONS = {
-  "최근 순": { orderBy: "createAt", sort: "desc" },
-  "오래된 순": { orderBy: "createAt", sort: "asc" },
-  "많은 포인트 순": { orderBy: "point", sort: "desc" },
-  "적은 포인트 순": { orderBy: "point", sort: "asc" },
+  latest: { orderBy: "createAt", sort: "desc" },
+  oldest: { orderBy: "createAt", sort: "asc" },
+  highest_point: { orderBy: "point", sort: "desc" },
+  lowest_point: { orderBy: "point", sort: "asc" },
 };

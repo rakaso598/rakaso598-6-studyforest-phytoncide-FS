@@ -1,4 +1,4 @@
-import { getStudies } from "@api/home/getStudy.api";
+import { getStudies } from "@api/home/home.api";
 
 const loadMoreStudies = async (currentStudies, setStudies, setIsLoading) => {
   try {
