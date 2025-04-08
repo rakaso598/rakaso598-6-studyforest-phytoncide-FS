@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "@today-habit/HabitModal.module.css";
 import trashIcon from "/images/icon/ic_trash.svg";
 import plusIcon from "/images/icon/ic_plus.svg";
-import { putHabits, getHabits } from "@api/today-habit/habit.api";
+import { putHabits, getHabits } from "@api/habit/habit.api";
 
 const HabitModal = ({ onClose, studyId, setIsModalLoading }) => {
   const [habits, setHabits] = useState([]);
@@ -25,16 +25,16 @@ const HabitModal = ({ onClose, studyId, setIsModalLoading }) => {
   const handleAddHabit = () => {
     setHabits((prev) => [
       ...prev,
-      { id: Date.now(), title: "                   ", isDone: false },
+      { id: Date.now(), title: "                   ", isDeleted: false },
     ]);
   };
   const handleDeleteHabit = (habitToDelete) => {
     setHabits((prev) =>
       prev
         .map((habit) =>
-          habit.id === habitToDelete.id ? { ...habit, isDone: true } : habit
+          habit.id === habitToDelete.id ? { ...habit, isDeleted: true } : habit
         )
-        .filter((habit) => !habit.isDone)
+        .filter((habit) => !habit.isDeleted)
     );
   };
   const handleConfirmRevision = async () => {
