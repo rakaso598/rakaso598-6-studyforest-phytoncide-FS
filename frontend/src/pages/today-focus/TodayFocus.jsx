@@ -7,14 +7,17 @@ import TodayFocusPoint from "./components/Point/TodayFocusPoint.jsx";
 import TodayFocusToast from "./components/Toast/TodayFocusToast.jsx";
 import TodayFocusTimer from "./components/Timer/TodayFocusTimer.jsx";
 import StudyNavbar from "@components/study-navbar/StudyNavbar.jsx";
+import {
+  TimerContextProvider,
+  useTimerState,
+} from "../../contexts/timerState.context.jsx";
 
 const TodayFocus = () => {
   const { studyId } = useParams();
   const [point, setPoint] = useState(3);
   const [totalPoint, setTotalPoint] = useState(0);
-  const [isStart, setIsStart] = useState(false);
-  const [isPause, setIsPause] = useState(false);
-  const [isComplete, setIsComplete] = useState(false);
+  const { timerState, setTimerState } = useTimerState();
+  const { isStart, isPause, isComplete } = timerState;
 
   // 스터디 상세 불러오기 API
   const getStudy = async (studyId) => {
@@ -70,8 +73,10 @@ const TodayFocus = () => {
     const toastOff = setTimeout(() => {
       if (!isPause && !isComplete) return;
 
-      if (isPause) setIsPause(false);
-      if (isComplete) setIsComplete(false);
+      if (isPause)
+        setTimerState((prevState) => ({ ...prevState, isPause: false }));
+      if (isComplete)
+        setTimerState((prevState) => ({ ...prevState, isComplete: false }));
     }, 2000);
 
     return () => {
@@ -93,21 +98,11 @@ const TodayFocus = () => {
         <div className={styles.focusContainer}>
           <section className={styles.focus}>
             <h2 className={styles.focusTxt}>오늘의 집중</h2>
-            <TodayFocusTimer
-              rewardPointSetByTime={rewardPointSetByTime}
-              setIsComplete={setIsComplete}
-              setIsPause={setIsPause}
-              isStart={isStart}
-              setIsStart={setIsStart}
-            />
+            <TodayFocusTimer rewardPointSetByTime={rewardPointSetByTime} />
           </section>
         </div>
       </div>
-      <TodayFocusToast
-        isPause={isPause}
-        isComplete={isComplete}
-        point={point}
-      />
+      <TodayFocusToast point={point} />
     </div>
   );
 };

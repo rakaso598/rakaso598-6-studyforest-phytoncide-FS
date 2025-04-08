@@ -3,61 +3,52 @@ import styles from "./TodayFocusTimer.module.css";
 import TodayFocusTimerBtn from "./TodayFocusTimerBtn";
 import clsx from "clsx";
 import { minTimerLogic, secTimerLogic } from "@utils/timerLogic.utils";
+import { useTimerState } from "@contexts/timerState.context";
 
-const TodayFocusTimer = ({
-  rewardPointSetByTime,
-  setIsComplete,
-  setIsPause,
-  isStart,
-  setIsStart,
-}) => {
+const TodayFocusTimer = ({ rewardPointSetByTime }) => {
+  const { timerState, setTimerState } = useTimerState();
+  const { isStart, isCountDown, isTimeOver, isDisabled } = timerState;
   const [minute, setMinute] = useState("00");
   const [second, setSecond] = useState("00");
   const [tempTime, setTempTime] = useState({ min: "00", sec: "00" });
-  const [isCountDown, setIsCountDown] = useState(false);
-  const [isTimeover, setIsTimeover] = useState(false);
-  const [isBtnVisible, setIsBtnVisible] = useState(false);
-  const [isDisabled, setIsDisabled] = useState(false);
-
-  // 시작 버튼
-  const handleStartClick = () => {
-    if (!isTimeover && minute === "00" && second === "00") return;
-    if (isStart) {
-      setIsStart(false);
-      setIsDisabled(false);
-      setIsCountDown(false);
-      setIsTimeover(false);
-      setIsComplete(true);
-      setMinute(tempTime.min);
-      setSecond(tempTime.sec);
-      return;
-    }
-    setIsStart(true);
-    setIsBtnVisible(true);
-    setIsDisabled(true);
-  };
-
-  // 일시 정지 버튼
-  const handlePauseClick = () => {
-    setIsPause(true);
-    setIsStart(false);
-    setIsBtnVisible(false);
-  };
-
-  // 리셋 버튼
-  const handleResetClick = () => {
-    setIsStart(false);
-    setIsBtnVisible(false);
-    setIsDisabled(false);
-    setIsCountDown(false);
-    setIsTimeover(false);
-    setMinute(tempTime.min);
-    setSecond(tempTime.sec);
-  };
 
   // 타이머 선택 시 자동 전체 선택
   const handleTimerClick = (e) => {
     e.target.select();
+  };
+
+  // 타이머 리셋
+  const resetTimer = () => {
+    setMinute(tempTime.min);
+    setSecond(tempTime.sec);
+  };
+
+  // 타이머 디폴트 값
+  const handleTimerDefaultValue = (e) => {
+    const { id, value } = e.target;
+    const DEFAULT_TIME = value.padStart(2, "0");
+
+    if (value.length >= 2) return;
+
+    if (id === "minute") {
+      if (!minute || minute === "0") {
+        setMinute(DEFAULT_TIME);
+        setTempTime({ ...tempTime, min: DEFAULT_TIME });
+      } else if (Number(value) < 10) {
+        setMinute(DEFAULT_TIME);
+        setTempTime({ ...tempTime, min: DEFAULT_TIME });
+      }
+    }
+
+    if (id === "second") {
+      if (!second || second === "0") {
+        setSecond(DEFAULT_TIME);
+        setTempTime({ ...tempTime, sec: DEFAULT_TIME });
+      } else if (Number(value) < 10) {
+        setSecond(DEFAULT_TIME);
+        setTempTime({ ...tempTime, sec: DEFAULT_TIME });
+      }
+    }
   };
 
   // 타이머 시간 설정
@@ -105,59 +96,34 @@ const TodayFocusTimer = ({
     }
   };
 
-  // 타이머 디폴트 값
-  const handleTimerDefaultValue = (e) => {
-    const { id, value } = e.target;
-    const DEFAULT_TIME = value.padStart(2, "0");
-
-    if (value.length >= 2) return;
-
-    if (id === "minute") {
-      if (!minute || minute === "0") {
-        setMinute(DEFAULT_TIME);
-        setTempTime({ ...tempTime, min: DEFAULT_TIME });
-      } else if (Number(value) < 10) {
-        setMinute(DEFAULT_TIME);
-        setTempTime({ ...tempTime, min: DEFAULT_TIME });
-      }
-    }
-
-    if (id === "second") {
-      if (!second || second === "0") {
-        setSecond(DEFAULT_TIME);
-        setTempTime({ ...tempTime, sec: DEFAULT_TIME });
-      } else if (Number(value) < 10) {
-        setSecond(DEFAULT_TIME);
-        setTempTime({ ...tempTime, sec: DEFAULT_TIME });
-      }
-    }
-  };
-
-  // 초(sec) 변경
+  // 타이머 시작 - 초(sec) 변경
   useEffect(() => {
     if (!isStart) return;
 
-    const secTimer = secTimerLogic(isTimeover, setSecond);
+    const secTimer = secTimerLogic(isTimeOver, setSecond);
 
     return () => {
       clearInterval(secTimer);
     };
-  }, [isStart, minute, isTimeover]);
+  }, [isStart, minute, isTimeOver]);
 
-  // 분(min) 변경
+  // 타이머 시작 - 분(min) 변경
   useEffect(() => {
     if (!isStart) return;
 
-    minTimerLogic(isTimeover, second, setMinute);
+    minTimerLogic(isTimeOver, second, setMinute);
 
     // 10초 & 타임오버 색상 효과
     if (minute === "00") {
       if (second === "00") {
-        setIsCountDown(false);
-        setIsBtnVisible(false);
-        setIsTimeover(true);
+        setTimerState((prevState) => ({
+          ...prevState,
+          isCountDown: false,
+          isBtnVisible: false,
+          isTimeOver: true,
+        }));
       } else if (second <= 10) {
-        setIsCountDown(true);
+        setTimerState((prevState) => ({ ...prevState, isCountDown: true }));
       }
     }
   }, [second]);
@@ -178,11 +144,11 @@ const TodayFocusTimer = ({
       <section
         className={clsx(
           styles.focusTimerContainer,
-          isTimeover && styles.timeover,
+          isTimeOver && styles.timeover,
           isCountDown && styles.countDown
         )}
       >
-        {isTimeover && <p>-</p>}
+        {isTimeOver && <p>-</p>}
         <input
           disabled={isDisabled}
           onClick={handleTimerClick}
@@ -207,11 +173,9 @@ const TodayFocusTimer = ({
         />
       </section>
       <TodayFocusTimerBtn
-        isTimeover={isTimeover}
-        isBtnVisible={isBtnVisible}
-        handleStartClick={handleStartClick}
-        handlePauseClick={handlePauseClick}
-        handleResetClick={handleResetClick}
+        minute={minute}
+        second={second}
+        resetTimer={resetTimer}
       />
     </>
   );

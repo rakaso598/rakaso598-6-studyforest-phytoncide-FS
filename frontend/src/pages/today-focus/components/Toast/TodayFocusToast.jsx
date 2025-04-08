@@ -1,7 +1,11 @@
 import clsx from "clsx";
 import styles from "./TodayFocusToast.module.css";
+import { useTimerState } from "@contexts/timerState.context";
 
-const TodayFocusToast = ({ isPause, isComplete, point }) => {
+const TodayFocusToast = ({ point }) => {
+  const { timerState } = useTimerState();
+  const { isPause, isComplete } = timerState;
+
   return (
     <aside className={styles.toastContainer}>
       <p className={clsx(styles.toastWarning, isPause && styles.show)}>

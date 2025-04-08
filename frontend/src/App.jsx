@@ -4,6 +4,7 @@ import "../public/font/Pretendard-1.3.9/web/static/pretendard.css";
 import Layout from "./layout/Layout";
 import { ClipLoader, SyncLoader } from "react-spinners";
 import styles from "./App.module.css";
+import { TimerContextProvider } from "./contexts/timerState.context";
 
 const Home = lazy(() => import("@home/Home"));
 const TodayFocus = lazy(() => import("@today-focus/TodayFocus"));
@@ -24,18 +25,20 @@ function App() {
         </div>
       }
     >
-      <Routes>
-        <Route element={<Layout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/studies/*">
-            <Route path="create" element={<StudyCreate />} />
-            <Route path=":studyId" element={<StudyDetail />} />
-            <Route path=":studyId/form" element={<StudyEditForm />} />
-            <Route path=":studyId/focus" element={<TodayFocus />} />
-            <Route path=":studyId/habit" element={<TodayHabit />} />
+      <TimerContextProvider>
+        <Routes>
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/studies/*">
+              <Route path="create" element={<StudyCreate />} />
+              <Route path=":studyId" element={<StudyDetail />} />
+              <Route path=":studyId/form" element={<StudyEditForm />} />
+              <Route path=":studyId/focus" element={<TodayFocus />} />
+              <Route path=":studyId/habit" element={<TodayHabit />} />
+            </Route>
           </Route>
-        </Route>
-      </Routes>
+        </Routes>
+      </TimerContextProvider>
     </Suspense>
   );
 }
