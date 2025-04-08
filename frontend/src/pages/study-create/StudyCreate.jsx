@@ -73,7 +73,10 @@ const StudyCreate = () => {
         <div className={styles.studyCreateTopInputBox}>
           <NicknameInput nickName={nickName} setNickName={setNickName} />
           <StudyNameInput title={title} setTitle={setTitle} />
-          <DescriptionInput setDescription={setDescription} />
+          <DescriptionInput
+            description={description}
+            setDescription={setDescription}
+          />
         </div>
         <Background setBackground={setBackground} background={background} />
         <div className={styles.studyCreateBottomBox}>
