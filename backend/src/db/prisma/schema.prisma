@@ -8,17 +8,43 @@ datasource db {
 }
 
 model Study {
-  id                Int               @id @default(autoincrement())
-  nickName          String            @db.VarChar(10)
-  title             String            @db.VarChar(10)
+  id                Int              @id @default(autoincrement())
+  nickName          String           @db.VarChar(10)
+  title             String           @db.VarChar(10)
   description       String
+  point             Int              @default(0)
+  createAt          DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
   encryptedPassword String
   background        StudyBackgrounds
-  point             Int               @default(0) 
-  createAt          DateTime          @default(now())
-  updatedAt         DateTime          @updatedAt
-  emojis            Emojis[]          @relation("StudyEmojis")
-  habits            Habit[]           @relation("StudyHabits")
+  emojis            Emojis[]         @relation("StudyEmojis")
+  habits            Habit[]          @relation("StudyHabits")
+}
+
+model Emojis {
+  id           Int    @id @default(autoincrement())
+  studyId      Int
+  emojiContent String
+  count        Int    @default(0)
+  study        Study  @relation("StudyEmojis", fields: [studyId], references: [id], onDelete: Cascade)
+}
+
+model Habit {
+  id        Int         @id @default(autoincrement())
+  title     String
+  createAt  DateTime    @default(now())
+  updatedAt DateTime    @updatedAt
+  studyId   Int
+  isDeleted Boolean     @default(false)
+  study     Study       @relation("StudyHabits", fields: [studyId], references: [id], onDelete: Cascade)
+  HabitDone HabitDone[]
+}
+
+model HabitDone {
+  id        Int      @id @default(autoincrement())
+  habitId   Int
+  createdAt DateTime @default(now()) @db.Date
+  habit     Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
 }
 
 enum StudyBackgrounds {
@@ -31,30 +57,3 @@ enum StudyBackgrounds {
   bg7
   bg8
 }
-
-model Emojis {
-  id           Int    @id @default(autoincrement())
-  studyId      Int
-  emojiContent String
-  count        Int    @default(0) 
-  study        Study  @relation("StudyEmojis", fields: [studyId], references: [id], onDelete: Cascade)
-}
-
-model Habit {
-  id        Int         @id @default(autoincrement())
-  title     String
-  createAt  DateTime    @default(now())
-  updatedAt DateTime    @updatedAt
-  study     Study       @relation("StudyHabits", fields: [studyId], references: [id], onDelete: Cascade)
-  studyId   Int
-  isDeleted    Boolean     @default(false)
-  HabitDone HabitDone[]
-}
-
-model HabitDone {
-  id        Int      @id @default(autoincrement())
-  habitId   Int
-  createdAt DateTime @default(now()) @db.Date
-  habit     Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
-}
-
