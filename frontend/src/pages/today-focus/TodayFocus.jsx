@@ -13,7 +13,7 @@ const TodayFocus = () => {
   const [point, setPoint] = useState(3);
   const [totalPoint, setTotalPoint] = useState(0);
   const [isStart, setIsStart] = useState(false);
-  const [isPause, isSetPause] = useState(false);
+  const [isPause, setIsPause] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
 
   // 스터디 상세 불러오기 API
@@ -70,7 +70,7 @@ const TodayFocus = () => {
     const toastOff = setTimeout(() => {
       if (!isPause && !isComplete) return;
 
-      if (isPause) isSetPause(false);
+      if (isPause) setIsPause(false);
       if (isComplete) setIsComplete(false);
     }, 2000);
 
@@ -96,7 +96,7 @@ const TodayFocus = () => {
             <TodayFocusTimer
               rewardPointSetByTime={rewardPointSetByTime}
               setIsComplete={setIsComplete}
-              setIsPause={isSetPause}
+              setIsPause={setIsPause}
               isStart={isStart}
               setIsStart={setIsStart}
             />

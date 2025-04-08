@@ -2,10 +2,7 @@ import { useEffect, useState } from "react";
 import styles from "./TodayFocusTimer.module.css";
 import TodayFocusTimerBtn from "./TodayFocusTimerBtn";
 import clsx from "clsx";
-import {
-  minTimerLogic,
-  secTimerLogic,
-} from "../../../../utils/timerLogic.utils";
+import { minTimerLogic, secTimerLogic } from "@utils/timerLogic.utils";
 
 const TodayFocusTimer = ({
   rewardPointSetByTime,
