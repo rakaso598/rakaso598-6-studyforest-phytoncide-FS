@@ -8,7 +8,7 @@ habitsRouter.get("/:studyId/habits", async (req, res, next) => {
     const studyId = Number(req.params.studyId);
     const includeDeletedHabit = req.query.all === "true";
     const habits = await prisma.habit.findMany({
-      where: { studyId, ...(includeDeletedHabit ? {} : { isDone: false }) },
+      where: { studyId, ...(includeDeletedHabit ? {} : { isDeleted: false }) },
       include: { HabitDone: true },
     });
     res.status(201).json(habits);
@@ -22,6 +22,7 @@ habitsRouter.get("/:studyId/habits/:habitId", async (req, res, next) => {
     const habit = await prisma.habit.findUnique({
       where: { id: habitId },
     });
+    if (!habit) return res.status(404).send("해당 습관이 존재하지 않습니다");
     res.status(200).json(habit);
   } catch (e) {
     next(e);
