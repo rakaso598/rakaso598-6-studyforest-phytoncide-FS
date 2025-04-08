@@ -5,56 +5,56 @@ import clsx from "clsx";
 
 const TodayFocusTimer = ({
   rewardPointSetByTime,
-  setComplete,
-  setPause,
-  start,
-  setStart,
+  setIsComplete,
+  setIsPause,
+  isStart,
+  setIsStart,
 }) => {
   const [minute, setMinute] = useState("00");
   const [second, setSecond] = useState("00");
   const [tempTime, setTempTime] = useState({ min: "00", sec: "00" });
-  const [countDown, setCountDown] = useState(false);
-  const [timeover, setTimeover] = useState(false);
-  const [btnToggle, setBtnToggle] = useState(false);
-  const [disabled, setDisabled] = useState(false);
+  const [isCountDown, setIsCountDown] = useState(false);
+  const [isTimeover, setIsTimeover] = useState(false);
+  const [isBtnVisible, setIsBtnVisible] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   // 시작 버튼
   const handleStartClick = () => {
-    if (!timeover && minute === "00" && second === "00") return;
-    if (start) {
-      setStart(false);
-      setDisabled(false);
-      setCountDown(false);
-      setTimeover(false);
-      setComplete(true);
+    if (!isTimeover && minute === "00" && second === "00") return;
+    if (isStart) {
+      setIsStart(false);
+      setIsDisabled(false);
+      setIsCountDown(false);
+      setIsTimeover(false);
+      setIsComplete(true);
       setMinute(tempTime.min);
       setSecond(tempTime.sec);
       return;
     }
-    setStart(true);
-    setBtnToggle(true);
-    setDisabled(true);
+    setIsStart(true);
+    setIsBtnVisible(true);
+    setIsDisabled(true);
   };
 
   // 일시 정지 버튼
   const handlePauseClick = () => {
-    setPause(true);
-    setStart(false);
-    setCountDown(false);
-    setBtnToggle(false);
+    setIsPause(true);
+    setIsStart(false);
+    setIsBtnVisible(false);
   };
 
   // 리셋 버튼
   const handleResetClick = () => {
-    setStart(false);
-    setBtnToggle(false);
-    setDisabled(false);
-    setCountDown(false);
-    setTimeover(false);
+    setIsStart(false);
+    setIsBtnVisible(false);
+    setIsDisabled(false);
+    setIsCountDown(false);
+    setIsTimeover(false);
     setMinute(tempTime.min);
     setSecond(tempTime.sec);
   };
 
+  // 타이머 선택 시 자동 전체 선택
   const handleTimerClick = (e) => {
     e.target.select();
   };
@@ -107,55 +107,50 @@ const TodayFocusTimer = ({
   // 타이머 디폴트 값
   const handleTimerDefaultValue = (e) => {
     const { id, value } = e.target;
-    const DEFAULT_TIME_00 = "00";
-    const DEFAULT_TIME_0 = "0" + value;
+    const DEFAULT_TIME = value.padStart(2, "0");
 
     if (value.length >= 2) return;
 
     if (id === "minute") {
       if (!minute || minute === "0") {
-        setMinute(DEFAULT_TIME_00);
-        setTempTime({ ...tempTime, min: DEFAULT_TIME_00 });
+        setMinute(DEFAULT_TIME);
+        setTempTime({ ...tempTime, min: DEFAULT_TIME });
       } else if (Number(value) < 10) {
-        setMinute(DEFAULT_TIME_0);
-        setTempTime({ ...tempTime, min: DEFAULT_TIME_0 });
+        setMinute(DEFAULT_TIME);
+        setTempTime({ ...tempTime, min: DEFAULT_TIME });
       }
     }
 
     if (id === "second") {
       if (!second || second === "0") {
-        setSecond(DEFAULT_TIME_00);
-        setTempTime({ ...tempTime, sec: DEFAULT_TIME_00 });
+        setSecond(DEFAULT_TIME);
+        setTempTime({ ...tempTime, sec: DEFAULT_TIME });
       } else if (Number(value) < 10) {
-        setSecond(DEFAULT_TIME_0);
-        setTempTime({ ...tempTime, sec: DEFAULT_TIME_0 });
+        setSecond(DEFAULT_TIME);
+        setTempTime({ ...tempTime, sec: DEFAULT_TIME });
       }
     }
   };
 
   // 초(sec) 변경
   useEffect(() => {
-    if (!start) return;
+    if (!isStart) return;
 
     const secTimer = setInterval(() => {
       setSecond((prevSecond) => {
-        // 초(sec) 증가
-        if (timeover) {
-          if (prevSecond < 9)
-            return (prevSecond = "0" + (Number(prevSecond[1]) + 1));
-          if (prevSecond < 10) return (prevSecond = 10);
-          if (prevSecond < 59) return prevSecond + 1;
-          return "00";
+        // 초(sec) 감소
+        if (!isTimeover) {
+          if (prevSecond === "00") return 59;
+          if (prevSecond <= 10) return "0" + (prevSecond - 1);
+          if (prevSecond <= 59) return prevSecond - 1;
         }
 
-        // 초(sec) 감소
-        if (prevSecond === "00") {
-          setCountDown(false);
-          return (prevSecond = 59);
-        } else if (prevSecond <= 10) {
-          return "0" + (prevSecond - 1);
-        } else {
-          return prevSecond - 1;
+        // 초(sec) 증가
+        if (isTimeover) {
+          if (prevSecond < 9) return "0" + (Number(prevSecond.slice(-1)) + 1);
+          if (prevSecond < 10) return 10;
+          if (prevSecond < 59) return prevSecond + 1;
+          return "00";
         }
       });
     }, 1000);
@@ -163,50 +158,46 @@ const TodayFocusTimer = ({
     return () => {
       clearInterval(secTimer);
     };
-  }, [start, minute, timeover]);
+  }, [isStart, minute, isTimeover]);
 
   // 분(min) 변경, 10초 카운트다운 & 타임오버 색상 효과
   useEffect(() => {
-    if (!start) return;
+    if (!isStart) return;
 
     // 분(min) 감소
-    if (second === 59 && !timeover) {
+    if (second === 59 && !isTimeover) {
       setMinute((prevMinute) => {
-        if (prevMinute <= 10) {
-          return "0" + (prevMinute - 1);
-        } else {
-          return prevMinute - 1;
-        }
+        if (prevMinute <= 10) return "0" + (prevMinute - 1);
+        return prevMinute - 1;
       });
     }
 
     // 분(min) 증가
-    if (second === "00" && timeover) {
+    if (second === "00" && isTimeover) {
       setMinute((prevMinute) => {
-        if (prevMinute < 9)
-          return (prevMinute = "0" + (Number(prevMinute[1]) + 1));
-        if (prevMinute < 10) return (prevMinute = 10);
+        if (prevMinute < 9) return "0" + (Number(prevMinute.slice(-1)) + 1);
+        if (prevMinute < 10) return 10;
         if (prevMinute < 99) return prevMinute + 1;
-        if (prevMinute === 99) return (prevMinute = "00");
+        if (prevMinute === 99) return "00";
       });
     }
 
     // 10초 카운트다운 색상 효과
     if (minute === "00" && second === "00") {
-      setCountDown(false);
-      setBtnToggle(false);
-      setTimeover(true);
+      setIsCountDown(false);
+      setIsBtnVisible(false);
+      setIsTimeover(true);
     } else if (minute === "00" && second <= 10) {
-      setCountDown(true);
+      setIsCountDown(true);
     }
-  }, [start, second]);
+  }, [second]);
 
   return (
     <>
       <div
         className={clsx(
           styles.focusSelectTimeContainer,
-          disabled && styles.show
+          isDisabled && styles.show
         )}
       >
         <img src="/images/icon/ic_timer.svg" alt="시계" />
@@ -217,13 +208,13 @@ const TodayFocusTimer = ({
       <section
         className={clsx(
           styles.focusTimerContainer,
-          timeover && styles.timeover,
-          countDown && styles.countDown
+          isTimeover && styles.timeover,
+          isCountDown && styles.countDown
         )}
       >
-        {timeover && <p>-</p>}
+        {isTimeover && <p>-</p>}
         <input
-          disabled={disabled}
+          disabled={isDisabled}
           onClick={handleTimerClick}
           onChange={handleTimerInput}
           onBlur={(e) => {
@@ -236,7 +227,7 @@ const TodayFocusTimer = ({
         />
         <p>:</p>
         <input
-          disabled={disabled}
+          disabled={isDisabled}
           onClick={handleTimerClick}
           onChange={handleTimerInput}
           onBlur={handleTimerDefaultValue}
@@ -246,8 +237,8 @@ const TodayFocusTimer = ({
         />
       </section>
       <TodayFocusTimerBtn
-        timeover={timeover}
-        btnToggle={btnToggle}
+        isTimeover={isTimeover}
+        isBtnVisible={isBtnVisible}
         handleStartClick={handleStartClick}
         handlePauseClick={handlePauseClick}
         handleResetClick={handleResetClick}

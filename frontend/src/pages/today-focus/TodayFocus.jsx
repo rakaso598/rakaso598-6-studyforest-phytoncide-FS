@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./TodayFocus.module.css";
-import { getPoint, patchPoint } from "@api/focus/focusPoint.api.js";
+import { getStudyDetail } from "@api/study/studyDetail.api";
+import { patchPoint } from "@api/focus/focusPoint.api.js";
 import TodayFocusPoint from "./components/Point/TodayFocusPoint.jsx";
 import TodayFocusToast from "./components/Toast/TodayFocusToast.jsx";
 import TodayFocusTimer from "./components/Timer/TodayFocusTimer.jsx";
@@ -11,18 +12,14 @@ const TodayFocus = () => {
   const { studyId } = useParams();
   const [point, setPoint] = useState(3);
   const [totalPoint, setTotalPoint] = useState(0);
-  const [start, setStart] = useState(false);
-  const [pause, setPause] = useState(false);
-  const [complete, setComplete] = useState(false);
+  const [isStart, setIsStart] = useState(false);
+  const [isPause, isSetPause] = useState(false);
+  const [isComplete, setIsComplete] = useState(false);
 
-  // 포인트 불러오기 API
-  const pointLoad = async (studyId) => {
-    try {
-      const { point } = await getPoint(studyId);
-      return point;
-    } catch (e) {
-      console.log(e.response.data);
-    }
+  // 스터디 상세 불러오기 API
+  const getStudy = async (studyId) => {
+    const study = await getStudyDetail(studyId);
+    return study;
   };
 
   // 포인트 업데이트 API
@@ -36,32 +33,32 @@ const TodayFocus = () => {
 
   // 처음 렌더링 때 포인트 불러오기
   useEffect(() => {
-    const getPoint = async () => {
-      const point = await pointLoad(studyId);
+    const pointLoad = async () => {
+      const { point } = await getStudy(studyId);
 
       setTotalPoint(point);
     };
 
-    getPoint();
+    pointLoad();
   }, []);
 
   // 집중 성공 시 DB에 포인트 저장
   useEffect(() => {
     if (point === 0) return;
 
-    if (complete) {
+    if (isComplete) {
       pointUpdate(studyId, { totalPoint });
     }
-  }, [totalPoint, complete]);
+  }, [totalPoint, isComplete]);
 
   // 집중 성공 시 총합 포인트 변경
   useEffect(() => {
-    if (start) return;
+    if (isStart) return;
 
-    if (!start && complete) {
+    if (!isStart && isComplete) {
       setTotalPoint((prevTotalPoint) => (prevTotalPoint += point));
     }
-  }, [start, point, complete]);
+  }, [isStart, point, isComplete]);
 
   // 시간 설정에 따른 포인트 설정
   const rewardPointSetByTime = (minute) => {
@@ -71,18 +68,18 @@ const TodayFocus = () => {
   // toast 팝업 자동종료
   useEffect(() => {
     const toastOff = setTimeout(() => {
-      if (!pause && !complete) return;
+      if (!isPause && !isComplete) return;
 
-      if (pause) setPause(false);
-      if (complete) setComplete(false);
+      if (isPause) isSetPause(false);
+      if (isComplete) setIsComplete(false);
     }, 2000);
 
     return () => {
-      if (pause || complete) return;
+      if (isPause || isComplete) return;
 
       clearTimeout(toastOff);
     };
-  }, [pause, complete]);
+  }, [isPause, isComplete]);
 
   return (
     <div className={styles.container}>
@@ -98,15 +95,19 @@ const TodayFocus = () => {
             <h2 className={styles.focusTxt}>오늘의 집중</h2>
             <TodayFocusTimer
               rewardPointSetByTime={rewardPointSetByTime}
-              setComplete={setComplete}
-              setPause={setPause}
-              start={start}
-              setStart={setStart}
+              setIsComplete={setIsComplete}
+              setIsPause={isSetPause}
+              isStart={isStart}
+              setIsStart={setIsStart}
             />
           </section>
         </div>
       </div>
-      <TodayFocusToast pause={pause} complete={complete} point={point} />
+      <TodayFocusToast
+        isPause={isPause}
+        isComplete={isComplete}
+        point={point}
+      />
     </div>
   );
 };
