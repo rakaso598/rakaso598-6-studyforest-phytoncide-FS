@@ -72,7 +72,7 @@ const StudyCreate = () => {
         <h2 className={styles.studyCreateTitle}>스터디 만들기</h2>
         <div className={styles.studyCreateTopInputBox}>
           <NicknameInput nickName={nickName} setNickName={setNickName} />
-          <StudyNameInput setTitle={setTitle} />
+          <StudyNameInput title={title} setTitle={setTitle} />
           <DescriptionInput setDescription={setDescription} />
         </div>
         <Background setBackground={setBackground} background={background} />
