@@ -55,28 +55,34 @@ habitsRouter.put("/:studyId/habits", async (req, res, next) => {
       );
     });
 
+    //비동기 함수의 실행 결과"인 Promise 객체들
     const deletedHabits = existingHabits.filter(
       (dbHabit) => !habits.some((habit) => habit.id === dbHabit.id)
     );
 
+    const createHabitsPromises = newHabits.map((habit) =>
+      prisma.habit.create({
+        data: { title: habit.title, isDone: habit.isDone, studyId },
+      })
+    );
+    const updateHabitsPromises = updatedHabits.map((habit) =>
+      prisma.habit.update({
+        where: { id: habit.id },
+        data: { title: habit.title, isDone: habit.isDone },
+      })
+    );
+
+    const deleteHabitsPromises = deletedHabits.map((habit) =>
+      prisma.habit.update({
+        where: { id: habit.id },
+        data: { isDone: true },
+      })
+    );
+    //create/update/delete 작업들이 모두 완료될 때까지 기다림
     await Promise.all([
-      ...newHabits.map((habit) =>
-        prisma.habit.create({
-          data: { title: habit.title, isDone: habit.isDone, studyId },
-        })
-      ),
-      ...updatedHabits.map((habit) =>
-        prisma.habit.update({
-          where: { id: habit.id },
-          data: { title: habit.title, isDone: habit.isDone },
-        })
-      ),
-      ...deletedHabits.map((habit) =>
-        prisma.habit.update({
-          where: { id: habit.id },
-          data: { isDone: true },
-        })
-      ),
+      ...createHabitsPromises,
+      ...updateHabitsPromises,
+      ...deleteHabitsPromises,
     ]);
 
     res.json({ message: "습관 목록이 성공적으로 업데이트되었습니다!" });

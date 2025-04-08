@@ -47,6 +47,7 @@ const TodayHabit = () => {
             className={styles.modalContent}
             onClick={(e) => e.stopPropagation()}
           >
+            {/* 모달 클릭시 닫히는거 방지 onClose라는 메서드를 전달*/}
             <HabitModal
               onClose={closeModal}
               studyId={studyId}
