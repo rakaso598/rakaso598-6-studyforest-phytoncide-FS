@@ -40,7 +40,6 @@ export const putHabits = async (studyId, habits) => {
     handleError(e);
   }
 };
-
 export const getAllHabits = async (studyId) => {
   try {
     const res = await axiosInstance.get(`/studies/${studyId}/habits?all=true`);
