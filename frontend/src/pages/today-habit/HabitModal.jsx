@@ -25,16 +25,16 @@ const HabitModal = ({ onClose, studyId, setIsModalLoading }) => {
   const handleAddHabit = () => {
     setHabits((prev) => [
       ...prev,
-      { id: Date.now(), title: "                   ", isDone: false },
+      { id: Date.now(), title: "                   ", isDeleted: false },
     ]);
   };
   const handleDeleteHabit = (habitToDelete) => {
     setHabits((prev) =>
       prev
         .map((habit) =>
-          habit.id === habitToDelete.id ? { ...habit, isDone: true } : habit
+          habit.id === habitToDelete.id ? { ...habit, isDeleted: true } : habit
         )
-        .filter((habit) => !habit.isDone)
+        .filter((habit) => !habit.isDeleted)
     );
   };
   const handleConfirmRevision = async () => {
