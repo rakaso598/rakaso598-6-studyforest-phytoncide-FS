@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import styles from "./TodayFocusTimerBtn.module.css";
 
 const TodayFocusTimerBtn = ({
@@ -11,14 +12,14 @@ const TodayFocusTimerBtn = ({
     <div className={styles.focusBtnContainer}>
       <button
         onClick={handlePauseClick}
-        className={`${styles.focusPauseBtn} ${btnToggle && styles.show}`}
+        className={clsx(styles.focusPauseBtn, btnToggle && styles.show)}
       >
         <img src="/images/icon/ic_pause.svg" alt="일시정지" />
       </button>
       <button
         disabled={btnToggle}
         onClick={handleStartClick}
-        className={`${styles.focusStartBtn} ${btnToggle && styles.disable}`}
+        className={clsx(styles.focusStartBtn, btnToggle && styles.disable)}
       >
         <img
           src={
@@ -30,7 +31,7 @@ const TodayFocusTimerBtn = ({
       </button>
       <button
         onClick={handleResetClick}
-        className={`${styles.focusResetBtn} ${btnToggle && styles.show}`}
+        className={clsx(styles.focusResetBtn, btnToggle && styles.show)}
       >
         <img src="/images/icon/ic_restart.svg" alt="초기화" />
       </button>
