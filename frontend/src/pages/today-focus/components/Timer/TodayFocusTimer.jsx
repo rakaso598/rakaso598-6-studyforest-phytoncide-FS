@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./TodayFocusTimer.module.css";
 import TodayFocusTimerBtn from "./TodayFocusTimerBtn";
+import clsx from "clsx";
 
 const TodayFocusTimer = ({
   rewardPointSetByTime,
@@ -144,7 +145,7 @@ const TodayFocusTimer = ({
             return (prevSecond = "0" + (Number(prevSecond[1]) + 1));
           if (prevSecond < 10) return (prevSecond = 10);
           if (prevSecond < 59) return prevSecond + 1;
-          return (prevSecond = "00");
+          return "00";
         }
 
         // 초(sec) 감소
@@ -203,9 +204,10 @@ const TodayFocusTimer = ({
   return (
     <>
       <div
-        className={`
-          ${styles.focusSelectTimeContainer} 
-          ${disabled && styles.show}`}
+        className={clsx(
+          styles.focusSelectTimeContainer,
+          disabled && styles.show
+        )}
       >
         <img src="/images/icon/ic_timer.svg" alt="시계" />
         <p>
@@ -213,10 +215,11 @@ const TodayFocusTimer = ({
         </p>
       </div>
       <section
-        className={`
-          ${styles.focusTimerContainer} 
-          ${timeover && styles.timeover}
-          ${countDown && styles.countDown}`}
+        className={clsx(
+          styles.focusTimerContainer,
+          timeover && styles.timeover,
+          countDown && styles.countDown
+        )}
       >
         {timeover && <p>-</p>}
         <input
@@ -228,7 +231,7 @@ const TodayFocusTimer = ({
             rewardPointSetByTime(minute);
           }}
           value={minute}
-          className={`${styles.focusMinTimer}`}
+          className={styles.focusMinTimer}
           id="minute"
         />
         <p>:</p>
@@ -238,7 +241,7 @@ const TodayFocusTimer = ({
           onChange={handleTimerInput}
           onBlur={handleTimerDefaultValue}
           value={second}
-          className={`${styles.focusSecTimer}`}
+          className={styles.focusSecTimer}
           id="second"
         />
       </section>
