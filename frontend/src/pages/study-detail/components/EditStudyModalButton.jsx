@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { getStudyDetail } from "@api/study/studyDetail.api";
 import { verifyStudyPassword } from "@api/study/verifyPassword.api";
-import PasswordModalButton from "@components/password-modal/PasswordModalButton";
+import PasswordModalButton from "./password-modal/PasswordModalButton";
 import styles from "./EditStudyModalButton.module.css";
 
 const EditStudyModalButton = ({ buttonText }) => {
