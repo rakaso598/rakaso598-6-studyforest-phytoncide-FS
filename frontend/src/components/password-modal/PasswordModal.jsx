@@ -70,58 +70,62 @@ const PasswordModal = ({
   return (
     <div className={styles.overlay}>
       <div className={styles.content}>
-        <div className={styles.header}>
-          <p className={styles.title}>{`${nickName}의 ${title}`}</p>
+        <div className={styles.contentWrapper}>
+          <div className={styles.header}>
+            <p className={styles.title}>{`${nickName}의 ${title}`}</p>
+            <button
+              type="button"
+              onClick={onClose}
+              className={styles.headerCloseButton}
+            >
+              {closeButtonText}
+            </button>
+          </div>
+          <p className={styles.message}>{message}</p>
+          <div className={styles.inputContainer}>
+            <p className={styles.inputLabel}>비밀번호</p>
+            <div className={styles.passwordInputWrapper}>
+              <input
+                placeholder="비밀번호를 입력해 주세요"
+                type={see ? "text" : "password"}
+                value={password}
+                onChange={handlePasswordChange}
+                className={styles.input}
+              />
+              <img
+                onClick={handleVisibilityToggle}
+                className={styles.visibilityToggle}
+                src={see ? btnSeeIcon : btnCloseIcon}
+                alt="비밀번호 표시 전환"
+              />
+            </div>
+            {!customToastContainer && (
+              <p
+                className={`${styles.toastError} ${
+                  showErrorToast && styles.show
+                }`}
+              >
+                🚨 {errorMessage}
+              </p>
+            )}
+          </div>
+        </div>
+        <div className={styles.buttons}>
+          <button
+            className={styles.actionButton}
+            type="button"
+            onClick={handleSubmit}
+          >
+            {actionButtonText}
+          </button>
           <button
             type="button"
             onClick={onClose}
-            className={styles.headerCloseButton}
+            className={styles.bottomCloseButton}
           >
             {closeButtonText}
           </button>
         </div>
-        <p className={styles.message}>{message}</p>
-        <div className={styles.inputContainer}>
-          <p className={styles.inputLabel}>비밀번호</p>
-          <div className={styles.passwordInputWrapper}>
-            <input
-              placeholder="비밀번호를 입력해 주세요"
-              type={see ? "text" : "password"}
-              value={password}
-              onChange={handlePasswordChange}
-              className={styles.input}
-            />
-            <img
-              onClick={handleVisibilityToggle}
-              className={styles.visibilityToggle}
-              src={see ? btnSeeIcon : btnCloseIcon}
-              alt="비밀번호 표시 전환"
-            />
-          </div>
-          {!customToastContainer && (
-            <p
-              className={`${styles.toastError} ${
-                showErrorToast && styles.show
-              }`}
-            >
-              🚨 {errorMessage}
-            </p>
-          )}
-        </div>
-        <button
-          className={styles.actionButton}
-          type="button"
-          onClick={handleSubmit}
-        >
-          {actionButtonText}
-        </button>
-        <button
-          type="button"
-          onClick={onClose}
-          className={styles.bottomCloseButton}
-        >
-          {closeButtonText}
-        </button>
       </div>
     </div>
   );
