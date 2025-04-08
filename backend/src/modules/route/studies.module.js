@@ -124,7 +124,6 @@ studyRouter.get("/:studyId", async (req, res, next) => {
 studyRouter.post("/", async (req, res, next) => {
   try {
     const data = req.body;
-
     if (!data.title || !data.encryptedPassword) {
       throw new Error("제목 또는 비밀번호가 필요합니다");
     }
@@ -134,7 +133,6 @@ studyRouter.post("/", async (req, res, next) => {
     }
 
     const salt = await bcrypt.genSalt(10);
-
     const hashedPw = await bcrypt.hash(data.encryptedPassword, salt);
 
     const study = await prisma.study.create({
@@ -296,6 +294,43 @@ studyRouter.get("/:id/emojis", async (req, res, next) => {
     });
 
     res.status(200).json(emojis);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 스터디 비밀번호 검증
+studyRouter.post("/:studyId/verify-password", async (req, res, next) => {
+  const { studyId } = req.params;
+  const { encryptedPassword } = req.body;
+
+  try {
+    const study = await prisma.study.findUnique({
+      where: {
+        id: parseInt(studyId),
+      },
+    });
+
+    if (!study) {
+      return res.status(404).json({
+        success: false,
+        message: "스터디를 찾을 수 없습니다.",
+      });
+    }
+
+    const isPasswordMatch = await bcrypt.compare(
+      encryptedPassword,
+      study.encryptedPassword
+    );
+
+    if (!isPasswordMatch) {
+      return res.status(401).json({
+        success: false,
+        message: "비밀번호가 일치하지 않습니다.",
+      });
+    }
+
+    res.status(200).json({ success: true, message: "비밀번호가 일치합니다." });
   } catch (error) {
     next(error);
   }
