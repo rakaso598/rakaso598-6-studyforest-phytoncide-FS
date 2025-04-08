@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styles from "./StudyCreate.module.css";
 import NicknameInput from "../../components/create-Study-Input/NicknameInput";
 import StudyNameInput from "../../components/create-Study-Input/StudyNameInput";
-import DescriptionInput from "../../components/create-Study-Input/DescriptionInput";
-import PasswordInput from "../../components/create-Study-Input/PasswordInput";
+import DescriptionInput from "../../components/create-study-Input/descriptionInput/DescriptionInput";
+import PasswordInput from "../../components/create-study-Input/passwordInput/PasswordInput";
 import PasswordCheck from "../../components/create-Study-Input/PasswordCheck";
-import Background from "../../components/create-Study-Input/Background";
+import Background from "../../components/create-study-Input/background/Background";
 import { studyCreate } from "../../api/study/studyCreate.api";
 import { useNavigate } from "react-router-dom";
 
@@ -71,7 +71,7 @@ const StudyCreate = () => {
       <article className={styles.article}>
         <h2 className={styles.studyCreateTitle}>스터디 만들기</h2>
         <div className={styles.studyCreateTopInputBox}>
-          <NicknameInput setNickName={setNickName} />
+          <NicknameInput nickName={nickName} setNickName={setNickName} />
           <StudyNameInput setTitle={setTitle} />
           <DescriptionInput setDescription={setDescription} />
         </div>
