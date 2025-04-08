@@ -2,6 +2,10 @@ import { useEffect, useState } from "react";
 import styles from "./TodayFocusTimer.module.css";
 import TodayFocusTimerBtn from "./TodayFocusTimerBtn";
 import clsx from "clsx";
+import {
+  minTimerLogic,
+  secTimerLogic,
+} from "../../../../utils/timerLogic.utils";
 
 const TodayFocusTimer = ({
   rewardPointSetByTime,
@@ -136,59 +140,28 @@ const TodayFocusTimer = ({
   useEffect(() => {
     if (!isStart) return;
 
-    const secTimer = setInterval(() => {
-      setSecond((prevSecond) => {
-        // 초(sec) 감소
-        if (!isTimeover) {
-          if (prevSecond === "00") return 59;
-          if (prevSecond <= 10) return "0" + (prevSecond - 1);
-          if (prevSecond <= 59) return prevSecond - 1;
-        }
-
-        // 초(sec) 증가
-        if (isTimeover) {
-          if (prevSecond < 9) return "0" + (Number(prevSecond.slice(-1)) + 1);
-          if (prevSecond < 10) return 10;
-          if (prevSecond < 59) return prevSecond + 1;
-          return "00";
-        }
-      });
-    }, 1000);
+    const secTimer = secTimerLogic(isTimeover, setSecond);
 
     return () => {
       clearInterval(secTimer);
     };
   }, [isStart, minute, isTimeover]);
 
-  // 분(min) 변경, 10초 카운트다운 & 타임오버 색상 효과
+  // 분(min) 변경
   useEffect(() => {
     if (!isStart) return;
 
-    // 분(min) 감소
-    if (second === 59 && !isTimeover) {
-      setMinute((prevMinute) => {
-        if (prevMinute <= 10) return "0" + (prevMinute - 1);
-        return prevMinute - 1;
-      });
-    }
+    minTimerLogic(isTimeover, second, setMinute);
 
-    // 분(min) 증가
-    if (second === "00" && isTimeover) {
-      setMinute((prevMinute) => {
-        if (prevMinute < 9) return "0" + (Number(prevMinute.slice(-1)) + 1);
-        if (prevMinute < 10) return 10;
-        if (prevMinute < 99) return prevMinute + 1;
-        if (prevMinute === 99) return "00";
-      });
-    }
-
-    // 10초 카운트다운 색상 효과
-    if (minute === "00" && second === "00") {
-      setIsCountDown(false);
-      setIsBtnVisible(false);
-      setIsTimeover(true);
-    } else if (minute === "00" && second <= 10) {
-      setIsCountDown(true);
+    // 10초 & 타임오버 색상 효과
+    if (minute === "00") {
+      if (second === "00") {
+        setIsCountDown(false);
+        setIsBtnVisible(false);
+        setIsTimeover(true);
+      } else if (second <= 10) {
+        setIsCountDown(true);
+      }
     }
   }, [second]);
 
