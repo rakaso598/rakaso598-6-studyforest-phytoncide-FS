@@ -77,7 +77,10 @@ const StudyCreate = () => {
         </div>
         <Background setBackground={setBackground} background={background} />
         <div className={styles.studyCreateBottomBox}>
-          <PasswordInput setEncryptedPassword={setEncryptedPassword} />
+          <PasswordInput
+            encryptedPassword={encryptedPassword}
+            setEncryptedPassword={setEncryptedPassword}
+          />
           <PasswordCheck
             encryptedPassword={encryptedPassword}
             passwordCheck={passwordCheck}
