@@ -1,14 +1,13 @@
 import { ClipLoader } from "react-spinners";
-import { getStudies } from "@api/home/getStudy.api";
-import styles from "./BrowseSection.module.css";
+import styles from "./AllStudiesSection.module.css";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { debounce } from "lodash";
 import SearchBar from "./SearchBar";
 import SortDropdown from "./SortDropdown";
-import BrowseCardList from "./BrowseCardList";
-import { SORT_OPTIONS } from "@api/home/getStudy.api";
+import AllStudiesSectionCardList from "./AllStudiesSectionCardList";
+import { getStudies, SORT_OPTIONS } from "@api/home/home.api";
 
-const BrowseSection = () => {
+const AllStudiesSection = () => {
   const [studies, setStudies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [searchInput, setSearchInput] = useState("");
@@ -106,7 +105,7 @@ const BrowseSection = () => {
         />
         <SortDropdown sortType={sortType} clickSortOption={clickSortOption} />
       </div>
-      <BrowseCardList isLoading={isLoading} studies={studies} />
+      <AllStudiesSectionCardList isLoading={isLoading} studies={studies} />
       {studies.length > 0 && (
         <div className={styles.moreButtonContainer}>
           <button
@@ -126,4 +125,4 @@ const BrowseSection = () => {
   );
 };
 
-export default BrowseSection;
+export default AllStudiesSection;

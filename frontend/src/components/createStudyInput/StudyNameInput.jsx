@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Input.module.css";
 
-const StudyNameInput = ({ setTitle }) => {
+const StudyNameInput = ({ title, setTitle }) => {
   const [isActive, setIsActive] = useState(false);
 
   const handleChange = (e) => {
@@ -19,6 +19,7 @@ const StudyNameInput = ({ setTitle }) => {
       <label className={styles.label}>
         <p className={styles.inputBoxTitle}>스터디 이름</p>
         <input
+          value={title}
           onChange={handleChange}
           className={`${styles.input} ${isActive && styles.err}`}
           type="text"

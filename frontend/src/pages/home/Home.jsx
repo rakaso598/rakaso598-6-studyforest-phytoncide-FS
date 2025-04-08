@@ -1,12 +1,12 @@
-import BrowseSection from "./BrowseSection";
 import styles from "./Home.module.css";
-import RecentlySection from "./RecentlySection";
+import AllStudiesSection from "./AllStudiesSection";
+import RecentlyVeiwedSection from "./RecentlyViewedSection";
 
 const Home = () => {
   return (
     <section className={styles.home}>
-      <RecentlySection />
-      <BrowseSection />
+      <RecentlyVeiwedSection />
+      <AllStudiesSection />
     </section>
   );
 };
