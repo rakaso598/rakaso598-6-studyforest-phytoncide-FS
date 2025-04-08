@@ -20,7 +20,7 @@ import stickerPink400 from "/images/stickers/sticker-pink-400.svg";
 import stickerPurple100 from "/images/stickers/sticker-purple-100.svg";
 import stickerPurple200 from "/images/stickers/sticker-purple-200.svg";
 import { useParams } from "react-router-dom";
-import { getAllHabits } from "@api/today-habit/habit.api";
+import { getAllHabits } from "@api/habit/habit.api";
 import { getCurrentWeekDates } from "@utils/dateUtils";
 
 const days = ["월", "화", "수", "목", "금", "토", "일"];

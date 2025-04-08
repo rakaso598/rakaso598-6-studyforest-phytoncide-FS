@@ -9,7 +9,11 @@ studyPostRouter.post("/", async (req, res, next) => {
     const data = req.body;
 
     if (!data.title || !data.encryptedPassword) {
-      res.status(400).json({ message: "제목 또는 비밀번호가 없습니다." });
+      throw new Error("제목 또는 비밀번호가 필요합니다");
+    }
+
+    if (data.nickName.length > 10 || data.title.length > 10) {
+      throw new Error("10글자 이하로 적어주세요.");
     }
 
     const salt = await bcrypt.genSalt(10);

@@ -1,6 +1,6 @@
 import HabitModal from "@today-habit/HabitModal";
-import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
 import styles from "@today-habit/TodayHabit.module.css";
 import Habits from "@today-habit/Habits";
 import StudyNavbar from "@components/study-navbar/StudyNavbar";
@@ -47,6 +47,7 @@ const TodayHabit = () => {
             className={styles.modalContent}
             onClick={(e) => e.stopPropagation()}
           >
+            {/* 모달 클릭시 닫히는거 방지 onClose라는 메서드를 전달*/}
             <HabitModal
               onClose={closeModal}
               studyId={studyId}

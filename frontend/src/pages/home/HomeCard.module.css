@@ -182,12 +182,22 @@
 .cardContentContainer {
   position: relative;
   z-index: 1;
-  width: 80%;
+  width: 100%;
 }
 
 .cardContent {
   font-size: 14px;
   color: var(--text-black);
+
+  display: -webkit-box;
+
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  line-height: 1.4;
 }
 
 .card[data-bg^="bg5"] .cardContent,

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "@today-habit/Habits.module.css";
-import { putHabitDone } from "@api/today-habit/habitDone.api";
-import { getHabits } from "@api/today-habit/habit.api";
+import { getHabits, putHabitDone } from "@api/habit/habit.api";
 
 function Habits({
   studyId,
@@ -13,6 +12,8 @@ function Habits({
   const [habits, setHabits] = useState([]);
   const [habitCheck, setHabitCheck] = useState(new Map());
   const today = new Date().toISOString().split("T")[0];
+
+  //습관 클릭시 체크 상태 변경
   const handleClick = async (habitId) => {
     try {
       await putHabitDone(studyId, habitId, today);
@@ -26,6 +27,7 @@ function Habits({
     }
   };
 
+  //스터디의 습관 및 습관 체크 여부 조회
   const handleLoad = async () => {
     try {
       setIsLoading(true);
@@ -52,6 +54,7 @@ function Habits({
     }
   };
 
+  //모달로 습관 수정 시 습관 재조회
   useEffect(() => {
     if (!isModalLoading) {
       handleLoad();

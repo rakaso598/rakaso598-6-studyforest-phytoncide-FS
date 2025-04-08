@@ -1,13 +1,13 @@
 .label {
   display: flex;
   flex-direction: column;
-  gap: 16px;
   width: 100%;
 }
 
 .inputBoxTitle {
   font-size: 16px;
   font-weight: 600;
+  margin-bottom: 16px;
 }
 
 .pwInputBox {
@@ -21,10 +21,15 @@
   outline: none;
   border: 1px solid var(--color-gray-200);
   border-radius: 15px;
-  padding: 20px 48px 20px 20px;
+  padding: 16px 48px 20px 20px;
   font-family: var(--font-pretendard-regular);
   transition: border-color 0.3s;
   box-sizing: border-box;
+} 
+
+::placeholder {
+  font-size: 14px;
+  font-weight: 400;
 }
 
 .input.err {
@@ -34,17 +39,19 @@
 .errMessage {
   font-size: 14px;
   color: var(--error-text);
+  margin-top: 8px;
 }
 
 .successMessage {
   color: green;
   font-size: 14px;
+  margin-top: 8px;
 }
 
 .btnIcon {
   position: absolute;
   top: 50%;
-  right: 16px;
+  right: 19px;
   transform: translateY(-50%);
   width: 24px;
   height: 24px;
@@ -54,5 +61,6 @@
 @media screen and (min-width: 744px) {
   .inputBoxTitle {
     font-size: 18px;
+
   }
 }

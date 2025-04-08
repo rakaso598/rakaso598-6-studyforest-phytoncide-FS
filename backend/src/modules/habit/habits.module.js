@@ -8,7 +8,7 @@ habitsRouter.get("/:studyId/habits", async (req, res, next) => {
     const studyId = Number(req.params.studyId);
     const includeDeletedHabit = req.query.all === "true";
     const habits = await prisma.habit.findMany({
-      where: { studyId, ...(includeDeletedHabit ? {} : { isDone: false }) },
+      where: { studyId, ...(includeDeletedHabit ? {} : { isDeleted: false }) },
       include: { HabitDone: true },
     });
     res.status(201).json(habits);
@@ -22,6 +22,7 @@ habitsRouter.get("/:studyId/habits/:habitId", async (req, res, next) => {
     const habit = await prisma.habit.findUnique({
       where: { id: habitId },
     });
+    if (!habit) return res.status(404).send("해당 습관이 존재하지 않습니다");
     res.status(200).json(habit);
   } catch (e) {
     next(e);
@@ -51,32 +52,38 @@ habitsRouter.put("/:studyId/habits", async (req, res, next) => {
       return (
         existingHabit &&
         (existingHabit.title !== habit.title ||
-          existingHabit.isDone !== habit.isDone)
+          existingHabit.isDeleted !== habit.isDeleted)
       );
     });
 
+    //비동기 함수의 실행 결과"인 Promise 객체들
     const deletedHabits = existingHabits.filter(
       (dbHabit) => !habits.some((habit) => habit.id === dbHabit.id)
     );
 
+    const createHabitsPromises = newHabits.map((habit) =>
+      prisma.habit.create({
+        data: { title: habit.title, isDeleted: habit.isDeleted, studyId },
+      })
+    );
+    const updateHabitsPromises = updatedHabits.map((habit) =>
+      prisma.habit.update({
+        where: { id: habit.id },
+        data: { title: habit.title, isDeleted: habit.isDeleted },
+      })
+    );
+
+    const deleteHabitsPromises = deletedHabits.map((habit) =>
+      prisma.habit.update({
+        where: { id: habit.id },
+        data: { isDeleted: true },
+      })
+    );
+    //create/update/delete 작업들이 모두 완료될 때까지 기다림
     await Promise.all([
-      ...newHabits.map((habit) =>
-        prisma.habit.create({
-          data: { title: habit.title, isDone: habit.isDone, studyId },
-        })
-      ),
-      ...updatedHabits.map((habit) =>
-        prisma.habit.update({
-          where: { id: habit.id },
-          data: { title: habit.title, isDone: habit.isDone },
-        })
-      ),
-      ...deletedHabits.map((habit) =>
-        prisma.habit.update({
-          where: { id: habit.id },
-          data: { isDone: true },
-        })
-      ),
+      ...createHabitsPromises,
+      ...updateHabitsPromises,
+      ...deleteHabitsPromises,
     ]);
 
     res.json({ message: "습관 목록이 성공적으로 업데이트되었습니다!" });
