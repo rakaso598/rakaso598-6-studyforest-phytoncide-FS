@@ -47,6 +47,14 @@ const StudyCreate = () => {
       alert("비밀번호를 확인해주세요");
       return;
     }
+    if (nickName.length > 10) {
+      alert("닉네임을 10글자 이하로 적어주세요");
+      return;
+    }
+    if (title.length > 10) {
+      alert("스터디 이름을 10글자 이하로 적어주세요");
+      return;
+    }
 
     const data = {
       nickName,
@@ -60,9 +68,13 @@ const StudyCreate = () => {
       const result = await studyCreate(data);
 
       navigate("/");
-      console.log(result);
     } catch (e) {
-      console.log(e);
+      if (e.response && e.response.data) {
+        const errorMessage = e.response.data;
+        alert(errorMessage);
+      } else {
+        alert("알 수 없는 에러가 발생했습니다.");
+      }
     }
   };
 

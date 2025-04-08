@@ -13,7 +13,8 @@
 .bgBox {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  gap: 12px;
+  row-gap: 14px;
 }
 
 .background {
@@ -43,5 +44,7 @@
   }
   .bgBox {
     grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    row-gap: 16px;
   }
 }

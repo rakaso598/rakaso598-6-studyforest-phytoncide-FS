@@ -6,6 +6,7 @@ const PasswordModalButton = ({
   buttonText,
   buttonClassName,
   modalTitle,
+  nickName,
   modalMessage,
   actionButtonText,
   closeButtonText,
@@ -24,6 +25,7 @@ const PasswordModalButton = ({
         isOpen={isOpen}
         onClose={handleClose}
         title={modalTitle}
+        nickName={nickName}
         message={modalMessage}
         actionButtonText={actionButtonText}
         closeButtonText={closeButtonText}

@@ -70,7 +70,6 @@ const StudyEditForm = () => {
       );
 
       if (response.status === 200) {
-        alert("스터디 정보가 성공적으로 수정되었습니다.");
         navigate(`/studies/${studyId}`);
       } else {
         setErrorMessage(

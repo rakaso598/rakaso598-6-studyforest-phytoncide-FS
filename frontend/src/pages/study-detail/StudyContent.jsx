@@ -29,7 +29,7 @@ const StudyContent = () => {
   return (
     <div className={styles.contentWrapper}>
       <div className={styles.contentTop}>
-        <h1 className={styles.title}>{study.title}</h1>
+        <h1 className={styles.title}>{`${study.nickName}의 ${study.title}`}</h1>
         <div className={styles.buttons}>
           <TodayFocusButton
             buttonText={

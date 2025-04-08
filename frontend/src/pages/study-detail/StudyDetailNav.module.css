@@ -31,14 +31,6 @@ button {
   color: var(--color-green-300);
 }
 
-.editLink {
-  color: var(--color-green-300);
-}
-
-.deleteLink {
-  color: var(--color-gray-300);
-}
-
 .divider {
   font-size: 12px;
   color: var(--color-green-300);
