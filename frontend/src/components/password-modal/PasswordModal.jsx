@@ -74,7 +74,7 @@ const PasswordModal = ({
           <button
             type="button"
             onClick={onClose}
-            className={styles.closeButton}
+            className={styles.headerCloseButton}
           >
             {closeButtonText}
           </button>
@@ -113,6 +113,13 @@ const PasswordModal = ({
           onClick={handleSubmit}
         >
           {actionButtonText}
+        </button>
+        <button
+          type="button"
+          onClick={onClose}
+          className={styles.bottomCloseButton}
+        >
+          {closeButtonText}
         </button>
       </div>
     </div>

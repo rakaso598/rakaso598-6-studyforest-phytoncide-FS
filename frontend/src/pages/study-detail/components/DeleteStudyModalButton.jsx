@@ -12,7 +12,6 @@ const DeleteStudyModalButton = ({ buttonText }) => {
   const navigate = useNavigate();
   const { studyId } = useParams();
 
-  // 비밀번호 검증 성공 후 스터디 삭제 처리
   const handleDeleteSuccess = async (password) => {
     try {
       const deleteResponse = await deleteStudy(studyId, password);
@@ -20,7 +19,6 @@ const DeleteStudyModalButton = ({ buttonText }) => {
       if (deleteResponse && deleteResponse.success) {
         setShowSuccessToast(true);
 
-        // 유저의 로컬 스토리지에서 삭제된 스터디 제거
         const storedData = localStorage.getItem("studyForestCardIds");
         if (storedData) {
           const parsedData = JSON.parse(storedData);
@@ -33,7 +31,6 @@ const DeleteStudyModalButton = ({ buttonText }) => {
           );
         }
         console.log("ignore");
-        // 2초 후 홈으로 이동
         setTimeout(() => {
           navigate("/");
         }, 2000);
@@ -43,7 +40,6 @@ const DeleteStudyModalButton = ({ buttonText }) => {
     }
   };
 
-  // 스터디 제목 가져오기
   useEffect(() => {
     const fetchStudyTitle = async () => {
       try {
@@ -72,7 +68,6 @@ const DeleteStudyModalButton = ({ buttonText }) => {
         verifyPassword={verifyStudyPassword}
       />
 
-      {/* 성공 토스트 메시지 */}
       {showSuccessToast && (
         <div className={styles.toastContainer}>
           <p className={styles.toastSuccess}>
