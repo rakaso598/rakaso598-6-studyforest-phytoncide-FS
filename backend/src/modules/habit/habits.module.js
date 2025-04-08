@@ -8,7 +8,7 @@ habitsRouter.get("/:studyId/habits", async (req, res, next) => {
     const studyId = Number(req.params.studyId);
     const includeDeletedHabit = req.query.all === "true";
     const habits = await prisma.habit.findMany({
-      where: { studyId, ...(includeDeletedHabit ? {} : { isDone: false }) },
+      where: { studyId, ...(includeDeletedHabit ? {} : { isDeleted: false }) },
       include: { HabitDone: true },
     });
     res.status(201).json(habits);
@@ -51,7 +51,7 @@ habitsRouter.put("/:studyId/habits", async (req, res, next) => {
       return (
         existingHabit &&
         (existingHabit.title !== habit.title ||
-          existingHabit.isDone !== habit.isDone)
+          existingHabit.isDeleted !== habit.isDeleted)
       );
     });
 
@@ -62,20 +62,20 @@ habitsRouter.put("/:studyId/habits", async (req, res, next) => {
 
     const createHabitsPromises = newHabits.map((habit) =>
       prisma.habit.create({
-        data: { title: habit.title, isDone: habit.isDone, studyId },
+        data: { title: habit.title, isDeleted: habit.isDeleted, studyId },
       })
     );
     const updateHabitsPromises = updatedHabits.map((habit) =>
       prisma.habit.update({
         where: { id: habit.id },
-        data: { title: habit.title, isDone: habit.isDone },
+        data: { title: habit.title, isDeleted: habit.isDeleted },
       })
     );
 
     const deleteHabitsPromises = deletedHabits.map((habit) =>
       prisma.habit.update({
         where: { id: habit.id },
-        data: { isDone: true },
+        data: { isDeleted: true },
       })
     );
     //create/update/delete 작업들이 모두 완료될 때까지 기다림
