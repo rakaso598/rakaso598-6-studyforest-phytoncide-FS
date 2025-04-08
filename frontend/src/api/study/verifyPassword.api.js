@@ -1,5 +1,6 @@
 import axiosInstance from "@api/axiosInstance";
 
+// 스터디 아이디 비밀번호 검증
 export const verifyStudyPassword = async (studyId, password) => {
   try {
     const response = await axiosInstance.post(

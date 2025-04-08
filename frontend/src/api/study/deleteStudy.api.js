@@ -1,5 +1,6 @@
 import axiosInstance from "@api/axiosInstance";
 
+// 스터디 삭제
 export const deleteStudy = async (studyId, password) => {
   try {
     const res = await axiosInstance.delete(`/studies/${studyId}`, {
