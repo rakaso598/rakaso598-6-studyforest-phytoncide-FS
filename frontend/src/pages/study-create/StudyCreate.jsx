@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import styles from "./StudyCreate.module.css";
-import NicknameInput from "../../components/create-Study-Input/NicknameInput";
-import StudyNameInput from "../../components/create-Study-Input/StudyNameInput";
-import DescriptionInput from "../../components/create-study-Input/descriptionInput/DescriptionInput";
-import PasswordInput from "../../components/create-study-Input/passwordInput/PasswordInput";
-import PasswordCheck from "../../components/create-Study-Input/PasswordCheck";
-import Background from "../../components/create-study-Input/background/Background";
+import NicknameInput from "../../components/create-study-input/NicknameInput";
+import StudyNameInput from "../../components/create-study-input/StudyNameInput";
+import DescriptionInput from "../../components/create-study-input/descriptionInput/DescriptionInput";
+import PasswordInput from "../../components/create-study-input/passwordInput/PasswordInput";
+import PasswordCheck from "../../components/create-study-input/PasswordCheck";
+import Background from "../../components/create-study-input/background/Background";
 import { studyCreate } from "../../api/study/studyCreate.api";
 import { useNavigate } from "react-router-dom";
 
