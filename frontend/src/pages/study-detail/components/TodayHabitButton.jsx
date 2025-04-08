@@ -8,6 +8,7 @@ import styles from "./TodayHabitButton.module.css";
 
 const TodayFocusButton = ({ buttonText }) => {
   const [studyTitle, setStudyTitle] = useState("");
+  const [nickName, setNickName] = useState("");
   const navigate = useNavigate();
   const { studyId } = useParams();
   const handleTodayHabit = () => {
@@ -19,6 +20,7 @@ const TodayFocusButton = ({ buttonText }) => {
       try {
         const study = await getStudyDetail(studyId);
         setStudyTitle(study.title);
+        setNickName(study.nickName);
       } catch (error) {
         console.error("스터디 정보 가져오기 실패:", error);
       }
@@ -35,6 +37,7 @@ const TodayFocusButton = ({ buttonText }) => {
         buttonText={buttonText}
         buttonClassName={styles.todayHabitButton}
         modalTitle={studyTitle}
+        nickName={nickName}
         modalMessage="권한이 필요해요!"
         actionButtonText="오늘의 습관으로 가기"
         closeButtonText="나가기"

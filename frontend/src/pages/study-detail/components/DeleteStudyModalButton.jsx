@@ -8,6 +8,7 @@ import styles from "./DeleteStudyModalButton.module.css";
 
 const DeleteStudyModalButton = ({ buttonText }) => {
   const [studyTitle, setStudyTitle] = useState("");
+  const [nickName, setNickName] = useState("");
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const navigate = useNavigate();
   const { studyId } = useParams();
@@ -45,6 +46,7 @@ const DeleteStudyModalButton = ({ buttonText }) => {
       try {
         const study = await getStudyDetail(studyId);
         setStudyTitle(study.title);
+        setNickName(study.nickName);
       } catch (error) {
         console.error("스터디 정보 가져오기 실패:", error);
       }
@@ -61,6 +63,7 @@ const DeleteStudyModalButton = ({ buttonText }) => {
         buttonText={buttonText}
         buttonClassName={styles.deleteStudyModalButton}
         modalTitle={studyTitle}
+        nickName={nickName}
         modalMessage="권한이 필요해요!"
         actionButtonText="삭제하기"
         closeButtonText="나가기"

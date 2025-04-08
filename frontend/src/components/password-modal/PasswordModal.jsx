@@ -9,6 +9,7 @@ const PasswordModal = ({
   onClose,
   onSuccess,
   title,
+  nickName,
   message = "권한이 필요해요!",
   actionButtonText,
   closeButtonText = "나가기",
@@ -70,7 +71,7 @@ const PasswordModal = ({
     <div className={styles.overlay}>
       <div className={styles.content}>
         <div className={styles.header}>
-          <p className={styles.title}>{title}</p>
+          <p className={styles.title}>{`${nickName}의 ${title}`}</p>
           <button
             type="button"
             onClick={onClose}

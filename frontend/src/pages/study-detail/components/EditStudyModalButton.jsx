@@ -7,6 +7,7 @@ import styles from "./EditStudyModalButton.module.css";
 
 const EditStudyModalButton = ({ buttonText }) => {
   const [studyTitle, setStudyTitle] = useState("");
+  const [nickName, setNickName] = useState("");
   const navigate = useNavigate();
   const { studyId } = useParams();
 
@@ -19,6 +20,7 @@ const EditStudyModalButton = ({ buttonText }) => {
       try {
         const study = await getStudyDetail(studyId);
         setStudyTitle(study.title);
+        setNickName(study.nickName);
       } catch (error) {
         console.error("스터디 정보 가져오기 실패:", error);
       }
@@ -34,6 +36,7 @@ const EditStudyModalButton = ({ buttonText }) => {
       buttonText={buttonText}
       buttonClassName={styles.editStudyModalButton}
       modalTitle={studyTitle}
+      nickName={nickName}
       modalMessage="권한이 필요해요!"
       actionButtonText="수정하러 가기"
       closeButtonText="나가기"
