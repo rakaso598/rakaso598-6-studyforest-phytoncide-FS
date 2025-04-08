@@ -33,6 +33,7 @@ const PasswordCheck = ({
         <p className={styles.inputBoxTitle}>비밀번호 확인</p>
         <div className={styles.pwInputBox}>
           <input
+            value={passwordCheck}
             onChange={(e) => setPasswordCheck(e.target.value)}
             className={`${styles.input} ${isActive ? styles.err : ""}`}
             type={see ? "text" : "password"}
