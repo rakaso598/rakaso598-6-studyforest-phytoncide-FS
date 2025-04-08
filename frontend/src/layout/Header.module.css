@@ -4,7 +4,7 @@
   padding: 20px 16px;
 }
 
-.header__wrapper {
+.logoWrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -26,7 +26,7 @@
   width: auto;
 }
 
-.create__study__button {
+.createStudyButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,7 +46,7 @@
   cursor: pointer;
 }
 
-.create__study__button__text__bg {
+.textBg {
   position: absolute;
   top: 14px;
 
@@ -57,7 +57,7 @@
   transition: all 0.3s ease;
 }
 
-.create__study__button__text {
+.text {
   position: absolute;
   top: 16px;
 
@@ -75,18 +75,18 @@
     height: 60px;
   }
 
-  .create__study__button {
+  .createStudyButton {
     max-width: 180px;
     border-radius: 14px;
   }
 
-  .create__study__button__text__bg {
+  .textBg {
     top: 21px;
 
     font-size: 18px;
   }
 
-  .create__study__button__text {
+  .text {
     top: 24px;
 
     font-size: 18px;
@@ -94,16 +94,16 @@
 }
 
 @media screen and (min-width: 1200px) {
-  .create__study__button {
+  .createStudyButton {
     max-width: 252px;
     border-radius: 16px;
   }
 
-  .create__study__button__text__bg {
+  .textBg {
     top: 21px;
   }
 
-  .create__study__button__text {
+  .text {
     top: 24px;
   }
 }

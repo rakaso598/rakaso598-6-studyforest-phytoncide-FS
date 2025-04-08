@@ -1,7 +1,14 @@
 import { RiArrowDownSFill, RiArrowUpSFill } from "react-icons/ri";
 import styles from "./SortDropdown.module.css";
 import { useState } from "react";
-import { SORT_OPTIONS } from "@api/home/getStudy.api";
+import { SORT_OPTIONS } from "@api/home/home.api";
+
+const SORT_LABEL_MAP = {
+  latest: "최근 순",
+  oldest: "오래된 순",
+  highest_point: "많은 포인트 순",
+  lowest_point: "적은 포인트 순",
+};
 
 const SortDropdown = ({ sortType, clickSortOption }) => {
   const options = Object.keys(SORT_OPTIONS);
@@ -10,7 +17,7 @@ const SortDropdown = ({ sortType, clickSortOption }) => {
   return (
     <div className={styles.filterContainer}>
       <div className={styles.dropdown} onClick={() => setIsOpen(!isOpen)}>
-        <span className={styles.selected}>{sortType}</span>
+        <span className={styles.selected}>{SORT_LABEL_MAP[sortType]}</span>
 
         {isOpen ? (
           <span className={styles.arrow}>
@@ -30,7 +37,7 @@ const SortDropdown = ({ sortType, clickSortOption }) => {
                 onClick={() => clickSortOption(option)}
                 className={styles.dropdownItem}
               >
-                {option}
+                {SORT_LABEL_MAP[option]}
               </li>
             ))}
           </ul>

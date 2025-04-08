@@ -6,8 +6,8 @@ import bg5 from "/images/study-bg/bg5.svg";
 import bg6 from "/images/study-bg/bg6.svg";
 import bg7 from "/images/study-bg/bg7.svg";
 import bg8 from "/images/study-bg/bg8.svg";
-import { saveAndNavigateToStudy } from "../../utils/study";
 import { useNavigate } from "react-router-dom";
+import { saveAndNavigateToStudy } from "./study";
 
 const backgroundImages = {
   bg5,
@@ -30,10 +30,12 @@ const HomeCard = ({ data }) => {
     return diffDays;
   };
 
+  // 스터디 상세 페이지로 이동
   const clickDetailStudy = () => {
     saveAndNavigateToStudy(data, navigate);
   };
 
+  // 기본 스터디 배경이 아니면 스터디 배경 이미지 설정
   useEffect(() => {
     if (
       data.background !== "bg1" &&
