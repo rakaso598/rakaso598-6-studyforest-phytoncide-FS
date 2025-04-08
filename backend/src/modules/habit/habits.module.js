@@ -22,6 +22,7 @@ habitsRouter.get("/:studyId/habits/:habitId", async (req, res, next) => {
     const habit = await prisma.habit.findUnique({
       where: { id: habitId },
     });
+    if (!habit) return res.status(404).send("해당 습관이 존재하지 않습니다");
     res.status(200).json(habit);
   } catch (e) {
     next(e);

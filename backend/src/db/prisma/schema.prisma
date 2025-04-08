@@ -9,19 +9,19 @@ datasource db {
 
 model Study {
   id                Int               @id @default(autoincrement())
-  nickName          String
-  title             String
+  nickName          String            @db.VarChar(10)
+  title             String            @db.VarChar(10)
   description       String
   encryptedPassword String
-  background        Study_backgrounds
-  point             Int               @default(0) // 250329 point 기본값 0
+  background        StudyBackgrounds
+  point             Int               @default(0) 
   createAt          DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
   emojis            Emojis[]          @relation("StudyEmojis")
   habits            Habit[]           @relation("StudyHabits")
 }
 
-enum Study_backgrounds {
+enum StudyBackgrounds {
   bg1
   bg2
   bg3
@@ -36,7 +36,7 @@ model Emojis {
   id           Int    @id @default(autoincrement())
   studyId      Int
   emojiContent String
-  count        Int    @default(0) // 250328 이모지카운트 추가
+  count        Int    @default(0) 
   study        Study  @relation("StudyEmojis", fields: [studyId], references: [id], onDelete: Cascade)
 }
 
@@ -47,7 +47,7 @@ model Habit {
   updatedAt DateTime    @updatedAt
   study     Study       @relation("StudyHabits", fields: [studyId], references: [id], onDelete: Cascade)
   studyId   Int
-  isDone    Boolean     @default(false)
+  isDeleted    Boolean     @default(false)
   HabitDone HabitDone[]
 }
 
@@ -58,4 +58,3 @@ model HabitDone {
   habit     Habit    @relation(fields: [habitId], references: [id], onDelete: Cascade)
 }
 
-// 250329 수정사항 : model Focus는 완전 삭제되었습니다.

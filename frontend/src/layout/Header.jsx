@@ -4,33 +4,30 @@ import logo1 from "/images/logo/logo_icon.svg";
 import { Link, useLocation } from "react-router-dom";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
 
+  // 현재 페이지 주소에따라 "스터디 만들기" 버튼 보여줄지 말지 결정
   useEffect(() => {
     if (location.pathname === "/" || location.pathname === "/study/create") {
-      setIsOpen(true);
+      setIsVisible(true);
     } else {
-      setIsOpen(false);
+      setIsVisible(false);
     }
   }, [location]);
 
   return (
     <>
       <header className={styles.container}>
-        <div className={styles.header__wrapper}>
+        <div className={styles.logoWrapper}>
           <Link to="/" className={styles.logo}>
             <img src={logo1} alt="Study Forest Logo" />
           </Link>
 
-          {isOpen && (
-            <Link to="/studies/create" className={styles.create__study__button}>
-              <span className={styles.create__study__button__text__bg}>
-                스터디 만들기
-              </span>
-              <span className={styles.create__study__button__text}>
-                스터디 만들기
-              </span>
+          {isVisible && (
+            <Link to="/studies/create" className={styles.createStudyButton}>
+              <span className={styles.textBg}>스터디 만들기</span>
+              <span className={styles.text}>스터디 만들기</span>
             </Link>
           )}
         </div>

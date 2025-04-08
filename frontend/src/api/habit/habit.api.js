@@ -7,6 +7,8 @@ const handleError = (e) => {
     console.error("Request failed");
   }
 };
+
+//스터디에 해당하는 습관 조회
 export const getHabits = async (studyId) => {
   try {
     const res = await axiosInstance.get(`/studies/${studyId}/habits`);
@@ -15,6 +17,19 @@ export const getHabits = async (studyId) => {
     handleError(e);
   }
 };
+
+//습관 체크
+export const putHabitDone = async (studyId, habitId, day) => {
+  try {
+    const res = await axiosInstance.put(
+      `studies/${studyId}/habits/${habitId}/${day}`
+    );
+    return res.data;
+  } catch (e) {
+    handleError(e);
+  }
+};
+
 export const putHabits = async (studyId, habits) => {
   try {
     const res = await axiosInstance.put(`/studies/${studyId}/habits`, {
