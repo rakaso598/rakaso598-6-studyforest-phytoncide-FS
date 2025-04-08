@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styles from "./TodayFocus.module.css";
 import { getPoint, patchPoint } from "@api/focus/focusPoint.api.js";
-import TodayFocusPoint from "./TodayFocusPoint.jsx";
-import TodayFocusToast from "./TodayFocusToast";
-import TodayFocusTimer from "./TodayFocusTimer.jsx";
+import TodayFocusPoint from "./components/Point/TodayFocusPoint.jsx";
+import TodayFocusToast from "./components/Toast/TodayFocusToast.jsx";
+import TodayFocusTimer from "./components/Timer/TodayFocusTimer.jsx";
 import StudyNavbar from "@components/study-navbar/StudyNavbar.jsx";
 
 const TodayFocus = () => {
@@ -52,7 +52,7 @@ const TodayFocus = () => {
     if (complete) {
       pointUpdate(studyId, { totalPoint });
     }
-  }, [totalPoint]);
+  }, [totalPoint, complete]);
 
   // 집중 성공 시 총합 포인트 변경
   useEffect(() => {
@@ -61,7 +61,7 @@ const TodayFocus = () => {
     if (!start && complete) {
       setTotalPoint((prevTotalPoint) => (prevTotalPoint += point));
     }
-  }, [start, point]);
+  }, [start, point, complete]);
 
   // 시간 설정에 따른 포인트 설정
   const rewardPointSetByTime = (minute) => {
