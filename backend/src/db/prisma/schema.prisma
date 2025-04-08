@@ -21,6 +21,7 @@ model Study {
   habits            Habit[]           @relation("StudyHabits")
 }
 
+// TODO: StudyBackgrounds
 enum Study_backgrounds {
   bg1
   bg2
