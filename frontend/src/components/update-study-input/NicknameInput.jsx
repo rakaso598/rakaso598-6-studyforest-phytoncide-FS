@@ -7,7 +7,7 @@ const NicknameInput = ({ setNickname, nickname }) => {
   const handleChange = (e) => {
     setNickname(e.target.value);
 
-    if (!e.target.value) {
+    if (e.target.value.length > 10) {
       setIsActive(true);
     } else {
       setIsActive(false);
@@ -24,7 +24,9 @@ const NicknameInput = ({ setNickname, nickname }) => {
         placeholder="닉네임을 입력해주세요"
         value={nickname}
       />
-      {isActive && <p className={styles.errMessage}>*닉네임을 입력해주세요.</p>}
+      {isActive && (
+        <p className={styles.errMessage}>*10자 이하로 적어주세요.</p>
+      )}
     </label>
   );
 };
