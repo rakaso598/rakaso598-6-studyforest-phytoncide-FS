@@ -16,8 +16,10 @@
   font-weight: 500;
 }
 
-.card:hover {
-  transform: translateY(-10px);
+.card:active {
+  filter: brightness(0.85);
+  transform: scale(0.98);
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.2);
 }
 
 .card[data-bg^="bg1"] {
@@ -247,6 +249,16 @@
   .card {
     padding: 30px;
   }
+
+  .card:active {
+    filter: none;
+    box-shadow: none;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+  }
+
   .headerTop {
     justify-content: space-between;
     flex-direction: row-reverse;
