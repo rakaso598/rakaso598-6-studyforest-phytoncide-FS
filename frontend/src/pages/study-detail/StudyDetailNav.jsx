@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styles from "./StudyDetailNav.module.css";
-import StudyEmoji from "./study-emoji/StudyEmoji";
+import StudyEmoji from "./components/study-emoji/StudyEmoji";
 import DeleteStudyModalButton from "./components/DeleteStudyModalButton";
 import ShareModal from "./components/ShareModal";
 import EditStudyModalButton from "./components/EditStudyModalButton";
