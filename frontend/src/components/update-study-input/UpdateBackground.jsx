@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Background.module.css";
+import styles from "./UpdateBackground.module.css";
 import bg1 from "/images/study-bg/bg1.svg";
 import bg2 from "/images/study-bg/bg2.svg";
 import bg3 from "/images/study-bg/bg3.svg";

@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Description.module.css";
+import styles from "./UpdateDescription.module.css";
 
 const DescriptionInput = ({ setDescription, description }) => {
   return (

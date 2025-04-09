@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import styles from "./StudyEditForm.module.css";
-import NicknameInput from "../../../components/update-study-input/NicknameInput";
-import StudyNameInput from "../../../components/update-study-input/StudyNameInput";
-import DescriptionInput from "../../../components/update-study-input/DescriptionInput";
-import PasswordInput from "../../../components/update-study-input/PasswordInput";
-import PasswordCheck from "../../../components/update-study-input/PasswordCheck";
-import Background from "../../../components/update-study-input/Background";
+import NicknameInput from "../../../../components/update-study-input/UpdateNicknameInput";
+import StudyNameInput from "../../../../components/update-study-input/UpdateStudyNameInput";
+import DescriptionInput from "../../../../components/update-study-input/UpdateDescriptionInput";
+import PasswordInput from "../../../../components/update-study-input/UpdatePasswordInput";
+import PasswordCheck from "../../../../components/update-study-input/UpdatePasswordCheck";
+import Background from "../../../../components/update-study-input/UpdateBackground";
 import { useParams, useNavigate } from "react-router-dom";
-import axiosInstance from "../../../api/axiosInstance";
+import axiosInstance from "../../../../api/axiosInstance";
 
 const StudyEditForm = () => {
   const { studyId } = useParams();

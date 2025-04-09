@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Input.module.css";
+import styles from "./UpdateInput.module.css";
 import btnCloseIcon from "/images/icon/btn_visibility_on_24px-1.svg";
 import btnSeeIcon from "/images/icon/btn_visibility_on_24px.svg";
 
