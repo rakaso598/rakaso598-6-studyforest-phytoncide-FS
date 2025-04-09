@@ -3,6 +3,7 @@ import styles from "./Input.module.css";
 
 const StudyNameInput = ({ setStudyName, studyName }) => {
   const [isActive, setIsActive] = useState(false);
+  const [isActiveLetters, setIsActiveLetters] = useState(false);
 
   const handleChange = (e) => {
     setStudyName(e.target.value);
@@ -12,6 +13,12 @@ const StudyNameInput = ({ setStudyName, studyName }) => {
     } else {
       setIsActive(false);
     }
+
+    if (e.target.value.length > 10) {
+      setIsActiveLetters(true);
+    } else {
+      setIsActiveLetters(false);
+    }
   };
 
   return (
@@ -19,12 +26,15 @@ const StudyNameInput = ({ setStudyName, studyName }) => {
       <p className={styles.inputBoxTitle}>스터디 이름</p>
       <input
         onChange={handleChange}
-        className={`${styles.input} ${isActive && styles.err}`}
+        className={`${styles.input} ${isActive && styles.err} ${isActiveLetters && styles.err}`}
         type="text"
         placeholder="스터디 이름을 입력해주세요"
-        value={studyName} // value 속성 추가
+        value={studyName}
       />
-      {isActive && <p className={styles.errMessage}>*스터디 이름을 입력해주세요.</p>}
+      {isActive && (<p className={styles.errMessage}>*스터디 이름을 입력해주세요.</p>)}
+      {isActiveLetters && (
+        <p className={styles.errMessage}>*10글자 이하로 적어주세요.</p>
+      )}
     </label>
   );
 };

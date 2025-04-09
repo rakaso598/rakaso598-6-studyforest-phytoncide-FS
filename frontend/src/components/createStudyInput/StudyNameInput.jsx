@@ -28,9 +28,8 @@ const StudyNameInput = ({ title, setTitle }) => {
         <input
           value={title}
           onChange={handleChange}
-          className={`${styles.input} ${isActive && styles.err} ${
-            isActiveLetters && styles.err
-          }`}
+          className={`${styles.input} ${isActive && styles.err} ${isActiveLetters && styles.err
+            }`}
           type="text"
           placeholder="스터디 이름을 입력해주세요"
         />
