@@ -12,6 +12,20 @@ const TodayFocusTimer = ({ rewardPointSetByTime }) => {
   const [second, setSecond] = useState("00");
   const [tempTime, setTempTime] = useState({ min: "00", sec: "00" });
 
+  // 페이지 이동 시 state 초기화
+  useEffect(() => {
+    console.log(timerState);
+    return () => {
+      setTimerState((prevState) => {
+        const resetState = Object.keys(prevState).reduce((acc, key) => {
+          acc[key] = false;
+          return acc;
+        }, {});
+        return resetState;
+      });
+    };
+  }, []);
+
   // 타이머 선택 시 자동 전체 선택
   const handleTimerClick = (e) => {
     e.target.select();
