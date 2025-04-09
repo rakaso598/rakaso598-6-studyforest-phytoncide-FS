@@ -12,7 +12,7 @@ const TodayHabit = lazy(() => import("@today-habit/TodayHabit"));
 const StudyDetail = lazy(() => import("@study-detail/StudyDetail"));
 const StudyCreate = lazy(() => import("@study-create/StudyCreate"));
 const StudyEditForm = lazy(() =>
-  import("@study-detail/study-edit-form/StudyEditForm")
+  import("@study-detail/components/study-edit-form/StudyEditForm")
 );
 
 function App() {

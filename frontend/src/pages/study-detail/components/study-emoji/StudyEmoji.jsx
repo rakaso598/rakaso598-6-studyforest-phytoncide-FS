@@ -3,7 +3,7 @@ import styles from "./StudyEmoji.module.css";
 import EmojiPicker from 'emoji-picker-react';
 import smileIcon from "/images/icon/ic_smile.svg";
 import plusIcon from "/images/icon/ic_plus-1.svg";
-import axiosInstance from '../../../api/axiosInstance';
+import axiosInstance from '../../../../api/axiosInstance';
 import { useParams } from 'react-router-dom';
 
 function StudyEmoji() {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./PasswordInput.module.css";
+import styles from "./UpdatePasswordInput.module.css";
 import btnCloseIcon from "/images/icon/btn_visibility_on_24px-1.svg";
 import btnSeeIcon from "/images/icon/btn_visibility_on_24px.svg";
 

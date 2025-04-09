@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import styles from "./Input.module.css";
+import styles from "./UpdateInput.module.css";
 
 const StudyNameInput = ({ setStudyName, studyName }) => {
   const [isActive, setIsActive] = useState(false);
