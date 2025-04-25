@@ -6,11 +6,11 @@
 
 # 🌟 **문서 정리에 진심인팀**
 
-[✏️팀 협업 문서 바로가기(Notion)](https://www.notion.so/2-1be5e940de598095a073da7e2f525e98?cookie_sync_completed=true)
+✏️ [팀 협업 문서 바로가기(Notion)](https://www.notion.so/2-1be5e940de598095a073da7e2f525e98?cookie_sync_completed=true)
 
-# **구현 홈페이지**
+# 💎 **구현 홈페이지**
 
-[💎구현 홈페이지 바로가기(Netlify)](https://6-studyforest-phytoncide-fs.netlify.app/)
+🔍 [구현 홈페이지 바로가기(Netlify)](https://6-studyforest-phytoncide-fs.netlify.app/)
 
 # 👥 **팀원 구성**
 
